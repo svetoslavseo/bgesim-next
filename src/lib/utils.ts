@@ -191,7 +191,7 @@ export function addRelToExternalLinks(html: string): string {
 
       // Parse existing rel attribute if any
       const relMatch = (before + after).match(/rel=["']([^"']+)["']/i);
-      let relValue = relMatch ? relMatch[1] : '';
+      let relValue = relMatch?.[1] || '';
 
       // Add nofollow and sponsored if not already present
       const relParts = relValue.split(/\s+/).filter(Boolean);

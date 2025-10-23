@@ -62,7 +62,14 @@ export function getPostBySlug(slug: string): ProcessedPost | null {
   }
   
   const data = fs.readFileSync(postPath, 'utf-8');
-  return JSON.parse(data);
+  const post = JSON.parse(data) as ProcessedPost;
+  
+  // Extract featured image URL from SEO metadata if not already set
+  if (!post.featuredImageUrl && post.seo?.openGraph?.images?.[0]?.url) {
+    post.featuredImageUrl = post.seo.openGraph.images[0].url;
+  }
+  
+  return post;
 }
 
 /**
@@ -200,7 +207,7 @@ export function getHomepage(): ProcessedPage | null {
   
   // If no specific home page, return the first page
   const slugs = getAllPageSlugs();
-  if (slugs.length > 0) {
+  if (slugs.length > 0 && slugs[0]) {
     return getPageBySlug(slugs[0]);
   }
   

@@ -107,6 +107,7 @@ export default function BlogPostPage({
               </h1>
             </header>
             
+            
             {/* 3. Published/Updated dates */}
             <div className={styles.meta}>
               <time dateTime={post.publishedDate}>

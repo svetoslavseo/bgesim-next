@@ -34,15 +34,17 @@ export function extractTableOfContents(content: string): TOCItem[] {
   let match;
   
   while ((match = ezTocRegex.exec(content)) !== null) {
-    const id = decodeURIComponent(match[1]);
-    ezTocIds.push(id);
+    const id = match[1];
+    if (id) {
+      ezTocIds.push(decodeURIComponent(id));
+    }
   }
   
   // Find all headings and match with ez-toc IDs or generate new ones
   const headingRegex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
   
   while ((match = headingRegex.exec(content)) !== null) {
-    const level = parseInt(match[1] || '1');
+    const level = parseInt(match[1] ?? '1');
     const headingText = match[2]?.replace(/<[^>]*>/g, '').trim();
     
     if (!headingText) continue;
@@ -76,8 +78,8 @@ export function extractTableOfContents(content: string): TOCItem[] {
     const headingRegex = /<h([1-6])[^>]*id="([^"]*)"[^>]*>(.*?)<\/h[1-6]>/gi;
     
     while ((match = headingRegex.exec(content)) !== null) {
-      const level = parseInt(match[1] || '1');
-      const id = match[2];
+      const level = parseInt(match[1] ?? '1');
+      const id = match[2] ?? '';
       const text = match[3]?.replace(/<[^>]*>/g, '').trim();
       
       if (text && id) {

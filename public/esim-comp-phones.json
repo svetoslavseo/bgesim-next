@@ -1,0 +1,704 @@
+{
+    "disclaimer": "Съвместимостта с eSIM, особено при устройства с Android, може да варира значително в зависимост от държавата, региона и оператора. Този списък е изчерпателен, но не и окончателен, и производителите могат да пуснат нови съвместими модели. Винаги проверявайте с вашия оператор или проверете настройките на вашето устройство (потърсете EID номер под Настройки > Всичко за телефона > Състояние), преди да закупите eSIM.",
+    "smartphones": [
+      {
+        "brand": "Apple",
+        "series": [
+          {
+            "series_name": "iPhone 17 Series",
+            "devices": [
+              {
+                "model": "iPhone 17",
+                "notes": "Моделите за САЩ са само с eSIM. Поддържат двойни eSIM."
+              },
+              {
+                "model": "iPhone 17 Plus",
+                "notes": "Моделите за САЩ са само с eSIM. Поддържат двойни eSIM."
+              },
+              {
+                "model": "iPhone 17 Pro",
+                "notes": "Моделите за САЩ са само с eSIM. Поддържат двойни eSIM."
+              },
+              {
+                "model": "iPhone 17 Pro Max",
+                "notes": "Моделите за САЩ са само с eSIM. Поддържат двойни eSIM."
+              }
+            ]
+          },
+          {
+            "series_name": "iPhone 15 Series",
+            "devices": [
+              {
+                "model": "iPhone 15",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 15 Plus",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 15 Pro",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 15 Pro Max",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              }
+            ]
+          },
+          {
+            "series_name": "iPhone 14 Series",
+            "devices": [
+              {
+                "model": "iPhone 14",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 14 Plus",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 14 Pro",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 14 Pro Max",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              }
+            ]
+          },
+          {
+            "series_name": "iPhone 13 Series",
+            "devices": [
+              {
+                "model": "iPhone 13",
+                "notes": "Supports dual eSIMs. Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone 13 mini",
+                "notes": "Supports dual eSIMs. Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone 13 Pro",
+                "notes": "Supports dual eSIMs. Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone 13 Pro Max",
+                "notes": "Supports dual eSIMs. Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              }
+            ]
+          },
+          {
+            "series_name": "iPhone SE Series",
+            "devices": [
+              {
+                "model": "iPhone SE (2020)",
+                "notes": "Models for mainland China may lack eSIM."
+              },
+              {
+                "model": "iPhone SE (2022)",
+                "notes": "Supports dual eSIMs. Models for mainland China may lack eSIM."
+              }
+            ]
+          },
+          {
+            "series_name": "iPhone 12 Series",
+            "devices": [
+              {
+                "model": "iPhone 12",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone 12 mini",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone 12 Pro",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone 12 Pro Max",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              }
+            ]
+          },
+          {
+            "series_name": "iPhone 11 Series",
+            "devices": [
+              {
+                "model": "iPhone 11",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone 11 Pro",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone 11 Pro Max",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              }
+            ]
+          },
+          {
+            "series_name": "iPhone X Series",
+            "devices": [
+              {
+                "model": "iPhone XS",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone XS Max",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              },
+              {
+                "model": "iPhone XR",
+                "notes": "Models for mainland China, Hong Kong, and Macao may lack eSIM."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Google",
+        "series": [
+          {
+            "series_name": "Pixel 8 Series",
+            "devices": [
+              { "model": "Pixel 8", "notes": null },
+              { "model": "Pixel 8 Pro", "notes": null },
+              { "model": "Pixel 8a", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Pixel Fold",
+            "devices": [
+              { "model": "Pixel Fold", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Pixel 7 Series",
+            "devices": [
+              { "model": "Pixel 7", "notes": null },
+              { "model": "Pixel 7 Pro", "notes": null },
+              { "model": "Pixel 7a", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Pixel 6 Series",
+            "devices": [
+              { "model": "Pixel 6", "notes": null },
+              { "model": "Pixel 6 Pro", "notes": null },
+              { "model": "Pixel 6a", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Pixel 5 Series",
+            "devices": [
+              { "model": "Pixel 5", "notes": null },
+              { "model": "Pixel 5a", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Pixel 4 Series",
+            "devices": [
+              { "model": "Pixel 4", "notes": null },
+              { "model": "Pixel 4 XL", "notes": null },
+              { "model": "Pixel 4a", "notes": null },
+              { "model": "Pixel 4a 5G", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Pixel 3 Series",
+            "devices": [
+              {
+                "model": "Pixel 3",
+                "notes": "Excludes phones bought in Australia, Taiwan, or Japan, and those bought with service from some US or Canadian carriers."
+              },
+              {
+                "model": "Pixel 3 XL",
+                "notes": "Excludes phones bought in Australia, Taiwan, or Japan, and those bought with service from some US or Canadian carriers."
+              },
+              {
+                "model": "Pixel 3a",
+                "notes": "Excludes phones from Japan or with Verizon service."
+              },
+              {
+                "model": "Pixel 3a XL",
+                "notes": "Excludes phones from Japan or with Verizon service."
+              }
+            ]
+          },
+          {
+            "series_name": "Pixel 2 Series",
+            "devices": [
+              {
+                "model": "Pixel 2",
+                "notes": "Only works with Google Fi service."
+              },
+              {
+                "model": "Pixel 2 XL",
+                "notes": "Only works with Google Fi service."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Samsung",
+        "series": [
+          {
+            "series_name": "Galaxy S Series",
+            "devices": [
+              {
+                "model": "Samsung Galaxy S24",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S24+",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S24 Ultra",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S23",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S23+",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S23 Ultra",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S23 FE",
+                "notes": "eSIM availability varies. Some country/carrier versions are dual physical SIM only."
+              },
+              {
+                "model": "Samsung Galaxy S22 5G",
+                "notes": "eSIM availability may vary by country/region and carrier."
+              },
+              {
+                "model": "Samsung Galaxy S22+ 5G",
+                "notes": "eSIM availability may vary by country/region and carrier."
+              },
+              {
+                "model": "Samsung Galaxy S22 Ultra 5G",
+                "notes": "eSIM availability may vary by country/region and carrier."
+              },
+              {
+                "model": "Samsung Galaxy S21 5G",
+                "notes": "eSIM availability may vary by country/region and carrier. US models generally do not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S21+ 5G",
+                "notes": "eSIM availability may vary by country/region and carrier. US models generally do not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S21 Ultra 5G",
+                "notes": "eSIM availability may vary by country/region and carrier. US models generally do not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S21 FE 5G",
+                "notes": "eSIM availability may vary by country/region and carrier."
+              },
+              {
+                "model": "Samsung Galaxy S20",
+                "notes": "eSIM availability may vary by country/region and carrier. US models generally do not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S20+",
+                "notes": "eSIM availability may vary by country/region and carrier. US models generally do not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S20 Ultra",
+                "notes": "eSIM availability may vary by country/region and carrier. US models generally do not support eSIM."
+              }
+            ]
+          },
+          {
+            "series_name": "Galaxy Z (Foldable) Series",
+            "devices": [
+              {
+                "model": "Samsung Galaxy Z Fold5",
+                "notes": "eSIM availability may vary by country/region and carrier."
+              },
+              {
+                "model": "Samsung Galaxy Z Flip5",
+                "notes": "eSIM availability may vary by country/region and carrier."
+              },
+              { "model": "Samsung Galaxy Z Fold4", "notes": null },
+              { "model": "Samsung Galaxy Z Flip4", "notes": null },
+              { "model": "Samsung Galaxy Z Fold3 5G", "notes": null },
+              { "model": "Samsung Galaxy Z Flip3 5G", "notes": null },
+              { "model": "Samsung Galaxy Z Fold2 5G", "notes": null },
+              { "model": "Samsung Galaxy Fold", "notes": null },
+              { "model": "Samsung Galaxy Z Flip", "notes": null },
+              { "model": "Samsung Galaxy Z Flip 5G", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Galaxy Note Series",
+            "devices": [
+              {
+                "model": "Samsung Galaxy Note 20",
+                "notes": "eSIM availability may vary by country/region and carrier. US T-Mobile/Sprint versions may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy Note 20 Ultra",
+                "notes": "eSIM availability may vary by country/region and carrier. US T-Mobile/Sprint versions may not support eSIM."
+              }
+            ]
+          },
+          {
+            "series_name": "Galaxy A Series",
+            "devices": [
+              {
+                "model": "Samsung Galaxy A55",
+                "notes": "eSIM availability is highly dependent on region and carrier."
+              },
+              {
+                "model": "Samsung Galaxy A54 5G",
+                "notes": "eSIM availability is highly dependent on region and carrier."
+              },
+              {
+                "model": "Samsung Galaxy A35",
+                "notes": "eSIM availability is highly dependent on region and carrier."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Huawei",
+        "series": [
+          {
+            "series_name": "Pura Series",
+            "devices": [
+              {
+                "model": "Huawei Pura 70 Pro",
+                "notes": "eSIM availability may vary by region."
+              }
+            ]
+          },
+          {
+            "series_name": "P Series",
+            "devices": [
+              {
+                "model": "Huawei P40",
+                "notes": "eSIM is not supported on P40 Pro+ model."
+              },
+              {
+                "model": "Huawei P40 Pro",
+                "notes": "eSIM is not supported on P40 Pro+ model."
+              }
+            ]
+          },
+          {
+            "series_name": "Mate Series",
+            "devices": [
+              { "model": "Huawei Mate 40 Pro", "notes": null }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Xiaomi",
+        "series": [
+          {
+            "series_name": "Xiaomi 14 Series",
+            "devices": [
+              {
+                "model": "Xiaomi 14",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              },
+              {
+                "model": "Xiaomi 14 Pro",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              }
+            ]
+          },
+          {
+            "series_name": "Xiaomi 13 Series",
+            "devices": [
+              {
+                "model": "Xiaomi 13",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              },
+              {
+                "model": "Xiaomi 13 Pro",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              },
+              {
+                "model": "Xiaomi 13 Lite",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              },
+              {
+                "model": "Xiaomi 13T",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              },
+              {
+                "model": "Xiaomi 13T Pro",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              }
+            ]
+          },
+          {
+            "series_name": "Xiaomi 12 Series",
+            "devices": [
+              {
+                "model": "Xiaomi 12T Pro",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              }
+            ]
+          },
+          {
+            "series_name": "Redmi Note Series",
+            "devices": [
+              {
+                "model": "Redmi Note 13 Pro",
+                "notes": "eSIM availability is limited to specific regional variants."
+              },
+              {
+                "model": "Redmi Note 13 Pro+",
+                "notes": "eSIM availability is limited to specific regional variants."
+              },
+              {
+                "model": "Redmi Note 11 Pro 5G",
+                "notes": "Only available on the Japanese variant."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Oppo",
+        "series": [
+          {
+            "series_name": "Find Series",
+            "devices": [
+              { "model": "Oppo Find X3 Pro", "notes": null },
+              { "model": "Oppo Find X5", "notes": null },
+              { "model": "Oppo Find X5 Pro", "notes": null },
+              { "model": "Oppo Find N2 Flip", "notes": null },
+              { "model": "Oppo Find N3", "notes": null },
+              { "model": "Oppo Find N3 Flip", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Reno Series",
+            "devices": [
+              { "model": "Oppo Reno 5A", "notes": null },
+              { "model": "Oppo Reno 6 Pro 5G", "notes": null },
+              { "model": "Oppo Reno 9A", "notes": null }
+            ]
+          },
+          {
+            "series_name": "A Series",
+            "devices": [
+              { "model": "Oppo A55s 5G", "notes": null },
+              {
+                "model": "Oppo A77",
+                "notes": "eSIM support may vary by region."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Motorola",
+        "series": [
+          {
+            "series_name": "Razr Series",
+            "devices": [
+              {
+                "model": "Motorola Razr (2019)",
+                "notes": "eSIM is the only SIM option."
+              },
+              { "model": "Motorola Razr 5G", "notes": null },
+              { "model": "Motorola Razr 40", "notes": null },
+              { "model": "Motorola Razr 40 Ultra", "notes": null },
+              { "model": "Motorola Razr+", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Edge Series",
+            "devices": [
+              { "model": "Motorola Edge (2023)", "notes": null },
+              { "model": "Motorola Edge (2022)", "notes": null },
+              { "model": "Motorola Edge+", "notes": null },
+              { "model": "Motorola Edge 40", "notes": null },
+              { "model": "Motorola Edge 40 Pro", "notes": null },
+              { "model": "Motorola Edge 40 Neo", "notes": null }
+            ]
+          },
+          {
+            "series_name": "G Series",
+            "devices": [
+              { "model": "Motorola G53j 5G", "notes": null },
+              {
+                "model": "Moto G54",
+                "notes": "Only on specific single SIM + eSIM variants."
+              },
+              {
+                "model": "Motorola G84",
+                "notes": "Only on specific single SIM + eSIM variants."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Sony",
+        "series": [
+          {
+            "series_name": "Xperia 1 Series",
+            "devices": [
+              { "model": "Sony Xperia 1 VI", "notes": null },
+              { "model": "Sony Xperia 1 V", "notes": null },
+              { "model": "Sony Xperia 1 IV", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Xperia 5 Series",
+            "devices": [
+              { "model": "Sony Xperia 5 V", "notes": null },
+              { "model": "Sony Xperia 5 IV", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Xperia 10 Series",
+            "devices": [
+              { "model": "Sony Xperia 10 III Lite", "notes": null },
+              { "model": "Sony Xperia 10 IV", "notes": null },
+              { "model": "Sony Xperia 10 V", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Xperia Ace Series",
+            "devices": [
+              { "model": "Sony Xperia Ace III", "notes": null }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Honor",
+        "series": [
+          {
+            "series_name": "Magic Series",
+            "devices": [
+              { "model": "Honor Magic 6 Pro", "notes": null },
+              { "model": "Honor Magic 5 Pro", "notes": null },
+              { "model": "Honor Magic 4 Pro", "notes": null },
+              { "model": "Honor Magic V2", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Numbered Series",
+            "devices": [
+              {
+                "model": "Honor 90",
+                "notes": "eSIM availability varies by region."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Nokia",
+        "series": [
+          {
+            "series_name": "X Series",
+            "devices": [
+              { "model": "Nokia X30", "notes": null },
+              { "model": "Nokia XR21", "notes": null }
+            ]
+          },
+          {
+            "series_name": "G Series",
+            "devices": [
+              { "model": "Nokia G60", "notes": null }
+            ]
+          }
+        ]
+      },
+      {
+        "brand": "Others",
+        "series": [
+          {
+            "series_name": "Fairphone",
+            "devices": [
+              { "model": "Fairphone 5", "notes": null },
+              { "model": "Fairphone 4", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Microsoft",
+            "devices": [
+              { "model": "Microsoft Surface Duo 2", "notes": null },
+              { "model": "Microsoft Surface Duo", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Rakuten",
+            "devices": [
+              {
+                "model": "Rakuten Mini",
+                "notes": "eSIM is the only SIM option."
+              },
+              { "model": "Rakuten Big", "notes": null },
+              { "model": "Rakuten Big-S", "notes": null },
+              { "model": "Rakuten Hand", "notes": null },
+              { "model": "Rakuten Hand 5G", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Sharp",
+            "devices": [
+              { "model": "Sharp AQUOS Sense4 Lite", "notes": null },
+              { "model": "Sharp AQUOS Sense6s", "notes": null },
+              { "model": "Sharp AQUOS Sense7", "notes": null },
+              { "model": "Sharp AQUOS Wish", "notes": null },
+              { "model": "Sharp AQUOS Zero6", "notes": null }
+            ]
+          },
+          {
+            "series_name": "Doogee",
+            "devices": [
+              { "model": "Doogee V30", "notes": null }
+            ]
+          },
+          {
+            "series_name": "OnePlus",
+            "devices": [
+              {
+                "model": "OnePlus 12",
+                "notes": "eSIM availability varies by region."
+              },
+              {
+                "model": "OnePlus 11",
+                "notes": "eSIM availability varies by region."
+              },
+              {
+                "model": "OnePlus Open",
+                "notes": "eSIM availability varies by region."
+              }
+            ]
+          },
+          {
+            "series_name": "Nothing",
+            "devices": [
+              {
+                "model": "Nothing Phone (2)",
+                "notes": "eSIM availability varies by region."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

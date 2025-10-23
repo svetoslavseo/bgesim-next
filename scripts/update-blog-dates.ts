@@ -106,9 +106,9 @@ async function fetchBlogPostData(url: string): Promise<{ publishedDate: string; 
       for (const pattern of datePatterns) {
         const match = dateStr.match(pattern);
         if (match && match[0] && match[1] && match[2]) {
-          const monthName = match[0].split(' ')[0].toLowerCase();
-          const day = match[1];
-          const year = match[2];
+          const monthName = match[0]!.split(' ')[0]!.toLowerCase();
+          const day = match[1]!;
+          const year = match[2]!;
           const month = monthNames[monthName as keyof typeof monthNames];
           
           if (month) {
@@ -124,16 +124,16 @@ async function fetchBlogPostData(url: string): Promise<{ publishedDate: string; 
                           html.match(/(\d{1,2}\s+(?:януари|февруари|март|април|май|юни|юли|август|септември|октомври|ноември|декември)\s+\d{4})/i);
     
     if (publishedMatch) {
-      const dateStr = publishedMatch[1] || publishedMatch[0];
+      const dateStr = (publishedMatch[1] || publishedMatch[0]) ?? '';
       console.log(`Found published date: ${dateStr}`);
       
       // Parse Bulgarian date format
       for (const pattern of datePatterns) {
         const match = dateStr.match(pattern);
         if (match && match[0] && match[1] && match[2]) {
-          const monthName = match[0].split(' ')[0].toLowerCase();
-          const day = match[1];
-          const year = match[2];
+          const monthName = match[0]!.split(' ')[0]!.toLowerCase();
+          const day = match[1]!;
+          const year = match[2]!;
           const month = monthNames[monthName as keyof typeof monthNames];
           
           if (month) {
@@ -148,7 +148,7 @@ async function fetchBlogPostData(url: string): Promise<{ publishedDate: string; 
     if (!publishedDate && !modifiedDate) {
       // Look for date in meta tags
       const metaDateMatch = html.match(/<meta[^>]*property="article:published_time"[^>]*content="([^"]+)"/i);
-      if (metaDateMatch) {
+      if (metaDateMatch && metaDateMatch[1]) {
         publishedDate = metaDateMatch[1];
         modifiedDate = publishedDate;
       }

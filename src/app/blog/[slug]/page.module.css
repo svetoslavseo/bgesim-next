@@ -46,6 +46,11 @@
   font-weight: 700;
 }
 
+.esimCheckerWrapper {
+  margin: 2rem 0;
+  padding: 0;
+}
+
 .meta {
   display: flex;
   flex-wrap: wrap;

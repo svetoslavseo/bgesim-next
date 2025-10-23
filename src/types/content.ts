@@ -17,6 +17,7 @@ export interface ProcessedPost extends ProcessedPage {
   author: string;
   categories: string[];
   tags: string[];
+  featuredImageUrl?: string;
 }
 
 export interface SEOData {
