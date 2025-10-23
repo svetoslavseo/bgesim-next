@@ -94,13 +94,20 @@ export default function BlogPostPage({
       <DesktopTableOfContents content={post.content} />
       
       {/* Article content */}
-      <Section padding="lg">
+      <Section padding="lg" className={styles.noTopPadding}>
         <Container size="xl">
           <article className={styles.article}>
             {/* 1. Breadcrumbs */}
             <Breadcrumbs items={breadcrumbItems} />
             
-            {/* 2. Published/Updated dates */}
+            {/* 2. H1 Headline */}
+            <header>
+              <h1 className={styles.headline}>
+                {post.title}
+              </h1>
+            </header>
+            
+            {/* 3. Published/Updated dates */}
             <div className={styles.meta}>
               <time dateTime={post.publishedDate}>
                 Публикувано: {formatDate(post.publishedDate)}
@@ -116,13 +123,6 @@ export default function BlogPostPage({
                 <span>• {post.categories.join(', ')}</span>
               )}
             </div>
-            
-            {/* 3. H1 Headline */}
-            <header>
-              <h1 className={styles.headline}>
-                {post.title}
-              </h1>
-            </header>
             
             {/* 4. Author name */}
             {post.author && (

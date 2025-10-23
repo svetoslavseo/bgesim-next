@@ -4,6 +4,11 @@
   max-width: 100%;
 }
 
+/* Add small top padding to Section component on blog posts */
+.noTopPadding {
+  padding-top: 2rem !important; /* Small spacing between nav and breadcrumbs */
+}
+
 /* Desktop sidebar spacing */
 @media (min-width: 1024px) {
   .article {
@@ -126,6 +131,21 @@
 /* Hide WordPress table of contents */
 .wp-content .ez-toc-container {
   display: none !important;
+}
+
+/* Remove excessive spacing from WordPress button blocks */
+.wp-content .wp-block-group {
+  margin-bottom: 0 !important;
+}
+
+.wp-content .wp-block-group.alignfull {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Remove spacing from empty paragraphs */
+.wp-content p:empty {
+  display: none;
 }
 
 /* Responsive */

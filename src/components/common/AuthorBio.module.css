@@ -1,5 +1,5 @@
 .authorBio {
-  margin-top: 3rem;
+  margin-top: 1rem;
   padding: 2rem;
   background: linear-gradient(135deg, #f8f4f7 0%, #faf9fb 100%);
   border-radius: 12px;
@@ -65,7 +65,7 @@ a.name:hover {
 @media (max-width: 768px) {
   .authorBio {
     padding: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
   
   .content {
