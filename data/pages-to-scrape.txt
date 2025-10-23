@@ -1,0 +1,92 @@
+PAGES TO SCRAPE
+======================================================================
+
+PAGES:
+----------------------------------------------------------------------
+1. eSIM за Египет
+   URL: https://travelesim.bg/esim-egipet/
+   Save to: data/scraped-html/pages/esim-egipet.html
+
+2. eSIM Сърбия
+   URL: https://travelesim.bg/esim-serbia/
+   Save to: data/scraped-html/pages/esim-serbia.html
+
+3. eSIM за Дубай
+   URL: https://travelesim.bg/esim-dubai/
+   Save to: data/scraped-html/pages/esim-dubai.html
+
+4. Контакти
+   URL: https://travelesim.bg/contacts/
+   Save to: data/scraped-html/pages/contacts.html
+
+5. Проверка на съвместимост с eSIM
+   URL: https://travelesim.bg/proverka-na-syvmestimost-s-esim/
+   Save to: data/scraped-html/pages/proverka-na-syvmestimost-s-esim.html
+
+6. eSIM за Тайланд
+   URL: https://travelesim.bg/esim-thailand/
+   Save to: data/scraped-html/pages/esim-thailand.html
+
+7. Калкулатор за използвани мобилни данни при пътуване
+   URL: https://travelesim.bg/calculator-za-izpolzvani-mobilni-danni/
+   Save to: data/scraped-html/pages/calculator-za-izpolzvani-mobilni-danni.html
+
+8. Васил Андреев
+   URL: https://travelesim.bg/v-andreev/
+   Save to: data/scraped-html/pages/v-andreev.html
+
+9. eSIM за САЩ
+   URL: https://travelesim.bg/esim-za-usa/
+   Save to: data/scraped-html/pages/esim-za-usa.html
+
+10. eSIM за Великобритания
+   URL: https://travelesim.bg/esim-velikobritania/
+   Save to: data/scraped-html/pages/esim-velikobritania.html
+
+11. Блог
+   URL: https://travelesim.bg/blog/
+   Save to: data/scraped-html/pages/blog.html
+
+12. eSIM Турция
+   URL: https://travelesim.bg/turcia/
+   Save to: data/scraped-html/pages/turcia.html
+
+13. Home
+   URL: https://travelesim.bg/
+   Save to: data/scraped-html/pages/en.html
+
+14. Privacy Policy
+   URL: https://travelesim.bg/privacy-policy/
+   Save to: data/scraped-html/pages/privacy-policy.html
+
+
+POSTS:
+----------------------------------------------------------------------
+1. Как да проверя дали имам роуминг? Практично ръководство за Vivacom, Yettel и A1
+   URL: https://travelesim.bg/blog/kak-da-proverq-dali-imam-rouming/
+   Save to: data/scraped-html/posts/kak-da-proverq-dali-imam-rouming.html
+
+2. Как да избегнеш скъп роуминг във Великобритания с eSIM (2025)
+   URL: https://travelesim.bg/blog/kak-da-izbegnesh-rouming-v-velikobritania/
+   Save to: data/scraped-html/posts/kak-da-izbegnesh-rouming-v-velikobritania.html
+
+3. Роуминг в Сърбия: Пълно ръководство за пътуващи
+   URL: https://travelesim.bg/blog/rouming-v-syrbia-ceni-paketi-esim-alternativi/
+   Save to: data/scraped-html/posts/rouming-v-syrbia-ceni-paketi-esim-alternativi.html
+
+4. Какво е EID номер и как да го откриете на iPhone, Android или друго устройство
+   URL: https://travelesim.bg/blog/kakvo-e-eid-nomer/
+   Save to: data/scraped-html/posts/kakvo-e-eid-nomer.html
+
+5. eSIM или SIM карта: Коя е по-подходяща за вас?
+   URL: https://travelesim.bg/blog/esim-ili-sim-karta/
+   Save to: data/scraped-html/posts/esim-ili-sim-karta.html
+
+6. Съвместими Телефони с eSIM  (2025) – Пълен списък с устройства
+   URL: https://travelesim.bg/blog/syvmestimi-telefoni-s-esim/
+   Save to: data/scraped-html/posts/syvmestimi-telefoni-s-esim.html
+
+7. Какво е eSIM?
+   URL: https://travelesim.bg/blog/kakvo-e-esim/
+   Save to: data/scraped-html/posts/kakvo-e-esim.html
+

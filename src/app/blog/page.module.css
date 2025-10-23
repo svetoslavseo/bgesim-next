@@ -1,0 +1,36 @@
+/**
+ * Blog page styles
+ */
+
+.blogContainer {
+  width: 50%;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .blogContainer {
+    width: 70%;
+  }
+  
+  .postsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .blogContainer {
+    width: 85%;
+  }
+  
+  .postsGrid {
+    grid-template-columns: 1fr;
+  }
+}

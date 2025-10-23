@@ -1,0 +1,230 @@
+/**
+ * SEO utilities and metadata generation
+ */
+
+import type { Metadata } from 'next';
+import type { SEOData, OpenGraphImage } from '@/types/content';
+
+/**
+ * Default site configuration
+ */
+export const SITE_CONFIG = {
+  name: 'Travel eSIM BG',
+  description: 'eSIM карти за пътуване - Бърз интернет без роуминг',
+  url: 'https://travelesim.bg',
+  locale: 'bg_BG',
+  defaultImage: {
+    url: '/media/images/default-og-image.png',
+    width: 1200,
+    height: 630,
+    alt: 'Travel eSIM BG',
+  },
+};
+
+/**
+ * Generate Next.js Metadata from SEO data
+ */
+export function generateMetadata(seoData: SEOData): Metadata {
+  const metadata: Metadata = {
+    title: seoData.title,
+    description: seoData.description,
+    
+    // Canonical URL
+    alternates: {
+      canonical: seoData.canonical,
+    },
+    
+    // Robots directives
+    robots: {
+      index: seoData.robots.index === 'index',
+      follow: seoData.robots.follow === 'follow',
+    },
+    
+    // Open Graph
+    openGraph: {
+      type: seoData.openGraph.type as any,
+      title: seoData.openGraph.title,
+      description: seoData.openGraph.description,
+      url: seoData.openGraph.url,
+      siteName: seoData.openGraph.siteName,
+      locale: seoData.openGraph.locale,
+      images: seoData.openGraph.images.map((img: OpenGraphImage) => ({
+        url: img.url,
+        width: img.width,
+        height: img.height,
+        alt: seoData.openGraph.title,
+      })),
+    },
+    
+    // Twitter Card
+    twitter: {
+      card: seoData.twitter.card as any,
+      title: seoData.openGraph.title,
+      description: seoData.openGraph.description,
+      images: seoData.openGraph.images[0]?.url,
+    },
+  };
+  
+  return metadata;
+}
+
+/**
+ * Generate JSON-LD structured data
+ */
+export function generateStructuredData(seoData: SEOData): object | null {
+  if (!seoData.schema) {
+    return null;
+  }
+  
+  return seoData.schema;
+}
+
+/**
+ * Generate default metadata for a page without SEO data
+ */
+export function generateDefaultMetadata(title?: string, description?: string): Metadata {
+  return {
+    title: title || SITE_CONFIG.name,
+    description: description || SITE_CONFIG.description,
+    alternates: {
+      canonical: SITE_CONFIG.url,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      type: 'website',
+      title: title || SITE_CONFIG.name,
+      description: description || SITE_CONFIG.description,
+      url: SITE_CONFIG.url,
+      siteName: SITE_CONFIG.name,
+      locale: SITE_CONFIG.locale,
+      images: [
+        {
+          url: SITE_CONFIG.defaultImage.url,
+          width: SITE_CONFIG.defaultImage.width,
+          height: SITE_CONFIG.defaultImage.height,
+          alt: SITE_CONFIG.defaultImage.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: title || SITE_CONFIG.name,
+      description: description || SITE_CONFIG.description,
+      images: [SITE_CONFIG.defaultImage.url],
+    },
+  };
+}
+
+/**
+ * Create breadcrumb structured data
+ */
+export function generateBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': items.map((item, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'name': item.name,
+      'item': item.url,
+    })),
+  };
+}
+
+/**
+ * Create article structured data for blog posts
+ */
+export function generateArticleSchema(article: {
+  title: string;
+  description: string;
+  url: string;
+  publishedDate: string;
+  modifiedDate: string;
+  author: string;
+  image?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': article.title,
+    'description': article.description,
+    'url': article.url,
+    'datePublished': article.publishedDate,
+    'dateModified': article.modifiedDate,
+    'author': {
+      '@type': 'Person',
+      'name': article.author,
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': SITE_CONFIG.name,
+      'url': SITE_CONFIG.url,
+    },
+    'image': article.image || SITE_CONFIG.defaultImage.url,
+  };
+}
+
+/**
+ * Create organization structured data
+ */
+export function generateOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    'name': SITE_CONFIG.name,
+    'url': SITE_CONFIG.url,
+    'logo': {
+      '@type': 'ImageObject',
+      'url': `${SITE_CONFIG.url}/media/images/logo.png`,
+    },
+    'description': SITE_CONFIG.description,
+  };
+}
+
+/**
+ * Sanitize text for meta tags
+ */
+export function sanitizeMetaText(text: string): string {
+  // Remove HTML tags
+  let sanitized = text.replace(/<[^>]*>/g, '');
+  
+  // Decode HTML entities
+  sanitized = sanitized
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'");
+  
+  // Trim whitespace
+  sanitized = sanitized.trim();
+  
+  return sanitized;
+}
+
+/**
+ * Truncate description to optimal length
+ */
+export function truncateDescription(text: string, maxLength: number = 160): string {
+  const sanitized = sanitizeMetaText(text);
+  
+  if (sanitized.length <= maxLength) {
+    return sanitized;
+  }
+  
+  // Truncate at word boundary
+  const truncated = sanitized.substring(0, maxLength);
+  const lastSpace = truncated.lastIndexOf(' ');
+  
+  if (lastSpace > 0) {
+    return truncated.substring(0, lastSpace) + '...';
+  }
+  
+  return truncated + '...';
+}
+
+
+

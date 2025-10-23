@@ -1,0 +1,62 @@
+/**
+ * Section component styles
+ */
+
+.section {
+  width: 100%;
+}
+
+/* Padding variants */
+.padding-none {
+  padding: 0;
+}
+
+.padding-sm {
+  padding: 2rem 0;
+}
+
+.padding-md {
+  padding: 4rem 0;
+}
+
+.padding-lg {
+  padding: 6rem 0;
+}
+
+/* Background variants */
+.background-white {
+  background-color: #ffffff;
+}
+
+.background-gray {
+  background-color: #f9fafb;
+}
+
+.background-primary {
+  background-color: #0066cc;
+  color: #ffffff;
+}
+
+/* Dark section for black-background areas */
+.background-dark {
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .padding-sm {
+    padding: 1.5rem 0;
+  }
+  
+  .padding-md {
+    padding: 2.5rem 0;
+  }
+  
+  .padding-lg {
+    padding: 3.5rem 0;
+  }
+}
+
+
+

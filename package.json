@@ -1,0 +1,40 @@
+{
+  "name": "wp-esim-bg-clone",
+  "version": "0.1.0",
+  "description": "WordPress to Next.js migration for travelesim.bg",
+  "private": true,
+  "scripts": {
+    "extract:all": "tsx scripts/run-all-extraction.ts",
+    "extract:wordpress": "tsx scripts/fetch-wordpress-data.ts",
+    "extract:media": "tsx scripts/download-media.ts",
+    "extract:homepage": "tsx scripts/download-homepage-assets.ts",
+    "extract:fonts": "tsx scripts/extract-fonts.ts",
+    "extract:scrape": "tsx scripts/scrape-pages-firecrawl.ts",
+    "scrape:oxygen": "tsx scripts/scrape-oxygen-content.ts",
+    "integrate:scraped": "tsx scripts/integrate-scraped-content.ts",
+    "transform:content": "tsx scripts/transform-content.ts",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "sass": "^1.70.0",
+    "sharp": "^0.33.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

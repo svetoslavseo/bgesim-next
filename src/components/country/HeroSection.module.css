@@ -1,0 +1,164 @@
+.hero {
+  background: #000000;
+  color: white;
+  padding: 4rem 2rem;
+  min-height: 500px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  margin-bottom: 1.5rem;
+  color: #999;
+}
+
+.breadcrumb a {
+  color: #ffeb3b;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 3.0625rem; /* 49px */
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+.features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+}
+
+.checkmark {
+  width: 24px;
+  height: 24px;
+  color: #4caf50;
+  flex-shrink: 0;
+}
+
+/* Pricing Card */
+.pricingCard {
+  background: white;
+  color: #333;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+.logo {
+  max-width: 150px;
+  height: auto;
+}
+
+.trustpilot {
+  max-width: 200px;
+  height: auto;
+}
+
+.planInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.planItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 15px;
+  color: #666;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: #007bff;
+}
+
+.country {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.ctaButton {
+  display: inline-block;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: #000;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .title {
+    font-size: 2.6875rem; /* 43px */
+  }
+
+  .pricingCard {
+    padding: 2rem;
+  }
+
+  .hero {
+    padding: 3rem 1rem;
+  }
+}
+

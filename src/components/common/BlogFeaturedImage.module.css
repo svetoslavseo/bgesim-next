@@ -1,0 +1,30 @@
+.featuredImageContainer {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border-radius: 30px !important;
+  background-color: #f0f0f0;
+}
+
+.featuredImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 30px !important;
+}
+
+@media (max-width: 768px) {
+  .featuredImageContainer {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featuredImageContainer {
+    height: 250px;
+  }
+}
+

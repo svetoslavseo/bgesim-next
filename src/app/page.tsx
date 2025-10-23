@@ -1,0 +1,147 @@
+import { getHomepage, getRecentPosts } from '@/lib/content';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
+import type { Metadata } from 'next';
+import HeroSection from '@/components/home/HeroSection';
+import PopularDestinations from '@/components/home/PopularDestinations';
+import BenefitsSection from '@/components/home/BenefitsSection';
+import InfoSection from '@/components/home/InfoSection';
+import WhyUsSection from '@/components/home/WhyUsSection';
+import HowItWorksSection from '@/components/home/HowItWorksSection';
+import BlogPostsSection from '@/components/home/BlogPostsSection';
+import BottomCTASection from '@/components/home/BottomCTASection';
+import { extractExcerpt, formatDate } from '@/lib/utils';
+
+/**
+ * Generate metadata for homepage
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const homepage = getHomepage();
+  
+  if (!homepage) {
+    return {
+      title: 'eSIM за пътуване - Travel eSIM by Breeze',
+      description: 'Останете свързани, където и да пътувате, с бърза и сигурна eSIM.',
+    };
+  }
+  
+  return generateSEOMetadata(homepage.seo);
+}
+
+/**
+ * Homepage component
+ */
+export default function HomePage() {
+  const homepage = getHomepage();
+  const recentPosts = getRecentPosts(3);
+
+  const destinations = [
+    { name: 'Великобритания', href: '/esim-velikobritania/', flag: '/media/images/5.png' },
+    { name: 'САЩ', href: '/esim-za-usa/', flag: '/media/images/Flags_-1.png' },
+    { name: 'Тайланд', href: '/esim-thailand/', flag: '/media/images/2-1.png' },
+    { name: 'Турция', href: '/turcia/', flag: '/media/images/4.png' },
+    { name: 'Дубай', href: '/esim-dubai/', flag: '/media/images/6.png' },
+    { name: 'Сърбия', href: '/esim-serbia/', flag: '/media/images/Flags_-2.png' },
+  ];
+
+  const benefits = [
+    {
+      icon: '/media/images/1-150x150.png',
+      title: 'Незабавно активиране',
+      description: 'С eSIM активирате плана си за секунди – сканирайте QR код и сте готови!'
+    },
+    {
+      icon: '/media/images/2-150x150.png',
+      title: 'Спестете пари от роуминг',
+      description: 'eSIM плановете са по-евтини, защото директно използват местни мрежи в избраната дестинация.'
+    },
+    {
+      icon: '/media/images/3-150x150.png',
+      title: 'Свързани навсякъде',
+      description: 'Намерете най-добрите eSIM оферти от доверени доставчици и останете онлайн в над 100 държави!'
+    }
+  ];
+
+  const howItWorksSteps = [
+    {
+      number: '1',
+      title: 'Изберете вашия план',
+      description: 'Разгледайте и изберете най-добрия eSIM план за вашата дестинация и нужди чрез нашата платформа.'
+    },
+    {
+      number: '2',
+      title: 'Активирайте eSIM',
+      description: 'След като закупите плана, ще получите QR код от доставчика. Сканирайте го директно от телефона си, за да активирате услугата.'
+    },
+    {
+      number: '3',
+      title: 'Наслаждавайте се на пътуването',
+      description: 'Вашият eSIM е готов за използване! Наслаждавайте се на бърз и достъпен интернет, без да се притеснявате за роуминг такси.'
+    }
+  ];
+
+  const blogPosts = recentPosts.map(post => ({
+    title: post.title,
+    excerpt: extractExcerpt(post.excerpt || post.content, 140),
+    slug: post.slug,
+    date: formatDate(post.publishedDate),
+    author: 'ВАСИЛ АНДРЕЕВ',
+    featuredImage: post.featuredImageUrl || undefined
+  }));
+
+  return (
+    <>
+      <HeroSection
+        title="eSIM за пътуване"
+        subtitle="Останете свързани, където и да пътувате, с бърза и сигурна eSIM. Без физически SIM карти, без забавяне – само мигновена връзка, където и да си."
+        ctaText="Виж Всички Оферти"
+        ctaUrl="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
+      />
+
+      <PopularDestinations destinations={destinations} />
+
+      <BenefitsSection
+        title="Предимстава на eSIM"
+        benefits={benefits}
+        ctaText="Виж Планове"
+        ctaUrl="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
+      />
+
+      <InfoSection
+        title="Достъпни eSIM международни планове – без роуминг такси, без напрежение."
+        description="Намерете идеалния eSIM план за вашето пътуване. Лесно, удобно и без излишни разходи – ние ви свързваме с най-добрите оферти."
+        ctaText="НАУЧЕТЕ КАК РАБОТИ"
+        ctaUrl="/blog/kakvo-e-esim/"
+        image="/media/images/Untitled-design.png"
+        imageAlt="eSIM карта"
+      />
+
+      <WhyUsSection
+        title="Защо да изберете нас?"
+        description="Нашата цел е да направим пътуванията ви по-лесни и без излишни разходи. Платформата ни е създадена, за да ви помогне бързо да намерите правилния eSIM план. Ако имате въпроси, просто ни пишете – ще получите отговор до 48 часа."
+      />
+
+      <HowItWorksSection
+        title="Как работи?"
+        steps={howItWorksSteps}
+        image="/media/images/Image-1-1.png"
+        imageAlt="Активиране на eSIM"
+      />
+
+      {blogPosts.length > 0 && (
+        <BlogPostsSection
+          title="Последни публикации"
+          subtitle="БЛОГ"
+          posts={blogPosts}
+        />
+      )}
+
+      <BottomCTASection
+        title="Купи своята eSIM карта сега и спести пари от роуминг."
+        description="Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. Гарантирано ниски цени от 15лв за 5GB."
+        ctaText="КУПИ СЕГА"
+        ctaUrl="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
+        features={[]}
+      />
+    </>
+  );
+}

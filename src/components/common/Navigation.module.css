@@ -1,0 +1,227 @@
+/* Navigation Styles - Cloned from WordPress */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: relative;
+  z-index: 1001;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburgerLine {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.hamburgerLineActive:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburgerLineActive:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerLineActive:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #e5e900;
+}
+
+.navLinkActive {
+  color: #e5e900;
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.hasSubmenu:hover .arrow {
+  transform: rotate(180deg);
+}
+
+/* Create invisible bridge between parent and dropdown */
+.hasSubmenu::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: transparent;
+  z-index: 999;
+}
+
+/* Submenu Styles */
+.submenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  min-width: 250px;
+  z-index: 1000;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submenu li {
+  margin: 0;
+}
+
+.submenuLink {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 15px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.submenuLink:hover {
+  background-color: #f8f9fa;
+  color: #e5e900;
+}
+
+/* CTA Button */
+.ctaButton {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background-color: transparent;
+  color: #e5e900;
+  border: 2px solid #e5e900;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: #e5e900;
+  color: black;
+}
+
+/* Mobile Styles */
+@media (max-width: 1120px) {
+  .mobileMenuButton {
+    display: block;
+  }
+
+  .navList {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    height: 100vh;
+    width: 300px;
+    background-color: #000;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4rem 0;
+    gap: 0;
+    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .navListMobile {
+    right: 0;
+  }
+
+  .navItem {
+    width: 100%;
+  }
+
+  .navLink,
+  .ctaButton {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+    border: none;
+    justify-content: space-between;
+  }
+
+  .submenu {
+    position: static;
+    box-shadow: none;
+    border-radius: 0;
+    background-color: #f8f9fa;
+    min-width: auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .submenuLink {
+    padding-left: 3rem;
+  }
+
+  .hasSubmenu {
+    flex-wrap: wrap;
+  }
+}

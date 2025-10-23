@@ -1,0 +1,51 @@
+/**
+ * Container component styles
+ */
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.container-sm {
+  max-width: 640px;
+}
+
+.container-md {
+  max-width: 768px;
+}
+
+.container-lg {
+  max-width: 1024px;
+}
+
+.container-xl {
+  max-width: 1280px;
+}
+
+/* Desktop TOC layout adjustments */
+@media (min-width: 1024px) {
+  .container-xl {
+    max-width: none; /* Remove max-width constraint when TOC is present */
+    width: 100%;
+    padding-left: 0; /* Remove left padding to use full 60% width */
+    padding-right: 0; /* Remove right padding to use full 60% width */
+  }
+}
+
+.container-full {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+
+

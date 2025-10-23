@@ -1,0 +1,40 @@
+.section {
+  padding: 4rem 2rem;
+  background: #000000;
+  color: #ffffff;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 62px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 1.5rem;
+  }
+
+  .title {
+    font-size: 44px;
+  }
+
+  .description {
+    font-size: 0.9375rem;
+  }
+}
+

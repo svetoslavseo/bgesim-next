@@ -1,0 +1,160 @@
+/* Blog post page styles */
+
+.article {
+  max-width: 100%;
+}
+
+/* Desktop sidebar spacing */
+@media (min-width: 1024px) {
+  .article {
+    margin-left: 25%; /* Space for desktop TOC sidebar (20% + 5% spacing) */
+    max-width: none; /* Remove max-width constraint */
+    width: 50%; /* 50% of page width */
+    padding: 0 2rem; /* Add horizontal padding for better readability */
+    position: relative; /* Ensure proper positioning context */
+  }
+  
+  /* Make the content area wider by reducing container constraints */
+  .article .wp-content {
+    max-width: none;
+    width: 100%;
+  }
+  
+  /* Ensure the main content area uses full available width */
+  .article > * {
+    max-width: none;
+  }
+  
+  /* Override container styles for blog posts */
+  .article {
+    margin-left: 25% !important;
+    width: 50% !important;
+    max-width: none !important;
+  }
+}
+
+.headline {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.authorLine {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.authorLabel {
+  font-weight: 500;
+}
+
+.authorName {
+  color: #ad6ca5;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.authorName:hover {
+  color: #8b5a8a;
+  text-decoration: underline;
+}
+
+.excerpt {
+  font-size: 1.125rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+  font-style: italic;
+  padding-left: 1rem;
+  border-left: 3px solid #ad6ca5;
+  line-height: 1.7;
+}
+
+.imageWrapper {
+  margin-bottom: 2rem;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.tags {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.tagsTitle {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #6b7280;
+}
+
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: #f3f4f6;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  color: #4b5563;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background-color: #e5e7eb;
+}
+
+/* Hide WordPress table of contents */
+.wp-content .ez-toc-container {
+  display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2rem;
+  }
+  
+  .excerpt {
+    font-size: 1rem;
+  }
+  
+  .meta {
+    font-size: 0.813rem;
+  }
+  
+  .authorLine {
+    font-size: 0.938rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 1.75rem;
+  }
+  
+  .excerpt {
+    font-size: 0.938rem;
+    padding-left: 0.75rem;
+  }
+}
+

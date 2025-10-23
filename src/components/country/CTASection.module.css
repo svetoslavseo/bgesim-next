@@ -1,0 +1,95 @@
+.cta {
+  padding: 4rem 2rem;
+}
+
+.cta.purple {
+  background-image: linear-gradient(rgba(255,255,255,0.4), #ad6ca5);
+  background-color: #ad6ca5;
+  text-align: justify;
+  color: #ffffff;
+}
+
+.cta.black {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.checkmark {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.checkmark img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: #000000;
+}
+
+.description {
+  font-size: 1rem;
+  margin: 0;
+  color: #000000;
+  line-height: 1.5;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.button:hover {
+  background: #333333;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .checkmark {
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+

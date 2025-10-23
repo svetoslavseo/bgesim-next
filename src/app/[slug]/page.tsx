@@ -1,0 +1,91 @@
+import { notFound } from 'next/navigation';
+import { getAllPageSlugs, getPageBySlug } from '@/lib/content';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
+import Container from '@/components/layout/Container';
+import Section from '@/components/layout/Section';
+import type { Metadata } from 'next';
+
+/**
+ * Generate static params for all pages
+ */
+export async function generateStaticParams() {
+  const slugs = getAllPageSlugs();
+  
+  // Filter out 'home' as it's handled by the root page
+  // Also exclude static files that shouldn't be handled by this route
+  const staticFiles = ['favicon.ico', 'sw.js', 'robots.txt', 'sitemap.xml'];
+  
+  return slugs
+    .filter(slug => 
+      slug !== 'home' && 
+      slug !== '' && 
+      !staticFiles.includes(slug)
+    )
+    .map((slug) => ({
+      slug,
+    }));
+}
+
+/**
+ * Generate metadata for each page
+ */
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { slug: string } 
+}): Promise<Metadata> {
+  const page = getPageBySlug(params.slug);
+  
+  if (!page) {
+    return {
+      title: 'Page Not Found',
+    };
+  }
+  
+  return generateSEOMetadata(page.seo);
+}
+
+/**
+ * Page component
+ */
+export default function Page({ 
+  params 
+}: { 
+  params: { slug: string } 
+}) {
+  const page = getPageBySlug(params.slug);
+  
+  if (!page) {
+    notFound();
+  }
+  
+  return (
+    <>
+      <Section padding="md">
+        <Container>
+          {/* Structured data if available */}
+          {page.seo.schema && (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(page.seo.schema),
+              }}
+            />
+          )}
+          
+          {/* Page title */}
+          <h1 style={{ marginBottom: '2rem' }}>{page.title}</h1>
+          
+          {/* Page content */}
+          <div 
+            className="wp-content"
+            dangerouslySetInnerHTML={{ __html: page.content }}
+          />
+        </Container>
+      </Section>
+    </>
+  );
+}
+
+
+

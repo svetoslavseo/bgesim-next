@@ -1,0 +1,147 @@
+/* Desktop Table of Contents - Left Sidebar Styles */
+
+.desktopToc {
+  position: absolute;
+  top: 0; /* Will be positioned relative to the image bottom */
+  left: 2.5%; /* 15% of page width */
+  width: 15%; /* 15% of page width */
+  max-height: calc(100vh - 200px);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow-y: auto;
+  /* Hide on mobile and tablet */
+  display: none;
+}
+
+/* Sticky behavior when scrolled - positioning handled by inline styles */
+.desktopToc.sticky {
+  /* Dynamic positioning handled by component */
+}
+
+.tocHeader {
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+.tocTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tocNav {
+  margin-top: 0.5rem;
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tocItem {
+  margin-bottom: 0.25rem;
+}
+
+.tocLink {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.tocLink:hover {
+  background-color: #f3f4f6;
+  color: #000000;
+}
+
+.tocLink:focus {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+/* Level-specific styling for H2 and H3 only */
+.tocLink.level2 {
+  font-weight: 500;
+  color: #000000;
+  font-size: 0.85rem;
+  padding-left: 0.5rem;
+}
+
+.tocLink.level3 {
+  font-weight: 400;
+  padding-left: 1.5rem;
+  color: #000000;
+  font-size: 0.8rem;
+}
+
+.tocSubList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 0.25rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid #e5e7eb;
+  margin-left: 0.5rem;
+}
+
+/* Active state for current section */
+.tocLink.active {
+  background-color: #f3f4f6;
+  color: #000000;
+  font-weight: 500;
+}
+
+/* Show only on desktop */
+@media (min-width: 1024px) {
+  .desktopToc {
+    display: block !important;
+    background: #f8fafc;
+    border: 2px solid #000000;
+  }
+}
+
+/* Hide on smaller screens */
+@media (max-width: 1023px) {
+  .desktopToc {
+    display: none;
+  }
+}
+
+/* Scrollbar styling */
+.desktopToc::-webkit-scrollbar {
+  width: 4px;
+}
+
+.desktopToc::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 2px;
+}
+
+.desktopToc::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.desktopToc::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

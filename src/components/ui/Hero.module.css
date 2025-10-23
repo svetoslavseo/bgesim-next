@@ -1,0 +1,130 @@
+/**
+ * Hero component styles
+ * TODO: Update with exact styles from Oxygen Builder after CSS extraction
+ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  background-color: #f9fafb;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hasBackground {
+  color: #ffffff;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Sizes */
+.size-sm {
+  padding: 4rem 0;
+}
+
+.size-md {
+  padding: 6rem 0;
+}
+
+.size-lg {
+  padding: 10rem 0;
+}
+
+/* Alignment */
+.align-left .content {
+  text-align: left;
+}
+
+.align-center .content {
+  text-align: center;
+}
+
+.align-right .content {
+  text-align: right;
+}
+
+/* Title */
+.title {
+  margin: 0 0 1.5rem;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hasBackground .title {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtitle */
+.subtitle {
+  margin: 0 0 2rem;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.hasBackground .subtitle {
+  color: #ffffff;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.align-center .actions {
+  justify-content: center;
+}
+
+.align-right .actions {
+  justify-content: flex-end;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .size-sm {
+    padding: 3rem 0;
+  }
+  
+  .size-md {
+    padding: 4rem 0;
+  }
+  
+  .size-lg {
+    padding: 6rem 0;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+  
+  .align-center .actions,
+  .align-right .actions {
+    justify-content: stretch;
+  }
+}
+
+
+

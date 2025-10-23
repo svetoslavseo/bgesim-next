@@ -1,0 +1,82 @@
+import { getRecentPosts } from '@/lib/content';
+import Container from '@/components/layout/Container';
+import Section from '@/components/layout/Section';
+import Card from '@/components/ui/Card';
+import { formatDate, extractExcerpt } from '@/lib/utils';
+import type { Metadata } from 'next';
+import featuredImagesMap from '../../../data/processed/blog-featured-images.json';
+import styles from './page.module.css';
+
+export const metadata: Metadata = {
+  title: 'Блог',
+  description: 'Статии и новини за eSIM технологиите и мобилната свързаност',
+};
+
+export default function BlogPage() {
+  const posts = getRecentPosts(100); // Get all posts
+  
+  if (posts.length === 0) {
+    return (
+      <Section padding="lg">
+        <Container>
+          <h1 style={{ marginBottom: '2rem', textAlign: 'center' }}>Блог</h1>
+          <p style={{ textAlign: 'center', color: '#6b7280' }}>
+            Няма публикувани статии. Стартирайте извличането на данни за да заредите съдържанието.
+          </p>
+        </Container>
+      </Section>
+    );
+  }
+  
+  return (
+    <>
+      <Section padding="md" background="gray">
+        <Container>
+          <h1 style={{ marginBottom: '1rem', textAlign: 'center' }}>Блог</h1>
+          <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: 0 }}>
+            Последни статии и новини
+          </p>
+        </Container>
+      </Section>
+      
+      <Section padding="lg">
+        <div className={styles.blogContainer}>
+          <div className={styles.postsGrid}>
+            {posts.map((post) => {
+              const featuredImagePath = (featuredImagesMap as Record<string, string>)[post.slug];
+              
+              return (
+                <Card
+                  key={post.slug}
+                  title={post.title}
+                  description={extractExcerpt(post.excerpt || post.content, 150)}
+                  href={`/blog/${post.slug}/`}
+                  image={featuredImagePath}
+                  imageAlt={post.title}
+                >
+                <div style={{ 
+                  marginTop: '1rem', 
+                  fontSize: '0.875rem', 
+                  color: '#6b7280' 
+                }}>
+                  <time dateTime={post.publishedDate}>
+                    {formatDate(post.publishedDate)}
+                  </time>
+                  {post.categories.length > 0 && (
+                    <span style={{ marginLeft: '0.5rem' }}>
+                      • {post.categories[0]}
+                    </span>
+                  )}
+                </div>
+              </Card>
+              );
+            })}
+          </div>
+        </div>
+      </Section>
+    </>
+  );
+}
+
+
+

@@ -1,0 +1,219 @@
+/* Table of Contents Styles - Compact & Simple */
+
+.tocContainer {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  /* Prevent CLS by setting a minimum height */
+  min-height: 120px;
+}
+
+.tocHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.tocTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggleButton {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggleButton:hover {
+  background: #e5e7eb;
+}
+
+.toggleIcon {
+  color: #000000;
+  transition: transform 0.2s ease;
+  width: 16px;
+  height: 16px;
+}
+
+.toggleIcon.expanded {
+  transform: rotate(180deg);
+}
+
+.tocNav {
+  margin-top: 0.5rem;
+  /* Prevent CLS by ensuring stable layout */
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tocItem {
+  margin-bottom: 0.25rem;
+}
+
+.tocLink {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.tocLink:hover {
+  background-color: #f3f4f6;
+  color: #000000;
+}
+
+.tocLink:focus {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+/* Level-specific styling */
+.tocLink.level1 {
+  font-weight: 600;
+  color: #000000;
+  font-size: 0.9rem;
+}
+
+.tocLink.level2 {
+  font-weight: 500;
+  padding-left: 1rem;
+  color: #000000;
+  font-size: 0.85rem;
+}
+
+.tocLink.level3 {
+  font-weight: 400;
+  padding-left: 2rem;
+  color: #000000;
+  font-size: 0.8rem;
+}
+
+.tocLink.level4 {
+  font-weight: 400;
+  padding-left: 3rem;
+  color: #000000;
+  font-size: 0.8rem;
+}
+
+.tocSubList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 0.25rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid #e5e7eb;
+  margin-left: 0.5rem;
+}
+
+/* Active state for current section */
+.tocLink.active {
+  background-color: #f3f4f6;
+  color: #000000;
+  font-weight: 500;
+}
+
+/* Animation for smooth expand/collapse - CLS optimized */
+.tocNav.collapsed {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.tocNav.expanded {
+  max-height: 1000px;
+  opacity: 1;
+  overflow: visible;
+}
+
+/* CSS-only responsive behavior to prevent CLS */
+@media (max-width: 768px) {
+  .tocNav {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  
+  .tocNav.expanded {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 769px) {
+  .toggleButton {
+    display: none;
+  }
+  
+  .tocNav {
+    max-height: 1000px !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+  
+  .tocNav.collapsed {
+    max-height: 1000px !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .tocContainer {
+    padding: 0.75rem;
+    margin: 1rem 0;
+  }
+  
+  .tocTitle {
+    font-size: 0.9rem;
+  }
+  
+  .tocLink {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .tocLink.level2 {
+    padding-left: 0.8rem;
+  }
+  
+  .tocLink.level3 {
+    padding-left: 1.6rem;
+  }
+  
+  .tocLink.level4 {
+    padding-left: 2.4rem;
+  }
+}

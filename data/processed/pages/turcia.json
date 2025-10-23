@@ -1,0 +1,133 @@
+{
+  "slug": "turcia",
+  "title": "eSIM Турция",
+  "content": "",
+  "excerpt": "",
+  "seo": {
+    "title": "eSIM за Турция с Мобилен Интернет: Цени от 8лв - Travel eSIM",
+    "description": "eSIM Турция - Travel eSIM BG",
+    "canonical": "https://travelesim.bg/turcia/",
+    "robots": {
+      "index": "index",
+      "follow": "follow"
+    },
+    "openGraph": {
+      "type": "article",
+      "title": "eSIM за Турция с Мобилен Интернет: Цени от 8лв - Travel eSIM",
+      "description": "eSIM Турция - Travel eSIM BG",
+      "url": "https://travelesim.bg/turcia/",
+      "siteName": "Travel eSIM BG",
+      "images": [
+        {
+          "url": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+          "width": 650,
+          "height": 200,
+          "type": "image/png"
+        }
+      ],
+      "locale": "en_GB",
+      "modifiedTime": "2025-10-16T20:37:55+00:00"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "misc": {
+        "Estimated reading time": "2 minutes"
+      }
+    },
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://travelesim.bg/turcia/",
+          "url": "https://travelesim.bg/turcia/",
+          "name": "eSIM за Турция с Мобилен Интернет: Цени от 8лв - Travel eSIM",
+          "isPartOf": {
+            "@id": "https://travelesim.bg/#website"
+          },
+          "datePublished": "2025-02-02T21:53:36+00:00",
+          "dateModified": "2025-10-16T20:37:55+00:00",
+          "description": "eSIM Турция - Travel eSIM BG",
+          "breadcrumb": {
+            "@id": "https://travelesim.bg/turcia/#breadcrumb"
+          },
+          "inLanguage": "en-GB",
+          "potentialAction": [
+            {
+              "@type": "ReadAction",
+              "target": [
+                "https://travelesim.bg/turcia/"
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://travelesim.bg/turcia/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://travelesim.bg/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "eSIM Турция"
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://travelesim.bg/#website",
+          "url": "https://travelesim.bg/",
+          "name": "Travel eSIM BG",
+          "description": "",
+          "publisher": {
+            "@id": "https://travelesim.bg/#organization"
+          },
+          "alternateName": "Travel eSIM Bulgaria",
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://travelesim.bg/?s={search_term_string}"
+              },
+              "query-input": {
+                "@type": "PropertyValueSpecification",
+                "valueRequired": true,
+                "valueName": "search_term_string"
+              }
+            }
+          ],
+          "inLanguage": "en-GB"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://travelesim.bg/#organization",
+          "name": "Travel eSIM Bulgaria",
+          "alternateName": "Travel eSIMple Bulgaria",
+          "url": "https://travelesim.bg/",
+          "logo": {
+            "@type": "ImageObject",
+            "inLanguage": "en-GB",
+            "@id": "https://travelesim.bg/#/schema/logo/image/",
+            "url": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+            "contentUrl": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+            "width": 650,
+            "height": 200,
+            "caption": "Travel eSIM Bulgaria"
+          },
+          "image": {
+            "@id": "https://travelesim.bg/#/schema/logo/image/"
+          }
+        }
+      ]
+    }
+  },
+  "url": "https://travelesim.bg/turcia/",
+  "modifiedDate": "2025-10-16T20:37:55",
+  "publishedDate": "2025-02-02T21:53:36"
+}

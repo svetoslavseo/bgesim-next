@@ -1,0 +1,59 @@
+/* Header Styles - Cloned from WordPress */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.headerRow {
+  padding: 1rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.headerLeft {
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: auto;
+  max-height: 50px;
+  width: auto;
+}
+
+.headerCenter {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1120px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .headerCenter {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    max-height: 40px;
+  }
+}

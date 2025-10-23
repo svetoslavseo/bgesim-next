@@ -1,0 +1,132 @@
+{
+  "slug": "esim-dubai",
+  "title": "eSIM за Дубай",
+  "content": "",
+  "excerpt": "",
+  "seo": {
+    "title": "eSIM Дубай – Бърз Мобилен Интернет без Роуминг - Travel eSIM",
+    "description": "eSIM за Дубай - Travel eSIM BG",
+    "canonical": "https://travelesim.bg/esim-dubai/",
+    "robots": {
+      "index": "index",
+      "follow": "follow"
+    },
+    "openGraph": {
+      "type": "article",
+      "title": "eSIM Дубай – Бърз Мобилен Интернет без Роуминг - Travel eSIM",
+      "description": "eSIM за Дубай - Travel eSIM BG",
+      "url": "https://travelesim.bg/esim-dubai/",
+      "siteName": "Travel eSIM BG",
+      "images": [
+        {
+          "url": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+          "width": 650,
+          "height": 200,
+          "type": "image/png"
+        }
+      ],
+      "locale": "en_GB",
+      "modifiedTime": ""
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "misc": {
+        "Estimated reading time": "3 minutes"
+      }
+    },
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://travelesim.bg/esim-dubai/",
+          "url": "https://travelesim.bg/esim-dubai/",
+          "name": "eSIM Дубай – Бърз Мобилен Интернет без Роуминг - Travel eSIM",
+          "isPartOf": {
+            "@id": "https://travelesim.bg/#website"
+          },
+          "datePublished": "2025-03-24T21:01:07+00:00",
+          "description": "eSIM за Дубай - Travel eSIM BG",
+          "breadcrumb": {
+            "@id": "https://travelesim.bg/esim-dubai/#breadcrumb"
+          },
+          "inLanguage": "en-GB",
+          "potentialAction": [
+            {
+              "@type": "ReadAction",
+              "target": [
+                "https://travelesim.bg/esim-dubai/"
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://travelesim.bg/esim-dubai/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://travelesim.bg/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "eSIM за Дубай"
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://travelesim.bg/#website",
+          "url": "https://travelesim.bg/",
+          "name": "Travel eSIM BG",
+          "description": "",
+          "publisher": {
+            "@id": "https://travelesim.bg/#organization"
+          },
+          "alternateName": "Travel eSIM Bulgaria",
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://travelesim.bg/?s={search_term_string}"
+              },
+              "query-input": {
+                "@type": "PropertyValueSpecification",
+                "valueRequired": true,
+                "valueName": "search_term_string"
+              }
+            }
+          ],
+          "inLanguage": "en-GB"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://travelesim.bg/#organization",
+          "name": "Travel eSIM Bulgaria",
+          "alternateName": "Travel eSIMple Bulgaria",
+          "url": "https://travelesim.bg/",
+          "logo": {
+            "@type": "ImageObject",
+            "inLanguage": "en-GB",
+            "@id": "https://travelesim.bg/#/schema/logo/image/",
+            "url": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+            "contentUrl": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+            "width": 650,
+            "height": 200,
+            "caption": "Travel eSIM Bulgaria"
+          },
+          "image": {
+            "@id": "https://travelesim.bg/#/schema/logo/image/"
+          }
+        }
+      ]
+    }
+  },
+  "url": "https://travelesim.bg/esim-dubai/",
+  "modifiedDate": "2025-03-24T21:01:07",
+  "publishedDate": "2025-03-24T21:01:07"
+}

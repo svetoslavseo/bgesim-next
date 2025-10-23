@@ -1,0 +1,43 @@
+[
+  {
+    "family": "Roboto",
+    "weights": [
+      300,
+      400,
+      500,
+      700
+    ],
+    "styles": [
+      "normal"
+    ],
+    "source": "Google Fonts",
+    "files": []
+  },
+  {
+    "family": "Open Sans",
+    "weights": [
+      400,
+      600,
+      700
+    ],
+    "styles": [
+      "normal"
+    ],
+    "source": "Google Fonts",
+    "files": []
+  },
+  {
+    "family": "Poppins",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "styles": [
+      "normal"
+    ],
+    "source": "Google Fonts",
+    "files": []
+  }
+]
