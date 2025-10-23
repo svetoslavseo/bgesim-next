@@ -128,11 +128,12 @@ async function downloadGoogleFont(
 
     for (const match of matches) {
       const fontFileUrl = match[1];
+      if (!fontFileUrl) continue;
       
       // Extract weight and style from context (basic parsing)
       // This is a simplified version - might need enhancement
-      const weight = weights[fontInfo.files.length % weights.length];
-      const style = styles[0];
+      const weight: number = weights.length > 0 ? weights[fontInfo.files.length % weights.length] || 400 : 400;
+      const style: string = styles.length > 0 ? styles[0] || 'normal' : 'normal';
       
       const filename = `${family.toLowerCase().replace(/\s+/g, '-')}-${weight}${style !== 'normal' ? '-' + style : ''}.woff2`;
       const localPath = path.join(familyDir, filename);

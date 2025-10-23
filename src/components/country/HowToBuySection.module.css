@@ -32,11 +32,12 @@
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  color: white;
+  background: #000;
+  color: #FFD700;
   font-size: 1.5rem;
   font-weight: 700;
   border-radius: 50%;
+  border: 3px solid #FFD700;
   margin: 0 auto 1.5rem auto;
 }
 

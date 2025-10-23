@@ -89,7 +89,7 @@ export default function Footer() {
                 <a
                   href="https://www.facebook.com/profile.php?id=61573078586675"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow sponsored"
                   aria-label="Visit our Facebook"
                   className={styles.socialLink}
                 >
@@ -100,7 +100,7 @@ export default function Footer() {
                 <a
                   href="https://www.instagram.com/travelesim.bg/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow sponsored"
                   aria-label="Visit our Instagram"
                   className={styles.socialLink}
                 >

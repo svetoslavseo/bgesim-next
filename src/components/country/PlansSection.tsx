@@ -41,7 +41,7 @@ export default function PlansSection({ title, lastUpdated, plans }: PlansSection
                 href={plan.ctaUrl}
                 className={styles.button}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow sponsored"
               >
                 Избери
               </a>

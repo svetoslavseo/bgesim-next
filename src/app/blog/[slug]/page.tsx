@@ -9,7 +9,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs';
 import AuthorBio from '@/components/common/AuthorBio';
 import TableOfContents from '@/components/common/TableOfContents';
 import DesktopTableOfContents from '@/components/common/DesktopTableOfContents';
-import { formatDate } from '@/lib/utils';
+import { formatDate, addRelToExternalLinks } from '@/lib/utils';
 import type { Metadata } from 'next';
 import featuredImagesMap from '../../../../data/processed/blog-featured-images.json';
 import styles from './page.module.css';
@@ -159,7 +159,7 @@ export default function BlogPostPage({
             {/* 6. Main content */}
             <div 
               className="wp-content"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: addRelToExternalLinks(post.content) }}
             />
             
             {/* Tags */}

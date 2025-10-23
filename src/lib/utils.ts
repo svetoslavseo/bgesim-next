@@ -176,5 +176,41 @@ export function throttle<T extends (...args: any[]) => any>(
   };
 }
 
+/**
+ * Add rel="nofollow sponsored" to external links in HTML content
+ */
+export function addRelToExternalLinks(html: string): string {
+  // Match all anchor tags
+  return html.replace(
+    /<a\s+([^>]*?)href=["']([^"']+)["']([^>]*?)>/gi,
+    (match, before, href, after) => {
+      // Check if the link is external
+      if (!isExternalUrl(href)) {
+        return match; // Keep internal links unchanged
+      }
+
+      // Parse existing rel attribute if any
+      const relMatch = (before + after).match(/rel=["']([^"']+)["']/i);
+      let relValue = relMatch ? relMatch[1] : '';
+
+      // Add nofollow and sponsored if not already present
+      const relParts = relValue.split(/\s+/).filter(Boolean);
+      if (!relParts.includes('nofollow')) {
+        relParts.push('nofollow');
+      }
+      if (!relParts.includes('sponsored')) {
+        relParts.push('sponsored');
+      }
+
+      // Remove old rel attribute from before and after
+      const cleanBefore = before.replace(/rel=["'][^"']*["']\s*/gi, '');
+      const cleanAfter = after.replace(/rel=["'][^"']*["']\s*/gi, '');
+
+      // Reconstruct the anchor tag with updated rel attribute
+      return `<a ${cleanBefore}href="${href}"${cleanAfter} rel="${relParts.join(' ')}">`;
+    }
+  );
+}
+
 
 

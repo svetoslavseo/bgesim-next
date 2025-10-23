@@ -143,6 +143,8 @@ async function downloadMedia(mediaItems: MediaItem[]): Promise<MediaMapping> {
 
   for (let i = 0; i < mediaItems.length; i++) {
     const item = mediaItems[i];
+    if (!item) continue;
+    
     const progress = `[${i + 1}/${mediaItems.length}]`;
 
     try {

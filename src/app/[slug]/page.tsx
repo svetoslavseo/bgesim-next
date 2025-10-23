@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getAllPageSlugs, getPageBySlug } from '@/lib/content';
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
+import { addRelToExternalLinks } from '@/lib/utils';
 import Container from '@/components/layout/Container';
 import Section from '@/components/layout/Section';
 import type { Metadata } from 'next';
@@ -79,7 +80,7 @@ export default function Page({
           {/* Page content */}
           <div 
             className="wp-content"
-            dangerouslySetInnerHTML={{ __html: page.content }}
+            dangerouslySetInnerHTML={{ __html: addRelToExternalLinks(page.content) }}
           />
         </Container>
       </Section>

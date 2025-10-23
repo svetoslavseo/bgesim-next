@@ -2,6 +2,8 @@ import HeroSection from '@/components/country/HeroSection';
 import BenefitsSection from '@/components/country/BenefitsSection';
 import PlansSection from '@/components/country/PlansSection';
 import HowToBuySection from '@/components/country/HowToBuySection';
+import ComparisonTable from '@/components/country/ComparisonTable';
+import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
 import CTASection from '@/components/country/CTASection';
 import { Metadata } from 'next';
@@ -116,6 +118,60 @@ export default function SerbiaPage() {
             title: 'Активирай веднага',
             description: 'Сканирай кода и инсталирай eSIM.'
           }
+        ]}
+      />
+
+      <ComparisonTable
+        title="eSIM vs Роуминг vs Местна SIM – Какво е най-добре?"
+        countryName="Сърбия"
+        rows={[
+          {
+            feature: 'Активация',
+            esim: 'Мигновена с QR код',
+            roaming: 'Автоматична, но скъпа',
+            localSim: 'Изисква магазин'
+          },
+          {
+            feature: 'Цена',
+            esim: 'Изгодни предплатени планове',
+            roaming: 'Обикновено €5–€12/ден или повече',
+            localSim: 'Евтина, но може да изисква регистрация'
+          },
+          {
+            feature: 'Интернет скорост',
+            esim: '4G/5G',
+            roaming: 'Зависи от оператора',
+            localSim: '4G/5G'
+          },
+          {
+            feature: 'Телефонен номер',
+            esim: 'Запазваш своя',
+            roaming: 'Запазваш своя',
+            localSim: 'Нов сръбски номер'
+          },
+          {
+            feature: 'Удобство',
+            esim: 'Изцяло дигитално',
+            roaming: 'Лесно, но скъпо',
+            localSim: 'Изисква лично посещение'
+          },
+          {
+            feature: 'Подходящо за',
+            esim: 'Повечето пътешественици',
+            roaming: 'Само за спешни случаи',
+            localSim: 'Бюджетни пътувания с дълъг престой'
+          }
+        ]}
+      />
+
+      <DeviceCompatibility
+        title="Съвместим ли е телефонът ти с eSIM?"
+        description="Повечето съвременни телефони поддържат eSIM. Провери в: Настройки → Мобилни данни → Добавяне на eSIM"
+        devices={[
+          'iPhone – XR, XS и по-нови',
+          'Samsung – Galaxy S20 и по-нови',
+          'Google Pixel – Pixel 3 и по-нови',
+          'Други – Провери настройките на устройството си'
         ]}
       />
 

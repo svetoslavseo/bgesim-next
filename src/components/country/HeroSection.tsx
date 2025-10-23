@@ -103,7 +103,7 @@ export default function HeroSection({
             href={ctaUrl}
             className={styles.ctaButton}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow sponsored"
           >
             Избери план
           </a>

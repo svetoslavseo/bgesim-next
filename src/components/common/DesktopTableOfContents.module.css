@@ -3,8 +3,8 @@
 .desktopToc {
   position: absolute;
   top: 0; /* Will be positioned relative to the image bottom */
-  left: 2.5%; /* 15% of page width */
-  width: 15%; /* 15% of page width */
+  left: 5%; /* Closer to main content */
+  width: 16%; /* Slightly wider for better readability */
   max-height: calc(100vh - 200px);
   background: #ffffff;
   border: 1px solid #e5e7eb;
@@ -15,6 +15,9 @@
   overflow-y: auto;
   /* Hide on mobile and tablet */
   display: none;
+  /* Start hidden to prevent flash during positioning */
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Sticky behavior when scrolled - positioning handled by inline styles */

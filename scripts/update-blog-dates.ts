@@ -98,14 +98,14 @@ async function fetchBlogPostData(url: string): Promise<{ publishedDate: string; 
     
     // Look for "Актуализирано" (Updated) date
     const updatedMatch = html.match(/Актуализирано\s*:\s*([^<]+)/i);
-    if (updatedMatch) {
+    if (updatedMatch && updatedMatch[1]) {
       const dateStr = updatedMatch[1].trim();
       console.log(`Found updated date: ${dateStr}`);
       
       // Parse Bulgarian date format
       for (const pattern of datePatterns) {
         const match = dateStr.match(pattern);
-        if (match) {
+        if (match && match[0] && match[1] && match[2]) {
           const monthName = match[0].split(' ')[0].toLowerCase();
           const day = match[1];
           const year = match[2];
@@ -130,7 +130,7 @@ async function fetchBlogPostData(url: string): Promise<{ publishedDate: string; 
       // Parse Bulgarian date format
       for (const pattern of datePatterns) {
         const match = dateStr.match(pattern);
-        if (match) {
+        if (match && match[0] && match[1] && match[2]) {
           const monthName = match[0].split(' ')[0].toLowerCase();
           const day = match[1];
           const year = match[2];

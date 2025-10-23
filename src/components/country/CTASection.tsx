@@ -35,7 +35,7 @@ export default function CTASection({
           href={ctaUrl}
           className={styles.button}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow sponsored"
         >
           {ctaText}
         </a>

@@ -15,6 +15,7 @@ export default function DesktopTableOfContents({ content, className = '' }: Desk
   const [isSticky, setIsSticky] = useState(false);
   const [tocPosition, setTocPosition] = useState<number>(0);
   const [headerOffset, setHeaderOffset] = useState(100); // Default value, will be updated dynamically
+  const [isPositioned, setIsPositioned] = useState(false); // Track if TOC has been positioned
 
   // Calculate header offset dynamically on mount
   useEffect(() => {
@@ -118,35 +119,53 @@ export default function DesktopTableOfContents({ content, className = '' }: Desk
   // Set initial position after component mounts
   useEffect(() => {
     const setInitialPosition = () => {
-      // Look for the main featured image more specifically
-      const featuredImage = document.querySelector('.wp-content img:first-of-type, .featured-image img, [class*="featured"] img, img[alt*="eSIM"], img[alt*="esim"], .BlogFeaturedImage img, [class*="BlogFeaturedImage"] img, [class*="featuredImage"] img, article img:first-of-type');
+      // Look for the image wrapper div first, then the image inside
+      // The blog post structure has: <div className={styles.imageWrapper}><BlogFeaturedImage /></div>
+      const imageWrapper = document.querySelector('article > div:has(img), article [class*="imageWrapper"], article [class*="featuredImage"]');
       
-      if (featuredImage) {
-        const rect = featuredImage.getBoundingClientRect();
+      let targetElement = null;
+      
+      if (imageWrapper) {
+        targetElement = imageWrapper;
+        console.log('DesktopTableOfContents: Found image wrapper:', imageWrapper.className);
+      } else {
+        // Fallback: try to find the featured image directly
+        const featuredImage = document.querySelector('article img:first-of-type');
+        if (featuredImage) {
+          targetElement = featuredImage;
+          console.log('DesktopTableOfContents: Found featured image directly');
+        }
+      }
+      
+      if (targetElement) {
+        const rect = targetElement.getBoundingClientRect();
         const scrollTop = window.scrollY;
         const elementBottom = rect.bottom + scrollTop;
         
-        // Position TOC right at the bottom of the featured image
+        // Position TOC at the bottom of the featured image with minimal spacing
         const newPosition = Math.max(elementBottom, headerOffset + 20);
         setTocPosition(newPosition);
-        console.log('DesktopTableOfContents: Found featured image:', featuredImage.className, 'positioned at', newPosition, 'image bottom:', elementBottom);
+        setIsPositioned(true); // Mark as positioned
+        console.log('DesktopTableOfContents: Positioned at', newPosition, 'element bottom:', elementBottom);
       } else {
-        // Fallback: look for first heading or article start
-        const firstHeading = document.querySelector('h1, h2, h3');
+        // Fallback: look for first content heading
+        const firstHeading = document.querySelector('h1, h2');
         const articleStart = document.querySelector('article');
-        const targetElement = firstHeading || articleStart;
+        const fallbackElement = firstHeading || articleStart;
         
-        if (targetElement) {
-          const rect = targetElement.getBoundingClientRect();
+        if (fallbackElement) {
+          const rect = fallbackElement.getBoundingClientRect();
           const scrollTop = window.scrollY;
           const elementBottom = rect.bottom + scrollTop;
           
           const newPosition = Math.max(elementBottom + 20, headerOffset + 20);
           setTocPosition(newPosition);
-          console.log('DesktopTableOfContents: No featured image, using fallback at', newPosition);
+          setIsPositioned(true); // Mark as positioned
+          console.log('DesktopTableOfContents: Using fallback position at', newPosition);
         } else {
           // Final fallback
           setTocPosition(headerOffset + 20);
+          setIsPositioned(true); // Mark as positioned
           console.log('DesktopTableOfContents: Using header offset fallback');
         }
       }
@@ -181,18 +200,9 @@ export default function DesktopTableOfContents({ content, className = '' }: Desk
     </li>
   );
 
-  // Show TOC even if empty for debugging
+  // Hide TOC if no items (don't show debug version to prevent flash)
   if (tocItems.length === 0) {
-    return (
-      <aside className={`${styles.desktopToc} ${className}`}>
-        <div className={styles.tocHeader}>
-          <h3 className={styles.tocTitle}>📋 Съдържание (Debug)</h3>
-        </div>
-        <div className={styles.tocNav}>
-          <p>No headings found</p>
-        </div>
-      </aside>
-    );
+    return null;
   }
 
   return (
@@ -201,7 +211,10 @@ export default function DesktopTableOfContents({ content, className = '' }: Desk
       style={{
         top: isSticky ? `${headerOffset}px` : `${tocPosition}px`,
         position: isSticky ? 'fixed' : 'absolute',
-        maxHeight: `calc(100vh - ${headerOffset + 20}px)` // Dynamic max-height
+        maxHeight: `calc(100vh - ${headerOffset + 20}px)`, // Dynamic max-height
+        opacity: isPositioned ? 1 : 0, // Hide until positioned
+        visibility: isPositioned ? 'visible' : 'hidden', // Prevent interaction before positioned
+        transition: 'opacity 0.2s ease-in-out' // Smooth fade-in
       }}
     >
       <div className={styles.tocHeader}>

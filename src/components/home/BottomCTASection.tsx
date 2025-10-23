@@ -16,7 +16,7 @@ export default function BottomCTASection({ title, description, ctaText, ctaUrl, 
         <div className={styles.content}>
           <h3 className={styles.title}>{title}</h3>
           <p className={styles.description}>{description}</p>
-          <Link href={ctaUrl} className={styles.ctaButton} target="_blank" rel="noopener noreferrer">
+          <Link href={ctaUrl} className={styles.ctaButton} target="_blank" rel="noopener noreferrer nofollow sponsored">
             {ctaText}
           </Link>
           <div className={styles.features}>

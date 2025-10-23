@@ -2,6 +2,8 @@
 .footer {
   background-color: #000000;
   color: #ffffff;
+  position: relative;
+  z-index: 2000;
 }
 
 /* Features Section */

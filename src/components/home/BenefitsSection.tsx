@@ -37,7 +37,7 @@ export default function BenefitsSection({ title, benefits, ctaText, ctaUrl }: Be
         </div>
         {ctaText && ctaUrl && (
           <div className={styles.ctaWrapper}>
-            <Link href={ctaUrl} className={styles.ctaButton} target="_blank" rel="noopener noreferrer">
+            <Link href={ctaUrl} className={styles.ctaButton} target="_blank" rel="noopener noreferrer nofollow sponsored">
               {ctaText}
             </Link>
           </div>

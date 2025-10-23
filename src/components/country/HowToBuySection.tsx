@@ -35,7 +35,7 @@ export default function HowToBuySection({ title, steps, ctaUrl, ctaText }: HowTo
               href={ctaUrl}
               className={styles.ctaButton}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow sponsored"
             >
               {ctaText}
             </a>

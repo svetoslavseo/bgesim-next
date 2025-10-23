@@ -157,7 +157,7 @@ export default function Navigation() {
             href="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
             className={styles.ctaButton}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow sponsored"
           >
             Виж Оферти
           </a>
