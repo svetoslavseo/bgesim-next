@@ -1,5 +1,6 @@
 import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
+import CompactPlansSectionWrapper from '@/components/country/CompactPlansSectionWrapper';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -90,6 +91,12 @@ export default function UKPage() {
         ]}
         image="/media/images/London.png"
         imageAlt="London"
+      />
+
+      <CompactPlansSectionWrapper
+        title="Избери от всички налични eSIM планове с покритие в Великобритания"
+        countryName="UK"
+        countryCode="GB"
       />
 
       <HowToBuySection

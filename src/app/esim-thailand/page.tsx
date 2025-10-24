@@ -1,5 +1,6 @@
 import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
+import CompactPlansSectionWrapper from '@/components/country/CompactPlansSectionWrapper';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -94,6 +95,12 @@ export default function ThailandPage() {
         ]}
         image="/media/images/PhuketThailand.png"
         imageAlt="Phuket, Thailand"
+      />
+
+      <CompactPlansSectionWrapper
+        title="Избери от всички налични eSIM планове с покритие в Тайланд"
+        countryName="Thailand"
+        countryCode="TH"
       />
 
       <HowToBuySection
