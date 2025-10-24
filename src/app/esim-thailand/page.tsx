@@ -69,6 +69,12 @@ export default function ThailandPage() {
         imageAlt="eSIM visualization"
       />
 
+      <CompactPlansSectionWrapper
+        title="Избери от всички налични eSIM планове с покритие в Тайланд"
+        countryName="Thailand"
+        countryCode="TH"
+      />
+
       <BenefitsSection
         title="Защо да избереш eSIM за Тайланд?"
         benefits={[
@@ -95,12 +101,6 @@ export default function ThailandPage() {
         ]}
         image="/media/images/PhuketThailand.png"
         imageAlt="Phuket, Thailand"
-      />
-
-      <CompactPlansSectionWrapper
-        title="Избери от всички налични eSIM планове с покритие в Тайланд"
-        countryName="Thailand"
-        countryCode="TH"
       />
 
       <HowToBuySection

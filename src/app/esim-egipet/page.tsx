@@ -69,6 +69,12 @@ export default function EgyptPage() {
         imageAlt="eSIM visualization"
       />
 
+      <CompactPlansSectionWrapper
+        title="Избери от всички налични eSIM планове с покритие в Египет"
+        countryName="Egypt"
+        countryCode="EG"
+      />
+
       <BenefitsSection
         title="Защо да изберете eSIM за Египет?"
         benefits={[
@@ -91,12 +97,6 @@ export default function EgyptPage() {
         ]}
         image="/media/images/Egypt.png"
         imageAlt="Egypt"
-      />
-
-      <CompactPlansSectionWrapper
-        title="Избери от всички налични eSIM планове с покритие в Египет"
-        countryName="Egypt"
-        countryCode="EG"
       />
 
       <HowToBuySection

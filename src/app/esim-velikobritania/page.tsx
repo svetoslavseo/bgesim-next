@@ -69,6 +69,12 @@ export default function UKPage() {
         imageAlt="eSIM visualization"
       />
 
+      <CompactPlansSectionWrapper
+        title="Избери от всички налични eSIM планове с покритие в Великобритания"
+        countryName="UK"
+        countryCode="GB"
+      />
+
       <BenefitsSection
         title="Защо да изберете eSIM за Великобритания?"
         benefits={[
@@ -91,12 +97,6 @@ export default function UKPage() {
         ]}
         image="/media/images/London.png"
         imageAlt="London"
-      />
-
-      <CompactPlansSectionWrapper
-        title="Избери от всички налични eSIM планове с покритие в Великобритания"
-        countryName="UK"
-        countryCode="GB"
       />
 
       <HowToBuySection

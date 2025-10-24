@@ -69,6 +69,12 @@ export default function DubaiPage() {
         imageAlt="eSIM People"
       />
 
+      <CompactPlansSectionWrapper
+        title="Избери от всички налични eSIM планове с покритие в Дубай"
+        countryName="Dubai"
+        countryCode="AE"
+      />
+
       <BenefitsSection
         title="Предимства на eSIM в Дубай"
         benefits={[
@@ -91,12 +97,6 @@ export default function DubaiPage() {
         ]}
         image="/media/images/Untitled_design_2-1.png"
         imageAlt="Dubai"
-      />
-
-      <CompactPlansSectionWrapper
-        title="Избери от всички налични eSIM планове с покритие в Дубай"
-        countryName="Dubai"
-        countryCode="AE"
       />
 
       <HowToBuySection

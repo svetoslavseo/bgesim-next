@@ -69,6 +69,12 @@ export default function SerbiaPage() {
         imageAlt="eSIM People"
       />
 
+      <CompactPlansSectionWrapper
+        title="Избери от всички налични eSIM планове с покритие в Сърбия"
+        countryName="Serbia"
+        countryCode="RS"
+      />
+
       <BenefitsSection
         title="Защо да избереш eSIM за Сърбия?"
         benefits={[
@@ -91,12 +97,6 @@ export default function SerbiaPage() {
         ]}
         image="/media/images/Untitled_design_3.png"
         imageAlt="Serbia"
-      />
-
-      <CompactPlansSectionWrapper
-        title="Избери от всички налични eSIM планове с покритие в Сърбия"
-        countryName="Serbia"
-        countryCode="RS"
       />
 
       <HowToBuySection
