@@ -6,15 +6,43 @@ import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
 import CTASection from '@/components/country/CTASection';
 import { Metadata } from 'next';
+import { getLowestPriceInBGN } from '@/lib/sailyApi';
+import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'eSIM за Великобритания: Бърз интернет без роуминг Цени от 10лв - Travel eSIM',
-  description: 'eSIM за Великобритания - Travelesim.bg',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lowestPrice = await getLowestPriceInBGN('GB');
+  
+  return {
+    title: `eSIM за Великобритания: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    description: `Купи eSIM за Великобритания от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Великобритания с 4G/5G покритие.`,
+    alternates: {
+      canonical: generateCanonicalUrl('/esim-velikobritania'),
+    },
+    openGraph: {
+      locale: 'bg_BG',
+      type: 'website',
+      title: `eSIM за Великобритания: Бърз интернет без роуминг от ${lowestPrice}лв`,
+      description: `Купи eSIM за Великобритания от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Великобритания с 4G/5G покритие.`,
+      url: generateCanonicalUrl('/esim-velikobritania'),
+    },
+  };
+}
 
 export default function UKPage() {
+  // Breadcrumb Schema for UK page
+  const breadcrumbSchema = generateCountryBreadcrumbSchema('Великобритания', 'esim-velikobritania');
+  
   return (
-    <main>
+    <>
+      {/* Structured Data - Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      
+      <main>
       <HeroSectionWrapper
         breadcrumb="eSIM Великобритания"
         title="eSIM за Великобритания – Бърз интернет без такси за роуминг"
@@ -166,7 +194,8 @@ export default function UKPage() {
         ctaText="КУПИ СЕГА"
         variant="purple"
       />
-    </main>
+      </main>
+    </>
   );
 }
 

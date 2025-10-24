@@ -6,15 +6,43 @@ import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
 import CTASection from '@/components/country/CTASection';
 import { Metadata } from 'next';
+import { getLowestPriceInBGN } from '@/lib/sailyApi';
+import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'eSIM за Египет: Купи Мобилен Интернет за Египет - Travel eSIM',
-  description: 'eSIM за Египет - Travelesim.bg',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lowestPrice = await getLowestPriceInBGN('EG');
+  
+  return {
+    title: `eSIM за Египет: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    description: `Купи eSIM за Египет от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Египет с 4G/5G покритие.`,
+    alternates: {
+      canonical: generateCanonicalUrl('/esim-egipet'),
+    },
+    openGraph: {
+      locale: 'bg_BG',
+      type: 'website',
+      title: `eSIM за Египет: Бърз интернет без роуминг от ${lowestPrice}лв`,
+      description: `Купи eSIM за Египет от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Египет с 4G/5G покритие.`,
+      url: generateCanonicalUrl('/esim-egipet'),
+    },
+  };
+}
 
 export default function EgyptPage() {
+  // Breadcrumb Schema for Egypt page
+  const breadcrumbSchema = generateCountryBreadcrumbSchema('Египет', 'esim-egipet');
+  
   return (
-    <main>
+    <>
+      {/* Structured Data - Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      
+      <main>
       <HeroSectionWrapper
         breadcrumb="eSIM Египет"
         title="eSIM за Египет – Мобилен интернет без роуминг"
@@ -166,7 +194,8 @@ export default function EgyptPage() {
         ctaText="КУПИ СЕГА"
         variant="purple"
       />
-    </main>
+      </main>
+    </>
   );
 }
 

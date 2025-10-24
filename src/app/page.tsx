@@ -10,6 +10,7 @@ import HowItWorksSection from '@/components/home/HowItWorksSection';
 import BlogPostsSection from '@/components/home/BlogPostsSection';
 import BottomCTASection from '@/components/home/BottomCTASection';
 import { extractExcerpt, formatDate } from '@/lib/utils';
+import { generateOrganizationSchema } from '@/lib/seo';
 
 /**
  * Generate metadata for homepage
@@ -89,8 +90,19 @@ export default function HomePage() {
     featuredImage: post.featuredImageUrl || undefined
   }));
 
+  // Generate organization schema for homepage
+  const organizationSchema = generateOrganizationSchema();
+
   return (
     <>
+      {/* Structured Data - Organization Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchema),
+        }}
+      />
+      
       <HeroSection
         title="eSIM за пътуване"
         subtitle="Останете свързани, където и да пътувате, с бърза и сигурна eSIM. Без физически SIM карти, без забавяне – само мигновена връзка, където и да си."

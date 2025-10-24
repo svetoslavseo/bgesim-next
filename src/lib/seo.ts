@@ -14,10 +14,10 @@ export const SITE_CONFIG = {
   url: 'https://travelesim.bg',
   locale: 'bg_BG',
   defaultImage: {
-    url: '/media/images/default-og-image.png',
+    url: '/media/images/TeSim-Logo-Breeze.png',
     width: 1200,
     height: 630,
-    alt: 'Travel eSIM BG',
+    alt: 'Travel eSIM BG - eSIM карти за пътуване',
   },
 };
 
@@ -29,9 +29,9 @@ export function generateMetadata(seoData: SEOData): Metadata {
     title: seoData.title,
     description: seoData.description,
     
-    // Canonical URL
+    // Canonical URL - self-canonical if not provided
     alternates: {
-      canonical: seoData.canonical,
+      canonical: seoData.canonical || SITE_CONFIG.url,
     },
     
     // Robots directives
@@ -82,12 +82,12 @@ export function generateStructuredData(seoData: SEOData): object | null {
 /**
  * Generate default metadata for a page without SEO data
  */
-export function generateDefaultMetadata(title?: string, description?: string): Metadata {
+export function generateDefaultMetadata(title?: string, description?: string, canonicalUrl?: string): Metadata {
   return {
     title: title || SITE_CONFIG.name,
     description: description || SITE_CONFIG.description,
     alternates: {
-      canonical: SITE_CONFIG.url,
+      canonical: canonicalUrl || SITE_CONFIG.url,
     },
     robots: {
       index: true,
@@ -224,6 +224,46 @@ export function truncateDescription(text: string, maxLength: number = 160): stri
   }
   
   return truncated + '...';
+}
+
+/**
+ * Generate canonical URL for a page
+ */
+export function generateCanonicalUrl(path: string): string {
+  const baseUrl = SITE_CONFIG.url;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const finalPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+  return `${baseUrl}${finalPath}`;
+}
+
+/**
+ * Generate breadcrumb schema for country pages
+ */
+export function generateCountryBreadcrumbSchema(countryName: string, countrySlug: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Начало",
+        "item": `${SITE_CONFIG.url}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Държави",
+        "item": `${SITE_CONFIG.url}/#countries`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `eSIM ${countryName}`,
+        "item": `${SITE_CONFIG.url}/${countrySlug}/`
+      }
+    ]
+  };
 }
 
 

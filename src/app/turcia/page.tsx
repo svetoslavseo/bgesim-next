@@ -6,15 +6,103 @@ import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
 import CTASection from '@/components/country/CTASection';
 import { Metadata } from 'next';
+import { getLowestPriceInBGN } from '@/lib/sailyApi';
+import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'eSIM за Турция с Мобилен Интернет: Цени от 8лв - Travel eSIM',
-  description: 'eSIM Турция - Travelesim.bg',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const lowestPrice = await getLowestPriceInBGN('TR');
+    console.log(`Metadata generation - lowest price for Turkey: ${lowestPrice}лв`);
+    
+    return {
+      title: `eSIM за Турция: Бърз интернет без роуминг от ${lowestPrice}лв`,
+      description: `Купи eSIM за Турция от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Турция с 4G/5G покритие.`,
+      alternates: {
+        canonical: generateCanonicalUrl('/turcia'),
+      },
+      openGraph: {
+        locale: 'bg_BG',
+        type: 'website',
+        title: `eSIM за Турция: Бърз интернет без роуминг от ${lowestPrice}лв`,
+        description: `Купи eSIM за Турция от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Турция с 4G/5G покритие.`,
+        url: generateCanonicalUrl('/turcia'),
+      },
+    };
+  } catch (error) {
+    console.error('Error generating metadata for Turkey:', error);
+    // Fallback to a reasonable price
+    return {
+      title: `eSIM за Турция: Бърз интернет без роуминг от 9лв`,
+      description: 'Купи eSIM за Турция от 9лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Турция с 4G/5G покритие.',
+      alternates: {
+        canonical: generateCanonicalUrl('/turcia'),
+      },
+      openGraph: {
+        locale: 'bg_BG',
+        type: 'website',
+        title: `eSIM за Турция: Бърз интернет без роуминг от 9лв`,
+        description: 'Купи eSIM за Турция от 9лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Турция с 4G/5G покритие.',
+        url: generateCanonicalUrl('/turcia'),
+      },
+    };
+  }
+}
 
 export default function TurciaPage() {
+  // Breadcrumb Schema for Turkey page
+  const breadcrumbSchema = generateCountryBreadcrumbSchema('Турция', 'turcia');
+  
+  // FAQ Schema for Turkey page
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Мога ли да купя eSIM за Турция, докато съм в България?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да! Купи и активирай преди пътуването си, за да имаш интернет веднага щом пристигнеш."
+        }
+      },
+      {
+        "@type": "Question", 
+        "name": "Какво става, ако свършат данните ми?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Можеш да презаредиш eSIM-а си онлайн по всяко време – без да сменяш оператор."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Работи ли eSIM-ът в цяла Турция?",
+        "acceptedAnswer": {
+          "@type": "Answer", 
+          "text": "Да, eSIM-ът работи навсякъде в Турция с добро мобилно покритие."
+        }
+      }
+    ]
+  };
+
   return (
-    <main>
+    <>
+      {/* Structured Data - Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      
+      {/* Structured Data - FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
+      
+      <main>
       <HeroSectionWrapper
         breadcrumb="eSIM Турция"
         title="eSIM за Турция с мобилен интернет"
@@ -164,7 +252,8 @@ export default function TurciaPage() {
         ctaText="КУПИ СЕГА"
         variant="purple"
       />
-    </main>
+      </main>
+    </>
   );
 }
 

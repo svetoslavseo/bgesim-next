@@ -28,24 +28,33 @@ export async function GET(request: NextRequest) {
     console.log('Server-side Saily API response:', data);
     console.log('Total items in response:', data.items.length);
 
-    // Process the plans
-    const allPlans = data.items.map((plan: any) => {
-      const priceUSD = plan.price.amount_with_tax / 100;
-      return {
-        id: plan.identifier,
-        name: plan.name,
-        data: plan.is_unlimited ? 'Unlimited' : `${plan.data_limit.amount} ${plan.data_limit.unit}`,
-        validity: `${plan.duration.amount} ${plan.duration.unit === 'day' ? 'дни' : plan.duration.unit}`,
-        priceUSD,
-        price: priceUSD,
-        currency: '$',
-        identifier: plan.identifier,
-        priceIdentifier: plan.price.identifier,
-        planType: (plan.covered_countries.length > 10 ? 'global' : 
-                  plan.covered_countries.length > 1 ? 'regional' : 'country') as 'global' | 'regional' | 'country',
-        coveredCountries: plan.covered_countries,
-      };
-    });
+    // Process the plans with data validation
+    const allPlans = data.items
+      .filter((plan: any) => {
+        // Filter out unrealistic data amounts (more than 100 GB)
+        if (!plan.is_unlimited && plan.data_limit.amount > 100) {
+          console.log(`Filtering out unrealistic plan: ${plan.name} with ${plan.data_limit.amount} ${plan.data_limit.unit}`);
+          return false;
+        }
+        return true;
+      })
+      .map((plan: any) => {
+        const priceUSD = plan.price.amount_with_tax / 100;
+        return {
+          id: plan.identifier,
+          name: plan.name,
+          data: plan.is_unlimited ? 'Unlimited' : `${plan.data_limit.amount} ${plan.data_limit.unit}`,
+          validity: `${plan.duration.amount} ${plan.duration.unit === 'day' ? 'дни' : plan.duration.unit}`,
+          priceUSD,
+          price: priceUSD,
+          currency: '$',
+          identifier: plan.identifier,
+          priceIdentifier: plan.price.identifier,
+          planType: (plan.covered_countries.length > 10 ? 'global' : 
+                    plan.covered_countries.length > 1 ? 'regional' : 'country') as 'global' | 'regional' | 'country',
+          coveredCountries: plan.covered_countries,
+        };
+      });
 
     // Filter plans for the specific country if provided
     let filteredPlans = allPlans;
@@ -55,20 +64,20 @@ export async function GET(request: NextRequest) {
       console.log(`Total plans from API: ${allPlans.length}`);
       
       // First, let's see all plans that contain the country name
-      const plansWithCountryName = allPlans.filter(plan => 
+      const plansWithCountryName = allPlans.filter((plan: any) => 
         plan.name.toLowerCase().includes(countryName.toLowerCase())
       );
-      console.log(`Plans with country name "${countryName}":`, plansWithCountryName.map(p => p.name));
+      console.log(`Plans with country name "${countryName}":`, plansWithCountryName.map((p: any) => p.name));
       
-      filteredPlans = allPlans.filter(plan => {
+      filteredPlans = allPlans.filter((plan: any) => {
         const coversCountry = plan.coveredCountries.includes(countryCode);
-        const isGlobal = plan.planType === 'global';
         const nameContainsCountry = plan.name.toLowerCase().includes(countryName.toLowerCase());
+        const isCountryPlan = plan.planType === 'country';
         
-        const shouldInclude = coversCountry || nameContainsCountry; // Remove global plans for now
+        const shouldInclude = (coversCountry || nameContainsCountry) && isCountryPlan;
         
         if (shouldInclude) {
-          console.log(`Including plan: ${plan.name} (covers: ${coversCountry}, name: ${nameContainsCountry})`);
+          console.log(`Including plan: ${plan.name} (covers: ${coversCountry}, name: ${nameContainsCountry}, country plan: ${isCountryPlan})`);
         }
         
         return shouldInclude;
@@ -76,10 +85,13 @@ export async function GET(request: NextRequest) {
       
       console.log(`Filtered plans for ${countryCode}: ${filteredPlans.length}`);
       
-      // If no plans found with filtering, return fallback plans for Serbia
-      if (filteredPlans.length === 0 && countryCode === 'RS') {
-        console.log('No Serbia plans found, returning fallback plans');
-        const fallbackPlans = [
+      // If no plans found with filtering, return fallback plans for specific countries
+      if (filteredPlans.length === 0) {
+        console.log(`No ${countryCode} plans found, returning fallback plans`);
+        let fallbackPlans: any[] = [];
+        
+        if (countryCode === 'RS') {
+          fallbackPlans = [
           {
             id: 'rs-1',
             name: 'Serbia 1GB 7 days',
@@ -141,7 +153,62 @@ export async function GET(request: NextRequest) {
             planType: 'country',
           }
         ];
-        filteredPlans = fallbackPlans;
+        } else if (countryCode === 'TR') {
+          fallbackPlans = [
+            {
+              id: 'tr-1',
+              name: 'Turkey 1GB 7 days',
+              data: '1 GB',
+              validity: '7 дни',
+              priceUSD: 4.99,
+              price: 4.99,
+              currency: '$',
+              identifier: 'saily_tr_1gb_7d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC40OTk=',
+              planType: 'country',
+            },
+            {
+              id: 'tr-2',
+              name: 'Turkey 3GB 15 days',
+              data: '3 GB',
+              validity: '15 дни',
+              priceUSD: 8.99,
+              price: 8.99,
+              currency: '$',
+              identifier: 'saily_tr_3gb_15d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC44OTk=',
+              planType: 'country',
+            },
+            {
+              id: 'tr-3',
+              name: 'Turkey 5GB 30 days',
+              data: '5 GB',
+              validity: '30 дни',
+              priceUSD: 12.99,
+              price: 12.99,
+              currency: '$',
+              identifier: 'saily_tr_5gb_30d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xMjk5',
+              planType: 'country',
+            },
+            {
+              id: 'tr-4',
+              name: 'Turkey 10GB 30 days',
+              data: '10 GB',
+              validity: '30 дни',
+              priceUSD: 19.99,
+              price: 19.99,
+              currency: '$',
+              identifier: 'saily_tr_10gb_30d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xOTk5',
+              planType: 'country',
+            }
+          ];
+        }
+        
+        if (fallbackPlans.length > 0) {
+          filteredPlans = fallbackPlans;
+        }
       }
     }
 

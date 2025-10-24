@@ -6,15 +6,43 @@ import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
 import CTASection from '@/components/country/CTASection';
 import { Metadata } from 'next';
+import { getLowestPriceInBGN } from '@/lib/sailyApi';
+import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Купи eSIM за Тайланд (Бърз интернет без роуминг) - Travel eSIM',
-  description: 'eSIM за Тайланд - Travelesim.bg',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lowestPrice = await getLowestPriceInBGN('TH');
+  
+  return {
+    title: `eSIM за Тайланд: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    description: `Купи eSIM за Тайланд от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Тайланд с 4G/5G покритие.`,
+    alternates: {
+      canonical: generateCanonicalUrl('/esim-thailand'),
+    },
+    openGraph: {
+      locale: 'bg_BG',
+      type: 'website',
+      title: `eSIM за Тайланд: Бърз интернет без роуминг от ${lowestPrice}лв`,
+      description: `Купи eSIM за Тайланд от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Тайланд с 4G/5G покритие.`,
+      url: generateCanonicalUrl('/esim-thailand'),
+    },
+  };
+}
 
 export default function ThailandPage() {
+  // Breadcrumb Schema for Thailand page
+  const breadcrumbSchema = generateCountryBreadcrumbSchema('Тайланд', 'esim-thailand');
+  
   return (
-    <main>
+    <>
+      {/* Structured Data - Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      
+      <main>
       <HeroSectionWrapper
         breadcrumb="eSIM Тайланд"
         title="eSIM за Тайланд – Надежден и бърз мобилен интернет"
@@ -170,7 +198,8 @@ export default function ThailandPage() {
         ctaText="КУПИ СЕГА"
         variant="purple"
       />
-    </main>
+      </main>
+    </>
   );
 }
 

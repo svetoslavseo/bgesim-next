@@ -70,23 +70,32 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
     console.log('Raw Saily API response:', data);
     console.log('Total items in response:', data.items.length);
     
-    const allPlans = data.items.map(plan => {
-      const priceUSD = plan.price.amount_with_tax / 100; // Convert cents to USD
-      return {
-        id: plan.identifier,
-        name: plan.name,
-        data: plan.is_unlimited ? 'Unlimited' : `${plan.data_limit.amount} ${plan.data_limit.unit}`,
-        validity: `${plan.duration.amount} ${plan.duration.unit === 'day' ? 'дни' : plan.duration.unit}`,
-        priceUSD, // Store original USD price
-        price: priceUSD, // Default price (will be converted in component)
-        currency: '$',
-        identifier: plan.identifier,
-        priceIdentifier: plan.price.identifier, // Add price identifier
-        planType: (plan.covered_countries.length > 10 ? 'global' : 
-                  plan.covered_countries.length > 1 ? 'regional' : 'country') as 'global' | 'regional' | 'country',
-        coveredCountries: plan.covered_countries, // Store covered countries for filtering
-      };
-    });
+    const allPlans = data.items
+      .filter(plan => {
+        // Filter out unrealistic data amounts (more than 100 GB)
+        if (!plan.is_unlimited && plan.data_limit.amount > 100) {
+          console.log(`Filtering out unrealistic plan: ${plan.name} with ${plan.data_limit.amount} ${plan.data_limit.unit}`);
+          return false;
+        }
+        return true;
+      })
+      .map(plan => {
+        const priceUSD = plan.price.amount_with_tax / 100; // Convert cents to USD
+        return {
+          id: plan.identifier,
+          name: plan.name,
+          data: plan.is_unlimited ? 'Unlimited' : `${plan.data_limit.amount} ${plan.data_limit.unit}`,
+          validity: `${plan.duration.amount} ${plan.duration.unit === 'day' ? 'дни' : plan.duration.unit}`,
+          priceUSD, // Store original USD price
+          price: priceUSD, // Default price (will be converted in component)
+          currency: '$',
+          identifier: plan.identifier,
+          priceIdentifier: plan.price.identifier, // Add price identifier
+          planType: (plan.covered_countries.length > 10 ? 'global' : 
+                    plan.covered_countries.length > 1 ? 'regional' : 'country') as 'global' | 'regional' | 'country',
+          coveredCountries: plan.covered_countries, // Store covered countries for filtering
+        };
+      });
 
     // If country code is provided, filter plans for that country
     if (countryCode) {
@@ -104,13 +113,13 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
       
       const filteredPlans = allPlans.filter(plan => {
         const coversCountry = plan.coveredCountries.includes(countryCode);
-        const isGlobal = plan.planType === 'global';
         const nameContainsCountry = plan.name.toLowerCase().includes(countryName.toLowerCase());
+        const isCountryPlan = plan.planType === 'country';
         
-        const shouldInclude = coversCountry || isGlobal || nameContainsCountry;
+        const shouldInclude = (coversCountry || nameContainsCountry) && isCountryPlan;
         
         if (shouldInclude) {
-          console.log(`Including plan: ${plan.name} (covers: ${coversCountry}, global: ${isGlobal}, name: ${nameContainsCountry})`);
+          console.log(`Including plan: ${plan.name} (covers: ${coversCountry}, name: ${nameContainsCountry}, country plan: ${isCountryPlan})`);
         }
         
         return shouldInclude;
@@ -135,13 +144,13 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
 }
 
 export function getPlansForCountry(plans: ProcessedPlan[], countryCode: string): ProcessedPlan[] {
-  // Filter plans that cover the specific country
+  // Filter plans that cover the specific country and are country plans only
   return plans.filter(plan => {
-    // This is a simplified version - in production you'd need proper country code mapping
-    // For now, we'll use name matching as a fallback
     const countryName = getCountryNameFromCode(countryCode);
-    return plan.name.toLowerCase().includes(countryName.toLowerCase()) ||
-           plan.planType === 'global';
+    const nameContainsCountry = plan.name.toLowerCase().includes(countryName.toLowerCase());
+    const isCountryPlan = plan.planType === 'country';
+    
+    return nameContainsCountry && isCountryPlan;
   });
 }
 
@@ -161,6 +170,57 @@ function getCountryNameFromCode(countryCode: string): string {
 export function generateAffiliateLink(plan: ProcessedPlan): string {
   const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${plan.identifier}&aff_transaction_id={transaction_id}&aff_offer_id={offer_id}&aff_id={aff_id}`;
   return `https://go.saily.site/aff_c?offer_id=101&aff_id=8080&url=${encodeURIComponent(sailyCheckoutUrl)}`;
+}
+
+/**
+ * Get the lowest price for a country from plans
+ */
+export function getLowestPriceForCountry(countryCode: string): number {
+  const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+  
+  if (fallbackPlans.length === 0) {
+    return 0;
+  }
+  
+  // Find the lowest price among all plans for this country
+  const lowestPrice = Math.min(...fallbackPlans.map(plan => plan.priceUSD));
+  
+  return lowestPrice;
+}
+
+/**
+ * Get the lowest price in BGN for a country
+ */
+export async function getLowestPriceInBGN(countryCode: string): Promise<number> {
+  try {
+    // Try to fetch real plans first
+    const plans = await fetchSailyPlans(countryCode);
+    
+    if (plans && plans.length > 0) {
+      const lowestPriceUSD = Math.min(...plans.map(plan => plan.priceUSD));
+      console.log(`Real plans lowest price for ${countryCode}: $${lowestPriceUSD}`);
+      // Convert USD to BGN (more accurate rate: 1 USD = 1.8 BGN)
+      const priceInBGN = Math.round(lowestPriceUSD * 1.8);
+      console.log(`Converted to BGN: ${priceInBGN}лв`);
+      return priceInBGN;
+    }
+  } catch (error) {
+    console.error('Error fetching real plans for price calculation:', error);
+  }
+  
+  // Fallback to static plans
+  const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+  
+  if (fallbackPlans.length === 0) {
+    return 9; // Default fallback price
+  }
+  
+  const lowestPriceUSD = Math.min(...fallbackPlans.map(plan => plan.priceUSD));
+  console.log(`Fallback plans lowest price for ${countryCode}: $${lowestPriceUSD}`);
+  // Convert USD to BGN (more accurate rate: 1 USD = 1.8 BGN)
+  const priceInBGN = Math.round(lowestPriceUSD * 1.8);
+  console.log(`Fallback converted to BGN: ${priceInBGN}лв`);
+  return priceInBGN;
 }
 
 // Fallback static plans for each country (all prices in USD for consistent conversion)
@@ -380,6 +440,28 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       price: 8.99,
       currency: '$',
       identifier: 'saily_tr_3gb_15d',
+      planType: 'country',
+    },
+    {
+      id: 'tr-3',
+      name: 'Turkey 5GB 30 days',
+      data: '5 GB',
+      validity: '30 дни',
+      priceUSD: 12.99,
+      price: 12.99,
+      currency: '$',
+      identifier: 'saily_tr_5gb_30d',
+      planType: 'country',
+    },
+    {
+      id: 'tr-4',
+      name: 'Turkey 10GB 30 days',
+      data: '10 GB',
+      validity: '30 дни',
+      priceUSD: 19.99,
+      price: 19.99,
+      currency: '$',
+      identifier: 'saily_tr_10gb_30d',
       planType: 'country',
     }
   ]

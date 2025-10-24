@@ -6,15 +6,43 @@ import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
 import CTASection from '@/components/country/CTASection';
 import { Metadata } from 'next';
+import { getLowestPriceInBGN } from '@/lib/sailyApi';
+import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'eSIM за Америка: Мобилен интернет на Цени от 8лв - Travel eSIM',
-  description: 'eSIM за САЩ - Travelesim.bg',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lowestPrice = await getLowestPriceInBGN('US');
+  
+  return {
+    title: `eSIM за Америка: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    description: `Купи eSIM за САЩ от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Америка с 4G/5G покритие.`,
+    alternates: {
+      canonical: generateCanonicalUrl('/esim-za-usa'),
+    },
+    openGraph: {
+      locale: 'bg_BG',
+      type: 'website',
+      title: `eSIM за Америка: Бърз интернет без роуминг от ${lowestPrice}лв`,
+      description: `Купи eSIM за САЩ от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Америка с 4G/5G покритие.`,
+      url: generateCanonicalUrl('/esim-za-usa'),
+    },
+  };
+}
 
 export default function USAPage() {
+  // Breadcrumb Schema for USA page
+  const breadcrumbSchema = generateCountryBreadcrumbSchema('САЩ', 'esim-za-usa');
+  
   return (
-    <main>
+    <>
+      {/* Structured Data - Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      
+      <main>
       <HeroSectionWrapper
         breadcrumb="eSIM САЩ"
         title="Купи eSIM за САЩ - Мобилен интернет без роуминг"
@@ -166,7 +194,8 @@ export default function USAPage() {
         ctaText="КУПИ СЕГА"
         variant="purple"
       />
-    </main>
+      </main>
+    </>
   );
 }
 

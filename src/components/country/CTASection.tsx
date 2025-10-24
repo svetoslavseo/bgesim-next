@@ -22,7 +22,7 @@ export default function CTASection({
         <div className={styles.checkmark}>
           <Image
             src="/media/images/1.png"
-            alt="Checkmark"
+            alt="Гарантирано качество и сигурност"
             width={96}
             height={96}
           />

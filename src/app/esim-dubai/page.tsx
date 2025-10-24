@@ -6,15 +6,43 @@ import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
 import CTASection from '@/components/country/CTASection';
 import { Metadata } from 'next';
+import { getLowestPriceInBGN } from '@/lib/sailyApi';
+import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'eSIM Дубай – Бърз Мобилен Интернет без Роуминг - Travel eSIM',
-  description: 'eSIM за Дубай - Travelesim.bg',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lowestPrice = await getLowestPriceInBGN('AE');
+  
+  return {
+    title: `eSIM за Дубай: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    description: `Купи eSIM за Дубай от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Дубай с 4G/5G покритие.`,
+    alternates: {
+      canonical: generateCanonicalUrl('/esim-dubai'),
+    },
+    openGraph: {
+      locale: 'bg_BG',
+      type: 'website',
+      title: `eSIM за Дубай: Бърз интернет без роуминг от ${lowestPrice}лв`,
+      description: `Купи eSIM за Дубай от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Дубай с 4G/5G покритие.`,
+      url: generateCanonicalUrl('/esim-dubai'),
+    },
+  };
+}
 
 export default function DubaiPage() {
+  // Breadcrumb Schema for Dubai page
+  const breadcrumbSchema = generateCountryBreadcrumbSchema('Дубай', 'esim-dubai');
+  
   return (
-    <main>
+    <>
+      {/* Structured Data - Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      
+      <main>
       <HeroSectionWrapper
         breadcrumb="eSIM Дубай"
         title="eSIM за Дубай"
@@ -166,7 +194,8 @@ export default function DubaiPage() {
         ctaText="КУПИ СЕГА"
         variant="purple"
       />
-    </main>
+      </main>
+    </>
   );
 }
 

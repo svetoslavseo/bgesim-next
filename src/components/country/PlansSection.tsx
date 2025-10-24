@@ -40,8 +40,9 @@ export default function PlansSection({
   const [selectedTab, setSelectedTab] = useState<string>('');
   const [hoveredTooltip, setHoveredTooltip] = useState<string | null>(null);
 
-  // Convert plans to current currency
-  const convertedPlans = plans.map(plan => {
+  // Filter only country plans and convert to current currency
+  const countryPlans = plans.filter(plan => plan.planType === 'country');
+  const convertedPlans = countryPlans.map(plan => {
     const priceUSD = plan.priceUSD || plan.price; // Use priceUSD if available, fallback to price
     const convertedPrice = convertPrice(priceUSD, currency, exchangeRates || undefined);
     
@@ -61,8 +62,8 @@ export default function PlansSection({
   // Build durations from converted plans
   const uniqueDurations = Array.from(new Set(convertedPlans.map(getDurationLabel)));
   const sortedDurations = uniqueDurations.sort((a, b) => {
-    const daysA = parseInt(a.split(' ')[0]);
-    const daysB = parseInt(b.split(' ')[0]);
+    const daysA = parseInt(a?.split(' ')[0] || '0');
+    const daysB = parseInt(b?.split(' ')[0] || '0');
     return daysA - daysB;
   });
 
@@ -76,7 +77,7 @@ export default function PlansSection({
   // Set initial tab
   useEffect(() => {
     if (sortedDurations.length > 0 && !selectedTab) {
-      setSelectedTab(sortedDurations[0]);
+      setSelectedTab(sortedDurations[0] || '');
     }
   }, [sortedDurations, selectedTab]);
 
@@ -90,7 +91,7 @@ export default function PlansSection({
     if (plan.data === 'Unlimited' || !plan.data) return plan.price;
     
     const dataMatch = plan.data.match(/(\d+(?:\.\d+)?)/);
-    if (!dataMatch) return plan.price;
+    if (!dataMatch || !dataMatch[1]) return plan.price;
     
     const dataAmount = parseFloat(dataMatch[1]);
     if (dataAmount === 0) return plan.price;
