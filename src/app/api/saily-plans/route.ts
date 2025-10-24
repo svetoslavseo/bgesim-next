@@ -72,12 +72,12 @@ export async function GET(request: NextRequest) {
       filteredPlans = allPlans.filter((plan: any) => {
         const coversCountry = plan.coveredCountries.includes(countryCode);
         const nameContainsCountry = plan.name.toLowerCase().includes(countryName.toLowerCase());
-        const isCountryPlan = plan.planType === 'country';
         
-        const shouldInclude = (coversCountry || nameContainsCountry) && isCountryPlan;
+        // Include all plan types (country, regional, global) that cover this country
+        const shouldInclude = coversCountry || nameContainsCountry;
         
         if (shouldInclude) {
-          console.log(`Including plan: ${plan.name} (covers: ${coversCountry}, name: ${nameContainsCountry}, country plan: ${isCountryPlan})`);
+          console.log(`Including plan: ${plan.name} (type: ${plan.planType}, covers: ${coversCountry}, name: ${nameContainsCountry})`);
         }
         
         return shouldInclude;
@@ -202,6 +202,144 @@ export async function GET(request: NextRequest) {
               identifier: 'saily_tr_10gb_30d',
               priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xOTk5',
               planType: 'country',
+            }
+          ];
+        } else if (countryCode === 'US') {
+          fallbackPlans = [
+            // Country Plans
+            {
+              id: 'us-1',
+              name: 'USA 1GB 7 days',
+              data: '1 GB',
+              validity: '7 дни',
+              priceUSD: 4.99,
+              price: 4.99,
+              currency: '$',
+              identifier: 'saily_us_1gb_7d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC40OTk5',
+              planType: 'country',
+            },
+            {
+              id: 'us-2',
+              name: 'USA 3GB 15 days',
+              data: '3 GB',
+              validity: '15 дни',
+              priceUSD: 9.99,
+              price: 9.99,
+              currency: '$',
+              identifier: 'saily_us_3gb_15d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC45OTk5',
+              planType: 'country',
+            },
+            {
+              id: 'us-3',
+              name: 'USA 5GB 30 days',
+              data: '5 GB',
+              validity: '30 дни',
+              priceUSD: 14.99,
+              price: 14.99,
+              currency: '$',
+              identifier: 'saily_us_5gb_30d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xNDk5',
+              planType: 'country',
+            },
+            {
+              id: 'us-4',
+              name: 'USA 10GB 30 days',
+              data: '10 GB',
+              validity: '30 дни',
+              priceUSD: 19.99,
+              price: 19.99,
+              currency: '$',
+              identifier: 'saily_us_10gb_30d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xOTk5',
+              planType: 'country',
+            },
+            // Regional Plans (North America)
+            {
+              id: 'us-regional-1',
+              name: 'North America 2GB 7 days',
+              data: '2 GB',
+              validity: '7 дни',
+              priceUSD: 7.99,
+              price: 7.99,
+              currency: '$',
+              identifier: 'saily_na_2gb_7d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC43OTk5',
+              planType: 'regional',
+            },
+            {
+              id: 'us-regional-2',
+              name: 'North America 5GB 15 days',
+              data: '5 GB',
+              validity: '15 дни',
+              priceUSD: 12.99,
+              price: 12.99,
+              currency: '$',
+              identifier: 'saily_na_5gb_15d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xMjk5',
+              planType: 'regional',
+            },
+            {
+              id: 'us-regional-3',
+              name: 'North America 10GB 30 days',
+              data: '10 GB',
+              validity: '30 дни',
+              priceUSD: 18.99,
+              price: 18.99,
+              currency: '$',
+              identifier: 'saily_na_10gb_30d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xODk5',
+              planType: 'regional',
+            },
+            // Global Plans
+            {
+              id: 'us-global-1',
+              name: 'Global 1GB 7 days',
+              data: '1 GB',
+              validity: '7 дни',
+              priceUSD: 9.99,
+              price: 9.99,
+              currency: '$',
+              identifier: 'saily_global_1gb_7d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC45OTk5',
+              planType: 'global',
+            },
+            {
+              id: 'us-global-2',
+              name: 'Global 3GB 15 days',
+              data: '3 GB',
+              validity: '15 дни',
+              priceUSD: 14.99,
+              price: 14.99,
+              currency: '$',
+              identifier: 'saily_global_3gb_15d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xNDk5',
+              planType: 'global',
+            },
+            {
+              id: 'us-global-3',
+              name: 'Global 5GB 30 days',
+              data: '5 GB',
+              validity: '30 дни',
+              priceUSD: 19.99,
+              price: 19.99,
+              currency: '$',
+              identifier: 'saily_global_5gb_30d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xOTk5',
+              planType: 'global',
+            },
+            {
+              id: 'us-global-4',
+              name: 'Global 10GB 30 days',
+              data: '10 GB',
+              validity: '30 дни',
+              priceUSD: 24.99,
+              price: 24.99,
+              currency: '$',
+              identifier: 'saily_global_10gb_30d',
+              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4yNDk5',
+              planType: 'global',
             }
           ];
         }

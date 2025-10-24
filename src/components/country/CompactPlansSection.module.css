@@ -1,0 +1,394 @@
+.plans {
+  background: #000000;
+  padding: 4rem 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 3rem 0;
+  color: white;
+  line-height: 1.2;
+}
+
+.planSelector {
+  background: #2a2a2a;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid #444;
+}
+
+/* Plan Type Switcher */
+.planTypeSwitcher {
+  display: flex;
+  background: #3a3a3a;
+  border-radius: 16px;
+  padding: 8px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.switcherButton {
+  flex: 1;
+  padding: 1rem 2rem;
+  border: none;
+  background: transparent;
+  color: #ccc;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.switcherButtonActive {
+  background: #ffd700;
+  color: #000;
+  box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+  font-weight: 700;
+}
+
+.switcherButton:hover:not(.switcherButtonActive) {
+  color: white;
+}
+
+/* Plans List Layout */
+.plansList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.durationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.durationTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #555;
+}
+
+.plansForDuration {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.planItem {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #3a3a3a;
+  border: 2px solid #555;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 60px;
+}
+
+.planItem:hover {
+  border-color: #ffd700;
+  background: #4a4a4a;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.planItemSelected {
+  border-color: #ffd700;
+  background: linear-gradient(135deg, #4a4a4a, #5a5a5a);
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+.radioButton {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.radioButtonSelected {
+  border-color: #ffd700;
+  background: #ffd700;
+}
+
+.checkIcon {
+  width: 16px;
+  height: 16px;
+  color: #000;
+}
+
+.planTypeTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.planDetails {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.planInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dataAmount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+}
+
+.validity {
+  font-size: 0.875rem;
+  color: #ccc;
+  font-weight: 500;
+}
+
+.planPricing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: right;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.pricePerGB {
+  font-size: 0.75rem;
+  color: #ccc;
+  font-weight: 500;
+}
+
+.planTypeBadge {
+  align-self: flex-start;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.planTypeCountry {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.planTypeRegional {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.planTypeGlobal {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.buyButton {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.buyButton:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.buyButtonActive {
+  background: #ffd700;
+  color: #000;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.buyButtonActive:hover {
+  background: #ffed4e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.trustIndicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #ffd700;
+  font-weight: 500;
+}
+
+.trustItem .checkIcon {
+  width: 18px;
+  height: 18px;
+  color: #ffd700;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .plans {
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .planSelector {
+    padding: 1.5rem;
+  }
+
+  .planTypeSwitcher {
+    margin-bottom: 1.5rem;
+  }
+
+  .switcherButton {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .plansList {
+    gap: 1.5rem;
+  }
+
+  .planItem {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .planTypeTitle {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .planDetails {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .planPricing {
+    text-align: left;
+  }
+
+  .dataAmount {
+    font-size: 1.25rem;
+  }
+
+  .price {
+    font-size: 1.25rem;
+  }
+
+  .buyButton {
+    align-self: stretch;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .trustIndicators {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .trustItem {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .plans {
+    padding: 2rem 0.5rem;
+  }
+
+  .planSelector {
+    padding: 1rem;
+  }
+
+  .switcherButton {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .planItem {
+    padding: 0.75rem;
+  }
+
+  .planTypeTitle {
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .dataAmount {
+    font-size: 1.125rem;
+  }
+
+  .price {
+    font-size: 1.125rem;
+  }
+
+  .buyButton {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}

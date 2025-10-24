@@ -1,5 +1,6 @@
 import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
+import CompactPlansSectionWrapper from '@/components/country/CompactPlansSectionWrapper';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -66,6 +67,12 @@ export default function USAPage() {
         ]}
         image="/media/images/Untitled-design-2.png"
         imageAlt="eSIM visualization"
+      />
+
+      <CompactPlansSectionWrapper
+        title="Избери от всички налични eSIM планове с покритие в САЩ"
+        countryName="USA"
+        countryCode="US"
       />
 
       <BenefitsSection
