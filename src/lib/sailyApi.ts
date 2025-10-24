@@ -45,6 +45,10 @@ const API_URL = 'https://web.saily.com/v2/partners/plans';
 
 export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPlan[]> {
   try {
+    console.log('Making Saily API request to:', API_URL);
+    console.log('API Key:', API_KEY.substring(0, 10) + '...');
+    console.log('Partner ID:', PARTNER_ID);
+    
     const response = await fetch(API_URL, {
       headers: {
         'x-api-key': API_KEY,
@@ -53,11 +57,18 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
       },
     });
 
+    console.log('API Response status:', response.status);
+    console.log('API Response headers:', Object.fromEntries(response.headers.entries()));
+
     if (!response.ok) {
-      throw new Error(`API request failed: ${response.status}`);
+      const errorText = await response.text();
+      console.error('API Error Response:', errorText);
+      throw new Error(`API request failed: ${response.status} - ${errorText}`);
     }
 
     const data: SailyApiResponse = await response.json();
+    console.log('Raw Saily API response:', data);
+    console.log('Total items in response:', data.items.length);
     
     const allPlans = data.items.map(plan => {
       const priceUSD = plan.price.amount_with_tax / 100; // Convert cents to USD
@@ -79,12 +90,41 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
 
     // If country code is provided, filter plans for that country
     if (countryCode) {
-      return allPlans.filter(plan => {
-        // Check if the plan covers the specific country
-        return plan.coveredCountries.includes(countryCode) || 
-               plan.planType === 'global' ||
-               plan.name.toLowerCase().includes(getCountryNameFromCode(countryCode).toLowerCase());
+      console.log(`Filtering plans for country: ${countryCode}`);
+      console.log(`Total plans from API: ${allPlans.length}`);
+      
+      // First, let's see all plans that contain the country name in their name
+      const countryName = getCountryNameFromCode(countryCode);
+      console.log(`Looking for country name: ${countryName}`);
+      
+      const plansWithCountryName = allPlans.filter(plan => 
+        plan.name.toLowerCase().includes(countryName.toLowerCase())
+      );
+      console.log(`Plans with country name "${countryName}":`, plansWithCountryName.map(p => p.name));
+      
+      const filteredPlans = allPlans.filter(plan => {
+        const coversCountry = plan.coveredCountries.includes(countryCode);
+        const isGlobal = plan.planType === 'global';
+        const nameContainsCountry = plan.name.toLowerCase().includes(countryName.toLowerCase());
+        
+        const shouldInclude = coversCountry || isGlobal || nameContainsCountry;
+        
+        if (shouldInclude) {
+          console.log(`Including plan: ${plan.name} (covers: ${coversCountry}, global: ${isGlobal}, name: ${nameContainsCountry})`);
+        }
+        
+        return shouldInclude;
       });
+      
+      console.log(`Filtered plans for ${countryCode}: ${filteredPlans.length}`);
+      
+      // If no plans found with filtering, return all plans for debugging
+      if (filteredPlans.length === 0) {
+        console.log('No plans found with filtering, returning all plans for debugging');
+        return allPlans;
+      }
+      
+      return filteredPlans;
     }
 
     return allPlans;
@@ -176,14 +216,50 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
     },
     {
       id: 'rs-2',
+      name: 'Serbia 3GB 30 days',
+      data: '3 GB',
+      validity: '30 дни',
+      priceUSD: 7.99,
+      price: 7.99,
+      currency: '$',
+      identifier: '3e530dbf-e379-4718-a7a7-b7f207b2df18', // Plan identifier
+      priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC43OTk=', // Price identifier for checkout
+      planType: 'country',
+    },
+    {
+      id: 'rs-3',
       name: 'Serbia 5GB 30 days',
       data: '5 GB',
       validity: '30 дни',
       priceUSD: 10.99,
       price: 10.99,
       currency: '$',
-      identifier: '3e530dbf-e379-4718-a7a7-b7f207b2df18', // Plan identifier
+      identifier: '5f8a9c2d-4e1b-4a3c-8d7e-9f0a1b2c3d4e', // Plan identifier
       priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xMDk5', // Price identifier for checkout
+      planType: 'country',
+    },
+    {
+      id: 'rs-4',
+      name: 'Serbia 10GB 30 days',
+      data: '10 GB',
+      validity: '30 дни',
+      priceUSD: 15.99,
+      price: 15.99,
+      currency: '$',
+      identifier: '6g9b0d3e-5f2c-5b4d-9e8f-0a1b2c3d4e5f', // Plan identifier
+      priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xNTk5', // Price identifier for checkout
+      planType: 'country',
+    },
+    {
+      id: 'rs-5',
+      name: 'Serbia 20GB 30 days',
+      data: '20 GB',
+      validity: '30 дни',
+      priceUSD: 25.99,
+      price: 25.99,
+      currency: '$',
+      identifier: '7h0c1e4f-6g3d-6c5e-0f1g-1b2c3d4e5f6g', // Plan identifier
+      priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4yNTk5', // Price identifier for checkout
       planType: 'country',
     }
   ],

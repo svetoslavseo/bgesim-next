@@ -9,9 +9,19 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% 50%;
   gap: 4rem;
   align-items: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 100%;
+}
+
+.planSelector {
+  width: 100%;
+  max-width: 100%;
 }
 
 .breadcrumb {

@@ -29,9 +29,12 @@ export default function HeroSectionWrapper({
       try {
         console.log('Fetching real Saily plans for', countryCode);
         
-        // Try to fetch real plans from Saily API for this specific country
-        const sailyPlans = await fetchSailyPlans(countryCode);
-        console.log('Saily API response for', countryCode, ':', sailyPlans);
+        // Try to fetch real plans from server-side API route (bypasses CORS)
+        const response = await fetch(`/api/saily-plans?countryCode=${countryCode}`);
+        const apiData = await response.json();
+        console.log('Server-side API response for', countryCode, ':', apiData);
+        
+        const sailyPlans = apiData.success ? apiData.plans : [];
         
         if (sailyPlans && sailyPlans.length > 0) {
           console.log('Using real Saily plans:', sailyPlans);
@@ -39,6 +42,7 @@ export default function HeroSectionWrapper({
         } else {
           console.log('No Saily plans found, using fallback');
           const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+          console.log('Fallback plans for', countryCode, ':', fallbackPlans);
           setPlans(fallbackPlans);
         }
         
