@@ -33,7 +33,9 @@ interface ProcessedPlan {
   price: number;
   currency: string;
   identifier: string;
+  priceIdentifier?: string; // Price identifier for Saily checkout
   planType: 'global' | 'regional' | 'country';
+  coveredCountries?: string[]; // Countries covered by this plan
   ctaUrl?: string;
 }
 
@@ -41,7 +43,7 @@ const API_KEY = 'a820596678ad38f13bad61d1648f1befef597d0b8659648f4cf8b337fd6cb51
 const PARTNER_ID = 'atlasvpn';
 const API_URL = 'https://web.saily.com/v2/partners/plans';
 
-export async function fetchSailyPlans(): Promise<ProcessedPlan[]> {
+export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPlan[]> {
   try {
     const response = await fetch(API_URL, {
       headers: {
@@ -57,7 +59,7 @@ export async function fetchSailyPlans(): Promise<ProcessedPlan[]> {
 
     const data: SailyApiResponse = await response.json();
     
-    return data.items.map(plan => {
+    const allPlans = data.items.map(plan => {
       const priceUSD = plan.price.amount_with_tax / 100; // Convert cents to USD
       return {
         id: plan.identifier,
@@ -68,10 +70,24 @@ export async function fetchSailyPlans(): Promise<ProcessedPlan[]> {
         price: priceUSD, // Default price (will be converted in component)
         currency: '$',
         identifier: plan.identifier,
-        planType: plan.covered_countries.length > 10 ? 'global' : 
-                  plan.covered_countries.length > 1 ? 'regional' : 'country',
+        priceIdentifier: plan.price.identifier, // Add price identifier
+        planType: (plan.covered_countries.length > 10 ? 'global' : 
+                  plan.covered_countries.length > 1 ? 'regional' : 'country') as 'global' | 'regional' | 'country',
+        coveredCountries: plan.covered_countries, // Store covered countries for filtering
       };
     });
+
+    // If country code is provided, filter plans for that country
+    if (countryCode) {
+      return allPlans.filter(plan => {
+        // Check if the plan covers the specific country
+        return plan.coveredCountries.includes(countryCode) || 
+               plan.planType === 'global' ||
+               plan.name.toLowerCase().includes(getCountryNameFromCode(countryCode).toLowerCase());
+      });
+    }
+
+    return allPlans;
   } catch (error) {
     console.error('Error fetching Saily plans:', error);
     throw error;
@@ -108,6 +124,7 @@ export function generateAffiliateLink(plan: ProcessedPlan): string {
 }
 
 // Fallback static plans for each country (all prices in USD for consistent conversion)
+// Using the same structure as the main project's plans.json
 export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
   'TH': [
     {
@@ -115,10 +132,10 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       name: 'Thailand 1GB 7 days',
       data: '1 GB',
       validity: '7 дни',
-      priceUSD: 5.99,
-      price: 5.99,
+      priceUSD: 4.99,
+      price: 4.99,
       currency: '$',
-      identifier: 'saily_th_1gb_7d',
+      identifier: '5621d850-cc6f-45bc-a79b-b443bbb6dffa', // Real Saily identifier from main project
       planType: 'country',
     },
     {
@@ -129,7 +146,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       priceUSD: 12.99,
       price: 12.99,
       currency: '$',
-      identifier: 'saily_th_3gb_15d',
+      identifier: '725f8236-8bf0-4d29-a28a-14e5903ee6bd', // Real Saily identifier from main project
       planType: 'country',
     },
     {
@@ -137,45 +154,36 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       name: 'Thailand 5GB 30 days',
       data: '5 GB',
       validity: '30 дни',
-      priceUSD: 19.99,
-      price: 19.99,
+      priceUSD: 7.99,
+      price: 7.99,
       currency: '$',
-      identifier: 'saily_th_5gb_30d',
+      identifier: 'cd709647-55bd-404b-ae1a-56904d84be89', // Real Saily identifier from main project
       planType: 'country',
     }
   ],
   'RS': [
     {
       id: 'rs-1',
-      name: 'Serbia 2GB 15 days',
-      data: '2 GB',
-      validity: '15 дни',
-      priceUSD: 14.44, // Converted from 26 BGN
-      price: 14.44,
+      name: 'Serbia 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 3.99,
+      price: 3.99,
       currency: '$',
-      identifier: 'saily_rs_2gb_15d',
+      identifier: '532eb9b7-a6a7-40e2-88ab-6622d12856dd', // Plan identifier
+      priceIdentifier: 'MTpwbHN6MnlZdVFtMkpsS3A0YVY4dTMxYld1LTJZY19mYzd0ejVwM19kSXg4PTpQcmljZToyNzkyLlVTRC4zOTk=', // Price identifier for checkout
       planType: 'country',
     },
     {
       id: 'rs-2',
-      name: 'Serbia Unlimited 1 day',
-      data: 'Unlimited',
-      validity: '1 ден',
-      priceUSD: 11.11, // Converted from 20 BGN
-      price: 11.11,
+      name: 'Serbia 5GB 30 days',
+      data: '5 GB',
+      validity: '30 дни',
+      priceUSD: 10.99,
+      price: 10.99,
       currency: '$',
-      identifier: 'saily_rs_unlimited_1d',
-      planType: 'country',
-    },
-    {
-      id: 'rs-3',
-      name: 'Serbia Unlimited 5 days',
-      data: 'Unlimited',
-      validity: '5 дни',
-      priceUSD: 41.11, // Converted from 74 BGN
-      price: 41.11,
-      currency: '$',
-      identifier: 'saily_rs_unlimited_5d',
+      identifier: '3e530dbf-e379-4718-a7a7-b7f207b2df18', // Plan identifier
+      priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xMDk5', // Price identifier for checkout
       planType: 'country',
     }
   ],

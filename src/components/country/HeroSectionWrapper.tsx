@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import HeroSection from './HeroSection';
-import { FALLBACK_PLANS } from '@/lib/sailyApi';
+import { fetchSailyPlans, FALLBACK_PLANS } from '@/lib/sailyApi';
 
 interface HeroSectionWrapperProps {
   breadcrumb: string;
@@ -27,13 +27,25 @@ export default function HeroSectionWrapper({
   useEffect(() => {
     const loadPlans = async () => {
       try {
-        // Use fallback plans immediately
-        const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
-        console.log('Loading plans for', countryCode, fallbackPlans);
-        setPlans(fallbackPlans);
+        console.log('Fetching real Saily plans for', countryCode);
+        
+        // Try to fetch real plans from Saily API for this specific country
+        const sailyPlans = await fetchSailyPlans(countryCode);
+        console.log('Saily API response for', countryCode, ':', sailyPlans);
+        
+        if (sailyPlans && sailyPlans.length > 0) {
+          console.log('Using real Saily plans:', sailyPlans);
+          setPlans(sailyPlans);
+        } else {
+          console.log('No Saily plans found, using fallback');
+          const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+          setPlans(fallbackPlans);
+        }
+        
         setIsLoading(false);
       } catch (error) {
         console.error('Error loading plans:', error);
+        console.log('Falling back to static plans');
         const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
         setPlans(fallbackPlans);
         setIsLoading(false);

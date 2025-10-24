@@ -17,6 +17,7 @@ interface Plan {
   currency: string;
   country: string;
   identifier?: string;
+  priceIdentifier?: string; // Price identifier for Saily checkout
 }
 
 const CheckoutPage = () => {
@@ -79,13 +80,16 @@ const CheckoutPage = () => {
     }
 
     try {
-      // Generate Saily affiliate link using the plan identifier
-      if (plan.identifier) {
+      // Generate Saily affiliate link using the price identifier (preferred) or plan identifier
+      const identifierToUse = plan.priceIdentifier || plan.identifier;
+      
+      if (identifierToUse) {
         // Use the Saily affiliate link format
-        const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${plan.identifier}&aff_transaction_id={transaction_id}&aff_offer_id={offer_id}&aff_id={aff_id}`;
+        const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${identifierToUse}&aff_transaction_id={transaction_id}&aff_offer_id={offer_id}&aff_id={aff_id}`;
         const finalUrl = `https://go.saily.site/aff_c?offer_id=101&aff_id=8080&url=${encodeURIComponent(sailyCheckoutUrl)}`;
         
         console.log('Redirecting to Saily:', finalUrl);
+        console.log('Using identifier:', identifierToUse, plan.priceIdentifier ? '(price identifier)' : '(plan identifier)');
         window.location.href = finalUrl;
       } else {
         // Fallback to Breeze if no Saily identifier

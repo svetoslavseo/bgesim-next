@@ -156,3 +156,4 @@ The EUR to BGN rate is **fixed at 1.96** (official Bulgarian Lev to Euro peg) an
 
 
 
+
