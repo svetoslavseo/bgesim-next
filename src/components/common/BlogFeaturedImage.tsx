@@ -30,7 +30,7 @@ export default function BlogFeaturedImage({
         style={{
           borderRadius: '30px',
           width: '100%',
-          height: '100%',
+          height: 'auto',
           objectFit: 'cover'
         }}
       />

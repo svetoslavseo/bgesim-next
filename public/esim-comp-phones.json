@@ -26,6 +26,27 @@
             ]
           },
           {
+            "series_name": "iPhone 16 Series",
+            "devices": [
+              {
+                "model": "iPhone 16",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 16 Plus",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 16 Pro",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              },
+              {
+                "model": "iPhone 16 Pro Max",
+                "notes": "US models are eSIM-only. Supports dual eSIMs."
+              }
+            ]
+          },
+          {
             "series_name": "iPhone 15 Series",
             "devices": [
               {
@@ -162,6 +183,14 @@
         "brand": "Google",
         "series": [
           {
+            "series_name": "Pixel 9 Series",
+            "devices": [
+              { "model": "Pixel 9", "notes": null },
+              { "model": "Pixel 9 Pro", "notes": null },
+              { "model": "Pixel 9 Pro XL", "notes": null }
+            ]
+          },
+          {
             "series_name": "Pixel 8 Series",
             "devices": [
               { "model": "Pixel 8", "notes": null },
@@ -250,6 +279,18 @@
             "series_name": "Galaxy S Series",
             "devices": [
               {
+                "model": "Samsung Galaxy S25",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S25+",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
+                "model": "Samsung Galaxy S25 Ultra",
+                "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
+              },
+              {
                 "model": "Samsung Galaxy S24",
                 "notes": "eSIM availability may vary by country/region and carrier. USA, Canada, and Hong Kong models may not support eSIM."
               },
@@ -322,6 +363,14 @@
           {
             "series_name": "Galaxy Z (Foldable) Series",
             "devices": [
+              {
+                "model": "Samsung Galaxy Z Fold6",
+                "notes": "eSIM availability may vary by country/region and carrier."
+              },
+              {
+                "model": "Samsung Galaxy Z Flip6",
+                "notes": "eSIM availability may vary by country/region and carrier."
+              },
               {
                 "model": "Samsung Galaxy Z Fold5",
                 "notes": "eSIM availability may vary by country/region and carrier."
@@ -398,6 +447,15 @@
             ]
           },
           {
+            "series_name": "Mate 70 Series",
+            "devices": [
+              {
+                "model": "Huawei Mate 70 Pro",
+                "notes": "eSIM availability may vary by region."
+              }
+            ]
+          },
+          {
             "series_name": "Mate Series",
             "devices": [
               { "model": "Huawei Mate 40 Pro", "notes": null }
@@ -408,6 +466,15 @@
       {
         "brand": "Xiaomi",
         "series": [
+          {
+            "series_name": "Xiaomi 15 Series",
+            "devices": [
+              {
+                "model": "Xiaomi 15 Ultra",
+                "notes": "eSIM availability varies by region. Check device specifications."
+              }
+            ]
+          },
           {
             "series_name": "Xiaomi 14 Series",
             "devices": [
@@ -632,6 +699,7 @@
           {
             "series_name": "Fairphone",
             "devices": [
+              { "model": "Fairphone 6", "notes": null },
               { "model": "Fairphone 5", "notes": null },
               { "model": "Fairphone 4", "notes": null }
             ]
@@ -692,6 +760,10 @@
           {
             "series_name": "Nothing",
             "devices": [
+              {
+                "model": "Nothing Phone (3a) Pro",
+                "notes": "eSIM availability varies by region."
+              },
               {
                 "model": "Nothing Phone (2)",
                 "notes": "eSIM availability varies by region."

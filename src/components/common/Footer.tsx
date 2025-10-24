@@ -63,6 +63,11 @@ export default function Footer() {
                   alt="Travel eSIM by Breeze Logo"
                   width={200}
                   height={60}
+                  style={{
+                    width: 'auto',
+                    height: 'auto',
+                    maxHeight: '60px'
+                  }}
                 />
               </Link>
               <p className={styles.footerDescription}>

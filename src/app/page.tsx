@@ -41,6 +41,7 @@ export default function HomePage() {
     { name: 'Турция', href: '/turcia/', flag: '/media/images/4.png' },
     { name: 'Дубай', href: '/esim-dubai/', flag: '/media/images/6.png' },
     { name: 'Сърбия', href: '/esim-serbia/', flag: '/media/images/Flags_-2.png' },
+    { name: 'Египет', href: '/esim-egipet/', flag: '/media/images/Egypt-150x150.png' },
   ];
 
   const benefits = [

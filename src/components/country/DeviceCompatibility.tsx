@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './DeviceCompatibility.module.css';
 
 interface DeviceCompatibilityProps {
@@ -22,6 +23,12 @@ export default function DeviceCompatibility({ title, description, devices }: Dev
                 <span>{device}</span>
               </div>
             ))}
+          </div>
+          
+          <div className={styles.ctaContainer}>
+            <Link href="/proverka-na-syvmestimost-s-esim" className={styles.ctaButton}>
+              Провери съвместимостта на моето устройство
+            </Link>
           </div>
         </div>
       </div>
