@@ -5,7 +5,7 @@ import styles from './Header.module.css';
 
 export default function Header() {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} contain-layout`}>
       <div className={styles.headerRow}>
         <div className={styles.container}>
           <div className={styles.headerLeft}>
@@ -16,11 +16,14 @@ export default function Header() {
                 width={200}
                 height={50}
                 priority
+                fetchPriority="high"
+                quality={90}
                 style={{
                   width: 'auto',
                   height: 'auto',
                   maxHeight: '50px'
                 }}
+                sizes="(max-width: 768px) 150px, 200px"
               />
             </Link>
           </div>

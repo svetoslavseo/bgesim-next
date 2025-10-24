@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import '@/styles/critical.css';
 import { SITE_CONFIG } from '@/lib/seo';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import ClientProviders from '@/components/providers/ClientProviders';
+import PerformanceMonitor from '@/components/common/PerformanceMonitor';
 
 export const metadata: Metadata = {
   title: {
@@ -53,6 +55,14 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   
+  // Performance and security headers
+  other: {
+    'X-DNS-Prefetch-Control': 'on',
+    'X-Frame-Options': 'DENY',
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'origin-when-cross-origin',
+  },
+  
   // Verification (add your verification tokens here)
   // verification: {
   //   google: 'your-google-verification-code',
@@ -66,7 +76,51 @@ export default function RootLayout({
 }) {
   return (
     <html lang="bg">
+      <head>
+        {/* DNS prefetch for external domains */}
+        <link rel="dns-prefetch" href="//breezesim.com" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://breezesim.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Resource hints for critical resources */}
+        <link rel="preload" href="/media/images/TeSim-Logo-Breeze.png" as="image" type="image/png" />
+        
+        {/* Viewport meta tag for mobile optimization */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        
+        {/* Theme color */}
+        <meta name="theme-color" content="#c8a2d0" />
+        <meta name="msapplication-TileColor" content="#c8a2d0" />
+        
+        {/* Performance monitoring */}
+        <script src="/performance.js" defer></script>
+        
+        {/* Service Worker registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                      console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                      console.log('SW registration failed: ', registrationError);
+                    });
+                });
+              }
+            `,
+          }}
+        />
+      </head>
       <body>
+        <PerformanceMonitor />
         <ClientProviders>
           <Header />
           <main>{children}</main>

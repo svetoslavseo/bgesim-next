@@ -14,7 +14,7 @@ interface PopularDestinationsProps {
 
 export default function PopularDestinations({ destinations }: PopularDestinationsProps) {
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} content-visibility-auto`}>
       <div className={styles.container}>
         <h2 className={styles.title}>Популярни дестинации</h2>
         <div className={styles.grid}>
@@ -31,6 +31,9 @@ export default function PopularDestinations({ destinations }: PopularDestination
                   width={24}
                   height={24}
                   className={styles.flag}
+                  loading="lazy"
+                  quality={85}
+                  sizes="24px"
                 />
               )}
               <span className={styles.name}>{destination.name}</span>

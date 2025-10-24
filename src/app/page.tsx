@@ -1,6 +1,7 @@
 import { getHomepage, getRecentPosts } from '@/lib/content';
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import HeroSection from '@/components/home/HeroSection';
 import PopularDestinations from '@/components/home/PopularDestinations';
 import BenefitsSection from '@/components/home/BenefitsSection';
@@ -11,6 +12,31 @@ import BlogPostsSection from '@/components/home/BlogPostsSection';
 import BottomCTASection from '@/components/home/BottomCTASection';
 import { extractExcerpt, formatDate } from '@/lib/utils';
 import { generateOrganizationSchema } from '@/lib/seo';
+
+// Lazy load non-critical sections
+const LazyBenefitsSection = dynamic(() => import('@/components/home/BenefitsSection'), {
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
+});
+
+const LazyInfoSection = dynamic(() => import('@/components/home/InfoSection'), {
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
+});
+
+const LazyWhyUsSection = dynamic(() => import('@/components/home/WhyUsSection'), {
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
+});
+
+const LazyHowItWorksSection = dynamic(() => import('@/components/home/HowItWorksSection'), {
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
+});
+
+const LazyBlogPostsSection = dynamic(() => import('@/components/home/BlogPostsSection'), {
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
+});
+
+const LazyBottomCTASection = dynamic(() => import('@/components/home/BottomCTASection'), {
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
+});
 
 /**
  * Generate metadata for homepage
@@ -112,14 +138,14 @@ export default function HomePage() {
 
       <PopularDestinations destinations={destinations} />
 
-      <BenefitsSection
+      <LazyBenefitsSection
         title="Предимстава на eSIM"
         benefits={benefits}
         ctaText="Виж Планове"
         ctaUrl="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
       />
 
-      <InfoSection
+      <LazyInfoSection
         title="Достъпни eSIM международни планове – без роуминг такси, без напрежение."
         description="Намерете идеалния eSIM план за вашето пътуване. Лесно, удобно и без излишни разходи – ние ви свързваме с най-добрите оферти."
         ctaText="НАУЧЕТЕ КАК РАБОТИ"
@@ -128,12 +154,12 @@ export default function HomePage() {
         imageAlt="eSIM карта"
       />
 
-      <WhyUsSection
+      <LazyWhyUsSection
         title="Защо да изберете нас?"
         description="Нашата цел е да направим пътуванията ви по-лесни и без излишни разходи. Платформата ни е създадена, за да ви помогне бързо да намерите правилния eSIM план. Ако имате въпроси, просто ни пишете – ще получите отговор до 48 часа."
       />
 
-      <HowItWorksSection
+      <LazyHowItWorksSection
         title="Как работи?"
         steps={howItWorksSteps}
         image="/media/images/Image-1-1.png"
@@ -141,14 +167,14 @@ export default function HomePage() {
       />
 
       {blogPosts.length > 0 && (
-        <BlogPostsSection
+        <LazyBlogPostsSection
           title="Последни публикации"
           subtitle="БЛОГ"
           posts={blogPosts}
         />
       )}
 
-      <BottomCTASection
+      <LazyBottomCTASection
         title="Купи своята eSIM карта сега и спести пари от роуминг."
         description="Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. Гарантирано ниски цени от 15лв за 5GB."
         ctaText="КУПИ СЕГА"
