@@ -13,6 +13,7 @@
     "scrape:oxygen": "tsx scripts/scrape-oxygen-content.ts",
     "integrate:scraped": "tsx scripts/integrate-scraped-content.ts",
     "transform:content": "tsx scripts/transform-content.ts",
+    "update-rates": "tsx scripts/update-exchange-rates.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

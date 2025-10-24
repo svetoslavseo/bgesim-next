@@ -1,6 +1,5 @@
-import HeroSection from '@/components/country/HeroSection';
+import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
-import PlansSection from '@/components/country/PlansSection';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 export default function ThailandPage() {
   return (
     <main>
-      <HeroSection
+      <HeroSectionWrapper
         breadcrumb="eSIM Тайланд"
         title="eSIM за Тайланд – Надежден и бърз мобилен интернет"
         subtitle="Ще пътуваш до Тайланд? Купи eSIM с бърз и надежден мобилен интернет. Без физическа SIM карта. Без дългосрочни договори."
@@ -25,15 +24,8 @@ export default function ThailandPage() {
           'Работи в над 190 държави',
           'Мигновено активиране'
         ]}
-        planDetails={{
-          dataRange: 'от 5 ГБ до неограничен интернет',
-          validityRange: 'от 1 до 30 дни',
-          country: 'Тайланд',
-          priceFrom: 'от 15лв'
-        }}
-        ctaUrl="https://breezesim.com/products/esimg_th_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        logo="/media/images/855d181a760a91a337c42ed96672a7c4_BreezeLogo-Black-1080px.png"
-        trustpilot="/media/images/Screenshot-2025-03-24-at-22.50.18.png"
+        countryName="Thailand"
+        countryCode="TH"
       />
 
       <BenefitsSection
@@ -46,34 +38,6 @@ export default function ThailandPage() {
         ]}
         image="/media/images/Untitled-design-2.png"
         imageAlt="eSIM visualization"
-      />
-
-      <PlansSection
-        title="Избери подходящия план за теб"
-        lastUpdated="март 16, 2025"
-        plans={[
-          {
-            name: '1 GB / 7 дни',
-            data: '',
-            validity: '',
-            price: 'Идеален за чат и проверка на имейли',
-            ctaUrl: 'https://breezesim.com/products/esimg_th_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: '3 GB / 15 дни',
-            data: '',
-            validity: '',
-            price: 'Перфектен за социални мрежи',
-            ctaUrl: 'https://breezesim.com/products/esimg_th_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: '5 GB / 30 дни',
-            data: '',
-            validity: '',
-            price: 'За стрийминг и работа',
-            ctaUrl: 'https://breezesim.com/products/esimg_us_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          }
-        ]}
       />
 
       <BenefitsSection

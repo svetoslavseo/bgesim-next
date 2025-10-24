@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { SITE_CONFIG } from '@/lib/seo';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
+import ClientProviders from '@/components/providers/ClientProviders';
 
 export const metadata: Metadata = {
   title: {
@@ -66,9 +67,11 @@ export default function RootLayout({
   return (
     <html lang="bg">
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <ClientProviders>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </ClientProviders>
       </body>
     </html>
   );

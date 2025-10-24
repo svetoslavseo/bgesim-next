@@ -67,79 +67,402 @@
   flex-shrink: 0;
 }
 
-/* Pricing Card */
-.pricingCard {
+/* Plan Selector */
+.planSelector {
   background: white;
-  color: #333;
-  border-radius: 16px;
-  padding: 2.5rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid #e5e7eb;
+  position: relative;
+  color: #000;
+}
+
+.planHeader {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.planHeaderContent {
+  flex: 1;
+}
+
+.planTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.planSubtitle {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.instantActivation {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
   align-items: center;
-  text-align: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  position: relative;
+  white-space: nowrap;
 }
 
-.logo {
-  max-width: 150px;
-  height: auto;
+.pulseDot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
 }
 
-.trustpilot {
-  max-width: 200px;
-  height: auto;
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
-.planInfo {
+
+.durationTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.durationTab {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  width: 100%;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 2px solid #d1d5db;
+  background: white;
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.durationTab:hover {
+  border-color: #fbbf24;
+  background: #fef9e7;
+}
+
+.durationTabActive {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #000;
+  border-color: #f59e0b;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+}
+
+.durationLabel {
+  font-size: 1.1375rem;
+  font-weight: 700;
+}
+
+.durationCount {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.countNumber {
+  background: #f3f4f6;
+  color: #111827;
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.durationTabActive .countNumber {
+  background: rgba(0, 0, 0, 0.2);
+  color: #000;
+}
+
+.countLabel {
+  font-size: 0.975rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.durationTabActive .countLabel {
+  opacity: 0.9;
+}
+
+.plansList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .planItem {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 15px;
-  color: #666;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.icon {
+.planItem:hover {
+  border-color: #fbbf24;
+  background: #fef9e7;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.1);
+}
+
+.planItemSelected {
+  border-color: #fbbf24;
+  background: linear-gradient(135deg, #fef9e7, #fef3c7);
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+}
+
+.radioButton {
   width: 20px;
   height: 20px;
-  color: #007bff;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
-.country {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #333;
+.radioButtonSelected {
+  border-color: #fbbf24;
+  background: #fbbf24;
+}
+
+.checkIcon {
+  width: 14px;
+  height: 14px;
+  color: #ca8a04;
+}
+
+.planDetails {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.planInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dataAmount {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.validity {
+  font-size: 0.975rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.pricing {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .price {
-  font-size: 2rem;
+  font-size: 1.625rem;
   font-weight: 700;
-  color: #000;
+  color: #111827;
 }
 
-.ctaButton {
-  display: inline-block;
-  width: 100%;
-  padding: 1rem 2rem;
-  background: #000;
-  color: white;
-  text-decoration: none;
-  border-radius: 30px;
+.pricePerGB {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.unlimitedBadge {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 0.125rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
   font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
 }
 
-.ctaButton:hover {
-  background: #333;
+.perGBBadge {
+  background: #f3f4f6;
+  color: #6b7280;
+  padding: 0.125rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.planTypeBadge {
+  position: relative;
+  margin-left: 0.75rem;
+}
+
+.planTypeLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.625rem;
+  font-weight: 600;
+}
+
+.planTypeGlobal {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.planTypeRegional {
+  background: #fef3c7;
+  color: #ca8a04;
+}
+
+.planTypeCountry {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.buyButton {
+  width: 100%;
+  background: linear-gradient(135deg, #111827, #000);
+  color: white;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.buyButton:hover {
+  background: linear-gradient(135deg, #000, #111827);
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.selectButton {
+  width: 100%;
+  background: #e5e7eb;
+  color: #9ca3af;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: not-allowed;
+  margin-bottom: 1rem;
+}
+
+.compatibilityLink {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.compatibilityButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ff8b3d, #ff6b1a);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 26, 0.25);
+}
+
+.compatibilityButton:hover {
+  background: linear-gradient(135deg, #ff7a2d, #ff5b0a);
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 26, 0.35);
+}
+
+.compatibilityButton:active {
+  transform: translateY(0);
+}
+
+.compatibilityIcon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.5;
+}
+
+.trustIndicators {
+  background: transparent;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  border: none;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #854d0e;
+  font-weight: 500;
+}
+
+.stars {
+  color: #fbbf24;
+  font-size: 0.875rem;
+}
+
+.paymentMethods {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.paymentLogo {
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.paymentLogo:hover {
+  opacity: 1;
 }
 
 /* Responsive */
@@ -153,8 +476,44 @@
     font-size: 2.6875rem; /* 43px */
   }
 
-  .pricingCard {
-    padding: 2rem;
+  .planSelector {
+    padding: 1.5rem;
+  }
+
+  .planHeader {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .instantActivation {
+    align-self: flex-end;
+  }
+
+  .durationTabs {
+    gap: 0.5rem;
+  }
+
+  .durationTab {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .planItem {
+    padding: 0.75rem;
+  }
+
+  .planDetails {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pricing {
+    text-align: right;
+  }
+
+  .trustIndicators {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
   .hero {

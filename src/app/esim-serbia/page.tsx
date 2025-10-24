@@ -1,6 +1,5 @@
-import HeroSection from '@/components/country/HeroSection';
+import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
-import PlansSection from '@/components/country/PlansSection';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 export default function SerbiaPage() {
   return (
     <main>
-      <HeroSection
+      <HeroSectionWrapper
         breadcrumb="eSIM Сърбия"
         title="eSIM Сърбия"
         subtitle="Забрави за високите такси за роуминг. С eSIM картата получавате интернет веднага – без роуминг и сложни настройки!"
@@ -25,15 +24,8 @@ export default function SerbiaPage() {
           'Работи в над 190+ държави',
           'Мигновено активиране'
         ]}
-        planDetails={{
-          dataRange: 'от 1GB до неограничен мобилен интернет',
-          validityRange: 'от 1 до 30 дни',
-          country: 'Сърбия',
-          priceFrom: 'от 14 лв'
-        }}
-        ctaUrl="https://breezesim.com/products/esimg_rs_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        logo="/media/images/855d181a760a91a337c42ed96672a7c4_BreezeLogo-Black-1080px.png"
-        trustpilot="/media/images/Screenshot-2025-03-24-at-22.50.18.png"
+        countryName="Serbia"
+        countryCode="RS"
       />
 
       <BenefitsSection
@@ -46,34 +38,6 @@ export default function SerbiaPage() {
         ]}
         image="/media/images/People_1.png"
         imageAlt="eSIM People"
-      />
-
-      <PlansSection
-        title="Най-популярни еСИМ планове за Сърбия?"
-        lastUpdated="октомври 16, 2025"
-        plans={[
-          {
-            name: '2GB',
-            data: 'Фиксиран план за',
-            validity: '15 дни',
-            price: '26лв',
-            ctaUrl: 'https://breezesim.com/products/esimg_rs_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: 'Неограничен',
-            data: 'Фиксиран план за',
-            validity: '1 ден',
-            price: '20лв',
-            ctaUrl: 'https://breezesim.com/products/esimg_rs_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: 'Неограничен',
-            data: 'Фиксиран план за',
-            validity: '5 дни',
-            price: '74лв',
-            ctaUrl: 'https://breezesim.com/products/esimg_rs_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          }
-        ]}
       />
 
       <BenefitsSection

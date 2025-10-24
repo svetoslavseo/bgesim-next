@@ -1,6 +1,5 @@
-import HeroSection from '@/components/country/HeroSection';
+import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
-import PlansSection from '@/components/country/PlansSection';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 export default function UKPage() {
   return (
     <main>
-      <HeroSection
+      <HeroSectionWrapper
         breadcrumb="eSIM Великобритания"
         title="eSIM за Великобритания – Бърз интернет без такси за роуминг"
         subtitle="Високите сметки за роуминг могат да развалят почивката ви. С eSIM имате интернет в UK без допълнителни такси."
@@ -25,15 +24,8 @@ export default function UKPage() {
           'Работи в над 190 държави',
           'Мигновено активиране'
         ]}
-        planDetails={{
-          dataRange: 'от 5 ГБ до неограничен интернет',
-          validityRange: 'от 1 до 30 дни',
-          country: 'Великобритания',
-          priceFrom: 'от 10 лв'
-        }}
-        ctaUrl="https://breezesim.com/products/esimg_gb_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        logo="/media/images/855d181a760a91a337c42ed96672a7c4_BreezeLogo-Black-1080px.png"
-        trustpilot="/media/images/Screenshot-2025-03-24-at-22.50.18.png"
+        countryName="UK"
+        countryCode="GB"
       />
 
       <BenefitsSection
@@ -46,34 +38,6 @@ export default function UKPage() {
         ]}
         image="/media/images/Untitled-design-2.png"
         imageAlt="eSIM visualization"
-      />
-
-      <PlansSection
-        title="Най-добрите eSIM пакети за Великобритания"
-        lastUpdated="октомври 16, 2025"
-        plans={[
-          {
-            name: '7 дни',
-            data: '',
-            validity: '',
-            price: 'Идеален за кратки пътувания',
-            ctaUrl: 'https://breezesim.com/products/esimg_gb_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: '15 дни',
-            data: '',
-            validity: '',
-            price: 'Перфектен за по-дълги пътешествия',
-            ctaUrl: 'https://breezesim.com/products/esimg_gb_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: '30 дни',
-            data: '',
-            validity: '',
-            price: 'За продължителен престой',
-            ctaUrl: 'https://breezesim.com/products/esimg_gb_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          }
-        ]}
       />
 
       <BenefitsSection

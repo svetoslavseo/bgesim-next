@@ -1,0 +1,10 @@
+{
+  "rates": {
+    "USD_TO_BGN": 1.69,
+    "USD_TO_EUR": 0.861
+  },
+  "lastUpdated": "2025-10-24T10:44:15.764Z",
+  "source": "ExchangeRate-API",
+  "apiDate": "2025-10-24"
+}
+

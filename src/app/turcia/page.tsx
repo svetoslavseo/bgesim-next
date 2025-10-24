@@ -1,6 +1,5 @@
-import HeroSection from '@/components/country/HeroSection';
+import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
-import PlansSection from '@/components/country/PlansSection';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 export default function TurciaPage() {
   return (
     <main>
-      <HeroSection
+      <HeroSectionWrapper
         breadcrumb="eSIM Турция"
         title="eSIM за Турция с мобилен интернет"
         subtitle="Пътувате до Турция? С eSIM картата получавате интернет веднага – без роуминг и сложни настройки!"
@@ -25,15 +24,8 @@ export default function TurciaPage() {
           'Без вадене на сегашната SIM карта',
           'Без физическа SIM карта или ходене до офиси'
         ]}
-        planDetails={{
-          dataRange: 'от 1GB до неограничен мобилен интернет',
-          validityRange: 'от 1 до 30 дни',
-          country: 'Турция',
-          priceFrom: 'от 8 лв'
-        }}
-        ctaUrl="https://breezesim.com/products/esimg_tr_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        logo="/media/images/855d181a760a91a337c42ed96672a7c4_BreezeLogo-Black-1080px.png"
-        trustpilot="/media/images/Screenshot-2025-03-24-at-22.50.18.png"
+        countryName="Turkey"
+        countryCode="TR"
       />
 
       <BenefitsSection
@@ -46,34 +38,6 @@ export default function TurciaPage() {
         ]}
         image="/media/images/Untitled-design-2.png"
         imageAlt="eSIM визуализация"
-      />
-
-      <PlansSection
-        title="Най-популярни eSim планове за Турция?"
-        lastUpdated="октомври 16, 2025"
-        plans={[
-          {
-            name: '5GB',
-            data: 'Фиксиран план за',
-            validity: '30 дни',
-            price: '17лв',
-            ctaUrl: 'https://breezesim.com/products/esimg_tr_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: '20GB',
-            data: 'Фиксиран план за',
-            validity: '30 дни',
-            price: '38лв',
-            ctaUrl: 'https://breezesim.com/products/esimg_tr_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: 'Неограничен',
-            data: 'Фиксиран план за 7',
-            validity: 'дни',
-            price: '31лв',
-            ctaUrl: 'https://breezesim.com/products/esimg_tr_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          }
-        ]}
       />
 
       <BenefitsSection

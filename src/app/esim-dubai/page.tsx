@@ -1,6 +1,5 @@
-import HeroSection from '@/components/country/HeroSection';
+import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
-import PlansSection from '@/components/country/PlansSection';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 export default function DubaiPage() {
   return (
     <main>
-      <HeroSection
+      <HeroSectionWrapper
         breadcrumb="eSIM Дубай"
         title="eSIM за Дубай"
         subtitle="С eSIM получаваш интернет веднага – без нужда от физическа SIM карта или посещение в магазин. Получаваш QR код по имейл, сканираш го и се свързваш за минути."
@@ -25,15 +24,8 @@ export default function DubaiPage() {
           'Работи в над 190 държави',
           'Мигновено активиране'
         ]}
-        planDetails={{
-          dataRange: 'от 1 GB до неограничен интернет',
-          validityRange: 'от 1 до 30 дни',
-          country: 'Дубай',
-          priceFrom: 'от 8лв'
-        }}
-        ctaUrl="https://breezesim.com/products/esimg_ae_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        logo="/media/images/855d181a760a91a337c42ed96672a7c4_BreezeLogo-Black-1080px.png"
-        trustpilot="/media/images/Screenshot-2025-03-24-at-22.50.18.png"
+        countryName="Dubai"
+        countryCode="AE"
       />
 
       <BenefitsSection
@@ -46,34 +38,6 @@ export default function DubaiPage() {
         ]}
         image="/media/images/People-1.png"
         imageAlt="eSIM People"
-      />
-
-      <PlansSection
-        title="Популярни eSIM планове за Дубай"
-        lastUpdated="март 24, 2025"
-        plans={[
-          {
-            name: '7 дни',
-            data: '',
-            validity: '',
-            price: 'Достатъчен за карти и социални мрежи',
-            ctaUrl: 'https://breezesim.com/products/esimg_ae_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: '15 дни',
-            data: '',
-            validity: '',
-            price: 'Повече данни за видеочат',
-            ctaUrl: 'https://breezesim.com/products/esimg_ae_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: '30 дни',
-            data: '',
-            validity: '',
-            price: 'За дистанционна работа',
-            ctaUrl: 'https://breezesim.com/products/esimg_ae_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          }
-        ]}
       />
 
       <BenefitsSection

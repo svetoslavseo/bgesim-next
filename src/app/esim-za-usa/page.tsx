@@ -1,6 +1,5 @@
-import HeroSection from '@/components/country/HeroSection';
+import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
 import BenefitsSection from '@/components/country/BenefitsSection';
-import PlansSection from '@/components/country/PlansSection';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
 import DeviceCompatibility from '@/components/country/DeviceCompatibility';
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 export default function USAPage() {
   return (
     <main>
-      <HeroSection
+      <HeroSectionWrapper
         breadcrumb="eSIM САЩ"
         title="Купи eSIM за САЩ - Мобилен интернет без роуминг"
         subtitle="eSIM е дигитална SIM карта, която не е нужно да я поставяш в телефона. Активираш я с QR код и се свързваш с интернет в САЩ без да сменяш физическата карта."
@@ -25,15 +24,8 @@ export default function USAPage() {
           'Работи в над 200 държави',
           'Мигновено активиране'
         ]}
-        planDetails={{
-          dataRange: 'от 1 ГБ до неограничен мобилен интернет',
-          validityRange: 'от 1 до 30 дни',
-          country: 'САЩ',
-          priceFrom: 'от 8 лв'
-        }}
-        ctaUrl="https://breezesim.com/products/esimg_us_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        logo="/media/images/855d181a760a91a337c42ed96672a7c4_BreezeLogo-Black-1080px.png"
-        trustpilot="/media/images/Screenshot-2025-03-24-at-22.50.18.png"
+        countryName="USA"
+        countryCode="US"
       />
 
       <BenefitsSection
@@ -46,34 +38,6 @@ export default function USAPage() {
         ]}
         image="/media/images/Untitled-design-2.png"
         imageAlt="eSIM visualization"
-      />
-
-      <PlansSection
-        title="Избери подходящия план за теб"
-        lastUpdated="октомври 16, 2025"
-        plans={[
-          {
-            name: '2 GB / 15 дни',
-            data: '',
-            validity: '',
-            price: 'Идеален за чат и проверка на имейли',
-            ctaUrl: 'https://breezesim.com/products/esimg_us_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: '10 GB / 30 дни',
-            data: '',
-            validity: '',
-            price: 'Перфектен за социални мрежи',
-            ctaUrl: 'https://breezesim.com/products/esimg_us_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          },
-          {
-            name: 'Неограничен / 10 дни',
-            data: '',
-            validity: '',
-            price: 'За стрийминг и работа',
-            ctaUrl: 'https://breezesim.com/products/esimg_us_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg'
-          }
-        ]}
       />
 
       <BenefitsSection
