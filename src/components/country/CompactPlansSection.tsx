@@ -156,7 +156,7 @@ export default function CompactPlansSection({
               className={`${styles.switcherButton} ${selectedPlanType === 'country' ? styles.switcherButtonActive : ''}`}
               onClick={() => setSelectedPlanType('country')}
             >
-              Държавни
+              eSIM планове за {countryName}
             </button>
             {hasRegionalPlans && (
               <button
