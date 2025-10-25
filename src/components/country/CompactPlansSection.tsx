@@ -47,6 +47,20 @@ export default function CompactPlansSection({
     };
   });
 
+  // Check which plan types are available
+  const availablePlanTypes = Array.from(new Set(convertedPlans.map(plan => plan.planType || 'country')));
+  const hasRegionalPlans = availablePlanTypes.includes('regional');
+  const hasGlobalPlans = availablePlanTypes.includes('global');
+
+  // If selected plan type is not available, switch to country
+  useEffect(() => {
+    if (selectedPlanType === 'regional' && !hasRegionalPlans) {
+      setSelectedPlanType('country');
+    } else if (selectedPlanType === 'global' && !hasGlobalPlans) {
+      setSelectedPlanType('country');
+    }
+  }, [selectedPlanType, hasRegionalPlans, hasGlobalPlans]);
+
   // Filter plans by selected type
   const filteredPlansByType = convertedPlans.filter(plan => {
     if (selectedPlanType === 'country') {
@@ -144,18 +158,22 @@ export default function CompactPlansSection({
             >
               Държавни
             </button>
-            <button
-              className={`${styles.switcherButton} ${selectedPlanType === 'regional' ? styles.switcherButtonActive : ''}`}
-              onClick={() => setSelectedPlanType('regional')}
-            >
-              Регионални
-            </button>
-            <button
-              className={`${styles.switcherButton} ${selectedPlanType === 'global' ? styles.switcherButtonActive : ''}`}
-              onClick={() => setSelectedPlanType('global')}
-            >
-              Глобални
-            </button>
+            {hasRegionalPlans && (
+              <button
+                className={`${styles.switcherButton} ${selectedPlanType === 'regional' ? styles.switcherButtonActive : ''}`}
+                onClick={() => setSelectedPlanType('regional')}
+              >
+                Регионални
+              </button>
+            )}
+            {hasGlobalPlans && (
+              <button
+                className={`${styles.switcherButton} ${selectedPlanType === 'global' ? styles.switcherButtonActive : ''}`}
+                onClick={() => setSelectedPlanType('global')}
+              >
+                Глобални
+              </button>
+            )}
           </div>
           
           {/* Plans List by Duration */}
