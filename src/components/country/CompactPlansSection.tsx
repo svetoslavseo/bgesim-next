@@ -32,7 +32,6 @@ export default function CompactPlansSection({
   onPlanSelect
 }: CompactPlansSectionProps) {
   const { currency, exchangeRates } = useCurrency();
-  const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [selectedPlanType, setSelectedPlanType] = useState<'country' | 'regional' | 'global'>('country');
 
   // Filter and convert plans to current currency
@@ -161,12 +160,6 @@ export default function CompactPlansSection({
   const regionalPlan = convertedPlans.find(plan => plan.planType === 'regional');
   const englishRegionName = regionalPlan ? getRegionNameFromPlan(regionalPlan.name) : null;
 
-  const handlePlanSelect = (plan: Plan) => {
-    setSelectedPlan(plan);
-    if (onPlanSelect) {
-      onPlanSelect(plan);
-    }
-  };
 
   const handleBuyNow = (plan: Plan) => {
     if (plan.ctaUrl) {
@@ -224,22 +217,11 @@ export default function CompactPlansSection({
                 <h3 className={styles.durationTitle}>{duration}</h3>
                 <div className={styles.plansForDuration}>
                   {plansByDuration[duration]?.map((plan) => {
-                    const isSelected = selectedPlan && selectedPlan.id === plan.id;
-                    
                     return (
                       <div
                         key={plan.id}
-                        className={`${styles.planItem} ${isSelected ? styles.planItemSelected : ''}`}
-                        onClick={() => handlePlanSelect(plan)}
+                        className={styles.planItem}
                       >
-                        {/* Selection Indicator */}
-                        <div className={`${styles.radioButton} ${isSelected ? styles.radioButtonSelected : ''}`}>
-                          {isSelected && (
-                            <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <polyline points="20,6 9,17 4,12"></polyline>
-                            </svg>
-                          )}
-                        </div>
                         
                         {/* Plan Type Title */}
                         {plan.planType && (
@@ -269,13 +251,13 @@ export default function CompactPlansSection({
                         
                         {/* Buy Button */}
                         <button
-                          className={`${styles.buyButton} ${isSelected ? styles.buyButtonActive : ''}`}
+                          className={styles.buyButton}
                           onClick={(e) => {
                             e.stopPropagation();
                             handleBuyNow(plan);
                           }}
                         >
-                          Купи
+                          Купи Сега
                         </button>
                       </div>
                     );
