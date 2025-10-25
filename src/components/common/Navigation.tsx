@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Navigation.module.css';
 import { classNames } from '@/lib/utils';
-import CurrencySwitcher from './CurrencySwitcher';
 
 // Navigation menu structure from WordPress
 const navigationItems = [
@@ -152,10 +151,6 @@ export default function Navigation() {
             )}
           </li>
         ))}
-        {/* Currency Switcher */}
-        <li className={styles.navItem}>
-          <CurrencySwitcher />
-        </li>
         {/* CTA Button */}
         <li className={styles.navItem}>
           <a

@@ -145,7 +145,7 @@
 .ctaButton {
   display: inline-block;
   padding: 18px 48px;
-  background: #fbbf24;
+  background: #e5e900;
   color: #000;
   font-size: 18px;
   font-weight: 700;
@@ -156,7 +156,7 @@
 }
 
 .ctaButton:hover {
-  background: #f59e0b;
+  background: #e5e900;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(251, 191, 36, 0.4);
 }

@@ -6,6 +6,7 @@ import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import ClientProviders from '@/components/providers/ClientProviders';
 import PerformanceMonitor from '@/components/common/PerformanceMonitor';
+import StickyCurrencySwitcher from '@/components/common/StickyCurrencySwitcher';
 
 export const metadata: Metadata = {
   title: {
@@ -125,6 +126,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          <StickyCurrencySwitcher />
         </ClientProviders>
       </body>
     </html>

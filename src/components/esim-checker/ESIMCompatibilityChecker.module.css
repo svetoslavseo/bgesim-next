@@ -4,7 +4,7 @@
 }
 
 .toolCard {
-  background: linear-gradient(135deg, #c8a2d0 0%, #d8b4db 50%, #e9c5e5 100%);
+  background: var(--gradient-purple);
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(200, 162, 208, 0.2);
@@ -61,10 +61,11 @@
 .searchButton {
   width: 100%;
   padding: 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 18px;
   font-weight: 600;
-  background: #000000;
-  color: #ffffff;
+  background: var(--color-black);
+  color: var(--color-white);
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -73,7 +74,8 @@
 }
 
 .searchButton:hover:not(:disabled) {
-  background: #1a1a1a;
+  background: var(--color-neon-yellow);
+  color: var(--color-black);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }

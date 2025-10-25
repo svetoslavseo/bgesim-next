@@ -12,7 +12,7 @@ export default function PerformanceMonitor() {
       for (const entry of list.getEntries()) {
         // Log CLS (Cumulative Layout Shift)
         if (entry.entryType === 'layout-shift') {
-          const layoutShiftEntry = entry as PerformanceEntry & { value: number };
+          const layoutShiftEntry = entry as PerformanceEntry & { value: number; hadRecentInput?: boolean };
           if (!layoutShiftEntry.hadRecentInput) {
             console.log('CLS:', layoutShiftEntry.value);
           }

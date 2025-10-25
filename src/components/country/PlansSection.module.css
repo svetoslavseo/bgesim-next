@@ -1,6 +1,6 @@
 .plans {
-  background: linear-gradient(135deg, #cddc39 0%, #4caf50 100%);
-  padding: 5rem 2rem;
+  background: var(--gradient-purple);
+  padding: 4.5rem 1.8rem;
 }
 
 .container {
@@ -10,17 +10,17 @@
 
 .title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  color: #000;
+  margin: 0 0 0.45rem 0;
+  color: var(--color-white);
 }
 
 .lastUpdated {
   text-align: center;
-  font-size: 0.95rem;
-  color: #333;
-  margin: 0 0 3rem 0;
+  font-size: 0.855rem;
+  color: var(--color-gray-200);
+  margin: 0 0 2.7rem 0;
 }
 
 .noPlans {
@@ -32,21 +32,21 @@
 
 .planSelector {
   background: white;
-  border-radius: 24px;
-  padding: 2rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 21.6px;
+  padding: 1.8rem;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e7eb;
   position: relative;
   margin: 0 auto;
   width: 100%;
-  max-width: 800px;
+  max-width: 720px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
   position: relative;
 }
 
@@ -55,37 +55,37 @@
 }
 
 .planTitle {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: #111827;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.45rem 0;
 }
 
 .planSubtitle {
   color: #6b7280;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
 }
 
 .instantActivation {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-size: 0.875rem;
+  background: var(--color-neon-yellow);
+  color: var(--color-black);
+  padding: 0.675rem 1.35rem;
+  border-radius: 45px;
+  font-size: 0.7875rem;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  gap: 0.45rem;
+  box-shadow: 0 3.6px 10.8px rgba(229, 233, 0, 0.3);
   position: relative;
   align-self: flex-end;
 }
 
 .pulseDot {
-  width: 8px;
-  height: 8px;
-  background: white;
+  width: 7.2px;
+  height: 7.2px;
+  background: var(--color-black);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -102,10 +102,10 @@
 
 .durationTabs {
   display: flex;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+  gap: 0.675rem;
+  margin-bottom: 1.8rem;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.45rem;
 }
 
 .durationTab {
@@ -113,32 +113,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
+  gap: 0.3375rem;
+  padding: 0.675rem 0.9rem;
+  border-radius: 10.8px;
   border: 2px solid #d1d5db;
   background: white;
   color: #374151;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.7875rem;
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .durationTab:hover {
-  border-color: #3b82f6;
-  background: #eff6ff;
+  border-color: var(--color-bright-pink);
+  background: rgba(248, 120, 205, 0.1);
 }
 
 .durationTabActive {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  color: white;
-  border-color: #1d4ed8;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  background: var(--color-neon-yellow);
+  color: var(--color-black);
+  border-color: var(--color-neon-yellow);
+  box-shadow: 0 3.6px 10.8px rgba(229, 233, 0, 0.3);
 }
 
 .durationLabel {
-  font-size: 1.3rem;
+  font-size: 1.17rem;
   font-weight: 700;
 }
 
@@ -151,9 +151,9 @@
 .countNumber {
   background: rgba(255, 255, 255, 0.2);
   color: white;
-  padding: 0.125rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
+  padding: 0.1125rem 0.45rem;
+  border-radius: 10.8px;
+  font-size: 0.675rem;
   font-weight: 700;
 }
 
@@ -162,7 +162,7 @@
 }
 
 .countLabel {
-  font-size: 0.975rem;
+  font-size: 0.8775rem;
   font-weight: 500;
   opacity: 0.8;
 }
@@ -170,57 +170,57 @@
 .plansList {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+  gap: 0.675rem;
+  margin-bottom: 1.8rem;
 }
 
 .planItem {
   display: flex;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1.35rem;
   border: 2px solid #e5e7eb;
-  border-radius: 16px;
+  border-radius: 14.4px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  min-height: 56px;
+  min-height: 50.4px;
 }
 
 .planItem:hover {
-  border-color: #3b82f6;
-  background: #eff6ff;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+  border-color: var(--color-bright-pink);
+  background: rgba(248, 120, 205, 0.1);
+  box-shadow: 0 4px 12px rgba(248, 120, 205, 0.1);
 }
 
 .planItemSelected {
-  border-color: #3b82f6;
-  background: linear-gradient(135deg, #eff6ff, #dbeafe);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
-  ring: 4px solid rgba(59, 130, 246, 0.2);
+  border-color: var(--color-neon-yellow);
+  background: linear-gradient(135deg, rgba(229, 233, 0, 0.1), rgba(229, 233, 0, 0.05));
+  box-shadow: 0 3.6px 18px rgba(229, 233, 0, 0.2);
+  ring: 3.6px solid rgba(229, 233, 0, 0.2);
 }
 
 .radioButton {
-  width: 24px;
-  height: 24px;
+  width: 21.6px;
+  height: 21.6px;
   border: 2px solid #d1d5db;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 1rem;
+  margin-right: 0.9rem;
   flex-shrink: 0;
   transition: all 0.2s ease;
 }
 
 .radioButtonSelected {
-  border-color: #3b82f6;
-  background: #3b82f6;
+  border-color: var(--color-neon-yellow);
+  background: var(--color-neon-yellow);
 }
 
 .checkIcon {
-  width: 16px;
-  height: 16px;
-  color: white;
+  width: 14.4px;
+  height: 14.4px;
+  color: var(--color-black);
 }
 
 .planDetails {
@@ -237,13 +237,13 @@
 }
 
 .dataAmount {
-  font-size: 1.95rem;
+  font-size: 1.755rem;
   font-weight: 700;
   color: #111827;
 }
 
 .validity {
-  font-size: 1.1375rem;
+  font-size: 1.02375rem;
   color: #6b7280;
   font-weight: 500;
 }
@@ -256,9 +256,9 @@
 }
 
 .price {
-  font-size: 1.95rem;
+  font-size: 1.755rem;
   font-weight: 700;
-  color: #3b82f6;
+  color: var(--color-bright-pink);
 }
 
 .pricePerGB {
@@ -268,35 +268,35 @@
 }
 
 .unlimitedBadge {
-  background: #fef3c7;
+  background: #e5e900;
   color: #92400e;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.975rem;
+  padding: 0.225rem 0.675rem;
+  border-radius: 10.8px;
+  font-size: 0.8775rem;
   font-weight: 600;
 }
 
 .perGBBadge {
   background: #f3f4f6;
   color: #6b7280;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.975rem;
+  padding: 0.225rem 0.675rem;
+  border-radius: 10.8px;
+  font-size: 0.8775rem;
   font-weight: 600;
 }
 
 .planTypeBadge {
   position: relative;
-  margin-left: 1rem;
+  margin-left: 0.9rem;
 }
 
 .planTypeLabel {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
+  gap: 0.225rem;
+  padding: 0.225rem 0.675rem;
+  border-radius: 10.8px;
+  font-size: 0.675rem;
   font-weight: 600;
 }
 
@@ -316,8 +316,8 @@
 }
 
 .infoIcon {
-  width: 16px;
-  height: 16px;
+  width: 14.4px;
+  height: 14.4px;
   cursor: help;
 }
 
@@ -326,12 +326,12 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   background: #1f2937;
   color: white;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.75rem;
+  padding: 0.45rem 0.675rem;
+  border-radius: 7.2px;
+  font-size: 0.675rem;
   white-space: nowrap;
   z-index: 10;
 }
@@ -348,62 +348,69 @@
 
 .buyButton {
   width: 100%;
-  background: linear-gradient(135deg, #111827, #000);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 16px;
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: 1.35rem 2.7rem;
+  border-radius: 45px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.35rem;
+  min-height: 54px;
 }
 
 .buyButton:hover {
-  background: linear-gradient(135deg, #000, #111827);
+  background: var(--color-neon-yellow);
+  color: var(--color-black);
   transform: scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 7.2px 22.5px rgba(229, 233, 0, 0.3);
 }
 
 .selectButton {
   width: 100%;
   background: #e5e7eb;
   color: #9ca3af;
-  padding: 1rem 2rem;
-  border-radius: 16px;
-  font-size: 1.125rem;
-  font-weight: 700;
+  padding: 0.9rem 1.8rem;
+  border-radius: 14.4px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1.0125rem;
+  font-weight: 600;
   border: none;
   cursor: not-allowed;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.35rem;
 }
 
 .compatibilityLink {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.35rem;
 }
 
 .compatibilityButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #ff8b3d, #ff6b1a);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 107, 26, 0.25);
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  background: transparent !important;
+  color: var(--color-gray-600) !important;
+  border: 1px solid var(--color-gray-300) !important;
+  padding: 0.45rem 0.9rem !important;
+  border-radius: 7.2px !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 0.72rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
 }
 
 .compatibilityButton:hover {
-  background: linear-gradient(135deg, #ff7a2d, #ff5b0a);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 107, 26, 0.35);
+  background: var(--color-gray-100) !important;
+  color: var(--color-gray-700) !important;
+  border-color: var(--color-gray-400) !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 .compatibilityButton:active {
@@ -411,92 +418,92 @@
 }
 
 .compatibilityIcon {
-  width: 18px;
-  height: 18px;
+  width: 16.2px;
+  height: 16.2px;
   stroke-width: 2.5;
 }
 
 .trustIndicators {
   background: transparent;
-  border-radius: 16px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  border-radius: 14.4px;
+  padding: 1.35rem;
+  margin-bottom: 1.35rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.8rem;
 }
 
 .trustItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
+  gap: 0.45rem;
+  font-size: 0.7875rem;
   color: #374151;
 }
 
 .stars {
-  color: #fbbf24;
-  font-size: 1rem;
+  color: var(--color-neon-yellow);
+  font-size: 0.9rem;
 }
 
 .paymentMethods {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
 }
 
 .paymentMethod {
   background: #f3f4f6;
   color: #6b7280;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 7.2px;
+  font-size: 0.7875rem;
   font-weight: 600;
 }
 
 @media (max-width: 768px) {
   .plans {
-    padding: 4rem 1rem;
+    padding: 3.6rem 0.9rem;
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .planSelector {
-    padding: 1.5rem;
+    padding: 1.35rem;
   }
 
   .header {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.9rem;
   }
 
   .instantActivation {
     position: relative;
     align-self: flex-end;
-    margin-top: 1rem;
+    margin-top: 0.9rem;
   }
 
   .durationTabs {
-    gap: 0.5rem;
+    gap: 0.45rem;
   }
 
   .durationTab {
-    padding: 0.5rem 0.75rem;
+    padding: 0.45rem 0.675rem;
   }
 
   .planItem {
-    padding: 1rem;
+    padding: 0.9rem;
   }
 
   .planDetails {
     flex-direction: row;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
   }
 
   .pricing {
@@ -505,16 +512,16 @@
 
   .trustIndicators {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.9rem;
   }
 
   .paymentMethods {
-    gap: 0.5rem;
+    gap: 0.45rem;
   }
 
   .paymentMethod {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
+    padding: 0.3375rem 0.675rem;
+    font-size: 0.675rem;
   }
 }
 

@@ -31,7 +31,7 @@
 }
 
 .breadcrumb a {
-  color: #ffeb3b;
+  color: #e5e900;
   text-decoration: none;
 }
 
@@ -168,14 +168,14 @@
 }
 
 .durationTab:hover {
-  border-color: #fbbf24;
-  background: #fef9e7;
+  border-color: #e5e900;
+  background: #e5e900;
 }
 
 .durationTabActive {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  background: linear-gradient(135deg, #e5e900, #e5e900);
   color: #000;
-  border-color: #f59e0b;
+  border-color: #e5e900;
   box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
 }
 
@@ -234,14 +234,14 @@
 }
 
 .planItem:hover {
-  border-color: #fbbf24;
-  background: #fef9e7;
+  border-color: #e5e900;
+  background: #e5e900;
   box-shadow: 0 4px 12px rgba(251, 191, 36, 0.1);
 }
 
 .planItemSelected {
-  border-color: #fbbf24;
-  background: linear-gradient(135deg, #fef9e7, #fef3c7);
+  border-color: #e5e900;
+  background: linear-gradient(135deg, #e5e900, #e5e900);
   box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
 }
 
@@ -259,14 +259,14 @@
 }
 
 .radioButtonSelected {
-  border-color: #fbbf24;
-  background: #fbbf24;
+  border-color: #e5e900;
+  background: #e5e900;
 }
 
 .checkIcon {
   width: 14px;
   height: 14px;
-  color: #ca8a04;
+  color: #e5e900;
 }
 
 .planDetails {
@@ -314,7 +314,7 @@
 }
 
 .unlimitedBadge {
-  background: #fef3c7;
+  background: #e5e900;
   color: #92400e;
   padding: 0.125rem 0.5rem;
   border-radius: 8px;
@@ -352,8 +352,8 @@
 }
 
 .planTypeRegional {
-  background: #fef3c7;
-  color: #ca8a04;
+  background: #e5e900;
+  color: #e5e900;
 }
 
 .planTypeCountry {
@@ -400,25 +400,27 @@
 }
 
 .compatibilityButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #ff8b3d, #ff6b1a);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 107, 26, 0.25);
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  background: transparent !important;
+  color: var(--color-gray-600) !important;
+  border: 1px solid var(--color-gray-300) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  font-size: 0.8rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
 }
 
 .compatibilityButton:hover {
-  background: linear-gradient(135deg, #ff7a2d, #ff5b0a);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 107, 26, 0.35);
+  background: var(--color-gray-100) !important;
+  color: var(--color-gray-700) !important;
+  border-color: var(--color-gray-400) !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 .compatibilityButton:active {
@@ -453,7 +455,7 @@
 }
 
 .stars {
-  color: #fbbf24;
+  color: #e5e900;
   font-size: 0.875rem;
 }
 

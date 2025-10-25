@@ -25,6 +25,7 @@ const CheckoutPage = () => {
   const [plan, setPlan] = useState<Plan | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isPackageDetailsOpen, setIsPackageDetailsOpen] = useState(false);
 
   // Map country names to flag file codes
   const getCountryFlagCode = (country: string): string => {
@@ -173,7 +174,7 @@ const CheckoutPage = () => {
         </Link>
         
         <div className={styles.card}>
-          <h1 className={styles.title}>Резюме на поръчката</h1>
+          <h1 className={styles.title}>Данни за Поръчка</h1>
           
           {/* Plan Summary */}
           <div className={styles.planSummary}>
@@ -192,45 +193,85 @@ const CheckoutPage = () => {
               </h2>
             </div>
             
-            <div className={styles.planDetails}>
-              <div>
-                <span className={styles.planDetailLabel}>Данни:</span>
-                <span className={styles.planDetailValue}>{convertedPlan?.data}</span>
-              </div>
-              <div>
-                <span className={styles.planDetailLabel}>Валидност:</span>
-                <span className={styles.planDetailValue}>{convertedPlan?.validity}</span>
-              </div>
+            <div className={styles.planDetailsTable}>
+              <table className={styles.esimTable}>
+                <tbody>
+                  <tr>
+                    <td className={styles.tableLabel}>
+                      <svg className={styles.tableIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                      </svg>
+                      Тип eSIM:
+                    </td>
+                    <td className={styles.tableValue}>Мобилни Данни</td>
+                  </tr>
+                  <tr>
+                    <td className={styles.tableLabel}>
+                      <svg className={styles.tableIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                      </svg>
+                      Размер Мобилни Данни:
+                    </td>
+                    <td className={styles.tableValue}>{convertedPlan?.data}</td>
+                  </tr>
+                  <tr>
+                    <td className={styles.tableLabel}>
+                      <svg className={styles.tableIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Валидност:
+                    </td>
+                    <td className={styles.tableValue}>{convertedPlan?.validity}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             
-            <div className={styles.planTotal}>
-              <span className={styles.planTotalLabel}>Общо:</span>
-              <span className={styles.planTotalPrice}>
-                {convertedPlan?.price?.toFixed(2)}{convertedPlan?.currency}
-              </span>
-            </div>
           </div>
 
           {/* Payment Methods */}
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Методи на плащане</h3>
+          <div className={styles.paymentSection}>
+            <div className={styles.paymentHeader}>
+              <svg className={styles.paymentIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+              </svg>
+              <h3 className={styles.paymentTitle}>Методи на плащане</h3>
+            </div>
             <div className={styles.paymentMethods}>
-              <Image src="/media/logos/apple-pay.png" alt="Apple Pay" width={28} height={18} className={styles.paymentLogo} />
-              <Image src="/media/logos/google-pay.png" alt="Google Pay" width={28} height={18} className={styles.paymentLogo} />
-              <Image src="/media/logos/visa.png" alt="Visa" width={28} height={18} className={styles.paymentLogo} />
-              <Image src="/media/logos/mastercard.png" alt="Mastercard" width={28} height={18} className={styles.paymentLogo} />
-              <Image src="/media/logos/amex.png" alt="Amex" width={28} height={18} className={styles.paymentLogo} />
+              <Image src="/media/logos/apple-pay.png" alt="Apple Pay" width={24} height={15} className={styles.paymentLogo} />
+              <Image src="/media/logos/google-pay.png" alt="Google Pay" width={24} height={15} className={styles.paymentLogo} />
+              <Image src="/media/logos/visa.png" alt="Visa" width={24} height={15} className={styles.paymentLogo} />
+              <Image src="/media/logos/mastercard.png" alt="Mastercard" width={24} height={15} className={styles.paymentLogo} />
+              <Image src="/media/logos/amex.png" alt="Amex" width={24} height={15} className={styles.paymentLogo} />
             </div>
           </div>
 
           {/* Security Notice */}
           <div className={styles.securityNotice}>
             <div className={styles.securityContent}>
-              <svg className={styles.securityIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <span className={styles.securityText}>SSL шифроване за сигурност</span>
+              <div className={styles.securityIconContainer}>
+                <svg className={styles.securityIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div className={styles.securityTextContainer}>
+                <span className={styles.securityText}>SSL шифроване за сигурност</span>
+                <span className={styles.securitySubtext}>Вашите данни са защитени</span>
+              </div>
             </div>
+          </div>
+
+          {/* Package Details Button - Desktop */}
+          <div className={styles.packageDetailsSection}>
+            <button
+              onClick={() => setIsPackageDetailsOpen(true)}
+              className={styles.packageDetailsButton}
+            >
+              <svg className={styles.packageDetailsIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className={styles.packageDetailsText}>Информация за плана</span>
+            </button>
           </div>
 
           {/* Desktop CTA Button */}
@@ -255,6 +296,15 @@ const CheckoutPage = () => {
       {/* Sticky checkout bar */}
       <div className={styles.stickyBar}>
         <div className={styles.stickyBarContent}>
+          <button
+            onClick={() => setIsPackageDetailsOpen(true)}
+            className={styles.stickyPackageDetailsButton}
+          >
+            <svg className={styles.packageDetailsIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className={styles.packageDetailsText}>Информация за плана</span>
+          </button>
           <div className={styles.stickyBarTotal}>
             <span className={styles.stickyBarTotalLabel}>Общо:</span>
             <span className={styles.stickyBarTotalPrice}>{convertedPlan?.price?.toFixed(2)}{convertedPlan?.currency}</span>
@@ -270,6 +320,68 @@ const CheckoutPage = () => {
           </button>
         </div>
       </div>
+
+      {/* Package Details Modal */}
+      {isPackageDetailsOpen && (
+        <div className={styles.modalOverlay} onClick={() => setIsPackageDetailsOpen(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2 className={styles.modalTitle}>Информация за плана</h2>
+              <button
+                onClick={() => setIsPackageDetailsOpen(false)}
+                className={styles.modalCloseButton}
+              >
+                <svg className={styles.modalCloseIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className={styles.modalBody}>
+              <div className={styles.detailSection}>
+                <div className={styles.detailHeader}>
+                  <span className={styles.detailIcon}>🗓️</span>
+                  <h3 className={styles.detailTitle}>Валидност</h3>
+                </div>
+                <div className={styles.detailContent}>
+                  <p className={styles.detailText}>
+                    Валидността започва, когато eSIM картата се свърже с мрежа в зоната на покритие. Ако я инсталирате извън зоната, ще се активира при пристигане.
+                  </p>
+                  <p className={styles.detailSource}>
+                    (Източник: Saily Help Center)
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.detailSection}>
+                <div className={styles.detailHeader}>
+                  <span className={styles.detailIcon}>🔄</span>
+                  <h3 className={styles.detailTitle}>Презареждане</h3>
+                </div>
+                <div className={styles.detailContent}>
+                  <p className={styles.detailText}>
+                    Можете да презаредите Saily eSIM през приложението Saily, след като изтече трафикът или валидността.
+                  </p>
+                  <p className={styles.detailSource}>
+                    (Източник: Saily Support)
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.detailSection}>
+                <div className={styles.detailHeader}>
+                  <span className={styles.detailIcon}>💬</span>
+                  <h3 className={styles.detailTitle}>Бележка</h3>
+                </div>
+                <div className={styles.detailContent}>
+                  <p className={styles.detailText}>
+                    Travel eSIM BG работи с афилиейт програма на Saily. При плащане ще бъдете пренасочени към страницата на Saily, за да завършите покупката си.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

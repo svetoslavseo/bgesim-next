@@ -70,7 +70,7 @@
 .gradientBg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #ff6ec4 0%, #7873f5 50%, #d4fc79 100%);
+  background: linear-gradient(135deg, #ff6ec4 0%, #7873f5 50%, #e5e900 100%);
   opacity: 0.8;
   border-radius: 30px;
 }

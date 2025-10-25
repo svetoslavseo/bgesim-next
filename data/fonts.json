@@ -1,22 +1,10 @@
 [
   {
-    "family": "Roboto",
+    "family": "Quicksand",
     "weights": [
       300,
       400,
       500,
-      700
-    ],
-    "styles": [
-      "normal"
-    ],
-    "source": "Google Fonts",
-    "files": []
-  },
-  {
-    "family": "Open Sans",
-    "weights": [
-      400,
       600,
       700
     ],
@@ -24,10 +12,26 @@
       "normal"
     ],
     "source": "Google Fonts",
-    "files": []
+    "files": [],
+    "usage": "Headings & Titles"
   },
   {
-    "family": "Poppins",
+    "family": "Lato",
+    "weights": [
+      300,
+      400,
+      700
+    ],
+    "styles": [
+      "normal",
+      "italic"
+    ],
+    "source": "Google Fonts",
+    "files": [],
+    "usage": "Body Text"
+  },
+  {
+    "family": "Inter",
     "weights": [
       400,
       500,
@@ -38,6 +42,7 @@
       "normal"
     ],
     "source": "Google Fonts",
-    "files": []
+    "files": [],
+    "usage": "CTAs & Buttons"
   }
 ]
