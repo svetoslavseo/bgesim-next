@@ -64,7 +64,11 @@
   position: relative;
   border-radius: 30px;
   overflow: hidden;
-  aspect-ratio: 1;
+  aspect-ratio: 1; /* Maintains square aspect ratio */
+  /* Reserve space to prevent layout shift */
+  min-height: 300px;
+  max-height: 500px;
+  width: 100%;
 }
 
 .gradientBg {
@@ -73,6 +77,8 @@
   background: linear-gradient(135deg, #ff6ec4 0%, #7873f5 50%, #e5e900 100%);
   opacity: 0.8;
   border-radius: 30px;
+  /* Ensure gradient doesn't cause layout shift */
+  z-index: 0;
 }
 
 .image {
@@ -82,16 +88,22 @@
   height: 100%;
   object-fit: cover;
   border-radius: 30px;
+  /* Prevent layout shift during image load */
+  display: block;
 }
 
 @media (max-width: 768px) {
   .benefits {
     padding: 4rem 1rem;
+    /* Mobile-specific containment */
+    contain: layout style;
   }
 
   .container {
     grid-template-columns: 1fr;
     gap: 3rem;
+    /* Mobile layout stability */
+    contain: layout style;
   }
 
   .title {
@@ -100,6 +112,12 @@
 
   .imageWrapper {
     order: -1;
+    /* Enhanced mobile containment */
+    contain: layout style size;
+    min-height: 300px;
+    max-height: 400px;
+    position: relative;
+    overflow: hidden;
   }
 }
 

@@ -59,7 +59,7 @@ export default function HeroSectionWrapper({
     loadPlans();
   }, [countryCode]);
 
-  // Only show loading during initial load
+  // Show skeleton loading to prevent CLS
   if (isLoading) {
     return (
       <HeroSection
@@ -69,6 +69,7 @@ export default function HeroSectionWrapper({
         features={features}
         plans={[]}
         countryName={countryName}
+        isLoading={true}
       />
     );
   }

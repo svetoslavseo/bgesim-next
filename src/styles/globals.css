@@ -37,6 +37,11 @@ body {
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent layout shifts during font loading */
+  font-synthesis: none;
+  text-size-adjust: 100%;
+  /* CSS containment to prevent layout recalculations */
+  contain: layout style;
 }
 
 /* Typography */
@@ -46,6 +51,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
   color: #1a1a1a;
+  /* Prevent layout shifts from font loading */
+  font-display: swap;
+  contain: layout style;
 }
 
 h1 {
@@ -156,18 +164,35 @@ select {
 @media (max-width: 768px) {
   html {
     font-size: 14px;
+    /* Mobile-specific containment */
+    contain: layout style;
   }
   
   h1 {
     font-size: 2rem;
+    /* Prevent mobile layout shifts */
+    contain: layout style;
+    min-height: 2.5rem;
   }
   
   h2 {
     font-size: 1.75rem;
+    contain: layout style;
+    min-height: 2rem;
   }
   
   h3 {
     font-size: 1.5rem;
+    contain: layout style;
+    min-height: 1.75rem;
+  }
+  
+  /* Mobile-specific layout stability */
+  body {
+    contain: layout style;
+    overflow-x: hidden;
+    /* Prevent mobile viewport issues */
+    -webkit-overflow-scrolling: touch;
   }
 }
 

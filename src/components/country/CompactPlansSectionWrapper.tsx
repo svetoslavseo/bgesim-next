@@ -62,8 +62,41 @@ export default function CompactPlansSectionWrapper({
     console.log('Selected plan:', plan);
   };
 
-  // Don't render if loading or no plans
-  if (isLoading || plans.length === 0) {
+  // Show skeleton loading to prevent CLS
+  if (isLoading) {
+    return (
+      <div style={{ 
+        padding: '2rem', 
+        textAlign: 'center',
+        background: '#f9fafb',
+        borderRadius: '12px',
+        margin: '2rem 0'
+      }}>
+        <div style={{ 
+          height: '1.5rem', 
+          background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+          backgroundSize: '200% 100%',
+          animation: 'shimmer 1.5s infinite',
+          borderRadius: '4px',
+          marginBottom: '1rem',
+          width: '60%',
+          margin: '0 auto'
+        }}></div>
+        <div style={{ 
+          height: '0.875rem', 
+          background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+          backgroundSize: '200% 100%',
+          animation: 'shimmer 1.5s infinite',
+          borderRadius: '4px',
+          width: '40%',
+          margin: '0 auto'
+        }}></div>
+      </div>
+    );
+  }
+
+  // Don't render if no plans
+  if (plans.length === 0) {
     return null;
   }
 

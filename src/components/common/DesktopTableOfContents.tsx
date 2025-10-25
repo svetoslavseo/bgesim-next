@@ -119,6 +119,10 @@ export default function DesktopTableOfContents({ content, className = '' }: Desk
   // Set initial position after component mounts
   useEffect(() => {
     const setInitialPosition = () => {
+      // Reserve space immediately to prevent layout shifts
+      setTocPosition(headerOffset + 20);
+      setIsPositioned(true);
+      
       // Look for the image wrapper div first, then the image inside
       // The blog post structure has: <div className={styles.imageWrapper}><BlogFeaturedImage /></div>
       const imageWrapper = document.querySelector('article > div:has(img), article [class*="imageWrapper"], article [class*="featuredImage"]');

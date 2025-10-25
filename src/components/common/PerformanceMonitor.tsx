@@ -8,13 +8,20 @@ export default function PerformanceMonitor() {
     if (process.env.NODE_ENV !== 'production') return;
 
     // Monitor Core Web Vitals
+    let clsValue = 0;
     const observer = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         // Log CLS (Cumulative Layout Shift)
         if (entry.entryType === 'layout-shift') {
           const layoutShiftEntry = entry as PerformanceEntry & { value: number; hadRecentInput?: boolean };
           if (!layoutShiftEntry.hadRecentInput) {
-            console.log('CLS:', layoutShiftEntry.value);
+            clsValue += layoutShiftEntry.value;
+            console.log('CLS Entry:', layoutShiftEntry.value, 'Total CLS:', clsValue);
+            
+            // Alert if CLS is too high
+            if (clsValue > 0.1) {
+              console.warn('High CLS detected:', clsValue);
+            }
           }
         }
         

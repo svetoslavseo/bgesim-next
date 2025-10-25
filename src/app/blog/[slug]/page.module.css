@@ -157,29 +157,53 @@
 @media (max-width: 768px) {
   .headline {
     font-size: 2rem;
+    /* Mobile-specific containment */
+    contain: layout style;
+    min-height: 2.5rem;
   }
   
   .excerpt {
     font-size: 1rem;
+    contain: layout style;
   }
   
   .meta {
     font-size: 0.813rem;
+    contain: layout style;
   }
   
   .authorLine {
     font-size: 0.938rem;
+    contain: layout style;
+  }
+  
+  /* Mobile article container */
+  .article {
+    contain: layout style;
+    /* Prevent mobile layout shifts */
+    position: relative;
+    overflow: hidden;
   }
 }
 
 @media (max-width: 480px) {
   .headline {
     font-size: 1.75rem;
+    /* Enhanced mobile containment */
+    contain: layout style;
+    min-height: 2rem;
   }
   
   .excerpt {
     font-size: 0.938rem;
     padding-left: 0.75rem;
+    contain: layout style;
+  }
+  
+  /* Small mobile optimizations */
+  .article {
+    contain: layout style size;
+    min-height: 100vh;
   }
 }
 

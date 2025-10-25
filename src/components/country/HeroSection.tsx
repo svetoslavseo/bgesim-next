@@ -26,6 +26,7 @@ interface HeroSectionProps {
   features: string[];
   plans: Plan[];
   countryName: string;
+  isLoading?: boolean;
 }
 
 export default function HeroSection({
@@ -34,7 +35,8 @@ export default function HeroSection({
   subtitle,
   features,
   plans,
-  countryName
+  countryName,
+  isLoading = false
 }: HeroSectionProps) {
   const { currency, exchangeRates } = useCurrency();
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
@@ -171,9 +173,35 @@ export default function HeroSection({
             </ul>
           </div>
           <div className={styles.planSelector}>
-            <div style={{ textAlign: 'center', padding: '2rem' }}>
-              <p style={{ color: '#6b7280', margin: '0' }}>Зареждане на планове...</p>
-            </div>
+            {isLoading ? (
+              <div className={styles.skeletonLoader}>
+                <div>
+                  <div className={styles.skeletonHeader}>
+                    <div className={styles.skeletonTitle}></div>
+                    <div className={styles.skeletonSubtitle}></div>
+                  </div>
+                  <div className={styles.skeletonTabs}>
+                    <div className={styles.skeletonTab}></div>
+                    <div className={styles.skeletonTab}></div>
+                    <div className={styles.skeletonTab}></div>
+                  </div>
+                  <div className={styles.skeletonPlans}>
+                    <div className={styles.skeletonPlan}></div>
+                    <div className={styles.skeletonPlan}></div>
+                    <div className={styles.skeletonPlan}></div>
+                  </div>
+                </div>
+                <div>
+                  <div className={styles.skeletonButton}></div>
+                  <div className={styles.skeletonTrust}></div>
+                  <div className={styles.skeletonPayment}></div>
+                </div>
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '2rem' }}>
+                <p style={{ color: '#6b7280', margin: '0' }}>Зареждане на планове...</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
