@@ -105,19 +105,6 @@ export default function CompactPlansSection({
     return plan.price / dataAmount;
   };
 
-  // Get plan type title in Bulgarian
-  const getPlanTypeTitle = (planType: string) => {
-    switch (planType) {
-      case 'country':
-        return 'Държавен план';
-      case 'regional':
-        return 'Регионален план';
-      case 'global':
-        return 'Глобален план';
-      default:
-        return 'План';
-    }
-  };
 
   // Get country name in Bulgarian
   const getCountryNameInBulgarian = (countryName: string) => {
@@ -222,13 +209,6 @@ export default function CompactPlansSection({
                         key={plan.id}
                         className={styles.planItem}
                       >
-                        
-                        {/* Plan Type Title */}
-                        {plan.planType && (
-                          <div className={styles.planTypeTitle}>
-                            {getPlanTypeTitle(plan.planType)}
-                          </div>
-                        )}
                         
                         {/* Plan Details */}
                         <div className={styles.planDetails}>
