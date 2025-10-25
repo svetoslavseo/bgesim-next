@@ -134,6 +134,33 @@ export default function CompactPlansSection({
     return countryMap[countryName] || countryName;
   };
 
+  // Get region name from plan name
+  const getRegionNameFromPlan = (planName: string): string | null => {
+    const knownRegions = ['North America', 'Balkans', 'Southeast Asia', 'Europe', 'Middle East'];
+    for (const region of knownRegions) {
+      if (planName.startsWith(region)) {
+        return region;
+      }
+    }
+    return null;
+  };
+
+  // Get region name in Bulgarian
+  const getRegionNameInBulgarian = (englishName: string): string => {
+    const regionMap: Record<string, string> = {
+      'North America': 'Северна Америка',
+      'Balkans': 'Балкани',
+      'Southeast Asia': 'Югоизточна Азия',
+      'Europe': 'Европа',
+      'Middle East': 'Близък изток'
+    };
+    return regionMap[englishName] || englishName;
+  };
+
+  // Get the regional plan to determine the region name
+  const regionalPlan = convertedPlans.find(plan => plan.planType === 'regional');
+  const englishRegionName = regionalPlan ? getRegionNameFromPlan(regionalPlan.name) : null;
+
   const handlePlanSelect = (plan: Plan) => {
     setSelectedPlan(plan);
     if (onPlanSelect) {
@@ -172,12 +199,12 @@ export default function CompactPlansSection({
             >
               eSIM планове за {getCountryNameInBulgarian(countryName)}
             </button>
-            {hasRegionalPlans && (
+            {hasRegionalPlans && englishRegionName && (
               <button
                 className={`${styles.switcherButton} ${selectedPlanType === 'regional' ? styles.switcherButtonActive : ''}`}
                 onClick={() => setSelectedPlanType('regional')}
               >
-                Регионални
+                eSIM планове за {getRegionNameInBulgarian(englishRegionName)}
               </button>
             )}
             {hasGlobalPlans && (
