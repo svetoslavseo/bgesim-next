@@ -156,12 +156,6 @@
   gap: 1.5rem;
 }
 
-.planInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
 .dataAmount {
   font-size: 1.5rem;
   font-weight: 700;
@@ -169,29 +163,11 @@
   line-height: 1.2;
 }
 
-.validity {
-  font-size: 0.875rem;
-  color: #ccc;
-  font-weight: 500;
-}
-
-.planPricing {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  text-align: right;
-}
-
 .price {
   font-size: 1.5rem;
   font-weight: 700;
   color: #ffd700;
-}
-
-.pricePerGB {
-  font-size: 0.75rem;
-  color: #ccc;
-  font-weight: 500;
+  line-height: 1.2;
 }
 
 .planTypeBadge {
@@ -308,14 +284,12 @@
   }
 
   .planDetails {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
   }
 
-  .planPricing {
-    text-align: left;
-  }
 
   .dataAmount {
     font-size: 1.25rem;

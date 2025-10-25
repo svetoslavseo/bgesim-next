@@ -232,20 +232,9 @@ export default function CompactPlansSection({
                         
                         {/* Plan Details */}
                         <div className={styles.planDetails}>
-                          <div className={styles.planInfo}>
-                            <div className={styles.dataAmount}>{plan.data}</div>
-                            <div className={styles.validity}>{plan.validity}</div>
-                          </div>
-                          
-                          <div className={styles.planPricing}>
-                            <div className={styles.price}>
-                              {plan.price.toFixed(2)}{plan.currency}
-                            </div>
-                            {plan.data !== 'Unlimited' && (
-                              <div className={styles.pricePerGB}>
-                                {calculatePricePerGB(plan).toFixed(2)}{plan.currency}/GB
-                              </div>
-                            )}
+                          <div className={styles.dataAmount}>{plan.data}</div>
+                          <div className={styles.price}>
+                            {plan.price.toFixed(2)}{plan.currency}
                           </div>
                         </div>
                         
