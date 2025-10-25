@@ -235,22 +235,6 @@ export default function CompactPlansSection({
               </div>
             ))}
           </div>
-          
-          {/* Trust Indicators */}
-          <div className={styles.trustIndicators}>
-            <div className={styles.trustItem}>
-              <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="20,6 9,17 4,12"></polyline>
-              </svg>
-              <span>Моментална активация</span>
-            </div>
-            <div className={styles.trustItem}>
-              <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="20,6 9,17 4,12"></polyline>
-              </svg>
-              <span>Гарантирано сигурно</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
