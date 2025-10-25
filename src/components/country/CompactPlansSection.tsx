@@ -120,6 +120,20 @@ export default function CompactPlansSection({
     }
   };
 
+  // Get country name in Bulgarian
+  const getCountryNameInBulgarian = (countryName: string) => {
+    const countryMap: Record<string, string> = {
+      'Serbia': 'Сърбия',
+      'Thailand': 'Тайланд',
+      'UK': 'Великобритания',
+      'Egypt': 'Египет',
+      'Dubai': 'Дубай',
+      'USA': 'САЩ',
+      'Turkey': 'Турция'
+    };
+    return countryMap[countryName] || countryName;
+  };
+
   const handlePlanSelect = (plan: Plan) => {
     setSelectedPlan(plan);
     if (onPlanSelect) {
@@ -156,7 +170,7 @@ export default function CompactPlansSection({
               className={`${styles.switcherButton} ${selectedPlanType === 'country' ? styles.switcherButtonActive : ''}`}
               onClick={() => setSelectedPlanType('country')}
             >
-              eSIM планове за {countryName}
+              eSIM планове за {getCountryNameInBulgarian(countryName)}
             </button>
             {hasRegionalPlans && (
               <button
