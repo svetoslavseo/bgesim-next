@@ -93,17 +93,20 @@ export default function HomePage() {
     {
       number: '1',
       title: 'Изберете вашия план',
-      description: 'Разгледайте и изберете най-добрия eSIM план за вашата дестинация и нужди чрез нашата платформа.'
+      description: 'Изберете вашата дестинация и изберете вашия план за данни за пътуване с eSIM.',
+      image: '/media/images/how-to-images/Step 1 Saily.png'
     },
     {
       number: '2',
-      title: 'Активирайте eSIM',
-      description: 'След като закупите плана, ще получите QR код от доставчика. Сканирайте го директно от телефона си, за да активирате услугата.'
+      title: 'Изтеглете и настройте вашия eSIM',
+      description: 'Настройте eSIM на вашето устройство, следвайки инструкциите в приложението.',
+      image: '/media/images/how-to-images/Step 2 Saily.png'
     },
     {
       number: '3',
-      title: 'Наслаждавайте се на пътуването',
-      description: 'Вашият eSIM е готов за използване! Наслаждавайте се на бърз и достъпен интернет, без да се притеснявате за роуминг такси.'
+      title: 'Наслаждавайте се на свързаността!',
+      description: 'Вашият план ще се активира, когато стигнете до дестинацията си или 30 дни след покупката.',
+      image: '/media/images/how-to-images/Step 3 Saily.png'
     }
   ];
 
@@ -161,9 +164,8 @@ export default function HomePage() {
 
       <LazyHowItWorksSection
         title="Как работи?"
+        subtitle="Нямате приложението за eSIM още? Изтеглете го от App Store или Google Play."
         steps={howItWorksSteps}
-        image="/media/images/Image-1-1.png"
-        imageAlt="Активиране на eSIM"
       />
 
       {blogPosts.length > 0 && (
