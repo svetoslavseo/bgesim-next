@@ -26,6 +26,7 @@ interface HeroSectionProps {
   features: string[];
   plans: Plan[];
   countryName: string;
+  countryCode: string;
   isLoading?: boolean;
 }
 
@@ -36,6 +37,7 @@ export default function HeroSection({
   features,
   plans,
   countryName,
+  countryCode,
   isLoading = false
 }: HeroSectionProps) {
   const { currency, exchangeRates } = useCurrency();
@@ -219,8 +221,17 @@ export default function HeroSection({
             <span>{breadcrumb}</span>
           </nav>
 
-          {/* Title */}
-          <h1 className={styles.title}>{title}</h1>
+          {/* Title with Flag */}
+          <div className={styles.titleContainer}>
+            <Image
+              src={`/media/flags/${countryCode.toLowerCase()}.svg`}
+              alt={`${countryName} flag`}
+              width={48}
+              height={48}
+              className={styles.countryFlag}
+            />
+            <h1 className={styles.title}>{title}</h1>
+          </div>
           {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
 
           {/* Features List */}
@@ -242,7 +253,7 @@ export default function HeroSection({
           <div className={styles.planHeader}>
             <div className={styles.planHeaderContent}>
               <h2 className={styles.planTitle}>Избери своя план</h2>
-              <p className={styles.planSubtitle}>Избери перфектния план за данни за твоето пътуване</p>
+              <p className={styles.planSubtitle}>Избери перфектния план с мобилни данни за твоето пътуване до {countryName}</p>
             </div>
             
             <div className={styles.instantActivation}>

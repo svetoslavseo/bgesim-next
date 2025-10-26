@@ -12,7 +12,7 @@ const navigationItems = [
   { label: 'Блог', href: '/blog' },
   {
     label: 'Държави',
-    href: '#',
+    href: '/durjavi',
     submenu: [
       { label: 'eSIM Турция', href: '/turcia' },
       { label: 'eSIM Сърбия', href: '/esim-serbia' },
@@ -112,15 +112,41 @@ export default function Navigation() {
           >
             {item.submenu ? (
               <>
-                <button
-                  className={styles.navLink}
-                  onClick={() => toggleSubmenu(item.label)}
-                  aria-expanded={openSubmenu === item.label}
-                  aria-haspopup="true"
-                >
-                  {item.label}
-                  <span className={styles.arrow}>▼</span>
-                </button>
+                {item.href && item.href !== '#' ? (
+                  <Link
+                    href={item.href}
+                    className={classNames(
+                      styles.navLink,
+                      isActive(item.href) && styles.navLinkActive
+                    )}
+                    onClick={(e) => {
+                      // On mobile, toggle submenu on first click
+                      if (window.innerWidth <= 1120) {
+                        if (openSubmenu !== item.label) {
+                          e.preventDefault();
+                          toggleSubmenu(item.label);
+                        } else {
+                          setMobileMenuOpen(false);
+                        }
+                      }
+                    }}
+                    aria-expanded={openSubmenu === item.label}
+                    aria-haspopup="true"
+                  >
+                    {item.label}
+                    <span className={styles.arrow}>▼</span>
+                  </Link>
+                ) : (
+                  <button
+                    className={styles.navLink}
+                    onClick={() => toggleSubmenu(item.label)}
+                    aria-expanded={openSubmenu === item.label}
+                    aria-haspopup="true"
+                  >
+                    {item.label}
+                    <span className={styles.arrow}>▼</span>
+                  </button>
+                )}
                 {openSubmenu === item.label && (
                   <ul className={styles.submenu}>
                     {item.submenu.map((subItem) => (
@@ -153,14 +179,13 @@ export default function Navigation() {
         ))}
         {/* CTA Button */}
         <li className={styles.navItem}>
-          <a
-            href="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
+          <Link
+            href="/durjavi"
             className={styles.ctaButton}
-            target="_blank"
-            rel="noopener noreferrer nofollow sponsored"
+            onClick={() => setMobileMenuOpen(false)}
           >
-            Виж Оферти
-          </a>
+            Дестинации
+          </Link>
         </li>
       </ul>
     </nav>

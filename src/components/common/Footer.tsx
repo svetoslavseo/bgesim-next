@@ -59,14 +59,14 @@ export default function Footer() {
             <div className={styles.footerColumn}>
               <Link href="/" className={styles.footerLogo}>
                 <Image
-                  src="/media/images/2-6.png"
-                  alt="Travel eSIM by Breeze Logo"
-                  width={200}
-                  height={60}
+                  src="/media/images/travelesim/TraveleSIMBG-logo.png"
+                  alt="Travel eSIM BG Logo"
+                  width={400}
+                  height={120}
                   style={{
                     width: 'auto',
                     height: 'auto',
-                    maxHeight: '60px'
+                    maxHeight: '120px'
                   }}
                 />
               </Link>

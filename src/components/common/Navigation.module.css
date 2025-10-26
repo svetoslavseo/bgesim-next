@@ -169,6 +169,7 @@
 @media (max-width: 1120px) {
   .mobileMenuButton {
     display: block;
+    margin-left: 1rem;
   }
 
   .navList {
@@ -196,14 +197,21 @@
     width: 100%;
   }
 
-  .navLink,
-  .ctaButton {
+  .navLink {
     width: 100%;
     text-align: left;
     padding: 1rem 1.5rem;
     border-radius: 0;
     border: none;
     justify-content: space-between;
+  }
+
+  .ctaButton {
+    width: calc(100% - 3rem);
+    margin: 1rem 1.5rem;
+    text-align: center;
+    padding: 0.75rem 1.5rem;
+    display: block;
   }
 
   .submenu {

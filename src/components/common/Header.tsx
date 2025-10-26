@@ -11,19 +11,19 @@ export default function Header() {
           <div className={styles.headerLeft}>
             <Link href="/" className={styles.logo}>
               <Image
-                src="/media/images/TeSim-Logo-Breeze.png"
-                alt="Travel eSIM by Breeze Logo"
-                width={200}
-                height={50}
+                src="/media/images/travelesim/TraveleSIMBG-logo.png"
+                alt="Travel eSIM BG Logo"
+                width={400}
+                height={100}
                 priority
                 fetchPriority="high"
                 quality={90}
                 style={{
                   width: 'auto',
                   height: 'auto',
-                  maxHeight: '50px'
+                  maxHeight: '100px'
                 }}
-                sizes="(max-width: 768px) 150px, 200px"
+                sizes="(max-width: 768px) 300px, 400px"
               />
             </Link>
           </div>

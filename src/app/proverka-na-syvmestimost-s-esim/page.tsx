@@ -170,7 +170,13 @@ export default function ESIMCompatibilityPage() {
       {/* FAQ Section */}
       <section className={styles.section}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle} style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 
+            className={styles.sectionTitle} 
+            style={{ textAlign: 'center', marginBottom: '48px' }}
+            tabIndex={0}
+            role="button"
+            aria-label="Често Задавани Въпроси - натиснете за да изберете"
+          >
             Често Задавани Въпроси
           </h2>
           

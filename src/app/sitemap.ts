@@ -31,9 +31,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }];
   
+  // Durjavi page
+  const durjaviPage: MetadataRoute.Sitemap = [{
+    url: `${baseUrl}/durjavi/`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }];
+  
   return [
     ...pageUrls,
     ...blogIndex,
+    ...durjaviPage,
     ...postUrls,
   ];
 }

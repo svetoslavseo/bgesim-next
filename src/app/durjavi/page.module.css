@@ -1,0 +1,325 @@
+/* Durjavi Page Styles */
+
+.hero {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  padding: 6rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1.5rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #e5e7eb;
+  margin: 0 0 2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.countriesSection {
+  padding: 4rem 2rem;
+  background: #ffffff;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.countryCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.countryCard:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.flagContainer {
+  flex-shrink: 0;
+}
+
+.flag {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f3f4f6;
+}
+
+.countryInfo {
+  flex: 1;
+}
+
+.countryName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem;
+}
+
+.countryDescription {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 0.5rem;
+  line-height: 1.4;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #059669;
+}
+
+.cardArrow {
+  flex-shrink: 0;
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.countryCard:hover .cardArrow {
+  color: #1a1a1a;
+  transform: translateX(4px);
+}
+
+.benefitsSection {
+  padding: 4rem 2rem;
+  background: #f9fafb;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.benefitCard {
+  text-align: center;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.benefitCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.benefitIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  background: #f0fdf4;
+  border-radius: 50%;
+}
+
+.benefitTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1rem;
+}
+
+.benefitDescription {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.ctaSection {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #c471ed 0%, #f64f59 100%);
+  text-align: center;
+  color: white;
+}
+
+.ctaContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1rem;
+}
+
+.ctaDescription {
+  font-size: 1.125rem;
+  color: #f3f4f6;
+  margin: 0 0 2rem;
+  line-height: 1.6;
+}
+
+.ctaButton {
+  display: inline-block;
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 2px solid #ffffff;
+}
+
+.ctaButton:hover {
+  background: #f9fafb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .countriesSection {
+    padding: 3rem 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .countryCard {
+    padding: 1rem;
+  }
+
+  .cardContent {
+    gap: 0.75rem;
+  }
+
+  .flag {
+    width: 40px;
+    height: 40px;
+  }
+
+  .countryName {
+    font-size: 1.125rem;
+  }
+
+  .benefitsSection {
+    padding: 3rem 1.5rem;
+  }
+
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .benefitCard {
+    padding: 1.5rem;
+  }
+
+  .ctaSection {
+    padding: 3rem 1.5rem;
+  }
+
+  .ctaTitle {
+    font-size: 2rem;
+  }
+
+  .ctaDescription {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .countriesSection {
+    padding: 2rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .benefitsSection {
+    padding: 2rem 1rem;
+  }
+
+  .ctaSection {
+    padding: 2rem 1rem;
+  }
+
+  .ctaTitle {
+    font-size: 1.75rem;
+  }
+}

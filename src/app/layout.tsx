@@ -92,7 +92,7 @@ export default function RootLayout({
         <link rel="preload" href="/media/images/TeSim-Logo-Breeze.png" as="image" type="image/png" />
         
         {/* Font loading optimization to prevent CLS */}
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onLoad="this.onload=null;this.rel='stylesheet'" />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
         
         {/* Viewport meta tag for mobile optimization */}

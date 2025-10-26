@@ -69,6 +69,7 @@ export default function HeroSectionWrapper({
         features={features}
         plans={[]}
         countryName={countryName}
+        countryCode={countryCode}
         isLoading={true}
       />
     );
@@ -82,6 +83,7 @@ export default function HeroSectionWrapper({
       features={features}
       plans={plans}
       countryName={countryName}
+      countryCode={countryCode}
     />
   );
 }

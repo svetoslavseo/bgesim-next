@@ -168,7 +168,7 @@ export default function PlansSection({
           <div className={styles.header}>
             <div className={styles.headerContent}>
               <h3 className={styles.planTitle}>Избери своя план</h3>
-              <p className={styles.planSubtitle}>Избери перфектния план за данни за твоето пътуване</p>
+              <p className={styles.planSubtitle}>Избери перфектния план с мобилни данни за твоето пътуване до {countryName}</p>
             </div>
             
             {/* Instant Activation Badge */}
