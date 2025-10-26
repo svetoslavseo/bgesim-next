@@ -105,6 +105,8 @@
   flex-direction: column;
   /* CSS containment to prevent layout recalculations */
   contain: layout style;
+  /* Allow content to expand beyond min-height */
+  height: auto;
 }
 
 .planHeader {
@@ -239,6 +241,8 @@
   flex-direction: column;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
+  /* Ensure plans list can expand to show all items */
+  flex: 0 0 auto;
 }
 
 .planItem {
@@ -629,11 +633,13 @@
   .planSelector {
     padding: 1.5rem;
     /* Enhanced mobile containment and layout stability */
-    contain: layout style size;
+    contain: layout style;
     min-height: 500px; /* Larger mobile reserve */
     /* Prevent mobile layout shifts */
     position: relative;
-    overflow: hidden;
+    /* Allow content to scroll if needed */
+    overflow: visible;
+    height: auto;
   }
 
   .planHeader {

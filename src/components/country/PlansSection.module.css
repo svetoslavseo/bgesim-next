@@ -40,6 +40,10 @@
   margin: 0 auto;
   width: 100%;
   max-width: 720px;
+  /* Allow content to expand to fit all plans */
+  height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -172,6 +176,8 @@
   flex-direction: column;
   gap: 0.675rem;
   margin-bottom: 1.8rem;
+  /* Ensure plans list can expand to show all items */
+  flex: 0 0 auto;
 }
 
 .planItem {
