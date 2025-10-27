@@ -4,15 +4,22 @@
 
 /**
  * Format date to readable string
+ * Using hardcoded Bulgarian locale strings for consistency between server and client
  */
 export function formatDate(dateString: string, locale: string = 'bg-BG'): string {
   const date = new Date(dateString);
   
-  return date.toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  // Use hardcoded month names in Bulgarian for consistency
+  const months = [
+    'януари', 'февруари', 'март', 'април', 'май', 'юни',
+    'юли', 'август', 'септември', 'октомври', 'ноември', 'декември'
+  ];
+  
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  
+  return `${day} ${month} ${year} г.`;
 }
 
 /**

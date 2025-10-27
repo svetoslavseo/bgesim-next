@@ -13,13 +13,14 @@ interface CurrencyContextType {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
 export function CurrencyProvider({ children }: { children: ReactNode }) {
-  const [currency, setCurrency] = useState<Currency>('BGN'); // Default to BGN for Bulgarian site
+  // Use useState with a function to ensure stable initial value
+  const [currency, setCurrency] = useState<Currency>(() => 'BGN'); // Default to BGN for Bulgarian site
   // Start with default rates to prevent layout shifts during loading
-  const [exchangeRates, setExchangeRates] = useState<ExchangeRates['rates'] | null>({
+  const [exchangeRates, setExchangeRates] = useState<ExchangeRates['rates'] | null>(() => ({
     USD_TO_BGN: 1.80,
     USD_TO_EUR: 0.92,
-  });
-  const [isLoading, setIsLoading] = useState(false); // Start as false to prevent layout shifts
+  }));
+  const [isLoading, setIsLoading] = useState(() => false); // Start as false to prevent layout shifts
 
   useEffect(() => {
     // Load exchange rates on mount

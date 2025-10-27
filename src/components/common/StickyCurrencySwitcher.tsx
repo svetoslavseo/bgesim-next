@@ -8,7 +8,7 @@ export default function StickyCurrencySwitcher() {
   const { currency, setCurrency } = useCurrency();
 
   return (
-    <div className={styles.stickyCurrencyContainer}>
+    <div className={styles.stickyCurrencyContainer} suppressHydrationWarning>
       <div className={styles.currencySwitcher}>
         <span className={styles.currencyLabel}>Валута:</span>
         <button
