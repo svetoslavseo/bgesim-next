@@ -52,6 +52,20 @@ export function getPageBySlug(slug: string): ProcessedPage | null {
 }
 
 /**
+ * Load blog featured images mapping
+ */
+function getBlogFeaturedImagesMap(): Record<string, string> {
+  const mappingPath = path.join(DATA_DIR, 'blog-featured-images.json');
+  
+  if (!fs.existsSync(mappingPath)) {
+    return {};
+  }
+  
+  const data = fs.readFileSync(mappingPath, 'utf-8');
+  return JSON.parse(data);
+}
+
+/**
  * Load a single post by slug
  */
 export function getPostBySlug(slug: string): ProcessedPost | null {
@@ -64,8 +78,13 @@ export function getPostBySlug(slug: string): ProcessedPost | null {
   const data = fs.readFileSync(postPath, 'utf-8');
   const post = JSON.parse(data) as ProcessedPost;
   
-  // Extract featured image URL from SEO metadata if not already set
-  if (!post.featuredImageUrl && post.seo?.openGraph?.images?.[0]?.url) {
+  // Get local featured images mapping
+  const featuredImagesMap = getBlogFeaturedImagesMap();
+  
+  // Use local featured image if available, otherwise fall back to SEO metadata
+  if (featuredImagesMap[slug]) {
+    post.featuredImageUrl = featuredImagesMap[slug];
+  } else if (!post.featuredImageUrl && post.seo?.openGraph?.images?.[0]?.url) {
     post.featuredImageUrl = post.seo.openGraph.images[0].url;
   }
   

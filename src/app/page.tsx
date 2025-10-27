@@ -12,6 +12,7 @@ import BlogPostsSection from '@/components/home/BlogPostsSection';
 import DynamicCTASection from '@/components/common/DynamicCTASection';
 import { extractExcerpt, formatDate } from '@/lib/utils';
 import { generateOrganizationSchema } from '@/lib/seo';
+import featuredImagesMap from '../../data/processed/blog-featured-images.json';
 
 // Lazy load non-critical sections
 const LazyBenefitsSection = dynamic(() => import('@/components/home/BenefitsSection'), {
@@ -110,14 +111,19 @@ export default function HomePage() {
     }
   ];
 
-  const blogPosts = recentPosts.map(post => ({
-    title: post.title,
-    excerpt: extractExcerpt(post.excerpt || post.content, 140),
-    slug: post.slug,
-    date: formatDate(post.publishedDate),
-    author: 'ВАСИЛ АНДРЕЕВ',
-    featuredImage: post.featuredImageUrl || undefined
-  }));
+  const blogPosts = recentPosts.map(post => {
+    // Get the featured image path from the mapping
+    const featuredImagePath = (featuredImagesMap as Record<string, string>)[post.slug];
+    
+    return {
+      title: post.title,
+      excerpt: extractExcerpt(post.excerpt || post.content, 140),
+      slug: post.slug,
+      date: formatDate(post.publishedDate),
+      author: 'ВАСИЛ АНДРЕЕВ',
+      featuredImage: featuredImagePath || post.featuredImageUrl || undefined
+    };
+  });
 
   // Generate organization schema for homepage
   const organizationSchema = generateOrganizationSchema();
