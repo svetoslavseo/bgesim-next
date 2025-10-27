@@ -30,13 +30,22 @@ const CheckoutPage = () => {
   // Map country names to flag file codes
   const getCountryFlagCode = (country: string): string => {
     const flagMap: Record<string, string> = {
+      // English names
       'Thailand': 'th',
       'Serbia': 'rs',
       'Dubai': 'ae',
       'Egypt': 'eg',
       'USA': 'us',
       'UK': 'gb',
-      'Turkey': 'tr'
+      'Turkey': 'tr',
+      // Bulgarian names
+      'Тайланд': 'th',
+      'Сърбия': 'rs',
+      'Дубай': 'ae',
+      'Египет': 'eg',
+      'САЩ': 'us',
+      'Великобритания': 'gb',
+      'Турция': 'tr'
     };
     return flagMap[country] || 'th';
   };
@@ -95,13 +104,22 @@ const CheckoutPage = () => {
       } else {
         // Fallback to Breeze if no Saily identifier
         const countryProductMap: Record<string, string> = {
+          // English names
           'Thailand': 'esimg_th_v2',
           'Serbia': 'esimg_rs_v2',
           'Dubai': 'esimg_ae_v2',
           'Egypt': 'esimg_eg_v2',
           'USA': 'esimg_us_v2',
           'UK': 'esimg_gb_v2',
-          'Turkey': 'esimg_tr_v2'
+          'Turkey': 'esimg_tr_v2',
+          // Bulgarian names
+          'Тайланд': 'esimg_th_v2',
+          'Сърбия': 'esimg_rs_v2',
+          'Дубай': 'esimg_ae_v2',
+          'Египет': 'esimg_eg_v2',
+          'САЩ': 'esimg_us_v2',
+          'Великобритания': 'esimg_gb_v2',
+          'Турция': 'esimg_tr_v2'
         };
 
         const productCode = countryProductMap[plan.country] || 'esimg_th_v2';
