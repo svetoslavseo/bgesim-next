@@ -17,7 +17,7 @@ export default async function DynamicCTASection() {
       title="Купи своята eSIM карта сега и спести пари от роуминг."
       description={description}
       ctaText="Дестинации"
-      ctaUrl="/durjavi"
+      ctaUrl="/durjavi/"
       variant="purple"
     />
   );

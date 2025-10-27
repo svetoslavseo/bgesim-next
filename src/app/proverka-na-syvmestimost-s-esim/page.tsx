@@ -148,7 +148,7 @@ export default function ESIMCompatibilityPage() {
                 Независимо дали сте почитател на Android или iOS, удобството на eSIM технологията ви дава пълен контрол върху избора на мрежа – бързо, лесно и без усилие.
               </p>
               <p className={styles.bodyText}>
-                <Link href="/kakvo-e-esim" className={styles.link}>
+                <Link href="/blog/kakvo-e-esim" className={styles.link}>
                   Прочети повече за технологията и за това какво точно представлява eSIM
                 </Link>
               </p>

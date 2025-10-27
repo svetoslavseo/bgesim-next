@@ -38,8 +38,23 @@ const navigationItems = [
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
+  
+  // Check if we're on desktop (width > 1120px to match CSS breakpoint)
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth > 1120);
+    };
+    
+    // Check on mount
+    checkIsDesktop();
+    
+    // Check on resize
+    window.addEventListener('resize', checkIsDesktop);
+    return () => window.removeEventListener('resize', checkIsDesktop);
+  }, []);
   
   const toggleMobileMenu = useMemo(() => () => {
     setMobileMenuOpen(prev => !prev);
@@ -57,7 +72,9 @@ function Navigation() {
   }, []);
 
   const handleMouseEnter = (label: string) => {
-    // Only handle mouse events on desktop (not mobile)
+    // Only handle mouse events on desktop
+    if (!isDesktop) return;
+    
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
       hoverTimeoutRef.current = null;
@@ -66,7 +83,9 @@ function Navigation() {
   };
 
   const handleMouseLeave = () => {
-    // Only handle mouse events on desktop (not mobile)
+    // Only handle mouse events on desktop
+    if (!isDesktop) return;
+    
     const timeout = setTimeout(() => {
       setOpenSubmenu(null);
     }, 150); // Small delay to prevent accidental closing
