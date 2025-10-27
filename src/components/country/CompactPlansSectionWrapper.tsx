@@ -33,38 +33,22 @@ export default function CompactPlansSectionWrapper({
 
   useEffect(() => {
     const loadPlans = async () => {
+      setIsLoading(true);
+      setError(null);
+      
       try {
-        setIsLoading(true);
-        setError(null);
-        
-        console.log('Fetching real Saily plans for', countryCode);
-        
-        // Try to fetch real plans from server-side API route (bypasses CORS)
-        const response = await fetch(`/api/saily-plans?countryCode=${countryCode}`);
-        const apiData = await response.json();
-        console.log('Server-side API response for', countryCode, ':', apiData);
-        
-        const sailyPlans = apiData.success ? apiData.plans : [];
-        
-        if (sailyPlans && sailyPlans.length > 0) {
-          console.log('Using real Saily plans:', sailyPlans);
-          setPlans(sailyPlans);
-          setLastUpdated(apiData.lastUpdated);
-        } else {
-          console.log('No Saily plans found, using fallback');
-          const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
-          console.log('Fallback plans for', countryCode, ':', fallbackPlans);
-          setPlans(fallbackPlans);
-          setLastUpdated(undefined);
-        }
-        
-        setIsLoading(false);
+        // Use fallback plans immediately for static export
+        // In production with static export, API routes don't exist
+        const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+        console.log('Loading fallback plans for', countryCode, ':', fallbackPlans.length, 'plans');
+        setPlans(fallbackPlans);
+        setLastUpdated(undefined);
       } catch (error) {
         console.error('Error loading plans:', error);
-        console.log('Falling back to static plans');
         const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
         setPlans(fallbackPlans);
         setLastUpdated(undefined);
+      } finally {
         setIsLoading(false);
       }
     };
