@@ -6,8 +6,19 @@ import ComparisonTable from '@/components/country/ComparisonTable';
 import FAQSection from '@/components/country/FAQSection';
 import DynamicCTASection from '@/components/common/DynamicCTASection';
 import { Metadata } from 'next';
-import { getLowestPriceInBGN } from '@/lib/sailyApi';
-import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
+import { getLowestPriceInBGN, getPriceRangeInBGN } from '@/lib/sailyApi';
+import { generateCanonicalUrl, generateCountryBreadcrumbSchema, generateProductSchema, getPriceValidUntilDate } from '@/lib/seo';
+
+// Mapping of country codes to checkout URLs
+const COUNTRY_CHECKOUT_URLS: Record<string, string> = {
+  'TH': 'https://breezesim.com/products/esimg_th_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
+  'TR': 'https://breezesim.com/products/esimg_tr_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
+  'RS': 'https://breezesim.com/products/esimg_rs_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
+  'GB': 'https://breezesim.com/products/esimg_gb_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
+  'EG': 'https://breezesim.com/products/esimg_eg_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
+  'US': 'https://breezesim.com/products/esimg_us_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
+  'AE': 'https://breezesim.com/products/esimg_ae_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -48,9 +59,32 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function TurciaPage() {
+export default async function TurciaPage() {
+  // Get price range for aggregate offer
+  const priceRange = await getPriceRangeInBGN('TR');
+  
   // Breadcrumb Schema for Turkey page
   const breadcrumbSchema = generateCountryBreadcrumbSchema('Турция', 'turcia');
+  
+  // Product Schema for Turkey page
+  const productSchema = generateProductSchema({
+    name: 'eSIM за Турция – Бърз мобилен интернет без роуминг',
+    description: 'Купи eSIM за Турция с бърз и надежден мобилен интернет. Без физическа SIM карта. Без дългосрочни договори. Моментална активация.',
+    url: generateCanonicalUrl('/turcia'),
+    countryCode: 'TR',
+    offers: {
+      lowPrice: priceRange.lowPrice.toString(),
+      highPrice: priceRange.highPrice.toString(),
+      currency: 'BGN',
+      availability: 'InStock',
+      priceValidUntil: getPriceValidUntilDate(),
+      offerCount: priceRange.offerCount.toString()
+    },
+    brand: {
+      name: 'Travel eSIM BG',
+      url: 'https://travelesim.bg'
+    }
+  });
   
   // FAQ Schema for Turkey page
   const faqSchema = {
@@ -91,6 +125,14 @@ export default function TurciaPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      
+      {/* Structured Data - Product Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema),
         }}
       />
       

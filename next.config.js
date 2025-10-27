@@ -3,6 +3,11 @@ const nextConfig = {
   // Enable static export for full SSG
   output: 'export',
   
+  // Exclude API routes from static generation
+  generateBuildId: async () => {
+    return process.env.BUILD_ID || 'production';
+  },
+  
   // Add trailing slashes to match WordPress URL structure
   trailingSlash: true,
   

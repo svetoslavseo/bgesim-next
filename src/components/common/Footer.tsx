@@ -3,8 +3,6 @@ import Image from 'next/image';
 import styles from './Footer.module.css';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  
   return (
     <footer className={styles.footer}>
       {/* Features Section */}
@@ -127,9 +125,18 @@ export default function Footer() {
             ако закупите продукт чрез нашите линкове. За вас като потребител няма допълнителни разходи и цената, 
             която плащате, остава същата.
           </p>
-          <p className={styles.copyright}>
-            © {currentYear}, Developed by Travel eSIM by Breeze
-          </p>
+          <div className={styles.footerBottomLinks}>
+            <p className={styles.copyright}>
+              © 2025, Developed by Travel eSIM team
+            </p>
+            <Link 
+              href="/privacy-policy" 
+              className={styles.privacyLink}
+              rel="nofollow"
+            >
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

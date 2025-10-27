@@ -266,5 +266,79 @@ export function generateCountryBreadcrumbSchema(countryName: string, countrySlug
   };
 }
 
+/**
+ * Get a date 90 days from now in YYYY-MM-DD format
+ */
+export function getPriceValidUntilDate(): string {
+  const date = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
+  const dateStr = date.toISOString().substring(0, 10);
+  return dateStr;
+}
+
+/**
+ * Generate product schema for eSIM country pages
+ */
+export function generateProductSchema(data: {
+  name: string;
+  description: string;
+  url: string;
+  countryCode: string;
+  image?: string;
+  offers: {
+    lowPrice: string;
+    highPrice: string;
+    currency: string;
+    availability: string;
+    priceValidUntil: string;
+    offerCount: string;
+  };
+  brand: {
+    name: string;
+    url: string;
+  };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": data.name,
+    "description": data.description,
+    "url": data.url,
+    "image": data.image || `${SITE_CONFIG.url}/media/images/travelesim/TraveleSIMBG-logo.png`,
+    "brand": {
+      "@type": "Brand",
+      "name": data.brand.name,
+      "url": data.brand.url
+    },
+    "category": "Mobile Data Plans",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": data.offers.currency,
+      "lowPrice": data.offers.lowPrice,
+      "highPrice": data.offers.highPrice,
+      "priceValidUntil": data.offers.priceValidUntil,
+      "availability": `https://schema.org/${data.offers.availability}`,
+      "offerCount": data.offers.offerCount
+    },
+    "gtin": data.countryCode,
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Activation",
+        "value": "Instant via QR code"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Network Speed",
+        "value": "4G/5G"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Roaming Fees",
+        "value": "No roaming fees"
+      }
+    ]
+  };
+}
+
 
 

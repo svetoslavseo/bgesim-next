@@ -96,7 +96,7 @@ export default function RootLayout({
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
         
         {/* Viewport meta tag for mobile optimization */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         
         {/* Mobile-specific optimizations */}
         <meta name="mobile-web-app-capable" content="yes" />

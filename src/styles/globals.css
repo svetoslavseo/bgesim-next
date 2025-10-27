@@ -43,8 +43,7 @@ body {
   /* Prevent layout shifts during font loading */
   font-synthesis: none;
   text-size-adjust: 100%;
-  /* CSS containment to prevent layout recalculations */
-  contain: style;
+  /* Removed contain to allow smooth scrolling */
 }
 
 /* Typography */
@@ -217,7 +216,6 @@ h6 ::-moz-selection {
   
   /* Mobile-specific layout stability */
   body {
-    contain: layout style;
     overflow-x: hidden;
     /* Prevent mobile viewport issues */
     -webkit-overflow-scrolling: touch;

@@ -179,10 +179,8 @@
   
   /* Mobile article container */
   .article {
-    contain: layout style;
-    /* Prevent mobile layout shifts */
     position: relative;
-    overflow: hidden;
+    /* Remove overflow: hidden to allow scrolling */
   }
 }
 
@@ -202,8 +200,8 @@
   
   /* Small mobile optimizations */
   .article {
-    contain: layout style size;
-    min-height: 100vh;
+    /* Remove strict containment that prevents scrolling */
+    min-height: auto;
   }
 }
 

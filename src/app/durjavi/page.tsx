@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { generateCanonicalUrl } from '@/lib/seo';
 import DynamicCTASection from '@/components/common/DynamicCTASection';
+import HowItWorksSection from '@/components/home/HowItWorksSection';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -158,64 +159,31 @@ export default function DurjaviPage() {
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className={styles.benefitsSection}>
-          <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Защо да изберете eSIM?</h2>
-            <div className={styles.benefitsGrid}>
-              <div className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path
-                      d="M16 2L20.09 8.26L28 9.27L22 14.14L23.18 22.02L16 18.77L8.82 22.02L10 14.14L4 9.27L11.91 8.26L16 2Z"
-                      fill="#4CAF50"
-                    />
-                  </svg>
-                </div>
-                <h3 className={styles.benefitTitle}>Моментална активация</h3>
-                <p className={styles.benefitDescription}>
-                  Сканирайте QR кода и активирайте eSIM-а си за секунди, без да чакате физическа карта.
-                </p>
-              </div>
-              <div className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path
-                      d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm0 26C9.373 28 4 22.627 4 16S9.373 4 16 4s12 5.373 12 12-5.373 12-12 12z"
-                      fill="#4CAF50"
-                    />
-                    <path
-                      d="M16 8c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zm0 14c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"
-                      fill="#4CAF50"
-                    />
-                    <path
-                      d="M16 12c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z"
-                      fill="#4CAF50"
-                    />
-                  </svg>
-                </div>
-                <h3 className={styles.benefitTitle}>Изгодни цени</h3>
-                <p className={styles.benefitDescription}>
-                  Спестете до 90% от роуминг таксите с местни тарифи в избраната дестинация.
-                </p>
-              </div>
-              <div className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path
-                      d="M16 2L20.09 8.26L28 9.27L22 14.14L23.18 22.02L16 18.77L8.82 22.02L10 14.14L4 9.27L11.91 8.26L16 2Z"
-                      fill="#4CAF50"
-                    />
-                  </svg>
-                </div>
-                <h3 className={styles.benefitTitle}>Надеждна връзка</h3>
-                <p className={styles.benefitDescription}>
-                  Стабилен 4G/5G интернет в над 100 държави с най-добрите местни мрежи.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* How It Works Section */}
+        <HowItWorksSection
+          title="Как работи?"
+          subtitle="Нямате приложението за eSIM още? Изтеглете го от App Store или Google Play."
+          steps={[
+            {
+              number: '1',
+              title: 'Изберете вашия план',
+              description: 'Изберете вашата дестинация и изберете вашия план за данни за пътуване с eSIM.',
+              image: '/media/images/how-to-images/Step 1 Saily.png'
+            },
+            {
+              number: '2',
+              title: 'Изтеглете и настройте вашия eSIM',
+              description: 'Настройте eSIM на вашето устройство, следвайки инструкциите в приложението.',
+              image: '/media/images/how-to-images/Step 2 Saily.png'
+            },
+            {
+              number: '3',
+              title: 'Наслаждавайте се на свързаността!',
+              description: 'Вашият план ще се активира, когато стигнете до дестинацията си или 30 дни след покупката.',
+              image: '/media/images/how-to-images/Step 3 Saily.png'
+            }
+          ]}
+        />
 
         {/* CTA Section */}
         <DynamicCTASection />

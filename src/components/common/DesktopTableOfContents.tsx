@@ -105,10 +105,31 @@ export default function DesktopTableOfContents({ content, className = '' }: Desk
         setActiveSection(current);
       }
       
-      // Sticky logic: become sticky when scroll position passes the initial TOC position
-      // adjusted for the header offset
+      // Check if Related Articles section is in view
+      const relatedSection = document.getElementById('related-articles');
       const scrollY = window.scrollY;
-      const shouldBeSticky = scrollY > (tocPosition - headerOffset);
+      const normalStickyPoint = tocPosition - headerOffset;
+      
+      // Default: use normal sticky logic
+      let shouldBeSticky = scrollY > normalStickyPoint;
+      
+      // Special handling for Related Articles section
+      if (relatedSection) {
+        const relatedRect = relatedSection.getBoundingClientRect();
+        // Calculate the actual scroll position of the related section
+        const relatedSectionScrollTop = relatedRect.top + scrollY;
+        
+        // If we've scrolled to or past where the Related section was/is
+        // (within 500px window), keep TOC sticky at top
+        const distanceFromSection = relatedRect.top;
+        
+        // When the section is approaching (within 500px of viewport top) 
+        // or already past, keep it sticky
+        if (distanceFromSection <= 500) {
+          shouldBeSticky = true;
+        }
+      }
+      
       setIsSticky(shouldBeSticky);
     };
 
@@ -218,7 +239,7 @@ export default function DesktopTableOfContents({ content, className = '' }: Desk
         maxHeight: `calc(100vh - ${headerOffset + 20}px)`, // Dynamic max-height
         opacity: isPositioned ? 1 : 0, // Hide until positioned
         visibility: isPositioned ? 'visible' : 'hidden', // Prevent interaction before positioned
-        transition: 'opacity 0.2s ease-in-out' // Smooth fade-in
+        transition: isPositioned ? 'opacity 0.2s ease-in-out, transform 0.3s ease-in-out' : 'none' // Smooth transitions
       }}
     >
       <div className={styles.tocHeader}>

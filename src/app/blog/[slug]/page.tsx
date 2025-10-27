@@ -7,6 +7,7 @@ import Section from '@/components/layout/Section';
 import BlogFeaturedImage from '@/components/common/BlogFeaturedImage';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import AuthorBio from '@/components/common/AuthorBio';
+import RelatedArticles from '@/components/common/RelatedArticles';
 import TableOfContents from '@/components/common/TableOfContents';
 import DesktopTableOfContents from '@/components/common/DesktopTableOfContents';
 import { formatDate, addRelToExternalLinks } from '@/lib/utils';
@@ -190,6 +191,9 @@ export default function BlogPostPage({
           </article>
         </Container>
       </Section>
+      
+      {/* Related Articles Section */}
+      <RelatedArticles excludeSlug={params.slug} />
     </>
   );
 }

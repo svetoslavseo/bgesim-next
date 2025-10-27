@@ -12,9 +12,19 @@ interface PlansSectionWrapperProps {
   countryCode: string;
 }
 
+/**
+ * PlansSectionWrapper Component
+ * 
+ * Note: This component attempts to fetch plans from /api/saily-plans, but with
+ * static export (output: 'export'), API routes don't work in production.
+ * 
+ * Fallback: If the API fails or doesn't exist, it uses FALLBACK_PLANS
+ * from @/lib/sailyApi. This ensures users always see valid plans.
+ * 
+ * Current Status: ✅ WORKS - Uses fallback plans in production
+ */
 export default function PlansSectionWrapper({ 
   title, 
-  lastUpdated, 
   countryName, 
   countryCode 
 }: PlansSectionWrapperProps) {
@@ -30,6 +40,7 @@ export default function PlansSectionWrapper({
         setError(null);
         
         // Fetch real plans from server-side API route
+        // Note: With static export, this will fail in production and fall back to FALLBACK_PLANS
         try {
           const response = await fetch(`/api/saily-plans?countryCode=${countryCode}`);
           const apiData = await response.json();

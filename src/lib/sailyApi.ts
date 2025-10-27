@@ -274,17 +274,22 @@ export async function getLowestPricePerGB(): Promise<{ pricePerGB: number; price
  * Get the lowest price in BGN for a country
  */
 export async function getLowestPriceInBGN(countryCode: string): Promise<number> {
+  const { lowPrice } = await getPriceRangeInBGN(countryCode);
+  return lowPrice;
+}
+
+export async function getPriceRangeInBGN(countryCode: string): Promise<{ lowPrice: number; highPrice: number; offerCount: number }> {
   try {
     // Try to fetch real plans first
     const plans = await fetchSailyPlans(countryCode);
     
     if (plans && plans.length > 0) {
-      const lowestPriceUSD = Math.min(...plans.map(plan => plan.priceUSD));
-      console.log(`Real plans lowest price for ${countryCode}: $${lowestPriceUSD}`);
-      // Convert USD to BGN (more accurate rate: 1 USD = 1.8 BGN)
-      const priceInBGN = Math.round(lowestPriceUSD * 1.8);
-      console.log(`Converted to BGN: ${priceInBGN}лв`);
-      return priceInBGN;
+      const pricesInBGN = plans.map(plan => Math.round(plan.priceUSD * 1.8));
+      const lowPrice = Math.min(...pricesInBGN);
+      const highPrice = Math.max(...pricesInBGN);
+      const offerCount = plans.length;
+      console.log(`Real plans for ${countryCode}: ${offerCount} offers, low: ${lowPrice}лв, high: ${highPrice}лв`);
+      return { lowPrice, highPrice, offerCount };
     }
   } catch (error) {
     console.error('Error fetching real plans for price calculation:', error);
@@ -294,15 +299,16 @@ export async function getLowestPriceInBGN(countryCode: string): Promise<number> 
   const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
   
   if (fallbackPlans.length === 0) {
-    return 9; // Default fallback price
+    const fallbackPrice = 9;
+    return { lowPrice: fallbackPrice, highPrice: fallbackPrice, offerCount: 1 };
   }
   
-  const lowestPriceUSD = Math.min(...fallbackPlans.map(plan => plan.priceUSD));
-  console.log(`Fallback plans lowest price for ${countryCode}: $${lowestPriceUSD}`);
-  // Convert USD to BGN (more accurate rate: 1 USD = 1.8 BGN)
-  const priceInBGN = Math.round(lowestPriceUSD * 1.8);
-  console.log(`Fallback converted to BGN: ${priceInBGN}лв`);
-  return priceInBGN;
+  const pricesInBGN = fallbackPlans.map(plan => Math.round(plan.priceUSD * 1.8));
+  const lowPrice = Math.min(...pricesInBGN);
+  const highPrice = Math.max(...pricesInBGN);
+  const offerCount = fallbackPlans.length;
+  console.log(`Fallback plans for ${countryCode}: ${offerCount} offers, low: ${lowPrice}лв, high: ${highPrice}лв`);
+  return { lowPrice, highPrice, offerCount };
 }
 
 // Fallback static plans for each country (all prices in USD for consistent conversion)

@@ -99,7 +99,7 @@ export default function CountrySearch() {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setHighlightedIndex(prev => (prev > 0 ? prev - 1 : filteredCountries.length - 1));
-    } else if (e.key === 'Enter' && highlightedIndex >= 0) {
+    } else if (e.key === 'Enter' && highlightedIndex >= 0 && filteredCountries[highlightedIndex]) {
       e.preventDefault();
       window.location.href = filteredCountries[highlightedIndex].href;
     } else if (e.key === 'Escape') {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './ResultsModal.module.css';
 
 interface Device {
@@ -25,6 +26,8 @@ export default function ResultsModal({
   searchedModel,
   disclaimer 
 }: ResultsModalProps) {
+  const router = useRouter();
+
   useEffect(() => {
     if (isOpen) {
       // Prevent body scroll when modal is open
@@ -63,7 +66,7 @@ export default function ResultsModal({
   };
 
   const handleBuyESIM = () => {
-    window.open('https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg', '_blank');
+    router.push('/durjavi');
   };
 
   return (

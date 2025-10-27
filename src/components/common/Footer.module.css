@@ -158,10 +158,29 @@
   margin-right: auto;
 }
 
+.footerBottomLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
 .copyright {
   font-size: 14px;
   color: #cccccc;
   margin: 0;
+}
+
+.privacyLink {
+  font-size: 14px;
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.privacyLink:hover {
+  color: #ffffff;
 }
 
 /* Responsive */
@@ -182,5 +201,10 @@
 
   .container {
     padding: 0 1rem;
+  }
+
+  .footerBottomLinks {
+    flex-direction: column;
+    gap: 1rem;
   }
 }

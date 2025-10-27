@@ -4,6 +4,20 @@ const API_KEY = 'a820596678ad38f13bad61d1648f1befef597d0b8659648f4cf8b337fd6cb51
 const PARTNER_ID = 'atlasvpn';
 const API_URL = 'https://web.saily.com/v2/partners/plans';
 
+/**
+ * IMPORTANT: This API route will NOT work in production with static export (output: 'export')
+ * 
+ * For static export, API routes are not supported. This means:
+ * 1. During build (npm run build), this route is ignored
+ * 2. In production, requests to /api/saily-plans will fail
+ * 
+ * Fallback: Components use FALLBACK_PLANS from @/lib/sailyApi when API fails
+ * 
+ * Solutions:
+ * 1. Keep using fallback plans (current approach - works fine)
+ * 2. Switch to ISR by removing output: 'export' from next.config.js
+ * 3. Fetch directly from Saily API on client side (requires CORS setup)
+ */
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);

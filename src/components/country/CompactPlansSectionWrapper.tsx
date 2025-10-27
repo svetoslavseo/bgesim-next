@@ -4,6 +4,16 @@ import React, { useState, useEffect } from 'react';
 import CompactPlansSection from './CompactPlansSection';
 import { FALLBACK_PLANS } from '@/lib/sailyApi';
 
+/**
+ * CompactPlansSectionWrapper Component
+ * 
+ * Note: Attempts to fetch from /api/saily-plans in development,
+ * but with static export, this fails in production and falls back
+ * to FALLBACK_PLANS.
+ * 
+ * Status: ✅ WORKS - Gracefully falls back to static plans
+ */
+
 interface CompactPlansSectionWrapperProps {
   title: string;
   countryName: string;

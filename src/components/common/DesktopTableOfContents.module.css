@@ -23,6 +23,7 @@
 /* Sticky behavior when scrolled - positioning handled by inline styles */
 .desktopToc.sticky {
   /* Dynamic positioning handled by component */
+  z-index: 1001; /* Ensure it stays above content when sticky */
 }
 
 .tocHeader {

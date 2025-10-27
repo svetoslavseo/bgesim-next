@@ -2,10 +2,22 @@ import { MetadataRoute } from 'next';
 import { getPagesIndex, getPostsIndex, getPageBySlug, getPostBySlug } from '@/lib/content';
 import { SITE_CONFIG } from '@/lib/seo';
 
+/**
+ * Sitemap generation for Next.js
+ * 
+ * This sitemap automatically includes:
+ * 1. All pages from data/processed/pages-index.json
+ * 2. All blog posts from data/processed/posts-index.json
+ * 
+ * To add a new page to the sitemap:
+ * - Add the page data to data/processed/pages/[slug].json
+ * - Add the page entry to data/processed/pages-index.json
+ * - The page will automatically appear in the sitemap on next build
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url;
   
-  // Get all pages with their actual modified dates
+  // Get all pages from the index - automatically includes all pages
   const pages = getPagesIndex();
   const pageUrls: MetadataRoute.Sitemap = pages.map((page) => {
     // Get the full page data to access modifiedDate
@@ -20,8 +32,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return {
       url,
       lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: page.slug === 'home' || page.slug === '' || page.slug === 'en' ? 1.0 : 0.8,
     };
   });
   
@@ -37,8 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return {
       url: `${baseUrl}/blog/${post.slug}/`,
       lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
     };
   });
   
@@ -46,16 +54,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogIndex: MetadataRoute.Sitemap = [{
     url: `${baseUrl}/blog/`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
   }];
   
   // Homepage
   const homepage: MetadataRoute.Sitemap = [{
     url: `${baseUrl}/`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 1.0,
   }];
   
   // Static pages that don't have data files but have route files
@@ -63,14 +67,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/durjavi/`,
       lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/checkout/`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
     },
   ];
   
