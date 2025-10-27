@@ -124,7 +124,7 @@ export default function CompactPlansSection({
 
   // Get region name from plan name
   const getRegionNameFromPlan = (planName: string): string | null => {
-    const knownRegions = ['North America', 'Balkans', 'Southeast Asia', 'Europe', 'Middle East'];
+    const knownRegions = ['North America', 'Balkans', 'Southeast Asia', 'Europe & Middle East', 'Europe', 'Middle East'];
     for (const region of knownRegions) {
       if (planName.startsWith(region)) {
         return region;
@@ -139,6 +139,7 @@ export default function CompactPlansSection({
       'North America': 'Северна Америка',
       'Balkans': 'Балкани',
       'Southeast Asia': 'Югоизточна Азия',
+      'Europe & Middle East': 'Европа и Близкия Изток',
       'Europe': 'Европа',
       'Middle East': 'Близък изток'
     };
