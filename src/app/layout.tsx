@@ -86,8 +86,6 @@ export default function RootLayout({
         
         {/* Resource hints for critical resources */}
         <link rel="preload" href="/media/images/TeSim-Logo-Breeze.png" as="image" type="image/png" />
-        <link rel="preload" href="/fonts/Lato-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/Quicksand-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
         {/* Viewport meta tag for mobile optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
