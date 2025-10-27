@@ -4,7 +4,6 @@ import Section from '@/components/layout/Section';
 import Card from '@/components/ui/Card';
 import { formatDate, extractExcerpt } from '@/lib/utils';
 import type { Metadata } from 'next';
-import featuredImagesMap from '../../../data/processed/blog-featured-images.json';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -42,16 +41,13 @@ export default function BlogPage() {
       <Section padding="lg">
         <div className={styles.blogContainer}>
           <div className={styles.postsGrid}>
-            {posts.map((post) => {
-              const featuredImagePath = (featuredImagesMap as Record<string, string>)[post.slug];
-              
-              return (
+            {posts.map((post) => (
                 <Card
                   key={post.slug}
                   title={post.title}
                   description={extractExcerpt(post.excerpt || post.content, 150)}
                   href={`/blog/${post.slug}/`}
-                  image={featuredImagePath}
+                  image={post.featuredImageUrl}
                   imageAlt={post.title}
                 >
                 <div style={{ 
@@ -69,8 +65,7 @@ export default function BlogPage() {
                   )}
                 </div>
               </Card>
-              );
-            })}
+              ))}
           </div>
         </div>
       </Section>

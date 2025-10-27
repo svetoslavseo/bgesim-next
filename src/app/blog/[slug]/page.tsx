@@ -12,7 +12,6 @@ import TableOfContents from '@/components/common/TableOfContents';
 import DesktopTableOfContents from '@/components/common/DesktopTableOfContents';
 import { formatDate, addRelToExternalLinks } from '@/lib/utils';
 import type { Metadata } from 'next';
-import featuredImagesMap from '../../../../data/processed/blog-featured-images.json';
 import styles from './page.module.css';
 
 /**
@@ -71,7 +70,7 @@ export default function BlogPostPage({
   });
   
   // Get featured image
-  const featuredImagePath = (featuredImagesMap as Record<string, string>)[params.slug];
+  const featuredImagePath = post.featuredImageUrl;
   const featuredImage = post.seo.openGraph.images[0];
   
   // Breadcrumb items
