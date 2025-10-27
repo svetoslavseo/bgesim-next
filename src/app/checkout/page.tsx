@@ -81,6 +81,16 @@ const CheckoutPage = () => {
     }
     
     setIsLoading(false);
+    
+    // Fix sticky bar positioning
+    const stickyBar = document.querySelector('[class*="stickyBar"]');
+    if (stickyBar) {
+      (stickyBar as HTMLElement).style.position = 'fixed';
+      (stickyBar as HTMLElement).style.bottom = '0';
+      (stickyBar as HTMLElement).style.left = '0';
+      (stickyBar as HTMLElement).style.right = '0';
+      (stickyBar as HTMLElement).style.zIndex = '9999';
+    }
   }, []);
 
   const handleProceedToPayment = () => {
@@ -182,16 +192,17 @@ const CheckoutPage = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <Link href="/" className={styles.backLink}>
-          <svg className={styles.backIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Назад
-        </Link>
-        
-        <div className={styles.card}>
+    <>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <Link href="/" className={styles.backLink}>
+            <svg className={styles.backIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Назад
+          </Link>
+          
+          <div className={styles.card}>
           <h1 className={styles.title}>Данни за Поръчка</h1>
           
           {/* Plan Summary */}
@@ -308,11 +319,12 @@ const CheckoutPage = () => {
               </svg>
             </button>
           </div>
+          </div>
         </div>
       </div>
 
       {/* Sticky checkout bar */}
-      <div className={styles.stickyBar}>
+      <div className={styles.stickyBar} style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 9999 }}>
         <div className={styles.stickyBarContent}>
           <button
             onClick={() => setIsPackageDetailsOpen(true)}
@@ -400,7 +412,7 @@ const CheckoutPage = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

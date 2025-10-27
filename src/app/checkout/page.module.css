@@ -249,7 +249,7 @@
   border-radius: 0.25rem;
   overflow: hidden;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  font-size: 0.7rem;
+  font-size: 1em;
   table-layout: fixed;
 }
 
@@ -267,7 +267,7 @@
 
 .tableLabel {
   padding: 0.25rem 0.375rem;
-  font-size: 0.7rem;
+  font-size: 1em;
   font-weight: 500;
   color: var(--color-gray-500);
   background-color: #f8fafc;
@@ -282,7 +282,7 @@
 
 .tableValue {
   padding: 0.25rem 0.375rem;
-  font-size: 0.7rem;
+  font-size: 1em;
   font-weight: 600;
   color: var(--color-gray-900);
   background-color: white;
@@ -353,7 +353,7 @@
 }
 
 .paymentTitle {
-  font-size: 0.875rem;
+  font-size: 1em;
   font-weight: 600;
   color: #1e293b;
   margin: 0;
@@ -416,20 +416,21 @@
 }
 
 .securityText {
-  font-size: 0.75rem;
+  font-size: 1em;
   font-weight: 500;
   color: #64748b;
   margin: 0;
 }
 
 .securitySubtext {
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   color: #94a3b8;
   margin: 0;
 }
 
 .desktopCta {
-  display: none;
+  display: block;
+  margin-top: 1.5rem;
 }
 
 .desktopCtaTotal {
@@ -480,25 +481,7 @@
 }
 
 .stickyBar {
-  display: block;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background: white;
-  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-@media (min-width: 768px) {
-  .desktopCta {
-    display: block;
-    margin-top: 1.5rem;
-  }
-
-  .stickyBar {
-    display: none;
-  }
+  display: none;
 }
 
 .stickyBarContent {
@@ -569,6 +552,7 @@
   transform: translateY(-50%) translateX(0.25rem) scale(1.1);
 }
 
+
 @media (max-width: 640px) {
   .card {
     padding: 1.5rem;
@@ -583,6 +567,10 @@
     font-size: 1.25rem;
   }
 
+  .planTitle {
+    font-size: 1rem;
+  }
+
   .planDetails {
     grid-template-columns: 1fr;
   }
@@ -590,11 +578,11 @@
   .tableLabel,
   .tableValue {
     padding: 0.2rem 0.3rem;
-    font-size: 0.65rem;
+    font-size: 1em;
   }
 
   .esimTable {
-    font-size: 0.65rem;
+    font-size: 1em;
   }
 
   .tableIcon {
@@ -624,7 +612,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 30px;
   color: #94a3b8;
-  font-size: 0.75rem;
+  font-size: 1em;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -650,7 +638,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 30px;
   color: #94a3b8;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
