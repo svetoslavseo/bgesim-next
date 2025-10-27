@@ -1,23 +1,38 @@
 import { Metadata } from 'next';
+import { getPageBySlug } from '@/lib/content';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import AuthorProfile from '@/components/author/AuthorProfile';
 
-export const metadata: Metadata = {
-  title: 'Основател на Travel eSIM Global - Travel eSIM',
-  description: 'Васил Андреев - Travel eSIM BG',
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const authorPage = getPageBySlug('v-andreev');
+  
+  if (authorPage) {
+    return generateSEOMetadata(authorPage.seo);
+  }
+  
+  // Fallback metadata if author page data is not available
+  return {
     title: 'Основател на Travel eSIM Global - Travel eSIM',
     description: 'Васил Андреев - Travel eSIM BG',
-    type: 'article',
-    images: [
-      {
-        url: '/media/images/vasil-andreev-768x1024.jpeg',
-        width: 768,
-        height: 1024,
-        alt: 'Васил Андреев'
-      }
-    ]
-  }
-};
+    alternates: {
+      canonical: 'https://travelesim.bg/v-andreev/',
+    },
+    openGraph: {
+      title: 'Основател на Travel eSIM Global - Travel eSIM',
+      description: 'Васил Андреев - Travel eSIM BG',
+      type: 'article',
+      url: 'https://travelesim.bg/v-andreev/',
+      images: [
+        {
+          url: 'https://travelesim.bg/media/images/vasil-andreev-768x1024.jpeg',
+          width: 768,
+          height: 1024,
+          alt: 'Васил Андреев'
+        }
+      ]
+    }
+  };
+}
 
 // Latest blog posts data
 const latestPosts = [

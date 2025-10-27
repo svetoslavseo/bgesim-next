@@ -49,6 +49,9 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       title: 'eSIM за пътуване - Travel eSIM by Breeze',
       description: 'Останете свързани, където и да пътувате, с бърза и сигурна eSIM.',
+      alternates: {
+        canonical: 'https://travelesim.bg/',
+      },
     };
   }
   

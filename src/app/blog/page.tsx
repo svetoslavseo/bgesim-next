@@ -1,4 +1,5 @@
-import { getRecentPosts } from '@/lib/content';
+import { getRecentPosts, getPageBySlug } from '@/lib/content';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import Container from '@/components/layout/Container';
 import Section from '@/components/layout/Section';
 import Card from '@/components/ui/Card';
@@ -6,10 +7,22 @@ import { formatDate, extractExcerpt } from '@/lib/utils';
 import type { Metadata } from 'next';
 import styles from './page.module.css';
 
-export const metadata: Metadata = {
-  title: 'Блог',
-  description: 'Статии и новини за eSIM технологиите и мобилната свързаност',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const blogPage = getPageBySlug('blog');
+  
+  if (blogPage) {
+    return generateSEOMetadata(blogPage.seo);
+  }
+  
+  // Fallback metadata if blog page data is not available
+  return {
+    title: 'Блог',
+    description: 'Статии и новини за eSIM технологиите и мобилната свързаност',
+    alternates: {
+      canonical: 'https://travelesim.bg/blog/',
+    },
+  };
+}
 
 export default function BlogPage() {
   const posts = getRecentPosts(100); // Get all posts

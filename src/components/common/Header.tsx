@@ -18,12 +18,13 @@ export default function Header() {
                 priority
                 fetchPriority="high"
                 quality={90}
+                sizes="(max-width: 768px) 300px, 400px"
                 style={{
                   width: 'auto',
                   height: 'auto',
-                  maxHeight: '100px'
+                  maxHeight: '100px',
+                  maxWidth: '400px'
                 }}
-                sizes="(max-width: 768px) 300px, 400px"
               />
             </Link>
           </div>

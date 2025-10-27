@@ -1,6 +1,26 @@
 import React from 'react';
+import type { Metadata } from 'next';
+import { getPageBySlug } from '@/lib/content';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import styles from './page.module.css';
 import DynamicCTASection from '@/components/common/DynamicCTASection';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const contactPage = getPageBySlug('contacts');
+  
+  if (contactPage) {
+    return generateSEOMetadata(contactPage.seo);
+  }
+  
+  // Fallback metadata if contact page data is not available
+  return {
+    title: 'Контакти - Travel eSIM',
+    description: 'Контакти - Travel eSIM BG',
+    alternates: {
+      canonical: 'https://travelesim.bg/contacts/',
+    },
+  };
+}
 
 export default function ContactPage() {
   return (

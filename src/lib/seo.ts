@@ -25,13 +25,16 @@ export const SITE_CONFIG = {
  * Generate Next.js Metadata from SEO data
  */
 export function generateMetadata(seoData: SEOData): Metadata {
+  // Generate canonical URL - prefer seoData.canonical, then openGraph.url, then fall back to site URL
+  const canonicalUrl = seoData.canonical || seoData.openGraph.url || SITE_CONFIG.url;
+  
   const metadata: Metadata = {
     title: seoData.title,
     description: seoData.description,
     
-    // Canonical URL - self-canonical if not provided
+    // Canonical URL - self-canonical
     alternates: {
-      canonical: seoData.canonical || SITE_CONFIG.url,
+      canonical: canonicalUrl,
     },
     
     // Robots directives
@@ -83,11 +86,14 @@ export function generateStructuredData(seoData: SEOData): object | null {
  * Generate default metadata for a page without SEO data
  */
 export function generateDefaultMetadata(title?: string, description?: string, canonicalUrl?: string): Metadata {
+  // Ensure canonical URL always defaults to the provided URL or site URL
+  const finalCanonical = canonicalUrl || SITE_CONFIG.url;
+  
   return {
     title: title || SITE_CONFIG.name,
     description: description || SITE_CONFIG.description,
     alternates: {
-      canonical: canonicalUrl || SITE_CONFIG.url,
+      canonical: finalCanonical,
     },
     robots: {
       index: true,

@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   },
   description: SITE_CONFIG.description,
   metadataBase: new URL(SITE_CONFIG.url),
+  alternates: {
+    canonical: SITE_CONFIG.url,
+  },
   
   // Open Graph
   openGraph: {
@@ -83,9 +86,6 @@ export default function RootLayout({
         
         {/* Preconnect to external domains - critical only */}
         <link rel="preconnect" href="https://breezesim.com" />
-        
-        {/* Resource hints for critical resources */}
-        <link rel="preload" href="/media/images/TeSim-Logo-Breeze.png" as="image" type="image/png" />
         
         {/* Viewport meta tag for mobile optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
