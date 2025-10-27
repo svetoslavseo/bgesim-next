@@ -12,7 +12,7 @@ const navigationItems = [
   { label: 'Блог', href: '/blog' },
   {
     label: 'Държави',
-    href: '/durjavi',
+    href: '#',
     submenu: [
       { label: 'eSIM Турция', href: '/turcia' },
       { label: 'eSIM Сърбия', href: '/esim-serbia' },
@@ -21,6 +21,7 @@ const navigationItems = [
       { label: 'eSIM Тайланд', href: '/esim-thailand' },
       { label: 'eSIM Дубай', href: '/esim-dubai' },
       { label: 'eSIM Египет', href: '/esim-egipet' },
+      { label: 'Всички държави', href: '/durjavi' },
     ]
   },
   {
@@ -56,18 +57,24 @@ function Navigation() {
   }, []);
 
   const handleMouseEnter = useMemo(() => (label: string) => {
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
-      hoverTimeoutRef.current = null;
+    // Only handle mouse events on desktop (not mobile)
+    if (window.innerWidth > 1120) {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+        hoverTimeoutRef.current = null;
+      }
+      setOpenSubmenu(label);
     }
-    setOpenSubmenu(label);
   }, []);
 
   const handleMouseLeave = useMemo(() => () => {
-    const timeout = setTimeout(() => {
-      setOpenSubmenu(null);
-    }, 150); // Small delay to prevent accidental closing
-    hoverTimeoutRef.current = timeout;
+    // Only handle mouse events on desktop (not mobile)
+    if (window.innerWidth > 1120) {
+      const timeout = setTimeout(() => {
+        setOpenSubmenu(null);
+      }, 150); // Small delay to prevent accidental closing
+      hoverTimeoutRef.current = timeout;
+    }
   }, []);
 
   // Cleanup timeout on unmount
@@ -112,42 +119,15 @@ function Navigation() {
           >
             {item.submenu ? (
               <>
-                {item.href && item.href !== '#' ? (
-                  <Link
-                    href={item.href}
-                    className={classNames(
-                      styles.navLink,
-                      isActive(item.href) && styles.navLinkActive
-                    )}
-                    onClick={(e) => {
-                      // On mobile, toggle submenu on first click
-                      if (window.innerWidth <= 1120) {
-                        if (openSubmenu !== item.label) {
-                          e.preventDefault();
-                          toggleSubmenu(item.label);
-                        } else {
-                          // If submenu is already open, let the link navigate and close mobile menu
-                          setMobileMenuOpen(false);
-                        }
-                      }
-                    }}
-                    aria-expanded={openSubmenu === item.label}
-                    aria-haspopup="true"
-                  >
-                    {item.label}
-                    <span className={styles.arrow}>▼</span>
-                  </Link>
-                ) : (
-                  <button
-                    className={styles.navLink}
-                    onClick={() => toggleSubmenu(item.label)}
-                    aria-expanded={openSubmenu === item.label}
-                    aria-haspopup="true"
-                  >
-                    {item.label}
-                    <span className={styles.arrow}>▼</span>
-                  </button>
-                )}
+                <button
+                  className={styles.navLink}
+                  onClick={() => toggleSubmenu(item.label)}
+                  aria-expanded={openSubmenu === item.label}
+                  aria-haspopup="true"
+                >
+                  {item.label}
+                  <span className={styles.arrow}>▼</span>
+                </button>
                 {openSubmenu === item.label && (
                   <ul className={styles.submenu}>
                     {item.submenu.map((subItem) => (
