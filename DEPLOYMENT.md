@@ -124,9 +124,16 @@ netlify deploy --prod --dir=out
 
 **Configuration:**
 
-The project includes `nixpacks.toml` which configures Railway to:
+The project includes `nixpacks.toml` and `server.js` which configures Railway to:
 - Build the Next.js static export (`npm run build`)
-- Serve the static files from `out/` directory (`npm start`)
+- Serve the static files from `out/` directory with custom server
+- Automatically redirect URLs without trailing slashes to URLs with trailing slashes (301 redirect)
+
+**Trailing Slash Redirects:**
+The custom `server.js` handles 301 redirects for URLs without trailing slashes:
+- Example: `https://yoursite.com/about` → `https://yoursite.com/about/`
+- Static files (CSS, JS, images) are not redirected
+- Proper SEO-friendly 301 redirects implemented
 
 **Custom Domain:**
 

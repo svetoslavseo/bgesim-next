@@ -1,0 +1,24 @@
+# Netlify redirects
+# Redirect URLs without trailing slash to version with trailing slash (301)
+
+# Static files - no redirect
+/favicon.ico 200
+/robots.txt 200
+/sitemap.xml 200
+/*.json 200
+/*.js 200
+/*.css 200
+/*.png 200
+/*.jpg 200
+/*.jpeg 200
+/*.svg 200
+/*.webp 200
+/*.ico 200
+/*.woff 200
+/*.woff2 200
+/*.ttf 200
+/*.eot 200
+
+# Redirect URLs without trailing slash
+/* /:splat/ 301
+

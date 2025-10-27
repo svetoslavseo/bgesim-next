@@ -9,5 +9,5 @@ nixPkgs = ["nodejs-20_x"]
 cmds = ["npm ci", "npm run build"]
 
 [start]
-cmd = "npm start"
+cmd = "node server.js"
 
