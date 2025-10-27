@@ -111,7 +111,30 @@ netlify deploy --prod --dir=out
   status = 404
 ```
 
-### Option 3: Cloudflare Pages
+### Option 3: Railway
+
+**Automatic Deployment:**
+
+1. Push your code to GitHub
+2. Visit [railway.app](https://railway.app)
+3. Click "New Project" → "Deploy from GitHub repo"
+4. Select your repository
+5. Railway will auto-detect the configuration from `nixpacks.toml`
+6. The build will run automatically and your site will be live
+
+**Configuration:**
+
+The project includes `nixpacks.toml` which configures Railway to:
+- Build the Next.js static export (`npm run build`)
+- Serve the static files from `out/` directory (`npm start`)
+
+**Custom Domain:**
+
+1. In Railway project settings, click "Settings" → "Networking"
+2. Click "Generate Domain" or add your custom domain
+3. Railway provides SSL automatically
+
+### Option 4: Cloudflare Pages
 
 **Automatic Deployment:**
 
@@ -145,7 +168,7 @@ wrangler pages publish out --project-name=your-project-name
 3. Add your domain (e.g., travelesim.bg)
 4. Update your DNS records as instructed
 
-### Option 4: GitHub Pages
+### Option 5: GitHub Pages
 
 **Setup:**
 
@@ -212,7 +235,7 @@ jobs:
 2. Add your custom domain
 3. Update DNS records with CNAME or A record
 
-### Option 5: AWS S3 + CloudFront
+### Option 6: AWS S3 + CloudFront
 
 **Setup:**
 
@@ -240,7 +263,7 @@ aws cloudfront create-invalidation --distribution-id YOUR_DIST_ID --paths "/*"
    - 404 → /404.html (404)
    - 403 → /404.html (404)
 
-### Option 6: Traditional Web Hosting
+### Option 7: Traditional Web Hosting
 
 For traditional hosting (cPanel, Plesk, etc.):
 
@@ -308,6 +331,9 @@ CNAME: cname.vercel-dns.com
 A record: 75.2.60.5
 CNAME: YOUR-SITE.netlify.app
 ```
+
+### For Railway:
+Railway provides automatic domain and SSL. Just add your custom domain in Railway dashboard.
 
 ### For Cloudflare Pages:
 Cloudflare automatically manages DNS if your domain is on Cloudflare.

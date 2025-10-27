@@ -16,7 +16,7 @@
     "update-rates": "tsx scripts/update-exchange-rates.ts",
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "serve out",
     "lint": "next lint",
     "type-check": "tsc --noEmit"
   },
@@ -24,7 +24,8 @@
     "marked": "^16.4.1",
     "next": "^14.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "serve": "^14.2.2"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
