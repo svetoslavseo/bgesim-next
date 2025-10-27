@@ -3,9 +3,8 @@ import BenefitsSection from '@/components/country/BenefitsSection';
 import CompactPlansSectionWrapper from '@/components/country/CompactPlansSectionWrapper';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
-import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
-import CTASection from '@/components/country/CTASection';
+import DynamicCTASection from '@/components/common/DynamicCTASection';
 import { Metadata } from 'next';
 import { getLowestPriceInBGN } from '@/lib/sailyApi';
 import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
@@ -49,11 +48,11 @@ export default function DubaiPage() {
         title="eSIM за Дубай"
         subtitle="С eSIM получаваш интернет веднага – без нужда от физическа SIM карта или посещение в магазин. Получаваш QR код по имейл, сканираш го и се свързваш за минути."
         features={[
-          'Бързо и надеждно',
-          'Работи в над 190 държави',
-          'Мигновено активиране'
+          'Интернет още в летището при кацане',
+          'Избягвай скъпия роуминг в Дубай',
+          'Без физическа карта всичко в телефона'
         ]}
-        countryName="Dubai"
+        countryName="Дубай"
         countryCode="AE"
       />
 
@@ -62,7 +61,7 @@ export default function DubaiPage() {
         benefits={[
           {
             title: 'Дигитална SIM карта',
-            description: 'eSIM е дигитална SIM карта. Не ти трябва пластика или чип. След като направиш поръчка, получаваш QR код по имейл. Сканираш го с телефона си и активираш интернет плана за няколко минути. В Дубай това е практичен избор – не губиш време в търсене на магазини или попълване на документи. Всичко става онлайн и бързо.'
+            description: '<a href="/blog/kakvo-e-esim/">eSIM е дигитална SIM карта</a>. Не ти трябва пластика или чип. След като направиш поръчка, получаваш QR код по имейл. Сканираш го с телефона си и активираш интернет плана за няколко минути. В Дубай това е практичен избор – не губиш време в търсене на магазини или попълване на документи. Всичко става онлайн и бързо.'
           }
         ]}
         image="/media/images/People-1.png"
@@ -71,7 +70,7 @@ export default function DubaiPage() {
 
       <CompactPlansSectionWrapper
         title="Избери от всички налични eSIM планове с покритие в Дубай"
-        countryName="Dubai"
+        countryName="Дубай"
         countryCode="AE"
       />
 
@@ -100,22 +99,25 @@ export default function DubaiPage() {
       />
 
       <HowToBuySection
-        title="Как да поръчаш и активираш eSIM?"
+        title="Как да закупите план за Дубай?"
         steps={[
           {
             number: '1',
-            title: 'Избери подходящия план',
-            description: 'Избери подходящия план според продължителността на пътуването.'
+            title: 'Изберете вашия план',
+            description: 'Изберете вашата дестинация и изберете вашия план за данни за пътуване с eSIM.',
+            image: '/media/images/how-to-images/Step 1 Saily.png'
           },
           {
             number: '2',
-            title: 'Получаваш eSIM-а по имейл',
-            description: 'Получаваш QR код и инструкции по имейл.'
+            title: 'Изтеглете и настройте вашия eSIM',
+            description: 'Настройте eSIM на вашето устройство, следвайки инструкциите в приложението.',
+            image: '/media/images/how-to-images/Step 2 Saily.png'
           },
           {
             number: '3',
-            title: 'Сканираш и активираш',
-            description: 'Сканираш кода с телефона си и активираш връзката. Интернетът тръгва веднага.'
+            title: 'Наслаждавайте се на свързаността!',
+            description: 'Вашият план ще се активира, когато стигнете до дестинацията си или 30 дни след покупката.',
+            image: '/media/images/how-to-images/Step 3 Saily.png'
           }
         ]}
         ctaUrl="https://breezesim.com/products/esimg_ae_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
@@ -127,52 +129,41 @@ export default function DubaiPage() {
         countryName="Дубай"
         rows={[
           {
-            feature: 'Активация',
-            esim: 'Мигновена с QR код',
-            roaming: 'Автоматична, но скъпа',
-            localSim: 'Изисква магазин'
+            feature: 'Включване',
+            esim: 'Незабавно стартиране',
+            roaming: 'Автоматично, но скъпо',
+            localSim: 'Нужен е магазин'
           },
           {
-            feature: 'Цена',
-            esim: 'Изгодни предплатени планове',
+            feature: 'Разходи',
+            esim: 'Предплатени тарифи',
             roaming: 'Обикновено €5–€12/ден или повече',
-            localSim: 'Евтина, но може да изисква регистрация'
+            localSim: 'Евтино, но може да изисква регистрация'
           },
           {
-            feature: 'Интернет скорост',
+            feature: 'Мрежова скорост',
             esim: '4G/5G',
             roaming: 'Зависи от оператора',
             localSim: '4G/5G'
           },
           {
-            feature: 'Телефонен номер',
+            feature: 'Номер за обаждания',
             esim: 'Запазваш своя',
             roaming: 'Запазваш своя',
             localSim: 'Нов местен номер'
           },
           {
-            feature: 'Удобство',
-            esim: 'Изцяло дигитално',
+            feature: 'Простота',
+            esim: 'Напълно дигитално',
             roaming: 'Лесно, но скъпо',
-            localSim: 'Изисква лично посещение'
+            localSim: 'Нужно лично посещение'
           },
           {
-            feature: 'Подходящо за',
+            feature: 'Най-добро за',
             esim: 'Повечето пътешественици',
             roaming: 'Само за спешни случаи',
             localSim: 'Бюджетни пътувания с дълъг престой'
           }
-        ]}
-      />
-
-      <DeviceCompatibility
-        title="Съвместим ли е телефонът ти с eSIM?"
-        description="Повечето съвременни телефони поддържат eSIM. Провери в: Настройки → Мобилни данни → Добавяне на eSIM"
-        devices={[
-          'iPhone – XR, XS и по-нови',
-          'Samsung – Galaxy S20 и по-нови',
-          'Google Pixel – Pixel 3 и по-нови',
-          'Други – Провери настройките на устройството си'
         ]}
       />
 
@@ -194,13 +185,7 @@ export default function DubaiPage() {
         ]}
       />
 
-      <CTASection
-        title="Купи своята eSIM карта сега и спести пари от роуминг."
-        description="Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. Гарантирано ниски цени от 15лв за 5GB."
-        ctaUrl="https://breezesim.com/?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        ctaText="КУПИ СЕГА"
-        variant="purple"
-      />
+      <DynamicCTASection />
       </main>
     </>
   );

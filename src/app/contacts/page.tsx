@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './page.module.css';
+import DynamicCTASection from '@/components/common/DynamicCTASection';
 
 export default function ContactPage() {
   return (
@@ -12,9 +13,9 @@ export default function ContactPage() {
           <h1 className={styles.headline}>Контакти</h1>
           <div className={styles.description}>
             Travel eSIM предлага достъпни и лесни за използване мобилни планове за данни в над 190 държави. 
-            Купуването и активирането на eSIM стават чрез Travel eSIM, но всички въпроси след покупката, 
-            като помощ при проблеми и въпроси за акаунта, се обработват от{' '}
-            <a href="https://breezesim.com/">Breeze</a>. 
+            Избирането на подходящ eSIM план става чрез Travel eSIM, но покупката и всички въпроси след покупката, 
+            като помощ при проблеми и въпроси за акаунта, се обработват от нашият афилиейт партньор{' '}
+            <a href="https://saily.com/">Saily</a>. 
             Въпреки това, екипът на Travel eSIM също е тук, за да ти помогне, когато имаш нужда.
           </div>
           
@@ -63,60 +64,55 @@ export default function ContactPage() {
             
             <div className={styles.contactColumn}>
               <div className={styles.contactBlock}>
-                <h3 className={styles.contactHeading}>Контакти - Breeze</h3>
+                <h3 className={styles.contactHeading}>Контакти - Saily</h3>
                 <div className={styles.addressWrapper}>
                   <div className={styles.addressLabel}>
                     <strong>Адрес: </strong>
                   </div>
                   <div className={styles.addressText}>
-                    Powered By Breeze (C/O eSIM Go)<br />
-                    Guardian House,<br />
-                    North Bar Street,<br />
-                    Banbury,<br />
-                    Oxon,<br />
-                    OX16 0TB<br /><br />
+                    Saily Inc.<br />
+                    330 N Wabash Ave<br />
+                    Chicago, IL 60611<br />
+                    United States of America<br /><br />
                   </div>
                 </div>
-                <a 
-                  href="https://help.breezesim.com/hc/en-gb/requests/new?store=breeze" 
-                  target="_blank" 
-                  rel="nofollow"
-                  className={styles.requestButton}
-                >
-                  Изпрати заявка
-                </a>
+                <div className={styles.addressWrapper}>
+                  <div className={styles.addressLabel}>
+                    <strong>GDPR: </strong>
+                  </div>
+                  <div className={styles.addressText}>
+                    За потребители от Европейското икономическо пространство (ЕИП), 
+                    можете да упражните правата си според Общият регламент за защита на данните 
+                    (ОРЗД), като се свържете с нас на{' '}
+                    <a href="mailto:privacy@saily.com">privacy@saily.com</a>.
+                  </div>
+                </div>
+                <div className={styles.buttonGroup}>
+                  <a 
+                    href="https://support.saily.com/hc/en-us/articles/16420576170652-What-is-Saily-s-refund-policy" 
+                    target="_blank" 
+                    rel="nofollow"
+                    className={styles.requestButton}
+                  >
+                    Политика за възстановяване
+                  </a>
+                  <a 
+                    href="https://support.saily.com/hc/en-us/requests/new" 
+                    target="_blank" 
+                    rel="nofollow"
+                    className={styles.requestButton}
+                  >
+                    Изпрати заявка
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Promotional Banner */}
-        <section className={styles.promoSection}>
-          <div className={styles.promoContent}>
-            <img 
-              alt="" 
-              src="/media/images/1.png" 
-              className={styles.promoImage}
-            />
-            <div className={styles.promoText}>
-              <h3 className={styles.promoHeading}>
-                Купи своята eSIM карта сега и спести пари от роуминг.
-              </h3>
-              <div className={styles.promoDescription}>
-                Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. 
-                Гарантирано ниски цени от 15лв за 5GB.
-              </div>
-            </div>
-          </div>
-          <a 
-            href="http://localhost:3000/durjavi/" 
-            className={styles.buyButton}
-          >
-            Дестинации
-          </a>
         </section>
 
       </main>
+
+      <DynamicCTASection />
 
       {/* SVG Icons */}
       <svg style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">

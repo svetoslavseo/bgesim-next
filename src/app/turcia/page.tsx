@@ -3,9 +3,8 @@ import BenefitsSection from '@/components/country/BenefitsSection';
 import CompactPlansSectionWrapper from '@/components/country/CompactPlansSectionWrapper';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
-import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
-import CTASection from '@/components/country/CTASection';
+import DynamicCTASection from '@/components/common/DynamicCTASection';
 import { Metadata } from 'next';
 import { getLowestPriceInBGN } from '@/lib/sailyApi';
 import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
@@ -109,11 +108,11 @@ export default function TurciaPage() {
         title="eSIM за Турция с мобилен интернет"
         subtitle="Пътувате до Турция? С eSIM картата получавате интернет веднага – без роуминг и сложни настройки!"
         features={[
-          'Бързо активиране',
-          'Без вадене на сегашната SIM карта',
-          'Без физическа SIM карта или ходене до офиси'
+          'Моментална активация в Турция',
+          'Запазваш основната SIM и добавяш данни',
+          'Активиране онлайн без документи'
         ]}
-        countryName="Turkey"
+        countryName="Турция"
         countryCode="TR"
       />
 
@@ -122,7 +121,7 @@ export default function TurciaPage() {
         benefits={[
           {
             title: 'Дигитална SIM карта',
-            description: 'eSIM е модерно решение за мобилна свързаност. Тя заменя стандартната SIM карта с вграден чип в телефона ви. След покупка получавате QR код, който сканирате, за да активирате услугата.'
+            description: '<a href="/blog/kakvo-e-esim/">eSIM е модерно решение</a> за мобилна свързаност. Тя заменя стандартната SIM карта с вграден чип в телефона ви. След покупка получавате QR код, който сканирате, за да активирате услугата.'
           }
         ]}
         image="/media/images/Untitled-design-2.png"
@@ -131,7 +130,7 @@ export default function TurciaPage() {
 
       <CompactPlansSectionWrapper
         title="Избери от всички налични eSIM планове с покритие в Турция"
-        countryName="Turkey"
+        countryName="Турция"
         countryCode="TR"
       />
 
@@ -165,17 +164,20 @@ export default function TurciaPage() {
           {
             number: '1',
             title: 'Изберете вашия план',
-            description: 'Разгледайте и изберете най-добрия eSIM план за вашата дестинация и нужди чрез нашата платформа.'
+            description: 'Изберете вашата дестинация и изберете вашия план за данни за пътуване с eSIM.',
+            image: '/media/images/how-to-images/Step 1 Saily.png'
           },
           {
             number: '2',
-            title: 'Активирайте eSIM',
-            description: 'След като закупите плана, ще получите QR код от доставчика. Сканирайте го директно от телефона си, за да активирате услугата.'
+            title: 'Изтеглете и настройте вашия eSIM',
+            description: 'Настройте eSIM на вашето устройство, следвайки инструкциите в приложението.',
+            image: '/media/images/how-to-images/Step 2 Saily.png'
           },
           {
             number: '3',
-            title: 'Наслаждавайте се на пътуването',
-            description: 'Вашият eSIM е готов за използване! Наслаждавайте се на бърз и достъпен интернет, без да се притеснявате за роуминг такси.'
+            title: 'Наслаждавайте се на свързаността!',
+            description: 'Вашият план ще се активира, когато стигнете до дестинацията си или 30 дни след покупката.',
+            image: '/media/images/how-to-images/Step 3 Saily.png'
           }
         ]}
       />
@@ -185,52 +187,41 @@ export default function TurciaPage() {
         countryName="Турция"
         rows={[
           {
-            feature: 'Активация',
-            esim: 'Мигновена с QR код',
-            roaming: 'Автоматична, но скъпа',
-            localSim: 'Изисква магазин'
+            feature: 'Стартиране',
+            esim: 'Моментално включване',
+            roaming: 'Автоматично, но скъпо',
+            localSim: 'Нужен е магазин'
           },
           {
-            feature: 'Цена',
-            esim: 'Изгодни предплатени планове',
+            feature: 'Стойност',
+            esim: 'Предплатени пакети',
             roaming: 'Обикновено €5–€12/ден или повече',
-            localSim: 'Евтина, но може да изисква регистрация'
+            localSim: 'Евтино, но може да изисква регистрация'
           },
           {
-            feature: 'Интернет скорост',
+            feature: 'Скорост на мрежата',
             esim: '4G/5G',
             roaming: 'Зависи от оператора',
             localSim: '4G/5G'
           },
           {
-            feature: 'Телефонен номер',
+            feature: 'Мобилен номер',
             esim: 'Запазваш своя',
             roaming: 'Запазваш своя',
             localSim: 'Нов турски номер'
           },
           {
-            feature: 'Удобство',
-            esim: 'Изцяло дигитално',
+            feature: 'Практичност',
+            esim: 'Напълно дигитално',
             roaming: 'Лесно, но скъпо',
-            localSim: 'Изисква лично посещение'
+            localSim: 'Нужно лично посещение'
           },
           {
-            feature: 'Подходящо за',
-            esim: 'Повечето пътешественици',
+            feature: 'Идеално за',
+            esim: 'Повечето туристи',
             roaming: 'Само за спешни случаи',
             localSim: 'Бюджетни пътувания с дълъг престой'
           }
-        ]}
-      />
-
-      <DeviceCompatibility
-        title="Съвместим ли е телефонът ти с eSIM?"
-        description="Повечето съвременни телефони поддържат eSIM. Провери в: Настройки → Мобилни данни → Добавяне на eSIM"
-        devices={[
-          'iPhone – XR, XS и по-нови',
-          'Samsung – Galaxy S20 и по-нови',
-          'Google Pixel – Pixel 3 и по-нови',
-          'Други – Провери настройките на устройството си'
         ]}
       />
 
@@ -252,13 +243,7 @@ export default function TurciaPage() {
         ]}
       />
 
-      <CTASection
-        title="Купи своята eSIM карта сега и спести пари от роуминг."
-        description="Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. Гарантирано ниски цени от 15лв за 5GB."
-        ctaUrl="https://breezesim.com/?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        ctaText="КУПИ СЕГА"
-        variant="purple"
-      />
+      <DynamicCTASection />
       </main>
     </>
   );

@@ -21,6 +21,7 @@ export default function PlansSectionWrapper({
   const [plans, setPlans] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const loadPlans = async () => {
@@ -28,19 +29,27 @@ export default function PlansSectionWrapper({
         setIsLoading(true);
         setError(null);
         
-        // For now, use fallback plans to avoid API issues during development
-        const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
-        setPlans(fallbackPlans);
-        
-        // TODO: Uncomment when ready to test API
-        // const allPlans = await fetchSailyPlans();
-        // const countryPlans = getPlansForCountry(allPlans, countryCode);
-        // 
-        // if (countryPlans.length > 0) {
-        //   setPlans(countryPlans);
-        // } else {
-        //   setPlans(fallbackPlans);
-        // }
+        // Fetch real plans from server-side API route
+        try {
+          const response = await fetch(`/api/saily-plans?countryCode=${countryCode}`);
+          const apiData = await response.json();
+          
+          if (apiData.success && apiData.plans && apiData.plans.length > 0) {
+            setPlans(apiData.plans);
+            setLastUpdated(apiData.lastUpdated);
+          } else {
+            // Use fallback plans if API fails
+            const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+            setPlans(fallbackPlans);
+            setLastUpdated(undefined);
+          }
+        } catch (apiError) {
+          console.error('Error fetching from API:', apiError);
+          // Use fallback plans
+          const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+          setPlans(fallbackPlans);
+          setLastUpdated(undefined);
+        }
       } catch (error) {
         console.error('Error loading plans:', error);
         setError('Не може да се заредят плановете от API');
@@ -48,6 +57,7 @@ export default function PlansSectionWrapper({
         // Use fallback plans
         const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
         setPlans(fallbackPlans);
+        setLastUpdated(undefined);
       } finally {
         setIsLoading(false);
       }

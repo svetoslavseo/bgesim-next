@@ -3,9 +3,8 @@ import BenefitsSection from '@/components/country/BenefitsSection';
 import CompactPlansSectionWrapper from '@/components/country/CompactPlansSectionWrapper';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
-import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
-import CTASection from '@/components/country/CTASection';
+import DynamicCTASection from '@/components/common/DynamicCTASection';
 import { Metadata } from 'next';
 import { getLowestPriceInBGN } from '@/lib/sailyApi';
 import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
@@ -49,11 +48,11 @@ export default function SerbiaPage() {
         title="eSIM Сърбия"
         subtitle="Забрави за високите такси за роуминг. С eSIM картата получавате интернет веднага – без роуминг и сложни настройки!"
         features={[
-          'Бързо и надеждно',
-          'Работи в над 190+ държави',
-          'Мигновено активиране'
+          'Директно свързване към сръбски мрежи',
+          'Активация преди границата',
+          'Без риск от загуба на карта'
         ]}
-        countryName="Serbia"
+        countryName="Сърбия"
         countryCode="RS"
       />
 
@@ -71,7 +70,7 @@ export default function SerbiaPage() {
 
       <CompactPlansSectionWrapper
         title="Избери от всички налични eSIM планове с покритие в Сърбия"
-        countryName="Serbia"
+        countryName="Сърбия"
         countryCode="RS"
       />
 
@@ -100,22 +99,25 @@ export default function SerbiaPage() {
       />
 
       <HowToBuySection
-        title="Как да си вземеш eSIM за Сърбия?"
+        title="Как да закупите план за Сърбия?"
         steps={[
           {
             number: '1',
-            title: 'Избери план',
-            description: 'Избери пакет с мобилни данни според престоя ти.'
+            title: 'Изберете вашия план',
+            description: 'Изберете вашата дестинация и изберете вашия план за данни за пътуване с eSIM.',
+            image: '/media/images/how-to-images/Step 1 Saily.png'
           },
           {
             number: '2',
-            title: 'Купи онлайн',
-            description: 'Завърши поръчката и ще получиш QR код по имейл.'
+            title: 'Изтеглете и настройте вашия eSIM',
+            description: 'Настройте eSIM на вашето устройство, следвайки инструкциите в приложението.',
+            image: '/media/images/how-to-images/Step 2 Saily.png'
           },
           {
             number: '3',
-            title: 'Активирай веднага',
-            description: 'Сканирай кода и инсталирай eSIM.'
+            title: 'Наслаждавайте се на свързаността!',
+            description: 'Вашият план ще се активира, когато стигнете до дестинацията си или 30 дни след покупката.',
+            image: '/media/images/how-to-images/Step 3 Saily.png'
           }
         ]}
       />
@@ -125,19 +127,19 @@ export default function SerbiaPage() {
         countryName="Сърбия"
         rows={[
           {
-            feature: 'Активация',
-            esim: 'Мигновена с QR код',
-            roaming: 'Автоматична, но скъпа',
-            localSim: 'Изисква магазин'
+            feature: 'Започване',
+            esim: 'Моментално включване',
+            roaming: 'Автоматично, но скъпо',
+            localSim: 'Нужен е магазин'
           },
           {
-            feature: 'Цена',
-            esim: 'Изгодни предплатени планове',
+            feature: 'Ценообразуване',
+            esim: 'Предплатени планове',
             roaming: 'Обикновено €5–€12/ден или повече',
-            localSim: 'Евтина, но може да изисква регистрация'
+            localSim: 'Евтино, но може да изисква регистрация'
           },
           {
-            feature: 'Интернет скорост',
+            feature: 'Бързина на интернет',
             esim: '4G/5G',
             roaming: 'Зависи от оператора',
             localSim: '4G/5G'
@@ -149,28 +151,17 @@ export default function SerbiaPage() {
             localSim: 'Нов сръбски номер'
           },
           {
-            feature: 'Удобство',
-            esim: 'Изцяло дигитално',
+            feature: 'Лекота на използване',
+            esim: 'Напълно дигитално',
             roaming: 'Лесно, но скъпо',
-            localSim: 'Изисква лично посещение'
+            localSim: 'Нужно лично посещение'
           },
           {
             feature: 'Подходящо за',
-            esim: 'Повечето пътешественици',
+            esim: 'Повечето туристи',
             roaming: 'Само за спешни случаи',
             localSim: 'Бюджетни пътувания с дълъг престой'
           }
-        ]}
-      />
-
-      <DeviceCompatibility
-        title="Съвместим ли е телефонът ти с eSIM?"
-        description="Повечето съвременни телефони поддържат eSIM. Провери в: Настройки → Мобилни данни → Добавяне на eSIM"
-        devices={[
-          'iPhone – XR, XS и по-нови',
-          'Samsung – Galaxy S20 и по-нови',
-          'Google Pixel – Pixel 3 и по-нови',
-          'Други – Провери настройките на устройството си'
         ]}
       />
 
@@ -192,13 +183,7 @@ export default function SerbiaPage() {
         ]}
       />
 
-      <CTASection
-        title="Купи своята eSIM карта сега и спести пари от роуминг."
-        description="Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. Гарантирано ниски цени от 15лв за 5GB."
-        ctaUrl="https://breezesim.com/?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        ctaText="КУПИ СЕГА"
-        variant="purple"
-      />
+      <DynamicCTASection />
       </main>
     </>
   );

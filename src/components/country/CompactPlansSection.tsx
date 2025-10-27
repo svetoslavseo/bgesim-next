@@ -22,6 +22,7 @@ interface CompactPlansSectionProps {
   title: string;
   plans: Plan[];
   countryName?: string;
+  lastUpdated?: string;
   onPlanSelect?: (plan: Plan) => void;
 }
 
@@ -29,6 +30,7 @@ export default function CompactPlansSection({
   title, 
   plans, 
   countryName = 'USA',
+  lastUpdated,
   onPlanSelect
 }: CompactPlansSectionProps) {
   const { currency, exchangeRates } = useCurrency();
@@ -169,6 +171,9 @@ export default function CompactPlansSection({
     <section className={styles.plans}>
       <div className={styles.container}>
         <h2 className={styles.title}>{title}</h2>
+        {lastUpdated && (
+          <p className={styles.lastUpdated}>Последно обновяване: {lastUpdated}</p>
+        )}
         
         <div className={styles.planSelector}>
           {/* Plan Type Switcher */}

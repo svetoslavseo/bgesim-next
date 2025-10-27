@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { generateCanonicalUrl } from '@/lib/seo';
+import DynamicCTASection from '@/components/common/DynamicCTASection';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -111,7 +112,7 @@ export default function DurjaviPage() {
         </section>
 
         {/* Countries Grid */}
-        <section className={styles.countriesSection}>
+        <section className={styles.countriesSection} id="Дестинации">
           <div className={styles.container}>
             <h2 className={styles.sectionTitle}>Популярни дестинации</h2>
             <div className={styles.grid}>
@@ -217,24 +218,7 @@ export default function DurjaviPage() {
         </section>
 
         {/* CTA Section */}
-        <section className={styles.ctaSection}>
-          <div className={styles.container}>
-            <div className={styles.ctaContent}>
-              <h2 className={styles.ctaTitle}>Готови да започнете?</h2>
-              <p className={styles.ctaDescription}>
-                Изберете вашата дестинация и купете eSIM план за секунди. Без роуминг такси, без напрежение.
-              </p>
-              <a
-                href="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-                className={styles.ctaButton}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Виж Всички Оферти
-              </a>
-            </div>
-          </div>
-        </section>
+        <DynamicCTASection />
       </main>
     </>
   );

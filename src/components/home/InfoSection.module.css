@@ -17,7 +17,7 @@
 }
 
 .title {
-  font-size: 62px;
+  font-size: 60px;
   font-weight: 700;
   color: #1a1a1a;
   margin: 0 0 1rem;
@@ -59,7 +59,7 @@
   position: relative;
   border-radius: 30px;
   padding: 3px;
-  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  background: transparent;
 }
 
 .image {

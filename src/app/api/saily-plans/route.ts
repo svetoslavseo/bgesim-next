@@ -875,12 +875,24 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    // Get current date in Bulgarian format
+    const now = new Date();
+    const dateFormatter = new Intl.DateTimeFormat('bg-BG', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    const lastUpdated = dateFormatter.format(now);
+
     return NextResponse.json({
       success: true,
       plans: filteredPlans,
       totalPlans: allPlans.length,
       filteredPlans: filteredPlans.length,
-      countryCode: countryCode || 'all'
+      countryCode: countryCode || 'all',
+      lastUpdated: lastUpdated
     });
 
   } catch (error) {

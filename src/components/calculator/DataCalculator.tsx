@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './DataCalculator.module.css';
 
 interface DataCategory {
@@ -80,6 +81,7 @@ const initialCategories: DataCategory[] = [
 ];
 
 export default function DataCalculator() {
+  const router = useRouter();
   const [categories, setCategories] = useState<DataCategory[]>(initialCategories);
   const [totalDaily, setTotalDaily] = useState(0);
   const [totalWeekly, setTotalWeekly] = useState(0);
@@ -106,8 +108,8 @@ export default function DataCalculator() {
   };
 
   const selectESIMPlan = () => {
-    // Redirect to Breeze
-    window.open('https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg', '_blank');
+    // Redirect to destinations page
+    router.push('/durjavi');
   };
 
   useEffect(() => {
@@ -127,19 +129,18 @@ export default function DataCalculator() {
           <h2 className={styles.sectionTitle}>
             Избери мобилните данни, които смяташ, че ще са ти нужни в чужбина
           </h2>
-          
-          <div className={styles.headers}>
-            <div className={styles.headerColumn}>
-              Средно дневно потребление на мобилни данни
-            </div>
-            <div className={styles.headerColumn}>
-              Средно седмично потребление на мобилни данни
-            </div>
+
+          <div className={styles.tableHeaders}>
+            <div className={styles.headerCategory}>Категория</div>
+            <div className={styles.headerInput}>Въведи стойност</div>
+            <div className={styles.headerSlider}>Регулирай</div>
+            <div className={styles.headerDaily}>Дневно</div>
+            <div className={styles.headerWeekly}>Седмично</div>
           </div>
 
           <div className={styles.categories}>
             {categories.map((category) => (
-              <div key={category.id} className={styles.category}>
+              <div key={category.id} className={styles.categoryRow}>
                 <div className={styles.categoryName}>{category.name}</div>
                 
                 <div className={styles.inputGroup}>
@@ -149,14 +150,9 @@ export default function DataCalculator() {
                     onChange={(e) => updateCategory(category.id, Number(e.target.value))}
                     className={styles.input}
                     min="0"
+                    placeholder="0"
                   />
                   <span className={styles.unit}>{category.unit}</span>
-                </div>
-                
-                <div className={styles.dataDisplay}>
-                  <div className={styles.dailyData}>
-                    {category.dailyData.toFixed(2)} GB
-                  </div>
                 </div>
                 
                 <div className={styles.sliderContainer}>
@@ -170,6 +166,10 @@ export default function DataCalculator() {
                   />
                 </div>
                 
+                <div className={styles.dailyData}>
+                  {category.dailyData.toFixed(2)} GB
+                </div>
+                
                 <div className={styles.weeklyData}>
                   {category.weeklyData.toFixed(2)} GB
                 </div>
@@ -179,38 +179,40 @@ export default function DataCalculator() {
         </section>
 
         <aside className={styles.summarySection}>
-          <h2 className={styles.summaryTitle}>
-            Средно потребление на мобилни данни
-          </h2>
-          
-          <div className={styles.summaryData}>
-            <div className={styles.summaryItem}>
-              <div className={styles.summaryLabel}>Дневно</div>
-              <div className={styles.summaryValue}>{totalDaily.toFixed(2)} GB</div>
+          <div className={styles.summaryContent}>
+            <h2 className={styles.summaryTitle}>
+              Средно потребление на мобилни данни
+            </h2>
+            
+            <div className={styles.summaryData}>
+              <div className={styles.summaryItem}>
+                <div className={styles.summaryLabel}>Дневно</div>
+                <div className={styles.summaryValue}>{totalDaily.toFixed(2)} GB</div>
+              </div>
+              <div className={styles.summaryItem}>
+                <div className={styles.summaryLabel}>Седмично</div>
+                <div className={styles.summaryValue}>{totalWeekly.toFixed(2)} GB</div>
+              </div>
+              <div className={styles.summaryItem}>
+                <div className={styles.summaryLabel}>Месечно</div>
+                <div className={styles.summaryValue}>{totalMonthly.toFixed(2)} GB</div>
+              </div>
             </div>
-            <div className={styles.summaryItem}>
-              <div className={styles.summaryLabel}>Седмично</div>
-              <div className={styles.summaryValue}>{totalWeekly.toFixed(2)} GB</div>
+            
+            <div className={styles.actions}>
+              <button 
+                onClick={resetCalculator}
+                className={styles.resetButton}
+              >
+                Рестартирай калкулатора
+              </button>
+              <button 
+                onClick={selectESIMPlan}
+                className={styles.selectButton}
+              >
+                Избери eSIM план
+              </button>
             </div>
-            <div className={styles.summaryItem}>
-              <div className={styles.summaryLabel}>Месечно</div>
-              <div className={styles.summaryValue}>{totalMonthly.toFixed(2)} GB</div>
-            </div>
-          </div>
-          
-          <div className={styles.actions}>
-            <button 
-              onClick={resetCalculator}
-              className={styles.resetButton}
-            >
-              Рестартирай калкулатора
-            </button>
-            <button 
-              onClick={selectESIMPlan}
-              className={styles.selectButton}
-            >
-              Избери eSIM план
-            </button>
           </div>
         </aside>
       </div>

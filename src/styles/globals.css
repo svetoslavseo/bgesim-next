@@ -44,7 +44,7 @@ body {
   font-synthesis: none;
   text-size-adjust: 100%;
   /* CSS containment to prevent layout recalculations */
-  contain: layout style;
+  contain: style;
 }
 
 /* Typography */

@@ -3,9 +3,8 @@ import BenefitsSection from '@/components/country/BenefitsSection';
 import CompactPlansSectionWrapper from '@/components/country/CompactPlansSectionWrapper';
 import HowToBuySection from '@/components/country/HowToBuySection';
 import ComparisonTable from '@/components/country/ComparisonTable';
-import DeviceCompatibility from '@/components/country/DeviceCompatibility';
 import FAQSection from '@/components/country/FAQSection';
-import CTASection from '@/components/country/CTASection';
+import DynamicCTASection from '@/components/common/DynamicCTASection';
 import { Metadata } from 'next';
 import { getLowestPriceInBGN } from '@/lib/sailyApi';
 import { generateCanonicalUrl, generateCountryBreadcrumbSchema } from '@/lib/seo';
@@ -49,11 +48,11 @@ export default function USAPage() {
         title="Купи eSIM за САЩ - Мобилен интернет без роуминг"
         subtitle="eSIM е дигитална SIM карта, която не е нужно да я поставяш в телефона. Активираш я с QR код и се свързваш с интернет в САЩ без да сменяш физическата карта."
         features={[
-          'Бързо и надеждно',
-          'Работи в над 200 държави',
-          'Мигновено активиране'
+          'Фиксирана цена без изненади',
+          'Покритие във всички 50 щата',
+          'Две карти работят паралелно'
         ]}
-        countryName="USA"
+        countryName="САЩ"
         countryCode="US"
       />
 
@@ -62,7 +61,7 @@ export default function USAPage() {
         benefits={[
           {
             title: 'Дигитална SIM карта',
-            description: 'eSIM е дигитална SIM карта, която не е нужно да я поставяш в телефона. Активираш я с QR код и се свързваш с интернет в САЩ без да сменяш физическата карта. Лесно и бързо и значително по-евтино от роуминг.'
+            description: '<a href="/blog/kakvo-e-esim/">eSIM е дигитална SIM карта</a>, която не е нужно да я поставяш в телефона. Активираш я с QR код и се свързваш с интернет в САЩ без да сменяш физическата карта. Лесно и бързо и значително по-евтино от роуминг.'
           }
         ]}
         image="/media/images/Untitled-design-2.png"
@@ -71,7 +70,7 @@ export default function USAPage() {
 
       <CompactPlansSectionWrapper
         title="Избери от всички налични eSIM планове с покритие в САЩ"
-        countryName="USA"
+        countryName="САЩ"
         countryCode="US"
       />
 
@@ -100,22 +99,25 @@ export default function USAPage() {
       />
 
       <HowToBuySection
-        title="Как работи eSIM за САЩ?"
+        title="Как да закупите план за САЩ?"
         steps={[
           {
             number: '1',
-            title: 'Купуваш предплатен план',
-            description: 'Избираш най-подходящия вариант за престоя ти в Америка.'
+            title: 'Изберете вашия план',
+            description: 'Изберете вашата дестинация и изберете вашия план за данни за пътуване с eSIM.',
+            image: '/media/images/how-to-images/Step 1 Saily.png'
           },
           {
             number: '2',
-            title: 'Получаваш QR код',
-            description: 'Изпращаме го по имейл веднага.'
+            title: 'Изтеглете и настройте вашия eSIM',
+            description: 'Настройте eSIM на вашето устройство, следвайки инструкциите в приложението.',
+            image: '/media/images/how-to-images/Step 2 Saily.png'
           },
           {
             number: '3',
-            title: 'Сканираш кода',
-            description: 'Следваш инструкциите за инсталация и вече имаш интернет навсякъде в САЩ.'
+            title: 'Наслаждавайте се на свързаността!',
+            description: 'Вашият план ще се активира, когато стигнете до дестинацията си или 30 дни след покупката.',
+            image: '/media/images/how-to-images/Step 3 Saily.png'
           }
         ]}
         ctaUrl="https://breezesim.com/products/esimg_us_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
@@ -127,52 +129,41 @@ export default function USAPage() {
         countryName="САЩ"
         rows={[
           {
-            feature: 'Активация',
-            esim: 'Мигновена с QR код',
-            roaming: 'Автоматична, но скъпа',
-            localSim: 'Изисква магазин'
+            feature: 'Включване',
+            esim: 'Незабавно стартиране',
+            roaming: 'Автоматично, но скъпо',
+            localSim: 'Нужен е магазин'
           },
           {
-            feature: 'Цена',
-            esim: 'Изгодни предплатени планове',
+            feature: 'Разходи',
+            esim: 'Предплатени тарифи',
             roaming: 'Обикновено €5–€12/ден или повече',
-            localSim: 'Евтина, но може да изисква регистрация'
+            localSim: 'Евтино, но може да изисква регистрация'
           },
           {
-            feature: 'Интернет скорост',
+            feature: 'Мрежова скорост',
             esim: '4G/5G',
             roaming: 'Зависи от оператора',
             localSim: '4G/5G'
           },
           {
-            feature: 'Телефонен номер',
+            feature: 'Номер за обаждания',
             esim: 'Запазваш своя',
             roaming: 'Запазваш своя',
             localSim: 'Нов американски номер'
           },
           {
-            feature: 'Удобство',
-            esim: 'Изцяло дигитално',
+            feature: 'Простота',
+            esim: 'Напълно дигитално',
             roaming: 'Лесно, но скъпо',
-            localSim: 'Изисква лично посещение'
+            localSim: 'Нужно лично посещение'
           },
           {
-            feature: 'Подходящо за',
+            feature: 'Най-добро за',
             esim: 'Повечето пътешественици',
             roaming: 'Само за спешни случаи',
             localSim: 'Бюджетни пътувания с дълъг престой'
           }
-        ]}
-      />
-
-      <DeviceCompatibility
-        title="Съвместим ли е телефонът ти с eSIM?"
-        description="Повечето съвременни телефони поддържат eSIM. Провери в: Настройки → Мобилни данни → Добавяне на eSIM"
-        devices={[
-          'iPhone – XR, XS и по-нови',
-          'Samsung – Galaxy S20 и по-нови',
-          'Google Pixel – Pixel 3 и по-нови',
-          'Други – Провери настройките на устройството си'
         ]}
       />
 
@@ -194,13 +185,7 @@ export default function USAPage() {
         ]}
       />
 
-      <CTASection
-        title="Купи своята eSIM карта сега и спести пари от роуминг."
-        description="Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. Гарантирано ниски цени от 15лв за 5GB."
-        ctaUrl="https://breezesim.com/?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        ctaText="КУПИ СЕГА"
-        variant="purple"
-      />
+      <DynamicCTASection />
       </main>
     </>
   );

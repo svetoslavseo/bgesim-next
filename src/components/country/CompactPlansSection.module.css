@@ -12,9 +12,17 @@
   text-align: center;
   font-size: 2.25rem;
   font-weight: 700;
-  margin: 0 0 2.7rem 0;
+  margin: 0 0 1.35rem 0;
   color: white;
   line-height: 1.2;
+}
+
+.lastUpdated {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0 0 2.7rem 0;
+  font-weight: 500;
 }
 
 .planSelector {

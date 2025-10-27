@@ -29,7 +29,7 @@ export default function BenefitsSection({ title, benefits, image, imageAlt }: Be
                   </svg>
                   <h3 className={styles.benefitTitle}>{benefit.title}</h3>
                 </div>
-                <p className={styles.benefitDescription}>{benefit.description}</p>
+                <p className={styles.benefitDescription} dangerouslySetInnerHTML={{ __html: benefit.description }}></p>
               </div>
             ))}
           </div>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import { getPageBySlug } from '@/lib/content';
 import ESIMCompatibilityChecker from '@/components/esim-checker/ESIMCompatibilityChecker';
+import DynamicCTASection from '@/components/common/DynamicCTASection';
 import styles from './page.module.css';
 
 /**
@@ -212,55 +213,7 @@ export default function ESIMCompatibilityPage() {
       </section>
 
       {/* Bottom CTA Section */}
-      <section className={styles.ctaSection}>
-        <div className={styles.container}>
-          <div className={styles.ctaCard}>
-            <div className={styles.ctaContent}>
-              <h3 className={styles.ctaTitle}>
-                Купи своята eSIM карта сега и спести пари от роуминг.
-              </h3>
-              <p className={styles.ctaText}>
-                Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. Гарантирано ниски цени от 15лв за 5GB.
-              </p>
-              <a
-                href="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.ctaButton}
-              >
-                КУПИ СЕГА
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Badges */}
-      <section className={styles.trustSection}>
-        <div className={styles.container}>
-          <div className={styles.trustBadges}>
-            <div className={styles.badge}>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-              <p>Бързо и надеждно</p>
-            </div>
-            <div className={styles.badge}>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-              </svg>
-              <p>Работи в над 100 държави</p>
-            </div>
-            <div className={styles.badge}>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />
-              </svg>
-              <p>Мигновено активиране</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <DynamicCTASection />
     </main>
   );
 }

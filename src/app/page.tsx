@@ -9,7 +9,7 @@ import InfoSection from '@/components/home/InfoSection';
 import WhyUsSection from '@/components/home/WhyUsSection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import BlogPostsSection from '@/components/home/BlogPostsSection';
-import BottomCTASection from '@/components/home/BottomCTASection';
+import DynamicCTASection from '@/components/common/DynamicCTASection';
 import { extractExcerpt, formatDate } from '@/lib/utils';
 import { generateOrganizationSchema } from '@/lib/seo';
 
@@ -34,7 +34,7 @@ const LazyBlogPostsSection = dynamic(() => import('@/components/home/BlogPostsSe
   loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
 });
 
-const LazyBottomCTASection = dynamic(() => import('@/components/home/BottomCTASection'), {
+const LazyCTASection = dynamic(() => import('@/components/common/DynamicCTASection'), {
   loading: () => <div className="h-96 bg-gray-100 animate-pulse" />,
 });
 
@@ -75,7 +75,7 @@ export default function HomePage() {
     {
       icon: '/media/images/1-150x150.png',
       title: 'Незабавно активиране',
-      description: 'С eSIM активирате плана си за секунди – сканирайте QR код и сте готови!'
+      description: 'С eSIM активирате плана си за секунди – изтеглете приложение и настройте вашия eSIM!'
     },
     {
       icon: '/media/images/2-150x150.png',
@@ -85,7 +85,7 @@ export default function HomePage() {
     {
       icon: '/media/images/3-150x150.png',
       title: 'Свързани навсякъде',
-      description: 'Намерете най-добрите eSIM оферти от доверени доставчици и останете онлайн в над 100 държави!'
+      description: 'Намерете най-добрите eSIM оферти от доверени доставчици и останете онлайн в над 190 държави!'
     }
   ];
 
@@ -135,8 +135,6 @@ export default function HomePage() {
       <HeroSection
         title="eSIM за пътуване"
         subtitle="Останете свързани, където и да пътувате, с бърза и сигурна eSIM. Без физически SIM карти, без забавяне – само мигновена връзка, където и да си."
-        ctaText="Виж Всички Оферти"
-        ctaUrl="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
       />
 
       <PopularDestinations destinations={destinations} />
@@ -176,13 +174,7 @@ export default function HomePage() {
         />
       )}
 
-      <LazyBottomCTASection
-        title="Купи своята eSIM карта сега и спести пари от роуминг."
-        description="Бързо и сигурно свързване, без нуждата да вадите сегашната SIM карта от телефона. Гарантирано ниски цени от 15лв за 5GB."
-        ctaText="КУПИ СЕГА"
-        ctaUrl="https://breezesim.com?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
-        features={[]}
-      />
+      <LazyCTASection />
     </>
   );
 }

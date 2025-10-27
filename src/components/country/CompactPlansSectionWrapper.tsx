@@ -19,6 +19,7 @@ export default function CompactPlansSectionWrapper({
   const [plans, setPlans] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const loadPlans = async () => {
@@ -38,11 +39,13 @@ export default function CompactPlansSectionWrapper({
         if (sailyPlans && sailyPlans.length > 0) {
           console.log('Using real Saily plans:', sailyPlans);
           setPlans(sailyPlans);
+          setLastUpdated(apiData.lastUpdated);
         } else {
           console.log('No Saily plans found, using fallback');
           const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
           console.log('Fallback plans for', countryCode, ':', fallbackPlans);
           setPlans(fallbackPlans);
+          setLastUpdated(undefined);
         }
         
         setIsLoading(false);
@@ -51,6 +54,7 @@ export default function CompactPlansSectionWrapper({
         console.log('Falling back to static plans');
         const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
         setPlans(fallbackPlans);
+        setLastUpdated(undefined);
         setIsLoading(false);
       }
     };
@@ -105,6 +109,7 @@ export default function CompactPlansSectionWrapper({
       title={title}
       plans={plans}
       countryName={countryName}
+      lastUpdated={lastUpdated}
       onPlanSelect={handlePlanSelect}
     />
   );

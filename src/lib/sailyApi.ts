@@ -189,6 +189,88 @@ export function getLowestPriceForCountry(countryCode: string): number {
 }
 
 /**
+ * Calculate price per GB from a plan's data string
+ * Examples: "3 GB" -> 3, "1 GB" -> 1, "Unlimited" -> null
+ */
+function extractGBFromData(data: string): number | null {
+  if (data.toLowerCase().includes('unlimited')) {
+    return null;
+  }
+  
+  const match = data.match(/(\d+(?:\.\d+)?)\s*GB/i);
+  if (match && match[1]) {
+    return parseFloat(match[1]);
+  }
+  
+  return null;
+}
+
+/**
+ * Calculate the lowest price per GB across all available plans
+ * Returns the price in BGN per GB
+ */
+export async function getLowestPricePerGB(): Promise<{ pricePerGB: number; priceInBGN: string }> {
+  try {
+    // Try to fetch real plans first
+    const plans = await fetchSailyPlans();
+    
+    if (plans && plans.length > 0) {
+      // Filter plans with valid GB amounts and calculate price per GB
+      const plansWithPricePerGB = plans
+        .map(plan => {
+          const gbAmount = extractGBFromData(plan.data);
+          if (gbAmount && gbAmount > 0) {
+            return {
+              pricePerGBUSD: plan.priceUSD / gbAmount,
+              plan
+            };
+          }
+          return null;
+        })
+        .filter((result): result is { pricePerGBUSD: number; plan: ProcessedPlan } => result !== null);
+      
+      if (plansWithPricePerGB.length > 0) {
+        const lowestPricePerGBUSD = Math.min(...plansWithPricePerGB.map(p => p.pricePerGBUSD));
+        // Convert USD to BGN (1.8 BGN per USD)
+        const pricePerGB = lowestPricePerGBUSD * 1.8;
+        const priceInBGN = Math.round(pricePerGB).toString();
+        
+        console.log(`Lowest price per GB: ${lowestPricePerGBUSD.toFixed(2)} USD = ${priceInBGN}лв`);
+        return { pricePerGB: lowestPricePerGBUSD, priceInBGN };
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching plans for price per GB calculation:', error);
+  }
+  
+  // Fallback to static plans
+  const allFallbackPlans = Object.values(FALLBACK_PLANS).flat();
+  
+  const plansWithPricePerGB = allFallbackPlans
+    .map(plan => {
+      const gbAmount = extractGBFromData(plan.data);
+      if (gbAmount && gbAmount > 0) {
+        return {
+          pricePerGBUSD: plan.priceUSD / gbAmount
+        };
+      }
+      return null;
+    })
+    .filter((result): result is { pricePerGBUSD: number } => result !== null);
+  
+  if (plansWithPricePerGB.length === 0) {
+    // Default fallback
+    return { pricePerGB: 3.0, priceInBGN: '5' };
+  }
+  
+  const lowestPricePerGBUSD = Math.min(...plansWithPricePerGB.map(p => p.pricePerGBUSD));
+  const pricePerGB = lowestPricePerGBUSD * 1.8;
+  const priceInBGN = Math.round(pricePerGB).toString();
+  
+  return { pricePerGB: lowestPricePerGBUSD, priceInBGN };
+}
+
+/**
  * Get the lowest price in BGN for a country
  */
 export async function getLowestPriceInBGN(countryCode: string): Promise<number> {
