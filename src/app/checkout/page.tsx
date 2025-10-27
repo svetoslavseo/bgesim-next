@@ -104,8 +104,11 @@ const CheckoutPage = () => {
       const identifierToUse = plan.priceIdentifier || plan.identifier;
       
       if (identifierToUse) {
-        // Use the Saily affiliate link format
-        const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${identifierToUse}&aff_transaction_id={transaction_id}&aff_offer_id={offer_id}&aff_id={aff_id}`;
+        // Generate a unique transaction ID
+        const transactionId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        
+        // Use the Saily affiliate link format with actual values
+        const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${identifierToUse}&aff_transaction_id=${transactionId}&aff_offer_id=101&aff_id=8080`;
         const finalUrl = `https://go.saily.site/aff_c?offer_id=101&aff_id=8080&url=${encodeURIComponent(sailyCheckoutUrl)}`;
         
         console.log('Redirecting to Saily:', finalUrl);

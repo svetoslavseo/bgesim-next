@@ -178,7 +178,7 @@ export async function GET(request: NextRequest) {
               price: 4.99,
               currency: '$',
               identifier: 'saily_tr_1gb_7d',
-              priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC40OTk=',
+              priceIdentifier: 'MTpkMjhYdEhrMmg0ak9tNURiS2YwTmtkSDJRN1l1aDJZRzRIWDdzS04tSGhRPTpQcmljZToyNTg5LlVTRC4zOTk=',
               planType: 'country',
             },
             {

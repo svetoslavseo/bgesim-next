@@ -169,7 +169,12 @@ function getCountryNameFromCode(countryCode: string): string {
 }
 
 export function generateAffiliateLink(plan: ProcessedPlan): string {
-  const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${plan.identifier}&aff_transaction_id={transaction_id}&aff_offer_id={offer_id}&aff_id={aff_id}`;
+  // Generate a unique transaction ID
+  const transactionId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  
+  // Use price identifier if available, otherwise use plan identifier
+  const planId = plan.priceIdentifier || plan.identifier;
+  const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${planId}&aff_transaction_id=${transactionId}&aff_offer_id=101&aff_id=8080`;
   return `https://go.saily.site/aff_c?offer_id=101&aff_id=8080&url=${encodeURIComponent(sailyCheckoutUrl)}`;
 }
 
@@ -949,6 +954,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       price: 4.99,
       currency: '$',
       identifier: 'saily_tr_1gb_7d',
+      priceIdentifier: 'MTpkMjhYdEhrMmg0ak9tNURiS2YwTmtkSDJRN1l1aDJZRzRIWDdzS04tSGhRPTpQcmljZToyNTg5LlVTRC4zOTk=',
       planType: 'country',
       coveredCountries: ['TR'],
     },
@@ -961,6 +967,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       price: 8.99,
       currency: '$',
       identifier: 'saily_tr_3gb_15d',
+      priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC44OTk=',
       planType: 'country',
       coveredCountries: ['TR'],
     },
@@ -973,6 +980,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       price: 12.99,
       currency: '$',
       identifier: 'saily_tr_5gb_30d',
+      priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xMjk5',
       planType: 'country',
       coveredCountries: ['TR'],
     },
@@ -985,6 +993,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       price: 19.99,
       currency: '$',
       identifier: 'saily_tr_10gb_30d',
+      priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xOTk5',
       planType: 'country',
       coveredCountries: ['TR'],
     },

@@ -56,26 +56,22 @@ function Navigation() {
     setOpenSubmenu(prev => prev === label ? null : label);
   }, []);
 
-  const handleMouseEnter = useMemo(() => (label: string) => {
+  const handleMouseEnter = (label: string) => {
     // Only handle mouse events on desktop (not mobile)
-    if (window.innerWidth > 1120) {
-      if (hoverTimeoutRef.current) {
-        clearTimeout(hoverTimeoutRef.current);
-        hoverTimeoutRef.current = null;
-      }
-      setOpenSubmenu(label);
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
     }
-  }, []);
+    setOpenSubmenu(label);
+  };
 
-  const handleMouseLeave = useMemo(() => () => {
+  const handleMouseLeave = () => {
     // Only handle mouse events on desktop (not mobile)
-    if (window.innerWidth > 1120) {
-      const timeout = setTimeout(() => {
-        setOpenSubmenu(null);
-      }, 150); // Small delay to prevent accidental closing
-      hoverTimeoutRef.current = timeout;
-    }
-  }, []);
+    const timeout = setTimeout(() => {
+      setOpenSubmenu(null);
+    }, 150); // Small delay to prevent accidental closing
+    hoverTimeoutRef.current = timeout;
+  };
 
   // Cleanup timeout on unmount
   useEffect(() => {
