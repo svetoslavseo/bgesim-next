@@ -126,6 +126,7 @@ function Navigation() {
                           e.preventDefault();
                           toggleSubmenu(item.label);
                         } else {
+                          // If submenu is already open, let the link navigate and close mobile menu
                           setMobileMenuOpen(false);
                         }
                       }
