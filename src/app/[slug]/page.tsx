@@ -16,6 +16,7 @@ export async function generateStaticParams() {
   // Also exclude static files that shouldn't be handled by this route
   // Exclude country pages that have their own dedicated routes
   // Exclude calculator page that has its own dedicated route
+  // Exclude 'blog' as it has its own route at /blog/
   const staticFiles = ['favicon.ico', 'sw.js', 'robots.txt', 'sitemap.xml'];
   const countryPages = ['turcia', 'esim-dubai', 'esim-egipet', 'esim-serbia', 'esim-thailand', 'esim-velikobritania', 'esim-za-usa'];
   const dedicatedRoutes = ['calculator-za-izpolzvani-mobilni-danni', 'proverka-na-syvmestimost-s-esim'];
@@ -24,6 +25,7 @@ export async function generateStaticParams() {
     .filter(slug => 
       slug !== 'home' && 
       slug !== '' && 
+      slug !== 'blog' &&
       !staticFiles.includes(slug) &&
       !countryPages.includes(slug) &&
       !dedicatedRoutes.includes(slug)
