@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './CountrySearch.module.css';
@@ -49,18 +49,20 @@ const countries: Country[] = [
   }
 ];
 
-export default function CountrySearch() {
+function CountrySearch() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const filteredCountries = searchQuery
-    ? countries.filter(country =>
-        country.name.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : [];
+  const filteredCountries = useMemo(() => {
+    if (!searchQuery) return [];
+    const lowerQuery = searchQuery.toLowerCase();
+    return countries.filter(country =>
+      country.name.toLowerCase().includes(lowerQuery)
+    );
+  }, [searchQuery]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -77,19 +79,19 @@ export default function CountrySearch() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
     setIsOpen(true);
     setHighlightedIndex(-1);
-  };
+  }, []);
 
-  const handleSearchFocus = () => {
+  const handleSearchFocus = useCallback(() => {
     if (filteredCountries.length > 0) {
       setIsOpen(true);
     }
-  };
+  }, [filteredCountries.length]);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       setHighlightedIndex(prev =>
@@ -105,12 +107,12 @@ export default function CountrySearch() {
     } else if (e.key === 'Escape') {
       setIsOpen(false);
     }
-  };
+  }, [filteredCountries, highlightedIndex]);
 
-  const handleCountryClick = (href: string) => {
+  const handleCountryClick = useCallback((href: string) => {
     setSearchQuery('');
     setIsOpen(false);
-  };
+  }, []);
 
   return (
     <div className={styles.searchContainer} ref={searchContainerRef}>
@@ -202,3 +204,4 @@ export default function CountrySearch() {
   );
 }
 
+export default memo(CountrySearch);

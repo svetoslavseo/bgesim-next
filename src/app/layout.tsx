@@ -80,20 +80,14 @@ export default function RootLayout({
       <head>
         {/* DNS prefetch for external domains */}
         <link rel="dns-prefetch" href="//breezesim.com" />
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         
-        {/* Preconnect to external domains */}
+        {/* Preconnect to external domains - critical only */}
         <link rel="preconnect" href="https://breezesim.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Resource hints for critical resources */}
         <link rel="preload" href="/media/images/TeSim-Logo-Breeze.png" as="image" type="image/png" />
-        
-        {/* Font loading optimization to prevent CLS */}
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" /></noscript>
+        <link rel="preload" href="/fonts/Lato-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/Quicksand-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
         {/* Viewport meta tag for mobile optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -107,47 +101,21 @@ export default function RootLayout({
         <meta name="theme-color" content="#c8a2d0" />
         <meta name="msapplication-TileColor" content="#c8a2d0" />
         
-        {/* Performance monitoring */}
-        <script src="/performance.js" defer></script>
+        {/* Performance monitoring - defer to not block rendering */}
+        <script src="/performance.js" defer async></script>
         
-        {/* Defer non-critical JavaScript to prevent CLS */}
+        {/* Optimized service worker registration */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Defer analytics and tracking scripts
-              window.addEventListener('load', function() {
-                // Load analytics after page is fully loaded
-                setTimeout(function() {
-                  // Add your analytics scripts here
-                  console.log('Page fully loaded, analytics can be initialized');
-                }, 1000);
-              });
-              
-              // Mobile-specific optimizations
-              if (window.innerWidth <= 768) {
-                // Defer mobile-specific scripts
-                document.addEventListener('DOMContentLoaded', function() {
-                  // Mobile-specific optimizations
-                  console.log('Mobile optimizations applied');
-                });
-              }
-            `,
-          }}
-        />
-        
-        {/* Service Worker registration */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+              // Register service worker with high priority
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                      console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                      console.log('SW registration failed: ', registrationError);
+                  setTimeout(function() {
+                    navigator.serviceWorker.register('/sw.js').catch(function() {
+                      // Silently fail for performance
                     });
+                  }, 100);
                 });
               }
             `,

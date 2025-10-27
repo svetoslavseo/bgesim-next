@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getRecentPosts } from '@/lib/content';
 import { formatDate, extractExcerpt } from '@/lib/utils';
 import featuredImagesMap from '../../../data/processed/blog-featured-images.json';
@@ -37,11 +38,15 @@ export default function RelatedArticles({ excludeSlug }: RelatedArticlesProps) {
                 <Link href={`/blog/${post.slug}/`} className={styles.link}>
                   {featuredImagePath && (
                     <div className={styles.imageWrapper}>
-                      <img 
+                      <Image 
                         src={featuredImagePath} 
                         alt={post.title}
                         className={styles.image}
+                        width={400}
+                        height={250}
                         loading="lazy"
+                        quality={80}
+                        sizes="(max-width: 768px) 100vw, 400px"
                       />
                     </div>
                   )}

@@ -1,13 +1,13 @@
-/* Google Fonts Import - Optimized for performance */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap');
+/* Self-hosted fonts with proper fallbacks */
+/* Using system fonts as primary to prevent render-blocking */
 
-/* Font fallbacks for better performance */
+/* Font fallbacks for better performance - using system fonts */
 @font-face {
   font-family: 'Quicksand';
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: local('Quicksand Light'), local('Quicksand-Light');
+  src: local('Quicksand Light'), local('Quicksand-Light'), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 @font-face {

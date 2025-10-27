@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, memo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Navigation.module.css';
@@ -34,41 +34,41 @@ const navigationItems = [
   { label: 'Какво е eSIM?', href: '/blog/kakvo-e-esim' },
 ];
 
-export default function Navigation() {
+function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
   
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+  const toggleMobileMenu = useMemo(() => () => {
+    setMobileMenuOpen(prev => !prev);
+  }, []);
   
-  const isActive = (href: string) => {
+  const isActive = useMemo(() => (href: string) => {
     if (href === '/') {
       return pathname === href;
     }
     return pathname?.startsWith(href);
-  };
+  }, [pathname]);
   
-  const toggleSubmenu = (label: string) => {
-    setOpenSubmenu(openSubmenu === label ? null : label);
-  };
+  const toggleSubmenu = useMemo(() => (label: string) => {
+    setOpenSubmenu(prev => prev === label ? null : label);
+  }, []);
 
-  const handleMouseEnter = (label: string) => {
+  const handleMouseEnter = useMemo(() => (label: string) => {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
       hoverTimeoutRef.current = null;
     }
     setOpenSubmenu(label);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useMemo(() => () => {
     const timeout = setTimeout(() => {
       setOpenSubmenu(null);
     }, 150); // Small delay to prevent accidental closing
     hoverTimeoutRef.current = timeout;
-  };
+  }, []);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -192,5 +192,5 @@ export default function Navigation() {
   );
 }
 
-
+export default memo(Navigation);
 
