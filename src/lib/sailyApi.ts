@@ -114,12 +114,12 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
       const filteredPlans = allPlans.filter(plan => {
         const coversCountry = plan.coveredCountries.includes(countryCode);
         const nameContainsCountry = plan.name.toLowerCase().includes(countryName.toLowerCase());
-        const isCountryPlan = plan.planType === 'country';
         
-        const shouldInclude = (coversCountry || nameContainsCountry) && isCountryPlan;
+        // Include all plan types (country, regional, global) that cover this country
+        const shouldInclude = coversCountry || nameContainsCountry;
         
         if (shouldInclude) {
-          console.log(`Including plan: ${plan.name} (covers: ${coversCountry}, name: ${nameContainsCountry}, country plan: ${isCountryPlan})`);
+          console.log(`Including plan: ${plan.name} (type: ${plan.planType}, covers: ${coversCountry}, name: ${nameContainsCountry})`);
         }
         
         return shouldInclude;
@@ -144,13 +144,14 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
 }
 
 export function getPlansForCountry(plans: ProcessedPlan[], countryCode: string): ProcessedPlan[] {
-  // Filter plans that cover the specific country and are country plans only
+  // Filter plans that cover the specific country (all plan types: country, regional, global)
   return plans.filter(plan => {
     const countryName = getCountryNameFromCode(countryCode);
+    const coversCountry = plan.coveredCountries?.includes(countryCode);
     const nameContainsCountry = plan.name.toLowerCase().includes(countryName.toLowerCase());
-    const isCountryPlan = plan.planType === 'country';
     
-    return nameContainsCountry && isCountryPlan;
+    // Include all plan types (country, regional, global) that cover this country
+    return coversCountry || nameContainsCountry;
   });
 }
 
@@ -315,6 +316,7 @@ export async function getPriceRangeInBGN(countryCode: string): Promise<{ lowPric
 // Using the same structure as the main project's plans.json
 export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
   'TH': [
+    // Country Plans
     {
       id: 'th-1',
       name: 'Thailand 1GB 7 days',
@@ -325,6 +327,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: '5621d850-cc6f-45bc-a79b-b443bbb6dffa', // Real Saily identifier from main project
       planType: 'country',
+      coveredCountries: ['TH'],
     },
     {
       id: 'th-2',
@@ -336,6 +339,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: '725f8236-8bf0-4d29-a28a-14e5903ee6bd', // Real Saily identifier from main project
       planType: 'country',
+      coveredCountries: ['TH'],
     },
     {
       id: 'th-3',
@@ -347,9 +351,85 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'cd709647-55bd-404b-ae1a-56904d84be89', // Real Saily identifier from main project
       planType: 'country',
+      coveredCountries: ['TH'],
+    },
+    // Regional Plans (Southeast Asia)
+    {
+      id: 'th-regional-1',
+      name: 'Southeast Asia 2GB 7 days',
+      data: '2 GB',
+      validity: '7 дни',
+      priceUSD: 6.99,
+      price: 6.99,
+      currency: '$',
+      identifier: 'saily_sea_2gb_7d',
+      planType: 'regional',
+      coveredCountries: ['TH', 'SG', 'MY', 'ID', 'PH', 'VN'],
+    },
+    {
+      id: 'th-regional-2',
+      name: 'Southeast Asia 5GB 15 days',
+      data: '5 GB',
+      validity: '15 дни',
+      priceUSD: 11.99,
+      price: 11.99,
+      currency: '$',
+      identifier: 'saily_sea_5gb_15d',
+      planType: 'regional',
+      coveredCountries: ['TH', 'SG', 'MY', 'ID', 'PH', 'VN'],
+    },
+    {
+      id: 'th-regional-3',
+      name: 'Southeast Asia 10GB 30 days',
+      data: '10 GB',
+      validity: '30 дни',
+      priceUSD: 17.99,
+      price: 17.99,
+      currency: '$',
+      identifier: 'saily_sea_10gb_30d',
+      planType: 'regional',
+      coveredCountries: ['TH', 'SG', 'MY', 'ID', 'PH', 'VN'],
+    },
+    // Global Plans
+    {
+      id: 'th-global-1',
+      name: 'Global 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'saily_global_1gb_7d',
+      planType: 'global',
+      coveredCountries: ['TH', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'SG', 'MY', 'AU', 'NZ'],
+    },
+    {
+      id: 'th-global-2',
+      name: 'Global 3GB 15 days',
+      data: '3 GB',
+      validity: '15 дни',
+      priceUSD: 15.99,
+      price: 15.99,
+      currency: '$',
+      identifier: 'saily_global_3gb_15d',
+      planType: 'global',
+      coveredCountries: ['TH', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'SG', 'MY', 'AU', 'NZ'],
+    },
+    {
+      id: 'th-global-3',
+      name: 'Global 5GB 30 days',
+      data: '5 GB',
+      validity: '30 дни',
+      priceUSD: 19.99,
+      price: 19.99,
+      currency: '$',
+      identifier: 'saily_global_5gb_30d',
+      planType: 'global',
+      coveredCountries: ['TH', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'SG', 'MY', 'AU', 'NZ'],
     }
   ],
   'RS': [
+    // Country Plans
     {
       id: 'rs-1',
       name: 'Serbia 1GB 7 days',
@@ -361,6 +441,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       identifier: '532eb9b7-a6a7-40e2-88ab-6622d12856dd', // Plan identifier
       priceIdentifier: 'MTpwbHN6MnlZdVFtMkpsS3A0YVY4dTMxYld1LTJZY19mYzd0ejVwM19kSXg4PTpQcmljZToyNzkyLlVTRC4zOTk=', // Price identifier for checkout
       planType: 'country',
+      coveredCountries: ['RS'],
     },
     {
       id: 'rs-2',
@@ -373,6 +454,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       identifier: '3e530dbf-e379-4718-a7a7-b7f207b2df18', // Plan identifier
       priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC43OTk=', // Price identifier for checkout
       planType: 'country',
+      coveredCountries: ['RS'],
     },
     {
       id: 'rs-3',
@@ -385,6 +467,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       identifier: '5f8a9c2d-4e1b-4a3c-8d7e-9f0a1b2c3d4e', // Plan identifier
       priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xMDk5', // Price identifier for checkout
       planType: 'country',
+      coveredCountries: ['RS'],
     },
     {
       id: 'rs-4',
@@ -397,6 +480,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       identifier: '6g9b0d3e-5f2c-5b4d-9e8f-0a1b2c3d4e5f', // Plan identifier
       priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4xNTk5', // Price identifier for checkout
       planType: 'country',
+      coveredCountries: ['RS'],
     },
     {
       id: 'rs-5',
@@ -409,9 +493,85 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       identifier: '7h0c1e4f-6g3d-6c5e-0f1g-1b2c3d4e5f6g', // Plan identifier
       priceIdentifier: 'MToxV2xQLUlUUHFPVnJRMUJqV1RSSGhZYVpTQTdSbTZKVzJMdjlsNklhYko0PTpQcmljZToyNzI2LlVTRC4yNTk5', // Price identifier for checkout
       planType: 'country',
+      coveredCountries: ['RS'],
+    },
+    // Regional Plans (Balkans)
+    {
+      id: 'rs-regional-1',
+      name: 'Balkans 2GB 7 days',
+      data: '2 GB',
+      validity: '7 дни',
+      priceUSD: 5.99,
+      price: 5.99,
+      currency: '$',
+      identifier: 'saily_balkans_2gb_7d',
+      planType: 'regional',
+      coveredCountries: ['RS', 'BG', 'HR', 'BA', 'MK', 'ME', 'AL'],
+    },
+    {
+      id: 'rs-regional-2',
+      name: 'Balkans 5GB 15 days',
+      data: '5 GB',
+      validity: '15 дни',
+      priceUSD: 10.99,
+      price: 10.99,
+      currency: '$',
+      identifier: 'saily_balkans_5gb_15d',
+      planType: 'regional',
+      coveredCountries: ['RS', 'BG', 'HR', 'BA', 'MK', 'ME', 'AL'],
+    },
+    {
+      id: 'rs-regional-3',
+      name: 'Balkans 10GB 30 days',
+      data: '10 GB',
+      validity: '30 дни',
+      priceUSD: 16.99,
+      price: 16.99,
+      currency: '$',
+      identifier: 'saily_balkans_10gb_30d',
+      planType: 'regional',
+      coveredCountries: ['RS', 'BG', 'HR', 'BA', 'MK', 'ME', 'AL'],
+    },
+    // Global Plans
+    {
+      id: 'rs-global-1',
+      name: 'Global 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'saily_global_1gb_7d',
+      planType: 'global',
+      coveredCountries: ['RS', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE'],
+    },
+    {
+      id: 'rs-global-2',
+      name: 'Global 3GB 15 days',
+      data: '3 GB',
+      validity: '15 дни',
+      priceUSD: 15.99,
+      price: 15.99,
+      currency: '$',
+      identifier: 'saily_global_3gb_15d',
+      planType: 'global',
+      coveredCountries: ['RS', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE'],
+    },
+    {
+      id: 'rs-global-3',
+      name: 'Global 5GB 30 days',
+      data: '5 GB',
+      validity: '30 дни',
+      priceUSD: 19.99,
+      price: 19.99,
+      currency: '$',
+      identifier: 'saily_global_5gb_30d',
+      planType: 'global',
+      coveredCountries: ['RS', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE'],
     }
   ],
   'AE': [
+    // Country Plans
     {
       id: 'ae-1',
       name: 'Dubai 1GB 7 days',
@@ -422,6 +582,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_ae_1gb_7d',
       planType: 'country',
+      coveredCountries: ['AE'],
     },
     {
       id: 'ae-2',
@@ -433,9 +594,61 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_ae_3gb_15d',
       planType: 'country',
+      coveredCountries: ['AE'],
+    },
+    // Regional Plans (Middle East)
+    {
+      id: 'ae-regional-1',
+      name: 'Middle East 2GB 7 days',
+      data: '2 GB',
+      validity: '7 дни',
+      priceUSD: 10.99,
+      price: 10.99,
+      currency: '$',
+      identifier: 'saily_me_2gb_7d',
+      planType: 'regional',
+      coveredCountries: ['AE', 'SA', 'QA', 'KW', 'OM', 'BH'],
+    },
+    {
+      id: 'ae-regional-2',
+      name: 'Middle East 5GB 15 days',
+      data: '5 GB',
+      validity: '15 дни',
+      priceUSD: 17.99,
+      price: 17.99,
+      currency: '$',
+      identifier: 'saily_me_5gb_15d',
+      planType: 'regional',
+      coveredCountries: ['AE', 'SA', 'QA', 'KW', 'OM', 'BH'],
+    },
+    // Global Plans
+    {
+      id: 'ae-global-1',
+      name: 'Global 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'saily_global_1gb_7d',
+      planType: 'global',
+      coveredCountries: ['AE', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
+    },
+    {
+      id: 'ae-global-2',
+      name: 'Global 3GB 15 days',
+      data: '3 GB',
+      validity: '15 дни',
+      priceUSD: 15.99,
+      price: 15.99,
+      currency: '$',
+      identifier: 'saily_global_3gb_15d',
+      planType: 'global',
+      coveredCountries: ['AE', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
     }
   ],
   'EG': [
+    // Country Plans
     {
       id: 'eg-1',
       name: 'Egypt 1GB 7 days',
@@ -446,6 +659,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_eg_1gb_7d',
       planType: 'country',
+      coveredCountries: ['EG'],
     },
     {
       id: 'eg-2',
@@ -457,6 +671,57 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_eg_3gb_15d',
       planType: 'country',
+      coveredCountries: ['EG'],
+    },
+    // Regional Plans (Middle East)
+    {
+      id: 'eg-regional-1',
+      name: 'Middle East 2GB 7 days',
+      data: '2 GB',
+      validity: '7 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'saily_me_2gb_7d',
+      planType: 'regional',
+      coveredCountries: ['EG', 'AE', 'SA', 'QA', 'KW', 'OM', 'BH', 'JO', 'LB'],
+    },
+    {
+      id: 'eg-regional-2',
+      name: 'Middle East 5GB 15 days',
+      data: '5 GB',
+      validity: '15 дни',
+      priceUSD: 16.99,
+      price: 16.99,
+      currency: '$',
+      identifier: 'saily_me_5gb_15d',
+      planType: 'regional',
+      coveredCountries: ['EG', 'AE', 'SA', 'QA', 'KW', 'OM', 'BH', 'JO', 'LB'],
+    },
+    // Global Plans
+    {
+      id: 'eg-global-1',
+      name: 'Global 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'saily_global_1gb_7d',
+      planType: 'global',
+      coveredCountries: ['EG', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
+    },
+    {
+      id: 'eg-global-2',
+      name: 'Global 3GB 15 days',
+      data: '3 GB',
+      validity: '15 дни',
+      priceUSD: 15.99,
+      price: 15.99,
+      currency: '$',
+      identifier: 'saily_global_3gb_15d',
+      planType: 'global',
+      coveredCountries: ['EG', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
     }
   ],
   'US': [
@@ -471,6 +736,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_us_1gb_7d',
       planType: 'country',
+      coveredCountries: ['US'],
     },
     {
       id: 'us-2',
@@ -482,6 +748,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_us_3gb_15d',
       planType: 'country',
+      coveredCountries: ['US'],
     },
     {
       id: 'us-3',
@@ -493,6 +760,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_us_5gb_30d',
       planType: 'country',
+      coveredCountries: ['US'],
     },
     {
       id: 'us-4',
@@ -504,6 +772,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_us_10gb_30d',
       planType: 'country',
+      coveredCountries: ['US'],
     },
     // Regional Plans (North America)
     {
@@ -516,6 +785,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_na_2gb_7d',
       planType: 'regional',
+      coveredCountries: ['US', 'CA', 'MX'],
     },
     {
       id: 'us-regional-2',
@@ -527,6 +797,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_na_5gb_15d',
       planType: 'regional',
+      coveredCountries: ['US', 'CA', 'MX'],
     },
     {
       id: 'us-regional-3',
@@ -538,6 +809,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_na_10gb_30d',
       planType: 'regional',
+      coveredCountries: ['US', 'CA', 'MX'],
     },
     // Global Plans
     {
@@ -550,6 +822,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_global_1gb_7d',
       planType: 'global',
+      coveredCountries: ['US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
     },
     {
       id: 'us-global-2',
@@ -561,6 +834,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_global_3gb_15d',
       planType: 'global',
+      coveredCountries: ['US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
     },
     {
       id: 'us-global-3',
@@ -572,6 +846,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_global_5gb_30d',
       planType: 'global',
+      coveredCountries: ['US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
     },
     {
       id: 'us-global-4',
@@ -583,9 +858,11 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_global_10gb_30d',
       planType: 'global',
+      coveredCountries: ['US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
     }
   ],
   'GB': [
+    // Country Plans
     {
       id: 'gb-1',
       name: 'UK 1GB 7 days',
@@ -596,6 +873,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_gb_2gb_15d',
       planType: 'country',
+      coveredCountries: ['GB'],
     },
     {
       id: 'gb-2',
@@ -607,9 +885,61 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_gb_5gb_30d',
       planType: 'country',
+      coveredCountries: ['GB'],
+    },
+    // Regional Plans (Europe)
+    {
+      id: 'gb-regional-1',
+      name: 'Europe 2GB 7 days',
+      data: '2 GB',
+      validity: '7 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'saily_eu_2gb_7d',
+      planType: 'regional',
+      coveredCountries: ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR'],
+    },
+    {
+      id: 'gb-regional-2',
+      name: 'Europe 5GB 15 days',
+      data: '5 GB',
+      validity: '15 дни',
+      priceUSD: 13.99,
+      price: 13.99,
+      currency: '$',
+      identifier: 'saily_eu_5gb_15d',
+      planType: 'regional',
+      coveredCountries: ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR'],
+    },
+    // Global Plans
+    {
+      id: 'gb-global-1',
+      name: 'Global 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'saily_global_1gb_7d',
+      planType: 'global',
+      coveredCountries: ['GB', 'US', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
+    },
+    {
+      id: 'gb-global-2',
+      name: 'Global 3GB 15 days',
+      data: '3 GB',
+      validity: '15 дни',
+      priceUSD: 15.99,
+      price: 15.99,
+      currency: '$',
+      identifier: 'saily_global_3gb_15d',
+      planType: 'global',
+      coveredCountries: ['GB', 'US', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE', 'TH', 'SG', 'MY', 'AU', 'NZ'],
     }
   ],
   'TR': [
+    // Country Plans
     {
       id: 'tr-1',
       name: 'Turkey 1GB 7 days',
@@ -620,6 +950,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_tr_1gb_7d',
       planType: 'country',
+      coveredCountries: ['TR'],
     },
     {
       id: 'tr-2',
@@ -631,6 +962,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_tr_3gb_15d',
       planType: 'country',
+      coveredCountries: ['TR'],
     },
     {
       id: 'tr-3',
@@ -642,6 +974,7 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_tr_5gb_30d',
       planType: 'country',
+      coveredCountries: ['TR'],
     },
     {
       id: 'tr-4',
@@ -653,6 +986,57 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       currency: '$',
       identifier: 'saily_tr_10gb_30d',
       planType: 'country',
+      coveredCountries: ['TR'],
+    },
+    // Regional Plans (Europe/Balkans)
+    {
+      id: 'tr-regional-1',
+      name: 'Europe 2GB 7 days',
+      data: '2 GB',
+      validity: '7 дни',
+      priceUSD: 8.99,
+      price: 8.99,
+      currency: '$',
+      identifier: 'saily_eu_2gb_7d',
+      planType: 'regional',
+      coveredCountries: ['TR', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR'],
+    },
+    {
+      id: 'tr-regional-2',
+      name: 'Europe 5GB 15 days',
+      data: '5 GB',
+      validity: '15 дни',
+      priceUSD: 12.99,
+      price: 12.99,
+      currency: '$',
+      identifier: 'saily_eu_5gb_15d',
+      planType: 'regional',
+      coveredCountries: ['TR', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR'],
+    },
+    // Global Plans
+    {
+      id: 'tr-global-1',
+      name: 'Global 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'saily_global_1gb_7d',
+      planType: 'global',
+      coveredCountries: ['TR', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE'],
+    },
+    {
+      id: 'tr-global-2',
+      name: 'Global 3GB 15 days',
+      data: '3 GB',
+      validity: '15 дни',
+      priceUSD: 15.99,
+      price: 15.99,
+      currency: '$',
+      identifier: 'saily_global_3gb_15d',
+      planType: 'global',
+      coveredCountries: ['TR', 'US', 'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'IE', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'PL', 'CZ', 'HU', 'RO', 'BG', 'HR', 'SK', 'SI', 'LT', 'LV', 'EE'],
     }
   ]
 };
