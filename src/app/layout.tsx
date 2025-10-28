@@ -81,6 +81,19 @@ export default function RootLayout({
   return (
     <html lang="bg">
       <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J85XGQ483H"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-J85XGQ483H');
+            `,
+          }}
+        />
+        
         {/* DNS prefetch for external domains */}
         <link rel="dns-prefetch" href="//breezesim.com" />
         
