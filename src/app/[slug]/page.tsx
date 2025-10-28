@@ -19,7 +19,7 @@ export async function generateStaticParams() {
   // Exclude 'blog' as it has its own route at /blog/
   const staticFiles = ['favicon.ico', 'sw.js', 'robots.txt', 'sitemap.xml'];
   const countryPages = ['turcia', 'esim-dubai', 'esim-egipet', 'esim-serbia', 'esim-thailand', 'esim-velikobritania', 'esim-za-usa'];
-  const dedicatedRoutes = ['calculator-za-izpolzvani-mobilni-danni', 'proverka-na-syvmestimost-s-esim'];
+  const dedicatedRoutes = ['calculator-za-izpolzvani-mobilni-danni', 'proverka-na-syvmestimost-s-esim', 'contacts', 'v-andreev'];
   
   return slugs
     .filter(slug => 
