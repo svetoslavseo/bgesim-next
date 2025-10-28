@@ -67,16 +67,16 @@
     right: 16px !important;
     top: unset !important;
     left: unset !important;
-    padding: 10px 12px;
+    padding: 11px 13px; /* 10% bigger: 10px->11px, 12px->13px */
   }
   
   .currencyLabel {
-    font-size: 13px;
+    font-size: 14px; /* 10% bigger: 13px->14px */
   }
   
   .currencyButton {
-    padding: 5px 10px;
-    font-size: 12px;
+    padding: 6px 11px; /* 10% bigger: 5px->6px, 10px->11px */
+    font-size: 13px; /* 10% bigger: 12px->13px */
   }
 }
 
@@ -87,6 +87,6 @@
     right: 12px !important;
     top: unset !important;
     left: unset !important;
-    padding: 8px 10px;
+    padding: 9px 11px; /* 10% bigger: 8px->9px, 10px->11px */
   }
 }
