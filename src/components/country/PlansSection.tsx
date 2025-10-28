@@ -40,9 +40,8 @@ export default function PlansSection({
   const [selectedTab, setSelectedTab] = useState<string>('');
   const [hoveredTooltip, setHoveredTooltip] = useState<string | null>(null);
 
-  // Filter only country plans and convert to current currency
-  const countryPlans = plans.filter(plan => plan.planType === 'country');
-  const convertedPlans = countryPlans.map(plan => {
+  // Convert all plans (country, regional, and global) to current currency
+  const convertedPlans = plans.map(plan => {
     const priceUSD = plan.priceUSD || plan.price; // Use priceUSD if available, fallback to price
     const convertedPrice = convertPrice(priceUSD, currency, exchangeRates || undefined);
     

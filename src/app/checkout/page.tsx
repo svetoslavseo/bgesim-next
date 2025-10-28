@@ -103,7 +103,12 @@ const CheckoutPage = () => {
       // Generate Saily affiliate link using the price identifier (preferred) or plan identifier
       const identifierToUse = plan.priceIdentifier || plan.identifier;
       
-      if (identifierToUse) {
+      // Validate that the identifier is a real Saily identifier (not a fallback placeholder)
+      const isValidSailyIdentifier = identifierToUse && 
+        (identifierToUse.includes('-') || // UUID format
+         identifierToUse.includes('=')); // Base64 format
+      
+      if (identifierToUse && isValidSailyIdentifier) {
         // Generate a unique transaction ID
         const transactionId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         
