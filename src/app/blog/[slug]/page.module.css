@@ -158,23 +158,23 @@
   .headline {
     font-size: 2rem;
     /* Mobile-specific containment */
-    contain: layout style;
+    contain: none;
     min-height: 2.5rem;
   }
   
   .excerpt {
     font-size: 1rem;
-    contain: layout style;
+    contain: none;
   }
   
   .meta {
     font-size: 0.813rem;
-    contain: layout style;
+    contain: none;
   }
   
   .authorLine {
     font-size: 0.938rem;
-    contain: layout style;
+    contain: none;
   }
   
   /* Mobile article container */
@@ -188,14 +188,14 @@
   .headline {
     font-size: 1.75rem;
     /* Enhanced mobile containment */
-    contain: layout style;
+    contain: none;
     min-height: 2rem;
   }
   
   .excerpt {
     font-size: 0.938rem;
     padding-left: 0.75rem;
-    contain: layout style;
+    contain: none;
   }
   
   /* Small mobile optimizations */

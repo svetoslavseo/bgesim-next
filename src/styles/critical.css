@@ -76,7 +76,7 @@ body {
   background: var(--gradient-purple);
   padding: 8rem 2rem;
   text-align: center;
-  contain: layout style paint;
+  contain: none;
   content-visibility: auto;
 }
 
@@ -211,6 +211,6 @@ img {
 }
 
 .hero-section {
-  contain: layout style paint;
+  contain: none;
   content-visibility: auto;
 }

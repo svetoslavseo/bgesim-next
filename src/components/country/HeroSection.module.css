@@ -104,7 +104,7 @@
   display: flex;
   flex-direction: column;
   /* CSS containment to prevent layout recalculations */
-  contain: layout style;
+  contain: none;
   /* Allow content to expand beyond min-height */
   height: auto;
 }
@@ -612,7 +612,7 @@
     grid-template-columns: 1fr;
     gap: 3rem;
     /* Mobile-specific containment */
-    contain: layout style;
+    contain: none;
   }
 
   .title {
@@ -633,7 +633,7 @@
   .planSelector {
     padding: 1.5rem;
     /* Enhanced mobile containment and layout stability */
-    contain: layout style;
+    contain: none;
     min-height: 500px; /* Larger mobile reserve */
     /* Prevent mobile layout shifts */
     position: relative;
@@ -662,7 +662,7 @@
   .planItem {
     padding: 0.75rem;
     /* Mobile-specific containment */
-    contain: layout style;
+    contain: none;
   }
 
   .planDetails {
@@ -683,13 +683,13 @@
   .hero {
     padding: 3rem 1rem;
     /* Mobile-specific containment */
-    contain: layout style;
+    contain: none;
   }
   
   /* Mobile skeleton loader enhancements */
   .skeletonLoader {
     min-height: 500px;
-    contain: layout style size;
+    contain: none;
   }
   
   .skeletonPlans {

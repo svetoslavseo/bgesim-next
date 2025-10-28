@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #1a1a1a;
   /* Prevent layout shifts from font loading */
   font-display: swap;
-  contain: layout style;
+  contain: none;
 }
 
 h1 {
@@ -191,26 +191,26 @@ h6 ::-moz-selection {
 @media (max-width: 768px) {
   html {
     font-size: 14px;
-    /* Mobile-specific containment */
-    contain: layout style;
+    /* fully remove contain to allow fixed elements to stick to viewport */
+    contain: initial;
   }
   
   h1 {
     font-size: 2rem;
     /* Prevent mobile layout shifts */
-    contain: layout style;
+    contain: none;
     min-height: 2.5rem;
   }
   
   h2 {
     font-size: 32px;
-    contain: layout style;
+    contain: none;
     min-height: 2rem;
   }
   
   h3 {
     font-size: 1.5rem;
-    contain: layout style;
+    contain: none;
     min-height: 1.75rem;
   }
   
@@ -345,7 +345,7 @@ h6 ::-moz-selection {
 
 /* Critical above-the-fold styles */
 .hero-section {
-  contain: layout style paint;
+  contain: none;
   content-visibility: auto;
 }
 
