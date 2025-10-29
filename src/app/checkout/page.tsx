@@ -27,6 +27,32 @@ const CheckoutPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [isPackageDetailsOpen, setIsPackageDetailsOpen] = useState(false);
 
+  // Lower z-index of sticky elements when modal is open
+  useEffect(() => {
+    let styleEl: HTMLStyleElement | null = null;
+    
+    if (isPackageDetailsOpen) {
+      // Inject style to force lower z-index on sticky elements
+      styleEl = document.createElement('style');
+      styleEl.setAttribute('data-modal-z-index-override', '');
+      styleEl.textContent = `
+        [class*="stickyCurrencyContainer"] {
+          z-index: 9998 !important;
+        }
+        [class*="stickyBar"] {
+          z-index: 9998 !important;
+        }
+      `;
+      document.head.appendChild(styleEl);
+    }
+    
+    return () => {
+      if (styleEl) {
+        styleEl.remove();
+      }
+    };
+  }, [isPackageDetailsOpen]);
+
   // Map country names to flag file codes
   const getCountryFlagCode = (country: string): string => {
     const flagMap: Record<string, string> = {
@@ -49,6 +75,35 @@ const CheckoutPage = () => {
     };
     return flagMap[country] || 'th';
   };
+
+  useEffect(() => {
+    // Add body class for checkout-specific styling
+    document.body.classList.add('checkout-page');
+    
+    // Position currency switcher above sticky bar on mobile
+    const styleEl = document.createElement('style');
+    styleEl.setAttribute('data-checkout-currency-override', '');
+    styleEl.textContent = `
+      @media (max-width: 767px) {
+        body.checkout-page [class*="stickyCurrencyContainer"] {
+          bottom: 170px !important;
+          right: 16px !important;
+        }
+      }
+      @media (max-width: 480px) {
+        body.checkout-page [class*="stickyCurrencyContainer"] {
+          bottom: 170px !important;
+          right: 12px !important;
+        }
+      }
+    `;
+    document.head.appendChild(styleEl);
+    
+    return () => {
+      document.body.classList.remove('checkout-page');
+      styleEl.remove();
+    };
+  }, []);
 
   useEffect(() => {
     // Get plan data from URL parameters

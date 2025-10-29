@@ -8,7 +8,7 @@
 }
 
 .headerRow {
-  padding: 1rem 0;
+  padding: 0.375rem 0;
 }
 
 .container {
@@ -32,7 +32,7 @@
 
 .logo img {
   height: auto;
-  max-height: 50px;
+  max-height: 32px;
   width: auto;
 }
 
@@ -53,7 +53,11 @@
 }
 
 @media (max-width: 768px) {
+  .headerRow {
+    padding: 0.3rem 0;
+  }
+  
   .logo img {
-    max-height: 40px;
+    max-height: 28px;
   }
 }

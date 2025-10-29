@@ -429,8 +429,14 @@
 }
 
 .desktopCta {
-  display: block;
+  display: none;
   margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .desktopCta {
+    display: block;
+  }
 }
 
 .desktopCtaTotal {
@@ -481,7 +487,16 @@
 }
 
 .stickyBar {
-  display: none;
+  display: block;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .stickyBar {
+    display: none;
+  }
 }
 
 .stickyBarContent {
@@ -489,6 +504,7 @@
   margin: 0 auto;
   padding: 1rem;
 }
+
 
 .stickyBarTotal {
   display: flex;
@@ -674,17 +690,21 @@
 
 /* Modal Styles */
 .modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-index: 2147483648 !important; /* Higher than currency switcher (2147483647) and sticky bar (9999) */
   padding: 1rem;
+  margin: 0 !important;
+  overflow: hidden;
 }
 
 .modalContent {
@@ -695,6 +715,8 @@
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
+  position: relative;
+  z-index: 2147483648;
 }
 
 .modalHeader {
