@@ -6,6 +6,8 @@ import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import ClientProviders from '@/components/providers/ClientProviders';
 import PerformanceMonitor from '@/components/common/PerformanceMonitor';
+import dynamic from 'next/dynamic';
+const CookieBanner = dynamic(() => import('@/components/common/CookieBanner'), { ssr: false });
 import StickyCurrencySwitcher from '@/components/common/StickyCurrencySwitcher';
 
 export const metadata: Metadata = {
@@ -81,13 +83,27 @@ export default function RootLayout({
   return (
     <html lang="bg">
       <head>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J85XGQ483H"></script>
+        {/* Google Consent Mode v2 - default deny, then load gtag */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
+              function gtag(){dataLayer.push(arguments);} 
+              gtag('consent', 'default', {
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                ad_storage: 'denied',
+                analytics_storage: 'denied',
+                functionality_storage: 'denied',
+                security_storage: 'granted'
+              });
+            `,
+          }}
+        />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J85XGQ483H"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
               gtag('js', new Date());
               gtag('config', 'G-J85XGQ483H');
             `,
@@ -139,6 +155,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          <CookieBanner />
           <StickyCurrencySwitcher />
         </ClientProviders>
       </body>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import CookieSettingsButton from '@/components/common/CookieSettingsButton';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -136,6 +137,7 @@ export default function Footer() {
             >
               Privacy Policy
             </Link>
+            <CookieSettingsButton />
           </div>
         </div>
       </div>
