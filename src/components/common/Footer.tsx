@@ -86,6 +86,20 @@ export default function Footer() {
               </ul>
             </div>
 
+            {/* Country Pages Links */}
+            <div className={styles.footerColumn}>
+              <h4 className={styles.footerHeading}>Държави</h4>
+              <ul className={styles.footerLinks}>
+                <li><Link href="/turcia/">eSIM за Турция</Link></li>
+                <li><Link href="/esim-velikobritania/">eSIM за Великобритания</Link></li>
+                <li><Link href="/esim-za-usa/">eSIM за САЩ</Link></li>
+                <li><Link href="/esim-thailand/">eSIM за Тайланд</Link></li>
+                <li><Link href="/esim-dubai/">eSIM за Дубай</Link></li>
+                <li><Link href="/esim-serbia/">eSIM за Сърбия</Link></li>
+                <li><Link href="/esim-egipet/">eSIM за Египет</Link></li>
+              </ul>
+            </div>
+
             {/* Social Media */}
             <div className={styles.footerColumn}>
               <h4 className={styles.footerHeading}>Последвайте ни:</h4>
