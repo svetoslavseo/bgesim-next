@@ -8,7 +8,7 @@ import ClientProviders from '@/components/providers/ClientProviders';
 import PerformanceMonitor from '@/components/common/PerformanceMonitor';
 import dynamic from 'next/dynamic';
 const CookieBanner = dynamic(() => import('@/components/common/CookieBanner'), { ssr: false });
-import StickyCurrencySwitcher from '@/components/common/StickyCurrencySwitcher';
+// StickyCurrencySwitcher is now rendered conditionally inside ClientProviders
 
 export const metadata: Metadata = {
   title: {
@@ -156,7 +156,6 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <CookieBanner />
-          <StickyCurrencySwitcher />
         </ClientProviders>
       </body>
     </html>
