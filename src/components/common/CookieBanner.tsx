@@ -94,8 +94,9 @@ export default function CookieBanner() {
         aria-hidden="true"
         style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.45)', zIndex: 9998 as any, pointerEvents: 'auto' }}
       ></div>
-      <div role="dialog" aria-modal="true" className="cookie-banner">
-      <p>
+      <div role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc" className="cookie-banner">
+      <h2 id="cookie-banner-title">Настройки за бисквитки</h2>
+      <p id="cookie-banner-desc">
         Използваме бисквитки за анализ, а при съгласие — за маркетинг. Можете да промените избора си по всяко време.
       </p>
       <div className="actions">
@@ -118,6 +119,11 @@ export default function CookieBanner() {
           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
           max-width: 720px;
           width: calc(100% - 32px);
+        }
+        .cookie-banner h2 {
+          margin: 0 0 8px 0;
+          font-size: 18px;
+          line-height: 1.3;
         }
         @media (min-width: 1024px) {
           .cookie-banner {
