@@ -127,6 +127,35 @@ export default function Footer() {
                   </svg>
                 </a>
               </div>
+              <ul className={styles.footerLinks}>
+                <li>
+                  <a
+                    href="https://travelesim.dk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Travel eSIM Denmark
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://travelesim.ro/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Travel eSIM Romania
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://travelesimple.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Travel eSIM Global
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
