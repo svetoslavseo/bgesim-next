@@ -1,0 +1,211 @@
+{
+  "slug": "kakvo-e-iccid-nomer",
+  "title": "Какво е ICCID номер и къде да го намеря на моята eSIM или SIM карта?",
+  "content": "\n\n<p>Искате да намерите ICCID номера на вашата eSIM или SIM карта, но не знаете откъде да започнете? В тази статия съм описал какво представлява ICCID, защо е важен и как лесно да го откриете на вашия телефон – независимо дали използвате физическа SIM карта или модерна eSIM технология.</p>\n\n<h2 class=\"wp-block-heading\">Какво е ICCID номер?</h2>\n\n<p>ICCID (Integrated Circuit Card Identifier) е уникален идентификационен номер, присвоен на всяка SIM или eSIM карта. Обикновено съдържа между 18 и 22 цифри и служи като своеобразен „отпечатък\" на картата. Всеки мобилен оператор използва ICCID, за да разпознае вашата карта в мрежата, да я свърже с вашия профил и да осигури правилна връзка към мобилните услуги.</p>\n\n<h2 class=\"wp-block-heading\">Защо ICCID номерът е важен?</h2>\n\n<p>ICCID не е просто произволен подбор от цифри. Той има конкретни цели, свързани с идентификацията и сигурността на вашата мобилна връзка:</p>\n\n<ul class=\"wp-block-list\">\n<li>Идентифицира вашата SIM или eSIM карта в системите на оператора.</li>\n<li>Помага при активиране на ново устройство или план.</li>\n<li>Служи за диагностика и поддръжка, ако имате проблем с мрежата.</li>\n<li>Предпазва от злоупотреба, когато картата е изгубена или открадната.</li>\n<li>Осигурява правилен роуминг, когато пътувате в чужбина.</li>\n</ul>\n\n<h2 class=\"wp-block-heading\">Как изглежда ICCID номерът?</h2>\n\n<p><strong>Примерен формат:</strong></p>\n\n<p>89 123 4567 8901 2345 6789</p>\n\n<ul class=\"wp-block-list\">\n<li><strong>89</strong> – показва, че става дума за телекомуникационна карта.</li>\n<li><strong>Следващите цифри</strong> – съдържат кода на страната и оператора.</li>\n<li><strong>Останалите цифри</strong> – са уникалният номер на вашата SIM карта.</li>\n<li><strong>Последната цифра</strong> – е контролна и се използва за проверка на валидността чрез алгоритъма Luhn.</li>\n</ul>\n\n<h2 class=\"wp-block-heading\">Каква е разликата между ICCID, IMEI и IMSI?</h2>\n\n<p>Много хора бъркат тези термини. Ето какво означава всеки от тях:</p>\n\n<div class=\"wp-block-table\">\n<table class=\"has-fixed-layout\">\n<thead>\n<tr>\n<th>Код</th>\n<th>Какво представлява</th>\n<th>За какво служи</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>ICCID</strong></td>\n<td>Уникален номер на SIM / eSIM карта</td>\n<td>Идентификация на самата карта</td>\n</tr>\n<tr>\n<td><strong>IMEI</strong></td>\n<td>Уникален номер на устройството</td>\n<td>Разпознаване на телефона от операторите</td>\n</tr>\n<tr>\n<td><strong>IMSI</strong></td>\n<td>Идентификатор на потребителя</td>\n<td>Свързва SIM картата с вашия акаунт</td>\n</tr>\n</tbody>\n</table>\n</div>\n\n<h2 class=\"wp-block-heading\">Има ли eSIM карта ICCID номер?</h2>\n\n<p>Да. Всяка eSIM карта също има ICCID номер – точно както физическите SIM карти. Разликата е, че eSIM е вградена директно в устройството, така че не се поставя и не се сменя физически.</p>\n\n<p>eSIM може да съдържа няколко различни ICCID номера (SIM профила), което ви позволява да превключвате между оператори и планове само с няколко докосвания – без нужда от нова карта. Това е особено удобно при пътувания или ако имате отделни служебни и лични номера.</p>\n\n<p>Ако искате да научите повече за eSIM технологията, прочетете нашата статия: <strong><a href=\"/blog/kakvo-e-esim/\">Какво е eSIM?</a></strong></p>\n\n<hr class=\"wp-block-separator has-alpha-channel-opacity\"/>\n\n<h2 class=\"wp-block-heading\">Как да намеря ICCID номера на моята eSIM или SIM карта?</h2>\n\n<p>Можете да откриете ICCID номера си директно в настройките на телефона. Не е нужно да вадите SIM картата.</p>\n\n<h3 class=\"wp-block-heading\">На iPhone:</h3>\n\n<ol class=\"wp-block-list\">\n<li>Отворете <strong>Настройки</strong> (Settings)</li>\n<li>Изберете <strong>Основни</strong> (General)</li>\n<li>Натиснете <strong>За телефона</strong> (About)</li>\n<li>Превъртете надолу – ще видите ред с <strong>ICCID</strong></li>\n</ol>\n\n<h3 class=\"wp-block-heading\">На Android:</h3>\n\n<ol class=\"wp-block-list\">\n<li>Отворете <strong>Настройки</strong> (Settings)</li>\n<li>Изберете <strong>За телефона</strong> (About phone)</li>\n<li>Натиснете <strong>Състояние</strong> (Status)</li>\n<li>Изберете <strong>Състояние на SIM картата</strong> (SIM status)</li>\n<li>Ще видите ICCID номера на вашата SIM или eSIM</li>\n</ol>\n\n<p>Ако номерът не се показва, операторът може да е ограничил достъпа поради сигурност. В този случай се свържете с отдела за обслужване на клиенти.</p>\n\n<h2 class=\"wp-block-heading\">Мога ли да проследя телефона си чрез ICCID?</h2>\n\n<p>Не. ICCID се използва само за идентифициране на SIM картата, не за проследяване. Ако изгубите телефона си, използвайте IMEI номера или GPS услуги като Find My iPhone и Find My Device.</p>\n\n<h2 class=\"wp-block-heading\">Може ли ICCID номерът да се промени?</h2>\n\n<p>ICCID може да се промени само когато смените SIM картата или създадете нов eSIM профил. Ако имате нужда от нов номер, свържете се с вашия мобилен оператор.</p>\n\n<h2 class=\"wp-block-heading\">Безопасно ли е да споделям ICCID номера си?</h2>\n\n<p>ICCID не е строго поверителна информация, но е добре да я пазите. Споделяйте я само при нужда – например, когато операторът ви я изисква за активиране или поддръжка.</p>\n\n<h2 class=\"wp-block-heading\">Често задавани въпроси (FAQ)</h2>\n\n<h3 class=\"wp-block-heading\">Мога ли да видя ICCID без да вадя SIM картата?</h3>\n\n<p>Да. В повечето случаи ICCID е достъпен в настройките на телефона, без да се вади картата.</p>\n\n<h3 class=\"wp-block-heading\">ICCID и телефонният номер едно и също ли са?</h3>\n\n<p>Не. ICCID идентифицира SIM картата, докато телефонният номер е свързан с вашия акаунт и може да остане същият дори при смяна на SIM.</p>\n\n<h3 class=\"wp-block-heading\">Какво означава „ICCID невалиден\"?</h3>\n\n<p>Това може да означава, че SIM картата е повредена или не е активирана правилно. Свържете се с мобилния си оператор.</p>\n\n<h2 class=\"wp-block-heading\">Заключение</h2>\n\n<p>ICCID номерът е малък, но изключително важен детайл от вашата SIM или eSIM карта. Той гарантира, че телефонът ви е свързан към правилната мрежа, осигурява сигурност и позволява лесно управление на мобилните ви услуги.</p>\n\n<p>Сега вече знаете къде да намерите ICCID номера си и защо е важно да го пазите. Независимо дали използвате eSIM или традиционна SIM карта – този номер е ключът към вашата мобилна идентичност.</p>\n",
+  "excerpt": "<p>Искате да намерите ICCID номера на вашата eSIM или SIM карта, но не знаете откъде да започнете? В тази статия съм описал какво представлява ICCID, защо е важен и как лесно да го откриете на вашия телефон – независимо дали използвате физическа SIM карта или модерна eSIM технология. ICCID (Integrated Circuit Card Identifier) е уникален идентификационен номер, присвоен на всяка SIM или eSIM карта. [&hellip;]</p>\n",
+  "seo": {
+    "title": "Какво е ICCID номер и къде да го намеря на моята eSIM или SIM карта? - Travel eSIM BG",
+    "description": "Научете какво е ICCID номер, защо е важен и как да го откриете на вашия iPhone или Android телефон. Пълно ръководство за SIM и eSIM карти.",
+    "canonical": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/",
+    "robots": {
+      "index": "index",
+      "follow": "follow"
+    },
+    "openGraph": {
+      "type": "article",
+      "title": "Какво е ICCID номер и къде да го намеря на моята eSIM или SIM карта? - Travel eSIM BG",
+      "description": "Научете какво е ICCID номер, защо е важен и как да го откриете на вашия iPhone или Android телефон. Пълно ръководство за SIM и eSIM карти.",
+      "url": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/",
+      "siteName": "Travel eSIM BG",
+      "images": [
+        {
+          "url": "https://travelesim.bg/media/blog-featured/kakvo-e-iccid-nomer.png",
+          "width": 1024,
+          "height": 1024,
+          "type": "image/png"
+        }
+      ],
+      "locale": "en_GB",
+      "modifiedTime": "2025-10-28T12:00:00+00:00"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "misc": {
+        "Written by": "Васил Андреев",
+        "Estimated reading time": "5 minutes"
+      }
+    },
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/#article",
+          "isPartOf": {
+            "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/"
+          },
+          "author": {
+            "name": "Васил Андреев",
+            "@id": "https://travelesim.bg/#/schema/person/f91b87636c0e34acdd581723431a1f6d"
+          },
+          "headline": "Какво е ICCID номер и къде да го намеря на моята eSIM или SIM карта?",
+          "datePublished": "2025-10-28T12:00:00+00:00",
+          "dateModified": "2025-10-28T12:00:00+00:00",
+          "mainEntityOfPage": {
+            "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/"
+          },
+          "wordCount": 800,
+          "commentCount": 0,
+          "publisher": {
+            "@id": "https://travelesim.bg/#organization"
+          },
+          "image": {
+            "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/#primaryimage"
+          },
+          "thumbnailUrl": "https://travelesim.bg/media/blog-featured/kakvo-e-iccid-nomer.png",
+          "articleSection": [
+            "eSIM Основи"
+          ],
+          "inLanguage": "en-GB",
+          "potentialAction": [
+            {
+              "@type": "CommentAction",
+              "name": "Comment",
+              "target": [
+                "https://travelesim.bg/blog/kakvo-e-iccid-nomer/#respond"
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/",
+          "url": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/",
+          "name": "Какво е ICCID номер и къде да го намеря на моята eSIM или SIM карта? - Travel eSIM BG",
+          "isPartOf": {
+            "@id": "https://travelesim.bg/#website"
+          },
+          "primaryImageOfPage": {
+            "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/#primaryimage"
+          },
+          "image": {
+            "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/#primaryimage"
+          },
+          "thumbnailUrl": "https://travelesim.bg/media/blog-featured/kakvo-e-iccid-nomer.png",
+          "datePublished": "2025-10-28T12:00:00+00:00",
+          "dateModified": "2025-10-28T12:00:00+00:00",
+          "description": "Научете какво е ICCID номер, защо е важен и как да го откриете на вашия iPhone или Android телефон. Пълно ръководство за SIM и eSIM карти.",
+          "breadcrumb": {
+            "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/#breadcrumb"
+          },
+          "inLanguage": "en-GB",
+          "potentialAction": [
+            {
+              "@type": "ReadAction",
+              "target": [
+                "https://travelesim.bg/blog/kakvo-e-iccid-nomer/"
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "ImageObject",
+          "inLanguage": "en-GB",
+          "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/#primaryimage",
+          "url": "https://travelesim.bg/media/blog-featured/kakvo-e-iccid-nomer.png",
+          "contentUrl": "https://travelesim.bg/media/blog-featured/kakvo-e-iccid-nomer.png",
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://travelesim.bg/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Какво е ICCID номер и къде да го намеря на моята eSIM или SIM карта?"
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://travelesim.bg/#website",
+          "url": "https://travelesim.bg/",
+          "name": "Travel eSIM BG",
+          "description": "",
+          "publisher": {
+            "@id": "https://travelesim.bg/#organization"
+          },
+          "alternateName": "Travel eSIM Bulgaria",
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://travelesim.bg/?s={search_term_string}"
+              },
+              "query-input": {
+                "@type": "PropertyValueSpecification",
+                "valueRequired": true,
+                "valueName": "search_term_string"
+              }
+            }
+          ],
+          "inLanguage": "en-GB"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://travelesim.bg/#organization",
+          "name": "Travel eSIM Bulgaria",
+          "alternateName": "Travel eSIMple Bulgaria",
+          "url": "https://travelesim.bg/",
+          "logo": {
+            "@type": "ImageObject",
+            "inLanguage": "en-GB",
+            "@id": "https://travelesim.bg/#/schema/logo/image/",
+            "url": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+            "contentUrl": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+            "width": 650,
+            "height": 200,
+            "caption": "Travel eSIM Bulgaria"
+          },
+          "image": {
+            "@id": "https://travelesim.bg/#/schema/logo/image/"
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://travelesim.bg/#/schema/person/f91b87636c0e34acdd581723431a1f6d",
+          "name": "Васил Андреев",
+          "image": {
+            "@type": "ImageObject",
+            "inLanguage": "en-GB",
+            "@id": "https://travelesim.bg/#/schema/person/image/",
+            "url": "https://secure.gravatar.com/avatar/eaa9cc2cc11f67ccaa87e5e94059d4445fa3bf4f5581fd457a223dde3b320550?s=96&d=mm&r=g",
+            "contentUrl": "https://secure.gravatar.com/avatar/eaa9cc2cc11f67ccaa87e5e94059d4445fa3bf4f5581fd457a223dde3b320550?s=96&d=mm&r=g",
+            "caption": "Васил Андреев"
+          },
+          "sameAs": [
+            "https://travelesim.bg/v-andreev/"
+          ],
+          "url": "https://travelesim.bg/blog/author/admin/"
+        }
+      ]
+    }
+  },
+  "url": "https://travelesim.bg/blog/kakvo-e-iccid-nomer/",
+  "modifiedDate": "2025-10-28T12:00:00",
+  "publishedDate": "2025-10-28T12:00:00",
+  "author": "Васил Андреев",
+  "categories": [
+    "eSIM Основи"
+  ],
+  "tags": []
+}
