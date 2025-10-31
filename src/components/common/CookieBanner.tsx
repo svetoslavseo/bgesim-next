@@ -103,11 +103,11 @@ export default function CookieBanner() {
       <div role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc" className="cookie-banner">
       <h2 id="cookie-banner-title">Настройки за бисквитки</h2>
       <p id="cookie-banner-desc">
-        Използваме бисквитки за анализ, а при съгласие — за маркетинг. Можете да промените избора си по всяко време.
+        Използваме бисквитки за аналитични цели. При предоставено съгласие използваме бисквитки и за маркетинг. Можете да промените настройките си по всяко време.
       </p>
       <div className="actions">
-        <button onClick={() => save({ analytics: true, marketing: true })}>Приемам всички</button>
         <button onClick={() => save({ analytics: false, marketing: false })}>Отказвам всички</button>
+        <button onClick={() => save({ analytics: true, marketing: true })}>Приемам всички</button>
       </div>
       <style jsx>{`
         /* overlay is styled inline to avoid scoping issues */
@@ -152,11 +152,19 @@ export default function CookieBanner() {
           border: 1px solid #d1d5db;
           background: #ffffff;
           cursor: pointer;
+          font-weight: 500;
         }
-        button:first-of-type {
-          background: #111111;
-          color: #ffffff;
-          border-color: #111111;
+        button:last-of-type {
+          background: var(--color-neon-yellow, #e5e900);
+          color: #000000;
+          border-color: var(--color-neon-yellow, #e5e900);
+          padding: 12px 24px;
+          font-weight: 600;
+          font-size: 1rem;
+        }
+        button:last-of-type:hover {
+          background: var(--color-neon-yellow-hover, #d4d800);
+          border-color: var(--color-neon-yellow-hover, #d4d800);
         }
       `}</style>
       </div>
