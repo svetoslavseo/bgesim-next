@@ -3,8 +3,8 @@
 import { useEffect } from 'react';
 import { trackEvent } from '@/lib/ga';
 
-const MOBILE_SELECTOR = '.page_checkoutButton___nsl5';
-const DESKTOP_SELECTOR = '.page_desktopCtaButton__8ySNe';
+// Use data attributes instead of CSS class selectors (which have changing hashes)
+const CHECKOUT_BUTTON_SELECTOR = 'button[data-checkout-button]';
 
 export default function CheckoutCTATracker() {
   useEffect(() => {
@@ -13,9 +13,25 @@ export default function CheckoutCTATracker() {
     const handleClick = (variant: 'mobile' | 'desktop', event: Event) => {
       const target = event.target as HTMLElement;
       // Find the button element (in case click is on child element)
-      const button = target.closest(MOBILE_SELECTOR) || target.closest(DESKTOP_SELECTOR) || target;
+      const button = target.closest('button[data-checkout-button]') as HTMLElement;
+      
+      if (!button) return;
+      
+      // Determine variant based on button location
+      // CSS modules add hashes, so we check if any parent has "stickyBar" in class name
+      let isSticky = false;
+      let parent = button.parentElement;
+      while (parent) {
+        if (parent.className && typeof parent.className === 'string' && parent.className.includes('stickyBar')) {
+          isSticky = true;
+          break;
+        }
+        parent = parent.parentElement;
+      }
+      const variantType = isSticky ? 'mobile' : 'desktop';
+      
       trackEvent('checkout_continue_click', {
-        variant,
+        variant: variantType,
         page_path: window.location.pathname + window.location.search,
         page_referrer: document.referrer || '(direct)',
         button_text: button.textContent?.trim() || '',
@@ -23,24 +39,29 @@ export default function CheckoutCTATracker() {
     };
 
     const attachListeners = () => {
-      // Find all buttons matching the selectors
-      const mobileButtons = Array.from(document.querySelectorAll<HTMLElement>(MOBILE_SELECTOR));
-      const desktopButtons = Array.from(document.querySelectorAll<HTMLElement>(DESKTOP_SELECTOR));
+      // Find all checkout buttons
+      const buttons = Array.from(document.querySelectorAll<HTMLElement>(CHECKOUT_BUTTON_SELECTOR));
 
       // Attach event listeners
-      const mobileHandlers = mobileButtons.map((btn) => {
-        const handler = (e: Event) => handleClick('mobile', e);
+      const handlers = buttons.map((btn) => {
+        const handler = (e: Event) => {
+          // Check if button is in sticky bar (CSS modules add hashes, so check class name contains "stickyBar")
+          let isSticky = false;
+          let parent = btn.parentElement;
+          while (parent) {
+            if (parent.className && typeof parent.className === 'string' && parent.className.includes('stickyBar')) {
+              isSticky = true;
+              break;
+            }
+            parent = parent.parentElement;
+          }
+          handleClick(isSticky ? 'mobile' : 'desktop', e);
+        };
         btn.addEventListener('click', handler);
         return { btn, handler };
       });
 
-      const desktopHandlers = desktopButtons.map((btn) => {
-        const handler = (e: Event) => handleClick('desktop', e);
-        btn.addEventListener('click', handler);
-        return { btn, handler };
-      });
-
-      return { mobileHandlers, desktopHandlers };
+      return handlers;
     };
 
     // Initial attachment attempt
@@ -49,10 +70,7 @@ export default function CheckoutCTATracker() {
     // Use MutationObserver to watch for dynamically added buttons
     const observer = new MutationObserver(() => {
       // Re-attach listeners in case buttons were added/removed
-      handlers.mobileHandlers.forEach(({ btn, handler }) => {
-        btn.removeEventListener('click', handler);
-      });
-      handlers.desktopHandlers.forEach(({ btn, handler }) => {
+      handlers.forEach(({ btn, handler }) => {
         btn.removeEventListener('click', handler);
       });
       handlers = attachListeners();
@@ -67,10 +85,7 @@ export default function CheckoutCTATracker() {
     // Cleanup function
     return () => {
       observer.disconnect();
-      handlers.mobileHandlers.forEach(({ btn, handler }) => {
-        btn.removeEventListener('click', handler);
-      });
-      handlers.desktopHandlers.forEach(({ btn, handler }) => {
+      handlers.forEach(({ btn, handler }) => {
         btn.removeEventListener('click', handler);
       });
     };
@@ -78,4 +93,3 @@ export default function CheckoutCTATracker() {
 
   return null;
 }
-
