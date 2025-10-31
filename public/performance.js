@@ -104,25 +104,4 @@
     }
   });
 
-  // Preload critical resources
-  function preloadCriticalResources() {
-    const criticalImages = [
-      '/media/images/TeSim-Logo-Breeze.png',
-    ];
-
-    criticalImages.forEach(src => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = src;
-      document.head.appendChild(link);
-    });
-  }
-
-  // Initialize preloading
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', preloadCriticalResources);
-  } else {
-    preloadCriticalResources();
-  }
 })();
