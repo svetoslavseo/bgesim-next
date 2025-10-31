@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { trackPageview } from '@/lib/ga';
 
 type Consent = { analytics: boolean; marketing: boolean };
 
@@ -83,6 +84,11 @@ export default function CookieBanner() {
       functionality_storage: 'denied',
       security_storage: 'granted',
     });
+
+    // Fire a page_view immediately after granting analytics consent
+    if (consent.analytics) {
+      trackPageview();
+    }
   };
 
   if (!open) return null;

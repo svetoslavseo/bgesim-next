@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { convertPrice, CURRENCY_SYMBOLS } from '@/lib/currency';
+import CheckoutCTATracker from '@/components/analytics/CheckoutCTATracker';
 import styles from './page.module.css';
 
 interface Plan {
@@ -256,6 +257,7 @@ const CheckoutPage = () => {
 
   return (
     <>
+      <CheckoutCTATracker />
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <Link href="/" className={styles.backLink}>
