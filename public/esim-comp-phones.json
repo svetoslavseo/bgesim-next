@@ -8,20 +8,16 @@
             "series_name": "iPhone 17 Series",
             "devices": [
               {
-                "model": "iPhone 17",
-                "notes": "Моделите за САЩ са само с eSIM. Поддържат двойни eSIM."
+                "model": "iPhone 17"
               },
               {
-                "model": "iPhone 17 Plus",
-                "notes": "Моделите за САЩ са само с eSIM. Поддържат двойни eSIM."
+                "model": "iPhone 17 Plus"
               },
               {
-                "model": "iPhone 17 Pro",
-                "notes": "Моделите за САЩ са само с eSIM. Поддържат двойни eSIM."
+                "model": "iPhone 17 Pro"
               },
               {
-                "model": "iPhone 17 Pro Max",
-                "notes": "Моделите за САЩ са само с eSIM. Поддържат двойни eSIM."
+                "model": "iPhone 17 Pro Max"
               }
             ]
           },
@@ -29,20 +25,16 @@
             "series_name": "iPhone 16 Series",
             "devices": [
               {
-                "model": "iPhone 16",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 16"
               },
               {
-                "model": "iPhone 16 Plus",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 16 Plus"
               },
               {
-                "model": "iPhone 16 Pro",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 16 Pro"
               },
               {
-                "model": "iPhone 16 Pro Max",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 16 Pro Max"
               }
             ]
           },
@@ -50,20 +42,16 @@
             "series_name": "iPhone 15 Series",
             "devices": [
               {
-                "model": "iPhone 15",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 15"
               },
               {
-                "model": "iPhone 15 Plus",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 15 Plus"
               },
               {
-                "model": "iPhone 15 Pro",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 15 Pro"
               },
               {
-                "model": "iPhone 15 Pro Max",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 15 Pro Max"
               }
             ]
           },
@@ -71,20 +59,16 @@
             "series_name": "iPhone 14 Series",
             "devices": [
               {
-                "model": "iPhone 14",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 14"
               },
               {
-                "model": "iPhone 14 Plus",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 14 Plus"
               },
               {
-                "model": "iPhone 14 Pro",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 14 Pro"
               },
               {
-                "model": "iPhone 14 Pro Max",
-                "notes": "US models are eSIM-only. Supports dual eSIMs."
+                "model": "iPhone 14 Pro Max"
               }
             ]
           },
