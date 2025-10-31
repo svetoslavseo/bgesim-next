@@ -428,8 +428,7 @@
             "series_name": "Pura Series",
             "devices": [
               {
-                "model": "Huawei Pura 70 Pro",
-                "notes": "eSIM availability may vary by region."
+                "model": "Huawei Pura 70 Pro"
               }
             ]
           },
@@ -450,8 +449,7 @@
             "series_name": "Mate 70 Series",
             "devices": [
               {
-                "model": "Huawei Mate 70 Pro",
-                "notes": "eSIM availability may vary by region."
+                "model": "Huawei Mate 70 Pro"
               }
             ]
           },
