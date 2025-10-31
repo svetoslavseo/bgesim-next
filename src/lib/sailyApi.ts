@@ -24,7 +24,7 @@ interface SailyApiResponse {
   items: SailyPlan[];
 }
 
-interface ProcessedPlan {
+export interface ProcessedPlan {
   id: string;
   name: string;
   data: string;
@@ -176,6 +176,53 @@ export function generateAffiliateLink(plan: ProcessedPlan): string {
   const planId = plan.priceIdentifier || plan.identifier;
   const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${planId}&aff_transaction_id=${transactionId}&aff_offer_id=101&aff_id=8080`;
   return `https://go.saily.site/aff_c?offer_id=101&aff_id=8080&url=${encodeURIComponent(sailyCheckoutUrl)}`;
+}
+
+/**
+ * Generate a Saily checkout URL for a country using the lowest price plan
+ * This is used for general country page CTAs where a specific plan isn't selected
+ */
+export async function generateCountryCheckoutUrl(countryCode: string): Promise<string> {
+  try {
+    // Get plans for the country
+    const plans = await fetchSailyPlans(countryCode);
+    
+    // Filter country-specific plans (prefer country plans over regional/global)
+    const countryPlans = plans.filter(plan => plan.planType === 'country');
+    
+    // Get the lowest price plan
+    const plansToUse = countryPlans.length > 0 ? countryPlans : plans;
+    if (plansToUse.length === 0) {
+      // Fallback to FALLBACK_PLANS
+      const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+      if (fallbackPlans.length > 0) {
+        const lowestPricePlan = fallbackPlans.reduce((lowest, plan) => 
+          plan.priceUSD < lowest.priceUSD ? plan : lowest
+        );
+        return generateAffiliateLink(lowestPricePlan);
+      }
+      throw new Error(`No plans found for country ${countryCode}`);
+    }
+    
+    // Find the lowest price plan
+    const lowestPricePlan = plansToUse.reduce((lowest, plan) => 
+      plan.priceUSD < lowest.priceUSD ? plan : lowest
+    );
+    
+    return generateAffiliateLink(lowestPricePlan);
+  } catch (error) {
+    console.error(`Error generating checkout URL for ${countryCode}:`, error);
+    // Fallback to FALLBACK_PLANS
+    const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+    if (fallbackPlans.length > 0) {
+      const lowestPricePlan = fallbackPlans.reduce((lowest, plan) => 
+        plan.priceUSD < lowest.priceUSD ? plan : lowest
+      );
+      return generateAffiliateLink(lowestPricePlan);
+    }
+    // Last resort: return a generic Saily URL
+    throw new Error(`Unable to generate checkout URL for ${countryCode}`);
+  }
 }
 
 /**

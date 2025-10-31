@@ -6,17 +6,8 @@ import ComparisonTable from '@/components/country/ComparisonTable';
 import FAQSection from '@/components/country/FAQSection';
 import DynamicCTASection from '@/components/common/DynamicCTASection';
 import { Metadata } from 'next';
-import { getLowestPriceInBGN, getPriceRangeInBGN } from '@/lib/sailyApi';
+import { getLowestPriceInBGN, getPriceRangeInBGN, generateCountryCheckoutUrl } from '@/lib/sailyApi';
 import { generateCanonicalUrl, generateCountryBreadcrumbSchema, generateProductSchema, getPriceValidUntilDate } from '@/lib/seo';
-
-// Mapping of country codes to checkout URLs
-const COUNTRY_CHECKOUT_URLS: Record<string, string> = {
-  'RS': 'https://breezesim.com/products/esimg_rs_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
-  'GB': 'https://breezesim.com/products/esimg_gb_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
-  'EG': 'https://breezesim.com/products/esimg_eg_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
-  'US': 'https://breezesim.com/products/esimg_us_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
-  'AE': 'https://breezesim.com/products/esimg_ae_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg',
-};
 
 export async function generateMetadata(): Promise<Metadata> {
   const lowestPrice = await getLowestPriceInBGN('EG');
@@ -40,6 +31,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function EgyptPage() {
   // Get price range for aggregate offer
   const priceRange = await getPriceRangeInBGN('EG');
+  
+  // Generate Saily checkout URL for Egypt
+  const checkoutUrl = await generateCountryCheckoutUrl('EG');
   
   // Breadcrumb Schema for Egypt page
   const breadcrumbSchema = generateCountryBreadcrumbSchema('Египет', 'esim-egipet');
@@ -160,7 +154,7 @@ export default async function EgyptPage() {
             image: '/media/images/how-to-images/Step 3 Saily.png'
           }
         ]}
-        ctaUrl="https://breezesim.com/products/esimg_eg_v2?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg"
+        ctaUrl={checkoutUrl}
         ctaText="Купи Сега"
       />
 

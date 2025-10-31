@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { convertPrice, CURRENCY_SYMBOLS } from '@/lib/currency';
+import { generateAffiliateLink } from '@/lib/sailyApi';
+import type { ProcessedPlan } from '@/lib/sailyApi';
 import CheckoutCTATracker from '@/components/analytics/CheckoutCTATracker';
 import styles from './page.module.css';
 
@@ -156,51 +158,44 @@ const CheckoutPage = () => {
     }
 
     try {
-      // Generate Saily affiliate link using the price identifier (preferred) or plan identifier
+      // Check if plan has required identifiers for Saily checkout
       const identifierToUse = plan.priceIdentifier || plan.identifier;
       
       // Validate that the identifier is a real Saily identifier (not a fallback placeholder)
+      // Saily identifiers can be:
+      // - UUID format (contains dashes): e.g., "cd90a7da-a22c-4d25-b628-5be35c02772f"
+      // - Base64 format (long string, may or may not have padding '='): e.g., "MTpWRUF4RFF0dEkyLXV1VVFKOEhMYlRxQTJxa1V1d0pJYXliM1lSTUdaM2RJPTpQcmljZTozMTIyLlVTRC4yNzk5"
+      // - Fallback placeholders usually start with "saily_" or are very short
       const isValidSailyIdentifier = identifierToUse && 
         (identifierToUse.includes('-') || // UUID format
-         identifierToUse.includes('=')); // Base64 format
+         identifierToUse.includes('=') || // Base64 format with padding
+         (identifierToUse.length > 30 && /^[A-Za-z0-9+/=]+$/.test(identifierToUse))); // Base64 format without padding (long alphanumeric string)
       
       if (identifierToUse && isValidSailyIdentifier) {
-        // Generate a unique transaction ID
-        const transactionId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        // Convert plan to ProcessedPlan format and generate Saily affiliate link
+        const processedPlan: ProcessedPlan = {
+          id: plan.id || '',
+          name: plan.name,
+          data: plan.data,
+          validity: plan.validity,
+          priceUSD: plan.priceUSD || plan.price,
+          price: plan.price,
+          currency: plan.currency,
+          identifier: plan.identifier || '',
+          priceIdentifier: plan.priceIdentifier,
+          planType: 'country', // Default to country, can be determined from plan data if needed
+          coveredCountries: []
+        };
         
-        // Use the Saily affiliate link format with actual values
-        const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${identifierToUse}&aff_transaction_id=${transactionId}&aff_offer_id=101&aff_id=8080`;
-        const finalUrl = `https://go.saily.site/aff_c?offer_id=101&aff_id=8080&url=${encodeURIComponent(sailyCheckoutUrl)}`;
+        const finalUrl = generateAffiliateLink(processedPlan);
         
         console.log('Redirecting to Saily:', finalUrl);
         console.log('Using identifier:', identifierToUse, plan.priceIdentifier ? '(price identifier)' : '(plan identifier)');
         window.location.href = finalUrl;
       } else {
-        // Fallback to Breeze if no Saily identifier
-        const countryProductMap: Record<string, string> = {
-          // English names
-          'Thailand': 'esimg_th_v2',
-          'Serbia': 'esimg_rs_v2',
-          'Dubai': 'esimg_ae_v2',
-          'Egypt': 'esimg_eg_v2',
-          'USA': 'esimg_us_v2',
-          'UK': 'esimg_gb_v2',
-          'Turkey': 'esimg_tr_v2',
-          // Bulgarian names
-          'Тайланд': 'esimg_th_v2',
-          'Сърбия': 'esimg_rs_v2',
-          'Дубай': 'esimg_ae_v2',
-          'Египет': 'esimg_eg_v2',
-          'САЩ': 'esimg_us_v2',
-          'Великобритания': 'esimg_gb_v2',
-          'Турция': 'esimg_tr_v2'
-        };
-
-        const productCode = countryProductMap[plan.country] || 'esimg_th_v2';
-        const finalUrl = `https://breezesim.com/products/${productCode}?sca_ref=8208552.WYX2DxgbRN&sca_source=tesim_bg`;
-        
-        console.log('Redirecting to Breeze (fallback):', finalUrl);
-        window.location.href = finalUrl;
+        // If no valid Saily identifier, show error instead of redirecting to Breeze
+        console.error('No valid Saily identifier found for plan:', plan);
+        setError('Липсва валиден идентификатор за плана. Моля, изберете план отново.');
       }
     } catch (error) {
       console.error('Error redirecting to payment:', error);
@@ -332,11 +327,11 @@ const CheckoutPage = () => {
               <h3 className={styles.paymentTitle}>Методи на плащане</h3>
             </div>
             <div className={styles.paymentMethods}>
-              <Image src="/media/logos/apple-pay.png" alt="Apple Pay" width={24} height={15} className={styles.paymentLogo} />
-              <Image src="/media/logos/google-pay.png" alt="Google Pay" width={24} height={15} className={styles.paymentLogo} />
-              <Image src="/media/logos/visa.png" alt="Visa" width={24} height={15} className={styles.paymentLogo} />
-              <Image src="/media/logos/mastercard.png" alt="Mastercard" width={24} height={15} className={styles.paymentLogo} />
-              <Image src="/media/logos/amex.png" alt="Amex" width={24} height={15} className={styles.paymentLogo} />
+              <Image src="/media/logos/apple-pay.png" alt="Apple Pay" width={24} height={15} className={styles.paymentLogo} style={{ width: 'auto', height: 'auto' }} />
+              <Image src="/media/logos/google-pay.png" alt="Google Pay" width={24} height={15} className={styles.paymentLogo} style={{ width: 'auto', height: 'auto' }} />
+              <Image src="/media/logos/visa.png" alt="Visa" width={24} height={15} className={styles.paymentLogo} style={{ width: 'auto', height: 'auto' }} />
+              <Image src="/media/logos/mastercard.png" alt="Mastercard" width={24} height={15} className={styles.paymentLogo} style={{ width: 'auto', height: 'auto' }} />
+              <Image src="/media/logos/amex.png" alt="Amex" width={24} height={15} className={styles.paymentLogo} style={{ width: 'auto', height: 'auto' }} />
             </div>
           </div>
 
