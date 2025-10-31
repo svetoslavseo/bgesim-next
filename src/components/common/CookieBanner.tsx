@@ -113,7 +113,7 @@ export default function CookieBanner() {
         /* overlay is styled inline to avoid scoping issues */
         .cookie-banner {
           position: fixed;
-          top: 50%;
+          top: 70%;
           left: 50%;
           transform: translate(-50%, -50%);
           z-index: 9999;
