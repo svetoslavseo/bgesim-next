@@ -110,18 +110,20 @@ export default function BlogPostPage({
             
             {/* 3. Published/Updated dates */}
             <div className={styles.meta}>
-              <time dateTime={post.publishedDate}>
-                Публикувано: {formatDate(post.publishedDate)}
-              </time>
-              
-              {post.publishedDate !== post.modifiedDate && (
-                <span>
-                  • Актуализирано: {formatDate(post.modifiedDate)}
-                </span>
+              {post.publishedDate !== post.modifiedDate ? (
+                <time dateTime={post.modifiedDate}>
+                  Актуализирано: {formatDate(post.modifiedDate)}
+                </time>
+              ) : (
+                <time dateTime={post.publishedDate}>
+                  Публикувано: {formatDate(post.publishedDate)}
+                </time>
               )}
               
               {post.categories.length > 0 && (
-                <span>• {post.categories.join(', ')}</span>
+                <span className={styles.categoryLabel}>
+                  {post.categories.join(', ')}
+                </span>
               )}
             </div>
             

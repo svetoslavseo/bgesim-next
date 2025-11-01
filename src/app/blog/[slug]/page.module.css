@@ -55,9 +55,21 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  align-items: center;
   font-size: 0.875rem;
   color: #6b7280;
   margin-bottom: 1rem;
+}
+
+.categoryLabel {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: #fefce8;
+  border: 1px solid #e5e7eb;
+  border-radius: 30px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
 }
 
 .authorLine {
