@@ -9,6 +9,7 @@ import { hasAnalyticsConsent, trackPageview } from '@/lib/ga';
 export default function ClientProviders({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isArticlePage = pathname?.startsWith('/blog/') || pathname?.startsWith('/en/blog/');
+  const isHomepage = pathname === '/' || pathname === '';
   const lastTrackedPathRef = useRef<string | null>(null);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
     <CurrencyProvider>
       {children}
-      {!isArticlePage && <StickyCurrencySwitcher />}
+      {!isArticlePage && !isHomepage && <StickyCurrencySwitcher />}
     </CurrencyProvider>
   );
 }
