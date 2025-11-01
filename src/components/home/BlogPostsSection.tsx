@@ -49,7 +49,6 @@ export default function BlogPostsSection({ title, subtitle, posts }: BlogPostsSe
                     {post.title}
                   </Link>
                 </h3>
-                <p className={styles.excerpt}>{post.excerpt}</p>
                 <Link href={`/blog/${post.slug}/`} className={styles.readMore}>
                   ПРОЧЕТИ ПОВЕЧЕ
                 </Link>

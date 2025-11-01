@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getRecentPosts } from '@/lib/content';
-import { formatDate, extractExcerpt } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 import featuredImagesMap from '../../../data/processed/blog-featured-images.json';
 import styles from './RelatedArticles.module.css';
 
@@ -62,10 +62,6 @@ export default function RelatedArticles({ excludeSlug }: RelatedArticlesProps) {
                     <h3 className={styles.title}>
                       {post.title}
                     </h3>
-                    
-                    <p className={styles.excerpt}>
-                      {extractExcerpt(post.excerpt || post.content, 120)}
-                    </p>
                     
                     <div className={styles.readMore}>
                       Прочети Повече

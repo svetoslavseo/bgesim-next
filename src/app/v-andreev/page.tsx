@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getPageBySlug } from '@/lib/content';
+import { getPageBySlug, getRecentPosts } from '@/lib/content';
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import AuthorProfile from '@/components/author/AuthorProfile';
 
@@ -34,29 +34,19 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-// Latest blog posts data
-const latestPosts = [
-  {
-    slug: 'kak-da-proverq-dali-imam-rouming',
-    title: 'Как да проверя дали имам роуминг? Практично ръководство за Vivacom, Yettel и A1',
-    publishedDate: '2025-10-19T19:58:56',
-    excerpt: 'Когато пътуваме в чужбина, едно от първите неща, за които се замисляме, е дали имаме активиран роуминг. Ако не проверите това предварително, може да останете без връзка точно когато най-много ви трябва интернет или обаждане. В тази статия ще разгледаме как да проверите дали имате роуминг при трите основни мобилни оператора в България – Vivacom, […]'
-  },
-  {
-    slug: 'kak-da-izbegnesh-rouming-v-velikobritania',
-    title: 'Как да избегнеш скъп роуминг във Великобритания с eSIM (2025)',
-    publishedDate: '2025-10-14T09:33:32',
-    excerpt: 'Пътуваш до Великобритания и искаш да използваш Интернет, без да се ужилиш от сметка?С Брекзит (Brexit) роумингът за UK вече не е „като у дома". Трябва да провериш тарифите си и да се подготвиш.Но има добри новини - eSIM може да ти даде по-евтин и по-удобен вариант за мобилен интернет. Без да вадиш сегашната си […]'
-  },
-  {
-    slug: 'rouming-v-syrbia-ceni-paketi-esim-alternativi',
-    title: 'Роуминг в Сърбия: Пълно ръководство за пътуващи',
-    publishedDate: '2025-08-13T12:27:11',
-    excerpt: 'Планираш пътуване до Сърбия и се чудиш как да останеш онлайн? В тази статия ще откриеш всичко важно за роуминг услугите, цените, алтернативите и най-добрите начини да спестиш пари, без да губиш връзка. 1. Роуминг от България към Сърбия Сърбия не е част от ЕС, което означава, че стандартните правила за безплатен роуминг в ЕС […]'
-  }
-];
-
 export default function VasilAndreevPage() {
+  // Get all published articles, sorted by published date (newest first)
+  // Using a high limit to ensure we get all posts
+  const allPosts = getRecentPosts(10000);
+  
+  // Map to the format expected by AuthorProfile component
+  const latestPosts = allPosts.map(post => ({
+    slug: post.slug,
+    title: post.title,
+    publishedDate: post.publishedDate,
+    excerpt: post.excerpt
+  }));
+
   const authorData = {
     authorName: "Васил Андреев",
     authorTitle: "Основател на Travel eSIM Global",

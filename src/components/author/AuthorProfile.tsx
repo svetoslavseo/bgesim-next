@@ -97,7 +97,6 @@ export default function AuthorProfile({
                 <Card
                   key={post.slug}
                   title={post.title}
-                  description={post.excerpt}
                   href={`/blog/${post.slug}/`}
                   image={featuredImagePath}
                   imageAlt={post.title}

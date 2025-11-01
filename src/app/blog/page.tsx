@@ -3,7 +3,7 @@ import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import Container from '@/components/layout/Container';
 import Section from '@/components/layout/Section';
 import Card from '@/components/ui/Card';
-import { formatDate, extractExcerpt } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 import type { Metadata } from 'next';
 import styles from './page.module.css';
 
@@ -58,7 +58,6 @@ export default function BlogPage() {
                 <Card
                   key={post.slug}
                   title={post.title}
-                  description={extractExcerpt(post.excerpt || post.content, 150)}
                   href={`/blog/${post.slug}/`}
                   image={post.featuredImageUrl}
                   imageAlt={post.title}

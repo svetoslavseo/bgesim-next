@@ -32,7 +32,6 @@ export default function Card({
       
       <div className={styles.content}>
         {title && <h3 className={styles.title}>{title}</h3>}
-        {description && <p className={styles.description}>{description}</p>}
         {children}
       </div>
     </>
