@@ -40,7 +40,7 @@
 
 .headline {
   margin-bottom: 1rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
   line-height: 1.2;
   color: #1a1a1a;
   font-weight: 700;
@@ -173,7 +173,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .headline {
-    font-size: 2rem;
+    font-size: 3rem;
     /* Mobile-specific containment */
     contain: none;
     min-height: 2.5rem;
@@ -203,7 +203,7 @@
 
 @media (max-width: 480px) {
   .headline {
-    font-size: 1.75rem;
+    font-size: 3rem;
     /* Enhanced mobile containment */
     contain: none;
     min-height: 2rem;
