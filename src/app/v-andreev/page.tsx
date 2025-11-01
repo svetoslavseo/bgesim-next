@@ -69,5 +69,58 @@ export default function VasilAndreevPage() {
     latestPosts
   };
 
-  return <AuthorProfile {...authorData} />;
+  // ProfilePage structured data according to Google's guidelines
+  const profilePageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": authorData.authorName,
+      "jobTitle": authorData.authorTitle,
+      "image": {
+        "@type": "ImageObject",
+        "url": `https://travelesim.bg${authorData.authorImage}`,
+        "contentUrl": `https://travelesim.bg${authorData.authorImage}`
+      },
+      "description": authorData.authorBio.join(" "),
+      "sameAs": [
+        authorData.linkedinUrl,
+        "https://travelesimple.com/author/vasil-andreev",
+        "https://travelesim.ro/andreev/",
+        "https://travelesim.dk/v-andreev/"
+      ],
+      "url": "https://travelesim.bg/v-andreev/",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Travel eSIM Global",
+        "alternateName": "Travel eSIM BG",
+        "url": "https://travelesim.bg/"
+      },
+      "knowsAbout": [
+        "SEO",
+        "eSIM",
+        "Travel",
+        "Mobile Technology",
+        "Digital Marketing",
+        "Roaming"
+      ],
+      "additionalType": [
+        "https://schema.org/Blogger",
+        "https://schema.org/Entrepreneur"
+      ]
+    }
+  };
+
+  return (
+    <>
+      {/* Structured Data - ProfilePage Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(profilePageSchema),
+        }}
+      />
+      <AuthorProfile {...authorData} />
+    </>
+  );
 }
