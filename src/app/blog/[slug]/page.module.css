@@ -64,12 +64,12 @@
 .categoryLabel {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  background-color: #fefce8;
+  background: linear-gradient(135deg, #f8f4f7 0%, #faf9fb 100%);
   border: 1px solid #e5e7eb;
   border-radius: 30px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #374151;
+  color: #6b7280;
 }
 
 .authorLine {
@@ -95,6 +95,11 @@
 .authorName:hover {
   color: #8b5a8a;
   text-decoration: underline;
+}
+
+.authorTitle {
+  color: #6b7280;
+  font-weight: 400;
 }
 
 .excerpt {

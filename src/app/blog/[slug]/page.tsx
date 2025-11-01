@@ -134,6 +134,7 @@ export default function BlogPostPage({
                 <Link href="/v-andreev/" className={styles.authorName}>
                   {post.author}
                 </Link>
+                <span className={styles.authorTitle}> (Автор и основател)</span>
               </div>
             )}
             
