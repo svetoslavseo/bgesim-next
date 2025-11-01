@@ -180,13 +180,48 @@ export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    'name': SITE_CONFIG.name,
+    'name': 'Travel eSIM',
+    'alternateName': [
+      'Travel eSIM Global',
+      'Travel eSIM BG'
+    ],
     'url': SITE_CONFIG.url,
     'logo': {
       '@type': 'ImageObject',
       'url': `${SITE_CONFIG.url}/media/images/logo.png`,
     },
     'description': SITE_CONFIG.description,
+    'sameAs': [
+      'https://travelesimple.com/',
+      'https://travelesim.ro/',
+      'https://travelesim.dk/',
+      'https://www.facebook.com/profile.php?id=61573078586675',
+      'https://www.instagram.com/travelesim.bg/',
+      'https://linkedin.com/in/vasil-andreev'
+    ],
+    'contactPoint': {
+      '@type': 'ContactPoint',
+      'email': 'sales@travelesim.bg',
+      'contactType': 'customer service',
+      'availableLanguage': ['bg', 'en'],
+      'areaServed': 'Worldwide'
+    },
+    'founder': {
+      '@type': 'Person',
+      'name': 'Васил Андреев',
+      'url': `${SITE_CONFIG.url}/v-andreev/`
+    },
+    'areaServed': {
+      '@type': 'Place',
+      'name': 'Bulgaria'
+    },
+    'knowsAbout': [
+      'eSIM',
+      'Mobile Data',
+      'International Roaming',
+      'Travel Connectivity',
+      'Digital SIM Cards'
+    ]
   };
 }
 
