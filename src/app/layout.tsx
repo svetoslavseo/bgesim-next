@@ -105,7 +105,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               gtag('js', new Date());
-              gtag('config', 'G-J85XGQ483H');
+              (function(){
+                try {
+                  var dbg = (location && (location.hostname === 'localhost' || location.search.indexOf('debug_ga=1') !== -1 || location.search.indexOf('debug_mode=1') !== -1));
+                  gtag('config', 'G-J85XGQ483H', { debug_mode: dbg });
+                } catch (e) {
+                  gtag('config', 'G-J85XGQ483H');
+                }
+              })();
             `,
           }}
         />

@@ -7,7 +7,7 @@ import { useCurrency } from '@/contexts/CurrencyContext';
 import { convertPrice, CURRENCY_SYMBOLS } from '@/lib/currency';
 import { generateAffiliateLink } from '@/lib/sailyApi';
 import type { ProcessedPlan } from '@/lib/sailyApi';
-import CheckoutCTATracker from '@/components/analytics/CheckoutCTATracker';
+import { trackEventWithCallback, hasAnalyticsConsent } from '@/lib/ga';
 import styles from './page.module.css';
 
 interface Plan {
@@ -151,7 +151,7 @@ const CheckoutPage = () => {
     }
   }, []);
 
-  const handleProceedToPayment = () => {
+  const handleProceedToPayment = (variant: 'desktop' | 'mobile') => {
     if (!plan) {
       setError('Липсва информация за плана');
       return;
@@ -188,10 +188,28 @@ const CheckoutPage = () => {
         };
         
         const finalUrl = generateAffiliateLink(processedPlan);
-        
-        console.log('Redirecting to Saily:', finalUrl);
-        console.log('Using identifier:', identifierToUse, plan.priceIdentifier ? '(price identifier)' : '(plan identifier)');
-        window.location.href = finalUrl;
+
+        const navigate = () => {
+          window.location.href = finalUrl;
+        };
+
+        // Track the click with a callback to avoid losing the hit on redirect
+        try {
+          const params = {
+            variant,
+            page_path: window.location.pathname + window.location.search,
+            page_referrer: document.referrer || '(direct)',
+            button_text: 'Продължи',
+          } as Record<string, any>;
+
+          if (hasAnalyticsConsent()) {
+            trackEventWithCallback('checkout_continue_click', params, navigate, 800);
+          } else {
+            navigate();
+          }
+        } catch {
+          navigate();
+        }
       } else {
         // If no valid Saily identifier, show error instead of redirecting to Breeze
         console.error('No valid Saily identifier found for plan:', plan);
@@ -252,7 +270,6 @@ const CheckoutPage = () => {
 
   return (
     <>
-      <CheckoutCTATracker />
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <Link href="/" className={styles.backLink}>
@@ -370,7 +387,7 @@ const CheckoutPage = () => {
               <span className={styles.desktopCtaTotalPrice}>{convertedPlan?.price?.toFixed(2)}{convertedPlan?.currency}</span>
             </div>
             <button
-              onClick={handleProceedToPayment}
+              onClick={() => handleProceedToPayment('desktop')}
               className={styles.desktopCtaButton}
               data-checkout-button
             >
@@ -401,7 +418,7 @@ const CheckoutPage = () => {
             <span className={styles.stickyBarTotalPrice}>{convertedPlan?.price?.toFixed(2)}{convertedPlan?.currency}</span>
           </div>
           <button
-            onClick={handleProceedToPayment}
+            onClick={() => handleProceedToPayment('mobile')}
             className={styles.checkoutButton}
             data-checkout-button
           >
