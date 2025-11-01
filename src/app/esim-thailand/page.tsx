@@ -46,7 +46,6 @@ export default async function ThailandPage() {
     countryCode: 'TH',
     offers: {
       lowPrice: priceRange.lowPrice.toString(),
-      highPrice: priceRange.highPrice.toString(),
       currency: 'BGN',
       availability: 'InStock',
       priceValidUntil: getPriceValidUntilDate(),

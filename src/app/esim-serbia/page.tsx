@@ -43,7 +43,6 @@ export default async function SerbiaPage() {
     countryCode: 'RS',
     offers: {
       lowPrice: priceRange.lowPrice.toString(),
-      highPrice: priceRange.highPrice.toString(),
       currency: 'BGN',
       availability: 'InStock',
       priceValidUntil: getPriceValidUntilDate(),

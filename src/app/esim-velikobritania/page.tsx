@@ -46,7 +46,6 @@ export default async function UKPage() {
     countryCode: 'GB',
     offers: {
       lowPrice: priceRange.lowPrice.toString(),
-      highPrice: priceRange.highPrice.toString(),
       currency: 'BGN',
       availability: 'InStock',
       priceValidUntil: getPriceValidUntilDate(),

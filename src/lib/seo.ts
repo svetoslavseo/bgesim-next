@@ -292,7 +292,6 @@ export function generateProductSchema(data: {
   image?: string;
   offers: {
     lowPrice: string;
-    highPrice: string;
     currency: string;
     availability: string;
     priceValidUntil: string;
@@ -320,7 +319,6 @@ export function generateProductSchema(data: {
       "@type": "AggregateOffer",
       "priceCurrency": data.offers.currency,
       "lowPrice": data.offers.lowPrice,
-      "highPrice": data.offers.highPrice,
       "priceValidUntil": data.offers.priceValidUntil,
       "availability": `https://schema.org/${data.offers.availability}`,
       "offerCount": data.offers.offerCount

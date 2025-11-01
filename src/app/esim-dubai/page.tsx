@@ -46,7 +46,6 @@ export default async function DubaiPage() {
     countryCode: 'AE',
     offers: {
       lowPrice: priceRange.lowPrice.toString(),
-      highPrice: priceRange.highPrice.toString(),
       currency: 'BGN',
       availability: 'InStock',
       priceValidUntil: getPriceValidUntilDate(),

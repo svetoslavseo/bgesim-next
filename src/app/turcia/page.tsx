@@ -63,7 +63,6 @@ export default async function TurciaPage() {
     countryCode: 'TR',
     offers: {
       lowPrice: priceRange.lowPrice.toString(),
-      highPrice: priceRange.highPrice.toString(),
       currency: 'BGN',
       availability: 'InStock',
       priceValidUntil: getPriceValidUntilDate(),
