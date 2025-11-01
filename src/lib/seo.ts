@@ -163,6 +163,10 @@ export function generateArticleSchema(article: {
     'author': {
       '@type': 'Person',
       'name': article.author,
+      'sameAs': [
+        'https://www.linkedin.com/in/vasil-andreev-b34142219/',
+        'https://travelesim.bg/v-andreev/'
+      ],
     },
     'publisher': {
       '@type': 'Organization',
@@ -197,7 +201,7 @@ export function generateOrganizationSchema() {
       'https://travelesim.dk/',
       'https://www.facebook.com/profile.php?id=61573078586675',
       'https://www.instagram.com/travelesim.bg/',
-      'https://linkedin.com/in/vasil-andreev'
+      'https://www.linkedin.com/in/vasil-andreev-b34142219/'
     ],
     'contactPoint': {
       '@type': 'ContactPoint',
