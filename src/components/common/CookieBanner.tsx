@@ -136,10 +136,12 @@ export default function CookieBanner() {
 
       {!showSettings ? (
         <>
-          <div className="actions">
-            <button onClick={() => save({ analytics: false, marketing: false })}>Отказвам всички</button>
-            <button onClick={() => setShowSettings(true)} className="settings-btn">Настройки</button>
+          <div className="actions-primary">
             <button onClick={() => save({ analytics: true, marketing: true })} className="accept-btn">Приемам всички</button>
+          </div>
+          <div className="actions-secondary">
+            <button onClick={() => setShowSettings(true)} className="settings-btn">Настройки</button>
+            <button onClick={() => save({ analytics: false, marketing: false })} className="reject-btn">Отказвам всички</button>
           </div>
         </>
       ) : (
@@ -204,17 +206,95 @@ export default function CookieBanner() {
           background: #000000;
           color: #D0D0D0;
           border: 1px solid #e5e7eb;
-          border-radius: 8px;
-          padding: 16px;
+          border-radius: 12px;
+          padding: 24px;
           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
           max-width: 720px;
           width: calc(100% - 32px);
         }
         .cookie-banner h2 {
-          margin: 0 0 8px 0;
-          font-size: 18px;
+          margin: 0 0 12px 0;
+          font-size: 20px;
           line-height: 1.3;
           color: #D0D0D0;
+          font-weight: 600;
+        }
+        .cookie-banner p {
+          margin: 0;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+        @media (max-width: 767px) {
+          .cookie-banner {
+            padding: 20px 16px;
+            width: calc(100% - 24px);
+            max-width: none;
+          }
+          .cookie-banner h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+          }
+          .cookie-banner p {
+            font-size: 13px;
+            line-height: 1.4;
+          }
+          .actions-primary {
+            margin-top: 16px;
+            margin-bottom: 10px;
+          }
+          .actions-secondary {
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+          }
+          .accept-btn {
+            padding: 16px 32px;
+            font-size: 1rem;
+            min-width: 100%;
+            width: 100%;
+            border-radius: 30px;
+            min-height: 48px;
+          }
+          .reject-btn,
+          .settings-btn {
+            padding: 14px 20px;
+            font-size: 0.875rem;
+            width: 100%;
+            border-radius: 30px;
+            min-height: 44px;
+          }
+          .cookie-settings {
+            margin-top: 12px;
+            margin-bottom: 12px;
+          }
+          .cookie-category {
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+          }
+          .category-name {
+            font-size: 15px;
+          }
+          .category-desc {
+            font-size: 13px;
+          }
+          .actions {
+            flex-direction: column;
+            gap: 10px;
+          }
+          .actions button {
+            width: 100%;
+            min-height: 44px;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .cookie-banner {
+            padding: 22px 20px;
+          }
+          .accept-btn {
+            padding: 15px 40px;
+            font-size: 1.0625rem;
+            min-width: 220px;
+          }
         }
         @media (min-width: 1024px) {
           .cookie-banner {
@@ -226,11 +306,25 @@ export default function CookieBanner() {
             max-width: 720px;
           }
         }
+        .actions-primary {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+          margin-bottom: 12px;
+        }
+        .actions-secondary {
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+          margin-top: 8px;
+          flex-wrap: wrap;
+        }
         .actions {
           display: flex;
           gap: 8px;
           margin-top: 16px;
           flex-wrap: wrap;
+          justify-content: center;
         }
         button {
           padding: 8px 12px;
@@ -242,25 +336,40 @@ export default function CookieBanner() {
           font-weight: 500;
           transition: all 0.2s ease;
         }
-        button:hover {
-          opacity: 0.8;
+        @media (hover: hover) {
+          button:hover {
+            opacity: 0.8;
+          }
+          .accept-btn:hover {
+            background: var(--color-neon-yellow-hover, #d4d800);
+            border-color: var(--color-neon-yellow-hover, #d4d800);
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(229, 233, 0, 0.5);
+          }
+        }
+        .reject-btn {
+          padding: 8px 16px;
+          font-size: 0.875rem;
         }
         .settings-btn {
-          padding: 12px 24px;
+          padding: 8px 16px;
+          font-size: 0.875rem;
         }
         .accept-btn {
           background: var(--color-neon-yellow, #e5e900);
           color: #000000;
           border-color: var(--color-neon-yellow, #e5e900);
-          padding: 12px 24px;
-          font-weight: 600;
-          font-size: 1rem;
+          padding: 16px 48px;
+          font-weight: 700;
+          font-size: 1.125rem;
           border-radius: 30px;
+          box-shadow: 0 4px 12px rgba(229, 233, 0, 0.4);
+          transform: scale(1);
+          min-width: 200px;
         }
-        .accept-btn:hover {
-          background: var(--color-neon-yellow-hover, #d4d800);
-          border-color: var(--color-neon-yellow-hover, #d4d800);
-          opacity: 1;
+        .accept-btn:active {
+          transform: scale(0.98);
         }
         .save-btn {
           background: var(--color-neon-yellow, #e5e900);
@@ -362,3 +471,4 @@ export default function CookieBanner() {
     </>
   );
 }
+
