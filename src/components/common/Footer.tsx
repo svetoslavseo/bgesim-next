@@ -178,7 +178,7 @@ export default function Footer() {
               className={styles.privacyLink}
               rel="nofollow"
             >
-              Privacy Policy
+              Политика за поверителност
             </Link>
             <CookieSettingsButton />
           </div>

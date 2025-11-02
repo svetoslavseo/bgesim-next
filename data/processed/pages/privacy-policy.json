@@ -1,11 +1,11 @@
 {
   "slug": "privacy-policy",
-  "title": "Privacy Policy",
-  "content": "\n<h2 class=\"wp-block-heading\">Who we are</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>Our website address is: https://travelesim.bg.</p>\n\n<h2 class=\"wp-block-heading\">Comments</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection.</p>\n\n<p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p>\n\n<h2 class=\"wp-block-heading\">Media</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p>\n\n<h2 class=\"wp-block-heading\">Cookies</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p>\n\n<p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p>\n\n<p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p>\n\n<p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p>\n\n<h2 class=\"wp-block-heading\">Embedded content from other websites</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p>\n\n<p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p>\n\n<h2 class=\"wp-block-heading\">Who we share your data with</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you request a password reset, your IP address will be included in the reset email.</p>\n\n<h2 class=\"wp-block-heading\">How long we retain your data</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p>\n\n<p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p>\n\n<h2 class=\"wp-block-heading\">What rights you have over your data</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p>\n\n<h2 class=\"wp-block-heading\">Where your data is sent</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>Visitor comments may be checked through an automated spam detection service.</p>\n\n",
-  "excerpt": "<p>Who we are Suggested text: Our website address is: https://travelesim.bg. Comments Suggested text: When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection. An anonymized string created from your email address (also called a [&hellip;]</p>\n",
+  "title": "Политика за поверителност",
+  "content": "\n<h2 class=\"wp-block-heading\">Кои сме ние</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Адресът на нашия уебсайт е: https://travelesim.bg.</p>\n\n<h2 class=\"wp-block-heading\">Коментари</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Когато посетителите оставят коментари на сайта, ние събираме данните, показани във формуляра за коментари, както и IP адреса на посетителя и низът на потребителския агент на браузъра, за да помогнем при откриването на спам.</p>\n\n<p>Анонимизиран низ, създаден от вашия имейл адрес (наричан още хеш), може да бъде предоставен на услугата Gravatar, за да се види дали го използвате. Политиката за поверителност на услугата Gravatar е достъпна тук: https://automattic.com/privacy/. След одобрение на вашия коментар, профилната ви снимка е видима за публиката в контекста на вашия коментар.</p>\n\n<h2 class=\"wp-block-heading\">Медии</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Ако качите изображения в уебсайта, трябва да избягвате качване на изображения с вградени данни за местоположение (EXIF GPS). Посетителите на уебсайта могат да изтеглят и извличат всякакви данни за местоположение от изображенията на уебсайта.</p>\n\n<h2 class=\"wp-block-heading\">Бисквитки</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Ако оставите коментар на нашия сайт, можете да изберете да запазите вашето име, имейл адрес и уебсайт в бисквитки. Това е за ваше удобство, за да не се налага да попълвате отново вашите данни, когато оставите друг коментар. Тези бисквитки ще продължат една година.</p>\n\n<p>Ако посетите нашата страница за вход, ще зададем временна бисквитка, за да определим дали вашият браузър приема бисквитки. Тази бисквитка не съдържа лични данни и се изхвърля, когато затворите браузъра си.</p>\n\n<p>Когато влезете, ние също ще настроим няколко бисквитки, за да запазим информацията ви за вход и изборите ви за показване на екрана. Бисквитките за вход продължават два дни, а бисквитките за опции на екрана продължават една година. Ако изберете &quot;Запомни ме&quot;, вашият вход ще продължи две седмици. Ако излезете от акаунта си, бисквитките за вход ще бъдат премахнати.</p>\n\n<p>Ако редактирате или публикувате статия, допълнителна бисквитка ще бъде запазена във вашия браузър. Тази бисквитка не включва лични данни и просто показва идентификатора на публикацията на статията, която току-що редактирахте. Изтича след 1 ден.</p>\n\n<h2 class=\"wp-block-heading\">Вградено съдържание от други уебсайтове</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Статиите на този сайт може да включват вградено съдържание (например видеоклипове, изображения, статии и др.). Вграденото съдържание от други уебсайтове се държи точно по същия начин, както ако посетителят е посетил другия уебсайт.</p>\n\n<p>Тези уебсайтове могат да събират данни за вас, да използват бисквитки, да вграждат допълнително проследяване от трети страни и да следят вашето взаимодействие с това вградено съдържание, включително проследяване на вашето взаимодействие с вграденото съдържание, ако имате акаунт и сте влезли в този уебсайт.</p>\n\n<h2 class=\"wp-block-heading\">С кого споделяме вашите данни</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Ако поискате възстановяване на парола, вашият IP адрес ще бъде включен в имейла за възстановяване.</p>\n\n<h2 class=\"wp-block-heading\">Колко време запазваме вашите данни</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Ако оставите коментар, коментарът и неговите метаданни се запазват безкрайно. Това е, за да можем да разпознаем и одобрим автоматично всички последващи коментари, вместо да ги задържаме в опашка за модерация.</p>\n\n<p>За потребители, които се регистрират на нашия уебсайт (ако има такива), ние също съхраняваме личната информация, която те предоставят в техния потребителски профил. Всички потребители могат да виждат, редактират или изтриват личната си информация по всяко време (освен че не могат да променят потребителското си име). Администраторите на уебсайта също могат да виждат и редактират тази информация.</p>\n\n<h2 class=\"wp-block-heading\">Какви права имате над вашите данни</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Ако имате акаунт на този сайт или сте оставили коментари, можете да поискате да получите експортиран файл на личните данни, които пазим за вас, включително всички данни, които сте ни предоставили. Можете също да поискате да изтрием всички лични данни, които пазим за вас. Това не включва данни, които сме задължени да пазим за административни, правни или цели за сигурност.</p>\n\n<h2 class=\"wp-block-heading\">Къде се изпращат вашите данни</h2>\n\n<p><strong class=\"privacy-policy-tutorial\">Предложен текст: </strong>Коментарите на посетителите могат да бъдат проверени чрез автоматизирана услуга за откриване на спам.</p>\n\n",
+  "excerpt": "<p>Кои сме ние Предложен текст: Адресът на нашия уебсайт е: https://travelesim.bg. Коментари Предложен текст: Когато посетителите оставят коментари на сайта, ние събираме данните, показани във формуляра за коментари, както и IP адреса на посетителя и низът на потребителския агент на браузъра, за да помогнем при откриването на спам. Анонимизиран низ, създаден от вашия имейл адрес (наричан още [&hellip;]</p>\n",
   "seo": {
-    "title": "Privacy Policy - Travel eSIM",
-    "description": "Privacy Policy - Travel eSIM BG",
+    "title": "Политика за поверителност - Travel eSIM",
+    "description": "Политика за поверителност - Travel eSIM BG",
     "canonical": "https://travelesim.bg/privacy-policy/",
     "robots": {
       "index": "index",
@@ -13,8 +13,8 @@
     },
     "openGraph": {
       "type": "article",
-      "title": "Privacy Policy - Travel eSIM",
-      "description": "Privacy Policy - Travel eSIM BG",
+      "title": "Политика за поверителност - Travel eSIM",
+      "description": "Политика за поверителност - Travel eSIM BG",
       "url": "https://travelesim.bg/privacy-policy/",
       "siteName": "Travel eSIM BG",
       "images": [
@@ -25,13 +25,13 @@
           "type": "image/png"
         }
       ],
-      "locale": "en_GB",
+      "locale": "bg_BG",
       "modifiedTime": "2025-03-16T14:49:29+00:00"
     },
     "twitter": {
       "card": "summary_large_image",
       "misc": {
-        "Estimated reading time": "3 minutes"
+        "Приблизително време за четене": "3 минути"
       }
     },
     "schema": {
@@ -41,17 +41,17 @@
           "@type": "WebPage",
           "@id": "https://travelesim.bg/privacy-policy/",
           "url": "https://travelesim.bg/privacy-policy/",
-          "name": "Privacy Policy - Travel eSIM",
+          "name": "Политика за поверителност - Travel eSIM",
           "isPartOf": {
             "@id": "https://travelesim.bg/#website"
           },
           "datePublished": "2025-01-31T15:36:58+00:00",
           "dateModified": "2025-03-16T14:49:29+00:00",
-          "description": "Privacy Policy - Travel eSIM BG",
+          "description": "Политика за поверителност - Travel eSIM BG",
           "breadcrumb": {
             "@id": "https://travelesim.bg/privacy-policy/#breadcrumb"
           },
-          "inLanguage": "en-GB",
+          "inLanguage": "bg-BG",
           "potentialAction": [
             {
               "@type": "ReadAction",
@@ -68,13 +68,13 @@
             {
               "@type": "ListItem",
               "position": 1,
-              "name": "Home",
+              "name": "Начало",
               "item": "https://travelesim.bg/"
             },
             {
               "@type": "ListItem",
               "position": 2,
-              "name": "Privacy Policy"
+              "name": "Политика за поверителност"
             }
           ]
         },
@@ -102,7 +102,7 @@
               }
             }
           ],
-          "inLanguage": "en-GB"
+          "inLanguage": "bg-BG"
         },
         {
           "@type": "Organization",
@@ -112,7 +112,7 @@
           "url": "https://travelesim.bg/",
           "logo": {
             "@type": "ImageObject",
-            "inLanguage": "en-GB",
+            "inLanguage": "bg-BG",
             "@id": "https://travelesim.bg/#/schema/logo/image/",
             "url": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
             "contentUrl": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",

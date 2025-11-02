@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { trackPageview } from '@/lib/ga';
 
 type Consent = { analytics: boolean; marketing: boolean };
@@ -21,6 +22,9 @@ function safeStorageAvailable(): boolean {
 
 export default function CookieBanner() {
   const [open, setOpen] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
+  const [marketingEnabled, setMarketingEnabled] = useState(false);
 
   const storageOk = useMemo(() => safeStorageAvailable(), []);
 
@@ -53,7 +57,22 @@ export default function CookieBanner() {
       }
     }
 
-    const openHandler = () => setOpen(true);
+    const openHandler = () => {
+      setOpen(true);
+      // Load current preferences when reopening
+      if (storageOk) {
+        try {
+          const saved = window.localStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            const parsed = JSON.parse(saved) as { analytics?: boolean; marketing?: boolean };
+            setAnalyticsEnabled(Boolean(parsed.analytics));
+            setMarketingEnabled(Boolean(parsed.marketing));
+          }
+        } catch {
+          // ignore
+        }
+      }
+    };
     if (typeof window !== 'undefined') {
       window.addEventListener('open-cookie-banner', openHandler);
     }
@@ -73,6 +92,7 @@ export default function CookieBanner() {
       }
     }
     setOpen(false);
+    setShowSettings(false);
 
     // Update Google Consent Mode v2
     if (typeof window.gtag === 'function') {
@@ -92,6 +112,10 @@ export default function CookieBanner() {
     }
   };
 
+  const handleSaveSettings = () => {
+    save({ analytics: analyticsEnabled, marketing: marketingEnabled });
+  };
+
   if (!open) return null;
 
   return (
@@ -104,12 +128,71 @@ export default function CookieBanner() {
       <div role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc" className="cookie-banner">
       <h2 id="cookie-banner-title">Настройки за бисквитки</h2>
       <p id="cookie-banner-desc" style={{ color: '#D0D0D0' }}>
-        Използваме бисквитки за аналитични цели. При предоставено съгласие използваме бисквитки и за маркетинг. Можете да промените настройките си по всяко време.
+        Използваме бисквитки за аналитични цели. При предоставено съгласие използваме бисквитки и за маркетинг. Можете да промените настройките си по всяко време.{' '}
+        <Link href="/privacy-policy" style={{ color: '#D0D0D0', textDecoration: 'underline' }}>
+          Политика за поверителност
+        </Link>
       </p>
-      <div className="actions">
-        <button onClick={() => save({ analytics: false, marketing: false })}>Отказвам всички</button>
-        <button onClick={() => save({ analytics: true, marketing: true })}>Приемам всички</button>
-      </div>
+
+      {!showSettings ? (
+        <>
+          <div className="actions">
+            <button onClick={() => save({ analytics: false, marketing: false })}>Отказвам всички</button>
+            <button onClick={() => setShowSettings(true)} className="settings-btn">Настройки</button>
+            <button onClick={() => save({ analytics: true, marketing: true })} className="accept-btn">Приемам всички</button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="cookie-settings">
+            <div className="cookie-category">
+              <div className="category-header">
+                <span className="category-name">Необходими бисквитки</span>
+                <span className="category-status always-on">Винаги активни</span>
+              </div>
+              <p className="category-desc">Тези бисквитки са необходими за основното функциониране на сайта и не могат да бъдат деактивирани.</p>
+            </div>
+
+            <div className="cookie-category">
+              <div className="category-header">
+                <span className="category-name">Аналитични бисквитки</span>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={analyticsEnabled}
+                    onChange={(e) => setAnalyticsEnabled(e.target.checked)}
+                    aria-label="Аналитични бисквитки"
+                  />
+                  <span className="toggle-slider"></span>
+                </label>
+              </div>
+              <p className="category-desc">Тези бисквитки ни помагат да разберем как посетителите използват нашия сайт чрез анонимни данни.</p>
+            </div>
+
+            <div className="cookie-category">
+              <div className="category-header">
+                <span className="category-name">Маркетинг бисквитки</span>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={marketingEnabled}
+                    onChange={(e) => setMarketingEnabled(e.target.checked)}
+                    aria-label="Маркетинг бисквитки"
+                  />
+                  <span className="toggle-slider"></span>
+                </label>
+              </div>
+              <p className="category-desc">Тези бисквитки се използват за персонализиране на реклами и измерване на ефективността на рекламните кампании.</p>
+            </div>
+          </div>
+
+          <div className="actions">
+            <button onClick={() => setShowSettings(false)}>Назад</button>
+            <button onClick={handleSaveSettings} className="save-btn">Запази избора</button>
+          </div>
+        </>
+      )}
+
       <style jsx>{`
         /* overlay is styled inline to avoid scoping issues */
         .cookie-banner {
@@ -140,12 +223,13 @@ export default function CookieBanner() {
             left: 50%;
             transform: translate(-50%, 0);
             width: auto;
+            max-width: 720px;
           }
         }
         .actions {
           display: flex;
           gap: 8px;
-          margin-top: 8px;
+          margin-top: 16px;
           flex-wrap: wrap;
         }
         button {
@@ -156,8 +240,15 @@ export default function CookieBanner() {
           color: #D0D0D0;
           cursor: pointer;
           font-weight: 500;
+          transition: all 0.2s ease;
         }
-        button:last-of-type {
+        button:hover {
+          opacity: 0.8;
+        }
+        .settings-btn {
+          padding: 12px 24px;
+        }
+        .accept-btn {
           background: var(--color-neon-yellow, #e5e900);
           color: #000000;
           border-color: var(--color-neon-yellow, #e5e900);
@@ -166,14 +257,108 @@ export default function CookieBanner() {
           font-size: 1rem;
           border-radius: 30px;
         }
-        button:last-of-type:hover {
+        .accept-btn:hover {
           background: var(--color-neon-yellow-hover, #d4d800);
           border-color: var(--color-neon-yellow-hover, #d4d800);
+          opacity: 1;
+        }
+        .save-btn {
+          background: var(--color-neon-yellow, #e5e900);
+          color: #000000;
+          border-color: var(--color-neon-yellow, #e5e900);
+          padding: 12px 24px;
+          font-weight: 600;
+          font-size: 1rem;
+          border-radius: 30px;
+        }
+        .save-btn:hover {
+          background: var(--color-neon-yellow-hover, #d4d800);
+          border-color: var(--color-neon-yellow-hover, #d4d800);
+          opacity: 1;
+        }
+        .cookie-settings {
+          margin-top: 16px;
+          margin-bottom: 8px;
+        }
+        .cookie-category {
+          margin-bottom: 16px;
+          padding-bottom: 16px;
+          border-bottom: 1px solid rgba(208, 208, 208, 0.2);
+        }
+        .cookie-category:last-child {
+          border-bottom: none;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+        .category-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 4px;
+        }
+        .category-name {
+          font-weight: 600;
+          color: #D0D0D0;
+          font-size: 16px;
+        }
+        .category-status {
+          font-size: 12px;
+          color: #D0D0D0;
+        }
+        .always-on {
+          opacity: 0.7;
+        }
+        .category-desc {
+          margin: 4px 0 0 0;
+          font-size: 14px;
+          line-height: 1.4;
+          color: #D0D0D0;
+          opacity: 0.9;
+        }
+        .toggle-switch {
+          position: relative;
+          display: inline-block;
+          width: 44px;
+          height: 24px;
+        }
+        .toggle-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        .toggle-slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(208, 208, 208, 0.3);
+          transition: 0.3s;
+          border-radius: 24px;
+        }
+        .toggle-slider:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: #D0D0D0;
+          transition: 0.3s;
+          border-radius: 50%;
+        }
+        .toggle-switch input:checked + .toggle-slider {
+          background-color: var(--color-neon-yellow, #e5e900);
+        }
+        .toggle-switch input:checked + .toggle-slider:before {
+          transform: translateX(20px);
+        }
+        .toggle-switch input:focus + .toggle-slider {
+          box-shadow: 0 0 1px var(--color-neon-yellow, #e5e900);
         }
       `}</style>
       </div>
     </>
   );
 }
-
-
