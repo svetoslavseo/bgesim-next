@@ -75,15 +75,16 @@ export default function CookieBanner() {
     setOpen(false);
 
     // Update Google Consent Mode v2
-    // @ts-ignore
-    window.gtag?.('consent', 'update', {
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
       ad_user_data: consent.marketing ? 'granted' : 'denied',
       ad_personalization: consent.marketing ? 'granted' : 'denied',
       ad_storage: consent.marketing ? 'granted' : 'denied',
       analytics_storage: consent.analytics ? 'granted' : 'denied',
       functionality_storage: 'denied',
       security_storage: 'granted',
-    });
+      });
+    }
 
     // Fire a page_view immediately after granting analytics consent
     if (consent.analytics) {

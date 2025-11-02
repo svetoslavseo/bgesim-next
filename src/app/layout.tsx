@@ -6,6 +6,7 @@ import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import ClientProviders from '@/components/providers/ClientProviders';
 import PerformanceMonitor from '@/components/common/PerformanceMonitor';
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import dynamic from 'next/dynamic';
 const CookieBanner = dynamic(() => import('@/components/common/CookieBanner'), { ssr: false });
 // StickyCurrencySwitcher is now rendered conditionally inside ClientProviders
@@ -83,12 +84,13 @@ export default function RootLayout({
   return (
     <html lang="bg">
       <head>
-        {/* Google Consent Mode v2 - default deny, then load gtag */}
+        {/* Google Consent Mode v2 - MUST load FIRST before any GA scripts */}
+        {/* This ensures consent mode is set before gtag.js loads */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);} 
+              function gtag(){dataLayer.push(arguments);}
               gtag('consent', 'default', {
                 ad_user_data: 'denied',
                 ad_personalization: 'denied',
@@ -100,22 +102,10 @@ export default function RootLayout({
             `,
           }}
         />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J85XGQ483H"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              gtag('js', new Date());
-              (function(){
-                try {
-                  var dbg = (location && (location.hostname === 'localhost' || location.search.indexOf('debug_ga=1') !== -1 || location.search.indexOf('debug_mode=1') !== -1));
-                  gtag('config', 'G-J85XGQ483H', { debug_mode: dbg });
-                } catch (e) {
-                  gtag('config', 'G-J85XGQ483H');
-                }
-              })();
-            `,
-          }}
-        />
+        
+        {/* DNS prefetch for Google Tag Manager - critical for GA performance */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         
         {/* DNS prefetch for external domains */}
         <link rel="dns-prefetch" href="//breezesim.com" />
@@ -157,6 +147,8 @@ export default function RootLayout({
         />
       </head>
       <body>
+        {/* Google Analytics - loads with proper consent mode and strategy */}
+        <GoogleAnalytics />
         <PerformanceMonitor />
         <ClientProviders>
           <Header />
