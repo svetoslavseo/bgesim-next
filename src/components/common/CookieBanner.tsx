@@ -103,7 +103,7 @@ export default function CookieBanner() {
       ></div>
       <div role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-desc" className="cookie-banner">
       <h2 id="cookie-banner-title">Настройки за бисквитки</h2>
-      <p id="cookie-banner-desc">
+      <p id="cookie-banner-desc" style={{ color: '#D0D0D0' }}>
         Използваме бисквитки за аналитични цели. При предоставено съгласие използваме бисквитки и за маркетинг. Можете да промените настройките си по всяко време.
       </p>
       <div className="actions">
@@ -118,8 +118,8 @@ export default function CookieBanner() {
           left: 50%;
           transform: translate(-50%, -50%);
           z-index: 9999;
-          background: #ffffff;
-          color: #111111;
+          background: #000000;
+          color: #D0D0D0;
           border: 1px solid #e5e7eb;
           border-radius: 8px;
           padding: 16px;
@@ -131,6 +131,7 @@ export default function CookieBanner() {
           margin: 0 0 8px 0;
           font-size: 18px;
           line-height: 1.3;
+          color: #D0D0D0;
         }
         @media (min-width: 1024px) {
           .cookie-banner {
@@ -149,9 +150,10 @@ export default function CookieBanner() {
         }
         button {
           padding: 8px 12px;
-          border-radius: 6px;
-          border: 1px solid #d1d5db;
-          background: #ffffff;
+          border-radius: 30px;
+          border: 1px solid #D0D0D0;
+          background: #000000;
+          color: #D0D0D0;
           cursor: pointer;
           font-weight: 500;
         }
@@ -162,6 +164,7 @@ export default function CookieBanner() {
           padding: 12px 24px;
           font-weight: 600;
           font-size: 1rem;
+          border-radius: 30px;
         }
         button:last-of-type:hover {
           background: var(--color-neon-yellow-hover, #d4d800);
