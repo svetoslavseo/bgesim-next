@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   
   if (!page) {
     return {
-      title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
+      title: 'eSIM съвместимост: Безплатна проверка',
       description: 'Проверка на съвместимост с eSIM - Travel eSIM BG',
     };
   }
@@ -25,9 +25,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const metadata = generateSEOMetadata(page.seo);
   return {
     ...metadata,
-    title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
+    // Set a clean title so the global template appends "| Travel eSIM" only once
+    title: 'eSIM съвместимост: Безплатна проверка',
     openGraph: {
       ...metadata.openGraph,
+      // Social titles include brand explicitly
       title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
     },
     twitter: {
