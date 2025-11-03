@@ -48,6 +48,20 @@ export function trackEvent(name: string, params: Record<string, any> = {}) {
   window.gtag('event', name, { ...(isDebugMode() ? { debug_mode: true } : {}), ...params });
 }
 
+/**
+ * Track event for both GA4 (via gtag) and GTM (via dataLayer)
+ * This ensures events are available to both systems
+ * 
+ * @param name - Event name
+ * @param params - Event parameters
+ */
+export function trackEventDual(name: string, params: Record<string, any> = {}) {
+  // Push to dataLayer for GTM
+  pushToDataLayer(name, params);
+  // Also send to GA4 via gtag
+  trackEvent(name, params);
+}
+
 export function trackEventWithCallback(
   name: string,
   params: Record<string, any> = {},
@@ -99,17 +113,25 @@ export function trackEventWithCallback(
  */
 export function pushToDataLayer(eventName: string, eventData: Record<string, any> = {}): void {
   if (typeof window === 'undefined') return;
+  
+  // Initialize dataLayer if it doesn't exist
   if (!window.dataLayer) {
-    console.warn('dataLayer is not available. GTM may not be loaded yet.');
-    return;
+    window.dataLayer = [];
   }
   
   try {
-    window.dataLayer.push({
+    const payload = {
       event: eventName,
       ...eventData,
       ...(isDebugMode() ? { debug_mode: true } : {}),
-    });
+    };
+    
+    window.dataLayer.push(payload);
+    
+    // Log in debug mode for troubleshooting
+    if (isDebugMode()) {
+      console.log('[GTM] Pushed to dataLayer:', payload);
+    }
   } catch (error) {
     console.error('Error pushing to dataLayer:', error);
   }

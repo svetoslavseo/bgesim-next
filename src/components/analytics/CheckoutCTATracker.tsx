@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { trackEvent } from '@/lib/ga';
+import { pushToDataLayer } from '@/lib/ga';
 
 // Use data attributes instead of CSS class selectors (which have changing hashes)
 const CHECKOUT_BUTTON_SELECTOR = 'button[data-checkout-button]';
@@ -30,12 +30,15 @@ export default function CheckoutCTATracker() {
       }
       const variantType = isSticky ? 'mobile' : 'desktop';
       
-      trackEvent('checkout_continue_click', {
+      const eventData = {
         variant: variantType,
         page_path: window.location.pathname + window.location.search,
         page_referrer: document.referrer || '(direct)',
         button_text: button.textContent?.trim() || '',
-      });
+      };
+      
+      // Push to dataLayer for GTM - GTM will handle sending to GA4
+      pushToDataLayer('checkout_continue_click', eventData);
     };
 
     const attachListeners = () => {
