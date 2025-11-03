@@ -2,12 +2,8 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import ResultsModal from './ResultsModal';
+import { Device, DeviceBrand, tabletsData, laptopsData, smartwatchesData } from './deviceData';
 import styles from './ESIMCompatibilityChecker.module.css';
-
-interface Device {
-  model: string;
-  notes: string | null;
-}
 
 interface Series {
   series_name: string;
@@ -24,15 +20,25 @@ interface ESIMData {
   smartphones: Smartphone[];
 }
 
+type DeviceCategory = 'smartphones' | 'tablets' | 'smartwatches' | 'laptops';
+
+const categoryLabels: Record<DeviceCategory, string> = {
+  smartphones: 'телефон',
+  tablets: 'таблет',
+  smartwatches: 'смарт часовник',
+  laptops: 'лаптоп'
+};
+
 export default function ESIMCompatibilityChecker() {
   const [data, setData] = useState<ESIMData | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<DeviceCategory>('smartphones');
   const [selectedBrand, setSelectedBrand] = useState<string>('');
   const [modelInput, setModelInput] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [foundDevice, setFoundDevice] = useState<Device | null>(null);
   const [searchedModel, setSearchedModel] = useState<string>('');
 
-  // Load JSON data
+  // Load JSON data for smartphones
   useEffect(() => {
     fetch('/esim-comp-phones.json')
       .then(res => res.json())
@@ -40,28 +46,52 @@ export default function ESIMCompatibilityChecker() {
       .catch(err => console.error('Failed to load eSIM data:', err));
   }, []);
 
+  // Get device data based on category
+  const getCategoryData = (): DeviceBrand[] => {
+    switch (selectedCategory) {
+      case 'smartphones':
+        return data?.smartphones || [];
+      case 'tablets':
+        return tabletsData;
+      case 'smartwatches':
+        return smartwatchesData;
+      case 'laptops':
+        return laptopsData;
+      default:
+        return [];
+    }
+  };
+
   // Get unique brands sorted alphabetically
   const brands = useMemo(() => {
-    if (!data) return [];
-    return data.smartphones
+    const categoryData = getCategoryData();
+    return categoryData
       .map(s => s.brand)
       .sort((a, b) => a.localeCompare(b, 'bg'));
-  }, [data]);
+  }, [data, selectedCategory]);
 
   // Get all models for selected brand
   const availableModels = useMemo(() => {
-    if (!data || !selectedBrand) return [];
+    if (!selectedBrand) return [];
     
-    const smartphone = data.smartphones.find(s => s.brand === selectedBrand);
-    if (!smartphone) return [];
+    const categoryData = getCategoryData();
+    const brandData = categoryData.find(s => s.brand === selectedBrand);
+    if (!brandData) return [];
     
     const models: Device[] = [];
-    smartphone.series.forEach(series => {
+    brandData.series.forEach(series => {
       models.push(...series.devices);
     });
     
     return models.sort((a, b) => a.model.localeCompare(b.model, 'bg'));
-  }, [data, selectedBrand]);
+  }, [data, selectedCategory, selectedBrand]);
+
+  // Handle category selection
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedCategory(e.target.value as DeviceCategory);
+    setSelectedBrand(''); // Reset brand when category changes
+    setModelInput(''); // Reset model input when category changes
+  };
 
   // Handle brand selection
   const handleBrandChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -76,7 +106,7 @@ export default function ESIMCompatibilityChecker() {
 
   // Search for device
   const handleSearch = () => {
-    if (!data || !selectedBrand || !modelInput.trim()) return;
+    if (!selectedBrand || !modelInput.trim()) return;
 
     const normalizedInput = modelInput.trim().toLowerCase();
     setSearchedModel(modelInput.trim());
@@ -100,19 +130,74 @@ export default function ESIMCompatibilityChecker() {
 
   const isSearchEnabled = selectedBrand && modelInput.trim().length > 0;
 
+  const categoryLabel = categoryLabels[selectedCategory];
+
   return (
     <>
       <div className={styles.checker}>
         <div className={styles.toolCard}>
           <div className={styles.formGroup}>
+            <label className={styles.label}>
+              Избери тип устройство:
+            </label>
+            <div className={styles.categorySelector}>
+              <label className={`${styles.categoryOption} ${selectedCategory === 'smartphones' ? styles.active : ''}`}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="smartphones"
+                  checked={selectedCategory === 'smartphones'}
+                  onChange={handleCategoryChange}
+                  className={styles.radioInput}
+                />
+                <span className={styles.categoryLabel}>Смартфони</span>
+              </label>
+              <label className={`${styles.categoryOption} ${selectedCategory === 'tablets' ? styles.active : ''}`}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="tablets"
+                  checked={selectedCategory === 'tablets'}
+                  onChange={handleCategoryChange}
+                  className={styles.radioInput}
+                />
+                <span className={styles.categoryLabel}>Таблети</span>
+              </label>
+              <label className={`${styles.categoryOption} ${selectedCategory === 'smartwatches' ? styles.active : ''}`}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="smartwatches"
+                  checked={selectedCategory === 'smartwatches'}
+                  onChange={handleCategoryChange}
+                  className={styles.radioInput}
+                />
+                <span className={styles.categoryLabel}>Смарт часовници</span>
+              </label>
+              <label className={`${styles.categoryOption} ${selectedCategory === 'laptops' ? styles.active : ''}`}>
+                <input
+                  type="radio"
+                  name="category"
+                  value="laptops"
+                  checked={selectedCategory === 'laptops'}
+                  onChange={handleCategoryChange}
+                  className={styles.radioInput}
+                />
+                <span className={styles.categoryLabel}>Лаптопи</span>
+              </label>
+            </div>
+          </div>
+
+          <div className={styles.formGroup}>
             <label htmlFor="brand-select" className={styles.label}>
-              Избери марката на твоя телефон:
+              Избери марката на твоя {categoryLabel}:
             </label>
             <select
               id="brand-select"
               value={selectedBrand}
               onChange={handleBrandChange}
               className={styles.select}
+              disabled={brands.length === 0}
             >
               <option value="">--Марка--</option>
               {brands.map(brand => (
@@ -156,12 +241,6 @@ export default function ESIMCompatibilityChecker() {
             Проверка
           </button>
         </div>
-
-        <div className={styles.helperText}>
-          <p>Чудите се дали телефонът ви поддържа eSIM? </p>
-          <p>Просто изберете марката, въведете модела си и проверете веднага! </p>
-          <p>Останете свързани с най-новата eSIM технология. ✅</p>
-        </div>
       </div>
 
       <ResultsModal
@@ -170,7 +249,7 @@ export default function ESIMCompatibilityChecker() {
         device={foundDevice}
         brand={selectedBrand}
         searchedModel={searchedModel}
-        disclaimer={data?.disclaimer || ''}
+        disclaimer={selectedCategory === 'smartphones' ? (data?.disclaimer || '') : ''}
       />
     </>
   );

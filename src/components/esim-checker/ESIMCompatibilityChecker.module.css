@@ -24,7 +24,57 @@
   font-size: 16px;
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.categorySelector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.categoryOption {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border: 2px solid #E5E7EB;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.categoryOption:hover {
+  border-color: #c8a2d0;
+  background: #fafafa;
+}
+
+.categoryOption.active {
+  border-color: #8B5CF6;
+  background: #f3f0ff;
+}
+
+.radioInput {
+  margin: 0;
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #8B5CF6;
+}
+
+.categoryLabel {
+  font-size: 15px;
+  font-weight: 500;
+  color: #111827;
+  cursor: pointer;
+  flex: 1;
+}
+
+.categoryOption.active .categoryLabel {
+  color: #8B5CF6;
+  font-weight: 600;
 }
 
 .select,
@@ -47,6 +97,7 @@
   box-shadow: 0 0 0 3px rgba(200, 162, 208, 0.1);
 }
 
+.select:disabled,
 .input:disabled {
   background: #F3F4F6;
   color: #9CA3AF;
@@ -124,6 +175,19 @@
 
   .label {
     font-size: 15px;
+  }
+
+  .categorySelector {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .categoryOption {
+    padding: 10px 14px;
+  }
+
+  .categoryLabel {
+    font-size: 14px;
   }
 
   .select,

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import { getPageBySlug } from '@/lib/content';
 import ESIMCompatibilityChecker from '@/components/esim-checker/ESIMCompatibilityChecker';
+import DeviceList from '@/components/esim-checker/DeviceList';
 import DynamicCTASection from '@/components/common/DynamicCTASection';
 import styles from './page.module.css';
 
@@ -15,12 +16,25 @@ export async function generateMetadata(): Promise<Metadata> {
   
   if (!page) {
     return {
-      title: 'Безплатна Проверка на Съвместимост с eSIM',
+      title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
       description: 'Проверка на съвместимост с eSIM - Travel eSIM BG',
     };
   }
   
-  return generateSEOMetadata(page.seo);
+  // Override title if page data exists
+  const metadata = generateSEOMetadata(page.seo);
+  return {
+    ...metadata,
+    title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
+    openGraph: {
+      ...metadata.openGraph,
+      title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
+    },
+    twitter: {
+      ...metadata.twitter,
+      title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
+    },
+  };
 }
 
 /**
@@ -165,6 +179,13 @@ export default function ESIMCompatibilityPage() {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Device List Section */}
+      <section className={styles.section} style={{ background: '#FFFFFF' }}>
+        <div className={styles.container}>
+          <DeviceList />
         </div>
       </section>
 

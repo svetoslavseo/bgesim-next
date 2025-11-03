@@ -1,0 +1,225 @@
+.deviceList {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.categoryNav {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.categoryTab {
+  padding: 16px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  top: 2px;
+}
+
+.categoryTab:hover {
+  color: #111827;
+  background-color: #f9fafb;
+}
+
+.categoryTab.active {
+  color: #111827;
+  border-bottom-color: #111827;
+}
+
+.content {
+  padding: 20px 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  background-color: #e5e900;
+  border-radius: 4px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.intro {
+  font-size: 17px;
+  color: #4b5563;
+  line-height: 1.7;
+  margin: 0 0 32px;
+}
+
+.brandSection {
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.brandHeader {
+  width: 100%;
+  padding: 20px 24px;
+  background: white;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: left;
+}
+
+.brandHeader:hover {
+  background-color: #f9fafb;
+}
+
+.brandName {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.caret {
+  font-size: 14px;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.caret.expanded {
+  transform: rotate(180deg);
+}
+
+.deviceListContent {
+  padding: 0 24px 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.deviceList {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deviceItem {
+  font-size: 16px;
+  color: #374151;
+  line-height: 1.6;
+  padding-left: 24px;
+  position: relative;
+}
+
+.deviceItem::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #111827;
+  font-weight: bold;
+}
+
+.infoBox {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 4px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.infoIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.infoText {
+  font-size: 14px;
+  color: #1e40af;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.comingSoon {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 18px;
+  color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .deviceList {
+    padding: 20px 16px;
+  }
+
+  .categoryNav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .categoryTab {
+    padding: 12px 16px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .intro {
+    font-size: 16px;
+  }
+
+  .brandHeader {
+    padding: 16px 20px;
+  }
+
+  .brandName {
+    font-size: 18px;
+  }
+
+  .deviceListContent {
+    padding: 0 20px 20px;
+  }
+
+  .deviceItem {
+    font-size: 15px;
+  }
+
+  .infoBox {
+    padding: 12px;
+  }
+
+  .infoText {
+    font-size: 13px;
+  }
+}
+
