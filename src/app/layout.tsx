@@ -7,6 +7,7 @@ import Footer from '@/components/common/Footer';
 import ClientProviders from '@/components/providers/ClientProviders';
 import PerformanceMonitor from '@/components/common/PerformanceMonitor';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import GoogleTagManager, { GoogleTagManagerNoscript } from '@/components/analytics/GoogleTagManager';
 import dynamic from 'next/dynamic';
 const CookieBanner = dynamic(() => import('@/components/common/CookieBanner'), { ssr: false });
 // StickyCurrencySwitcher is now rendered conditionally inside ClientProviders
@@ -84,8 +85,8 @@ export default function RootLayout({
   return (
     <html lang="bg">
       <head>
-        {/* Google Consent Mode v2 - MUST load FIRST before any GA scripts */}
-        {/* This ensures consent mode is set before gtag.js loads */}
+        {/* Google Consent Mode v2 - MUST load FIRST before any GA/GTM scripts */}
+        {/* This ensures consent mode is set before gtag.js/gtm.js loads */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -103,7 +104,7 @@ export default function RootLayout({
           }}
         />
         
-        {/* DNS prefetch for Google Tag Manager - critical for GA performance */}
+        {/* DNS prefetch for Google Tag Manager - critical for performance */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         
@@ -147,6 +148,13 @@ export default function RootLayout({
         />
       </head>
       <body>
+        {/* Google Tag Manager - loads early in body for optimal performance */}
+        {/* Note: In Next.js App Router, scripts in head don't always render, so we load GTM in body */}
+        <GoogleTagManager />
+        
+        {/* Google Tag Manager noscript fallback - must be immediately after opening body tag */}
+        <GoogleTagManagerNoscript />
+        
         {/* Google Analytics - loads with proper consent mode and strategy */}
         <GoogleAnalytics />
         <PerformanceMonitor />

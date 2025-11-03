@@ -87,4 +87,31 @@ export function trackEventWithCallback(
   }
 }
 
+/**
+ * Push an event to Google Tag Manager dataLayer
+ * This is useful for tracking custom events that should be handled by GTM
+ * 
+ * Note: GTM will respect consent mode settings automatically.
+ * Events pushed here will be processed by GTM tags configured in the GTM dashboard.
+ * 
+ * @param eventName - The name of the event
+ * @param eventData - Additional event data to send
+ */
+export function pushToDataLayer(eventName: string, eventData: Record<string, any> = {}): void {
+  if (typeof window === 'undefined') return;
+  if (!window.dataLayer) {
+    console.warn('dataLayer is not available. GTM may not be loaded yet.');
+    return;
+  }
+  
+  try {
+    window.dataLayer.push({
+      event: eventName,
+      ...eventData,
+      ...(isDebugMode() ? { debug_mode: true } : {}),
+    });
+  } catch (error) {
+    console.error('Error pushing to dataLayer:', error);
+  }
+}
 
