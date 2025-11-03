@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import { MdPhoneAndroid, MdTablet, MdWatch, MdLaptop } from 'react-icons/md';
 import styles from './DeviceList.module.css';
 
 interface Device {
@@ -409,16 +410,29 @@ export default function DeviceList() {
   const [activeCategory, setActiveCategory] = useState<DeviceCategory>('smartphones');
   const [expandedBrands, setExpandedBrands] = useState<Set<string>>(new Set());
 
-  // Load JSON data
+  // Load JSON data with performance optimization
   useEffect(() => {
-    fetch('/esim-comp-phones.json')
-      .then(res => res.json())
-      .then(setData)
-      .catch(err => console.error('Failed to load eSIM data:', err));
+    // Use requestIdleCallback if available for better performance
+    const loadData = () => {
+      fetch('/esim-comp-phones.json', {
+        // Add cache headers for better performance
+        cache: 'force-cache',
+      })
+        .then(res => res.json())
+        .then(setData)
+        .catch(err => console.error('Failed to load eSIM data:', err));
+    };
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(loadData, { timeout: 2000 });
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(loadData, 0);
+    }
   }, []);
 
-  // Toggle brand expansion
-  const toggleBrand = (brand: string) => {
+  // Toggle brand expansion - memoized for performance
+  const toggleBrand = useCallback((brand: string) => {
     setExpandedBrands(prev => {
       const newSet = new Set(prev);
       if (newSet.has(brand)) {
@@ -428,7 +442,7 @@ export default function DeviceList() {
       }
       return newSet;
     });
-  };
+  }, []);
 
   // Get device priority for sorting (matches screenshot order)
   const getDevicePriority = (model: string): number => {
@@ -643,7 +657,9 @@ export default function DeviceList() {
       {activeCategory === 'smartphones' && (
         <div className={styles.content}>
           <div className={styles.header}>
-            <div className={styles.icon}></div>
+            <div className={styles.icon}>
+              <MdPhoneAndroid className={styles.iconSvg} />
+            </div>
             <h2 className={styles.title}>Смартфони</h2>
           </div>
           
@@ -670,29 +686,27 @@ export default function DeviceList() {
                   </span>
                 </button>
 
-                {isExpanded && (
-                  <div className={styles.deviceListContent}>
-                    <ul className={styles.deviceList}>
-                      {devices.map((device, index) => (
-                        <li key={index} className={styles.deviceItem}>
-                          {device.model}
-                        </li>
-                      ))}
-                    </ul>
+                <div className={`${styles.deviceListContent} ${isExpanded ? styles.expanded : ''}`}>
+                  <ul className={styles.deviceList}>
+                    {devices.map((device, index) => (
+                      <li key={index} className={styles.deviceItem}>
+                        {device.model}
+                      </li>
+                    ))}
+                  </ul>
 
-                    {showChinaNote && (
-                      <div className={styles.infoBox}>
-                        <span className={styles.infoIcon}>ℹ️</span>
-                        <p className={styles.infoText}>
-                          iPhone устройствата, продадени в континентален Китай, не поддържат eSIM, 
-                          и само някои iPhone модели, продадени в Хонг Конг и Макао, поддържат eSIM. 
-                          Ако сте закупили iPhone в някоя от тези страни, проверете дали вашият iPhone 
-                          е съвместим с eSIM преди да инсталирате eSIM приложение.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                  {showChinaNote && isExpanded && (
+                    <div className={styles.infoBox}>
+                      <span className={styles.infoIcon}>ℹ️</span>
+                      <p className={styles.infoText}>
+                        iPhone устройствата, продадени в континентален Китай, не поддържат eSIM, 
+                        и само някои iPhone модели, продадени в Хонг Конг и Макао, поддържат eSIM. 
+                        Ако сте закупили iPhone в някоя от тези страни, проверете дали вашият iPhone 
+                        е съвместим с eSIM преди да инсталирате eSIM приложение.
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -703,7 +717,9 @@ export default function DeviceList() {
       {activeCategory === 'tablets' && (
         <div className={styles.content}>
           <div className={styles.header}>
-            <div className={styles.icon}></div>
+            <div className={styles.icon}>
+              <MdTablet className={styles.iconSvg} />
+            </div>
             <h2 className={styles.title}>Таблети</h2>
           </div>
           
@@ -729,17 +745,15 @@ export default function DeviceList() {
                   </span>
                 </button>
 
-                {isExpanded && (
-                  <div className={styles.deviceListContent}>
-                    <ul className={styles.deviceList}>
-                      {devices.map((device, index) => (
-                        <li key={index} className={styles.deviceItem}>
-                          {device.model}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                <div className={`${styles.deviceListContent} ${isExpanded ? styles.expanded : ''}`}>
+                  <ul className={styles.deviceList}>
+                    {devices.map((device, index) => (
+                      <li key={index} className={styles.deviceItem}>
+                        {device.model}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             );
           })}
@@ -750,7 +764,9 @@ export default function DeviceList() {
       {activeCategory === 'laptops' && (
         <div className={styles.content}>
           <div className={styles.header}>
-            <div className={styles.icon}></div>
+            <div className={styles.icon}>
+              <MdLaptop className={styles.iconSvg} />
+            </div>
             <h2 className={styles.title}>Лаптопи</h2>
           </div>
           
@@ -776,17 +792,15 @@ export default function DeviceList() {
                   </span>
                 </button>
 
-                {isExpanded && (
-                  <div className={styles.deviceListContent}>
-                    <ul className={styles.deviceList}>
-                      {devices.map((device, index) => (
-                        <li key={index} className={styles.deviceItem}>
-                          {device.model}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                <div className={`${styles.deviceListContent} ${isExpanded ? styles.expanded : ''}`}>
+                  <ul className={styles.deviceList}>
+                    {devices.map((device, index) => (
+                      <li key={index} className={styles.deviceItem}>
+                        {device.model}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             );
           })}
@@ -797,7 +811,9 @@ export default function DeviceList() {
       {activeCategory === 'smartwatches' && (
         <div className={styles.content}>
           <div className={styles.header}>
-            <div className={styles.icon}></div>
+            <div className={styles.icon}>
+              <MdWatch className={styles.iconSvg} />
+            </div>
             <h2 className={styles.title}>Смарт часовници</h2>
           </div>
           
@@ -823,17 +839,15 @@ export default function DeviceList() {
                   </span>
                 </button>
 
-                {isExpanded && (
-                  <div className={styles.deviceListContent}>
-                    <ul className={styles.deviceList}>
-                      {devices.map((device, index) => (
-                        <li key={index} className={styles.deviceItem}>
-                          {device.model}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                <div className={`${styles.deviceListContent} ${isExpanded ? styles.expanded : ''}`}>
+                  <ul className={styles.deviceList}>
+                    {devices.map((device, index) => (
+                      <li key={index} className={styles.deviceItem}>
+                        {device.model}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             );
           })}

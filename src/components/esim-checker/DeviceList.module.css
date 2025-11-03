@@ -2,6 +2,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  /* Prevent layout shift during loading */
+  min-height: 200px;
 }
 
 .categoryNav {
@@ -38,6 +40,10 @@
 
 .content {
   padding: 20px 0;
+  /* Reserve space to prevent CLS */
+  min-height: 100px;
+  /* Optimize rendering */
+  contain: layout;
 }
 
 .header {
@@ -52,8 +58,15 @@
   height: 40px;
   background-color: #e5e900;
   border-radius: 4px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+}
+
+.iconSvg {
+  color: #8B5CF6;
+  font-size: 24px;
 }
 
 .title {
@@ -76,6 +89,12 @@
   border-radius: 8px;
   overflow: hidden;
   background: white;
+  /* Prevent layout shift */
+  contain: layout style;
+  min-height: 60px;
+  /* Optimize rendering */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .brandHeader {
@@ -89,6 +108,9 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   text-align: left;
+  /* Prevent layout shift */
+  min-height: 60px;
+  box-sizing: border-box;
 }
 
 .brandHeader:hover {
@@ -99,6 +121,10 @@
   font-size: 20px;
   font-weight: 600;
   color: #111827;
+  /* Prevent text shift */
+  min-height: 28px;
+  display: flex;
+  align-items: center;
 }
 
 .caret {
@@ -106,6 +132,13 @@
   color: #6b7280;
   transition: transform 0.2s ease;
   display: inline-block;
+  /* Reserve space for caret rotation */
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .caret.expanded {
@@ -113,8 +146,26 @@
 }
 
 .deviceListContent {
-  padding: 0 24px 24px;
+  /* Use max-height for smooth animation without layout shift */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding-top 0.3s ease-out, padding-bottom 0.3s ease-out;
+  /* Reserve minimum space - prevent CLS */
+  min-height: 0;
+  padding: 0 24px;
   border-top: 1px solid #e5e7eb;
+  /* Optimize for performance */
+  will-change: max-height;
+  contain: layout style;
+  /* Prevent repaints */
+  transform: translateZ(0);
+}
+
+.deviceListContent.expanded {
+  max-height: 5000px;
+  /* Padding applied when expanded */
+  padding-top: 0;
+  padding-bottom: 24px;
 }
 
 .deviceList {
@@ -124,6 +175,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  /* Prevent layout shift */
+  contain: layout;
+  /* Reserve space */
+  min-height: 0;
 }
 
 .deviceItem {
@@ -132,6 +187,10 @@
   line-height: 1.6;
   padding-left: 24px;
   position: relative;
+  /* Prevent layout shift */
+  min-height: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .deviceItem::before {
@@ -207,7 +266,11 @@
   }
 
   .deviceListContent {
-    padding: 0 20px 20px;
+    padding: 0 20px;
+  }
+
+  .deviceListContent.expanded {
+    padding-bottom: 20px;
   }
 
   .deviceItem {
