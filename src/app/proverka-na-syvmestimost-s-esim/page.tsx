@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   
   if (!page) {
     return {
-      title: 'Безплатна Проверка на Съвместимост с eSIM - Travel eSIM',
+      title: 'Безплатна Проверка на Съвместимост с eSIM',
       description: 'Проверка на съвместимост с eSIM - Travel eSIM BG',
     };
   }

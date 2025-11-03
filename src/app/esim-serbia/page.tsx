@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       locale: 'bg_BG',
       type: 'website',
-      title: `eSIM за Сърбия: Бърз интернет без роуминг от ${lowestPrice}лв`,
+      title: `eSIM за Сърбия: Бърз интернет без роуминг от ${lowestPrice}лв | Travel eSIM`,
       description: `Купи eSIM за Сърбия от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Сърбия с 4G/5G покритие.`,
       url: generateCanonicalUrl('/esim-serbia'),
     },

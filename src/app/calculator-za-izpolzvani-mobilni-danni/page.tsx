@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   
   if (!page) {
     return {
-      title: 'Калкулатор за използван мобилен интернет при пътуване - Travel eSIM',
+      title: 'Калкулатор за използван мобилен интернет при пътуване',
       description: 'Калкулатор за използвани мобилни данни при пътуване - Travel eSIM BG',
     };
   }

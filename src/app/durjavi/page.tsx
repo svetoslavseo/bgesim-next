@@ -7,7 +7,7 @@ import HowItWorksSection from '@/components/home/HowItWorksSection';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'eSIM за всички държави - Travel eSIM by Breeze',
+  title: 'eSIM за всички държави',
   description: 'Намерете eSIM планове за всички популярни дестинации. Бърз интернет без роуминг такси в над 100 държави по света.',
   alternates: {
     canonical: generateCanonicalUrl('/durjavi'),
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     locale: 'bg_BG',
     type: 'website',
-    title: 'eSIM за всички държави - Travel eSIM by Breeze',
+    title: 'eSIM за всички държави | Travel eSIM',
     description: 'Намерете eSIM планове за всички популярни дестинации. Бърз интернет без роуминг такси в над 100 държави по света.',
     url: generateCanonicalUrl('/durjavi'),
   },

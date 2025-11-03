@@ -15,7 +15,7 @@ const CookieBanner = dynamic(() => import('@/components/common/CookieBanner'), {
 export const metadata: Metadata = {
   title: {
     default: SITE_CONFIG.name,
-    template: `%s | ${SITE_CONFIG.name}`,
+    template: `%s | Travel eSIM`,
   },
   description: SITE_CONFIG.description,
   metadataBase: new URL(SITE_CONFIG.url),

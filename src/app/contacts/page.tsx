@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   
   // Fallback metadata if contact page data is not available
   return {
-    title: 'Контакти - Travel eSIM',
+    title: 'Контакти',
     description: 'Контакти - Travel eSIM BG',
     alternates: {
       canonical: 'https://travelesim.bg/contacts/',

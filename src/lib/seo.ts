@@ -22,14 +22,34 @@ export const SITE_CONFIG = {
 };
 
 /**
+ * Clean title by removing any existing brand suffixes
+ */
+function cleanTitle(title: string): string {
+  // Remove various brand suffix patterns
+  return title
+    .replace(/\s*-\s*Travel eSIM\s*$/i, '')
+    .replace(/\s*\|\s*Travel eSIM\s*$/i, '')
+    .replace(/\s*Travel eSIM BG\s*$/i, '')
+    .replace(/\s*Travel eSIM by Breeze\s*$/i, '')
+    .trim();
+}
+
+/**
  * Generate Next.js Metadata from SEO data
  */
 export function generateMetadata(seoData: SEOData): Metadata {
   // Generate canonical URL - prefer seoData.canonical, then openGraph.url, then fall back to site URL
   const canonicalUrl = seoData.canonical || seoData.openGraph.url || SITE_CONFIG.url;
   
+  // Clean titles to remove any existing brand suffixes (template will add "| Travel eSIM")
+  const cleanMainTitle = cleanTitle(seoData.title);
+  const cleanOGTitle = cleanTitle(seoData.openGraph.title);
+  
+  // Append brand to OpenGraph title (since it doesn't use the template)
+  const ogTitleWithBrand = cleanOGTitle ? `${cleanOGTitle} | Travel eSIM` : 'Travel eSIM';
+  
   const metadata: Metadata = {
-    title: seoData.title,
+    title: cleanMainTitle,
     description: seoData.description,
     
     // Canonical URL - self-canonical
@@ -46,7 +66,7 @@ export function generateMetadata(seoData: SEOData): Metadata {
     // Open Graph
     openGraph: {
       type: seoData.openGraph.type as any,
-      title: seoData.openGraph.title,
+      title: ogTitleWithBrand,
       description: seoData.openGraph.description,
       url: seoData.openGraph.url,
       siteName: seoData.openGraph.siteName,
@@ -62,7 +82,7 @@ export function generateMetadata(seoData: SEOData): Metadata {
     // Twitter Card
     twitter: {
       card: seoData.twitter.card as any,
-      title: seoData.openGraph.title,
+      title: ogTitleWithBrand,
       description: seoData.openGraph.description,
       images: seoData.openGraph.images[0]?.url,
     },

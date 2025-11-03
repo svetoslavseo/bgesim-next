@@ -12,13 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
   
   // Fallback metadata if author page data is not available
   return {
-    title: 'Основател на Travel eSIM Global - Travel eSIM',
+    title: 'Основател на Travel eSIM Global',
     description: 'Васил Андреев - Travel eSIM BG',
     alternates: {
       canonical: 'https://travelesim.bg/v-andreev/',
     },
     openGraph: {
-      title: 'Основател на Travel eSIM Global - Travel eSIM',
+      title: 'Основател на Travel eSIM Global | Travel eSIM',
       description: 'Васил Андреев - Travel eSIM BG',
       type: 'article',
       url: 'https://travelesim.bg/v-andreev/',
