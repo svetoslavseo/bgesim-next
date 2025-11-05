@@ -1,14 +1,9 @@
 # Railway build configuration for static Next.js export
 # Nixpacks will auto-detect Node.js version from package.json
 
-# Set environment variables to avoid cache conflicts with Docker mount
-[phases.build.env]
-NPM_CONFIG_CACHE = "/tmp/.npm-cache"
-NEXT_TELEMETRY_DISABLED = "1"
-
 [phases.build]
 cmds = [
-  "mkdir -p /tmp/.npm-cache /tmp/.node_modules_cache || true",
+  "mkdir -p /tmp/.npm-cache || true",
   "npm config set cache /tmp/.npm-cache",
   "rm -rf node_modules/.cache 2>/dev/null || true",
   "npm ci --prefer-offline --no-audit",
