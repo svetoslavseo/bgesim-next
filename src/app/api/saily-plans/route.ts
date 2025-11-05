@@ -54,6 +54,39 @@ export async function GET(request: NextRequest) {
       })
       .map((plan: any) => {
         const priceUSD = plan.price.amount_with_tax / 100;
+        
+        // Determine plan type: check name first for regional plans, then by country count
+        let planType: 'global' | 'regional' | 'country';
+        const planNameLower = plan.name.toLowerCase();
+        
+        // Regional plan names that should be marked as regional even if they cover many countries
+        const regionalKeywords = [
+          'middle east',
+          'north america',
+          'south america',
+          'europe',
+          'asia',
+          'balkans',
+          'africa',
+          'oceania'
+        ];
+        
+        const isRegionalByName = regionalKeywords.some(keyword => planNameLower.includes(keyword));
+        
+        if (isRegionalByName && plan.covered_countries.length > 1 && plan.covered_countries.length <= 50) {
+          // Regional plans (cover multiple countries but not too many)
+          planType = 'regional';
+        } else if (plan.covered_countries.length > 50 || (!isRegionalByName && plan.covered_countries.length > 10)) {
+          // Global plans (cover many countries or explicitly global)
+          planType = 'global';
+        } else if (plan.covered_countries.length > 1) {
+          // Regional plans (2-10 countries, or 2-50 if it's a known regional name)
+          planType = 'regional';
+        } else {
+          // Country-specific plans
+          planType = 'country';
+        }
+        
         return {
           id: plan.identifier,
           name: plan.name,
@@ -64,8 +97,7 @@ export async function GET(request: NextRequest) {
           currency: '$',
           identifier: plan.identifier,
           priceIdentifier: plan.price.identifier,
-          planType: (plan.covered_countries.length > 10 ? 'global' : 
-                    plan.covered_countries.length > 1 ? 'regional' : 'country') as 'global' | 'regional' | 'country',
+          planType,
           coveredCountries: plan.covered_countries,
         };
       });
@@ -83,9 +115,10 @@ export async function GET(request: NextRequest) {
       );
       console.log(`Plans with country name "${countryName}":`, plansWithCountryName.map((p: any) => p.name));
       
+      const countryRegex = new RegExp(`\\b${countryName.toLowerCase()}\\b`);
       filteredPlans = allPlans.filter((plan: any) => {
         const coversCountry = plan.coveredCountries.includes(countryCode);
-        const nameContainsCountry = plan.name.toLowerCase().includes(countryName.toLowerCase());
+        const nameContainsCountry = countryRegex.test(plan.name.toLowerCase());
         
         // Include all plan types (country, regional, global) that cover this country
         const shouldInclude = coversCountry || nameContainsCountry;
@@ -843,6 +876,7 @@ function getCountryNameFromCode(countryCode: string): string {
     'RS': 'serbia', 
     'AE': 'dubai',
     'EG': 'egypt',
+    'MA': 'morocco',
     'US': 'usa',
     'GB': 'uk',
     'TR': 'turkey'

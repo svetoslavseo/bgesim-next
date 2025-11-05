@@ -117,14 +117,15 @@ export default function CompactPlansSection({
       'Egypt': 'Египет',
       'Dubai': 'Дубай',
       'USA': 'САЩ',
-      'Turkey': 'Турция'
+      'Turkey': 'Турция',
+      'Morocco': 'Мароко'
     };
     return countryMap[countryName] || countryName;
   };
 
   // Get region name from plan name
   const getRegionNameFromPlan = (planName: string): string | null => {
-    const knownRegions = ['North America', 'Balkans', 'Southeast Asia', 'Europe & Middle East', 'Europe', 'Middle East'];
+    const knownRegions = ['North America', 'Balkans', 'Southeast Asia', 'Europe & Middle East', 'Europe', 'Middle East', 'Middle East and North Africa'];
     for (const region of knownRegions) {
       if (planName.startsWith(region)) {
         return region;
@@ -141,7 +142,8 @@ export default function CompactPlansSection({
       'Southeast Asia': 'Югоизточна Азия',
       'Europe & Middle East': 'Европа и Близкия Изток',
       'Europe': 'Европа',
-      'Middle East': 'Близък изток'
+      'Middle East': 'Близък изток',
+      'Middle East and North Africa': 'Близък изток и Северна Африка'
     };
     return regionMap[englishName] || englishName;
   };

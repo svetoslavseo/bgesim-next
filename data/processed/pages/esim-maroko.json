@@ -1,0 +1,44 @@
+{
+  "slug": "esim-maroko",
+  "title": "eSIM за Мароко",
+  "content": "",
+  "excerpt": "",
+  "seo": {
+    "title": "eSIM за Мароко (Бърз интернет без роуминг) - Travel eSIM",
+    "description": "eSIM за Мароко - Travel eSIM BG",
+    "canonical": "https://travelesim.bg/esim-maroko/",
+    "robots": {
+      "index": "index",
+      "follow": "follow"
+    },
+    "openGraph": {
+      "type": "article",
+      "title": "eSIM за Мароко (Бърз интернет без роуминг) - Travel eSIM",
+      "description": "eSIM за Мароко - Travel eSIM BG",
+      "url": "https://travelesim.bg/esim-maroko/",
+      "siteName": "Travel eSIM BG",
+      "images": [
+        {
+          "url": "https://travelesim.bg/wp-content/uploads/2025/02/TSim-200-x-50-px-650-x-200-px.png",
+          "width": 650,
+          "height": 200,
+          "type": "image/png"
+        }
+      ],
+      "locale": "en_GB",
+      "modifiedTime": "2025-11-05T00:00:00+00:00"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "misc": {
+        "Estimated reading time": "2 minutes"
+      }
+    },
+    "schema": null
+  },
+  "url": "https://travelesim.bg/esim-maroko/",
+  "modifiedDate": "2025-11-05T00:00:00",
+  "publishedDate": "2025-11-05T00:00:00"
+}
+
+

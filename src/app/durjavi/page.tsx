@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { generateCanonicalUrl } from '@/lib/seo';
+import { getLowestCountryPriceInBGN } from '@/lib/sailyApi';
 import DynamicCTASection from '@/components/common/DynamicCTASection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import styles from './page.module.css';
@@ -21,59 +22,68 @@ export const metadata: Metadata = {
   },
 };
 
-const countries = [
-  {
-    name: 'Турция',
-    href: '/turcia/',
-    flag: '/media/images/4.png',
-    description: 'eSIM за Турция с мобилен интернет',
-    price: 'от 9лв'
-  },
-  {
-    name: 'Великобритания',
-    href: '/esim-velikobritania/',
-    flag: '/media/images/5.png',
-    description: 'eSIM за Великобритания с мобилен интернет',
-    price: 'от 12лв'
-  },
-  {
-    name: 'САЩ',
-    href: '/esim-za-usa/',
-    flag: '/media/images/Flags_-1.png',
-    description: 'eSIM за САЩ с мобилен интернет',
-    price: 'от 15лв'
-  },
-  {
-    name: 'Тайланд',
-    href: '/esim-thailand/',
-    flag: '/media/images/2-1.png',
-    description: 'eSIM за Тайланд с мобилен интернет',
-    price: 'от 8лв'
-  },
-  {
-    name: 'Дубай',
-    href: '/esim-dubai/',
-    flag: '/media/images/6.png',
-    description: 'eSIM за Дубай с мобилен интернет',
-    price: 'от 10лв'
-  },
-  {
-    name: 'Сърбия',
-    href: '/esim-serbia/',
-    flag: '/media/images/Flags_-2.png',
-    description: 'eSIM за Сърбия с мобилен интернет',
-    price: 'от 7лв'
-  },
-  {
-    name: 'Египет',
-    href: '/esim-egipet/',
-    flag: '/media/flags/eg.png',
-    description: 'eSIM за Египет с мобилен интернет',
-    price: 'от 9лв'
-  }
-];
+export default async function DurjaviPage() {
+  // Fetch the lowest price for Morocco dynamically
+  const moroccoLowestPrice = await getLowestCountryPriceInBGN('MA');
 
-export default function DurjaviPage() {
+  const countries = [
+    {
+      name: 'Турция',
+      href: '/turcia/',
+      flag: '/media/images/4.png',
+      description: 'eSIM за Турция с мобилен интернет',
+      price: 'от 9лв'
+    },
+    {
+      name: 'Великобритания',
+      href: '/esim-velikobritania/',
+      flag: '/media/images/5.png',
+      description: 'eSIM за Великобритания с мобилен интернет',
+      price: 'от 12лв'
+    },
+    {
+      name: 'САЩ',
+      href: '/esim-za-usa/',
+      flag: '/media/images/Flags_-1.png',
+      description: 'eSIM за САЩ с мобилен интернет',
+      price: 'от 15лв'
+    },
+    {
+      name: 'Тайланд',
+      href: '/esim-thailand/',
+      flag: '/media/images/2-1.png',
+      description: 'eSIM за Тайланд с мобилен интернет',
+      price: 'от 8лв'
+    },
+    {
+      name: 'Дубай',
+      href: '/esim-dubai/',
+      flag: '/media/images/6.png',
+      description: 'eSIM за Дубай с мобилен интернет',
+      price: 'от 10лв'
+    },
+    {
+      name: 'Сърбия',
+      href: '/esim-serbia/',
+      flag: '/media/images/Flags_-2.png',
+      description: 'eSIM за Сърбия с мобилен интернет',
+      price: 'от 7лв'
+    },
+    {
+      name: 'Египет',
+      href: '/esim-egipet/',
+      flag: '/media/flags/eg.png',
+      description: 'eSIM за Египет с мобилен интернет',
+      price: 'от 9лв'
+    },
+    {
+      name: 'Мароко',
+      href: '/esim-maroko/',
+      flag: '/media/flags/ma.png',
+      description: 'eSIM за Мароко с мобилен интернет',
+      price: `от ${moroccoLowestPrice}лв`
+    }
+  ];
   return (
     <>
       {/* Structured Data - Breadcrumb Schema */}

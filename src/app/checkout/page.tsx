@@ -67,6 +67,7 @@ const CheckoutPage = () => {
       'USA': 'us',
       'UK': 'gb',
       'Turkey': 'tr',
+      'Morocco': 'ma',
       // Bulgarian names
       'Тайланд': 'th',
       'Сърбия': 'rs',
@@ -74,7 +75,8 @@ const CheckoutPage = () => {
       'Египет': 'eg',
       'САЩ': 'us',
       'Великобритания': 'gb',
-      'Турция': 'tr'
+      'Турция': 'tr',
+      'Мароко': 'ma'
     };
     return flagMap[country] || 'th';
   };

@@ -21,6 +21,7 @@ const navigationItems = [
       { label: 'eSIM Тайланд', href: '/esim-thailand' },
       { label: 'eSIM Дубай', href: '/esim-dubai' },
       { label: 'eSIM Египет', href: '/esim-egipet' },
+      { label: 'Мароко', href: '/esim-maroko' },
       { label: 'Всички държави', href: '/durjavi' },
     ]
   },

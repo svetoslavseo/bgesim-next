@@ -73,6 +73,7 @@ export default function HomePage() {
     { name: 'Дубай', href: '/esim-dubai/', flag: '/media/images/6.png' },
     { name: 'Сърбия', href: '/esim-serbia/', flag: '/media/images/Flags_-2.png' },
     { name: 'Египет', href: '/esim-egipet/', flag: '/media/flags/eg.png' },
+    { name: 'Мароко', href: '/esim-maroko/', flag: '/media/flags/ma.png' },
   ];
 
   const benefits = [

@@ -35,13 +35,21 @@ export default function HeroSectionWrapper({
         console.log('Server-side API response for', countryCode, ':', apiData);
         
         const sailyPlans = apiData.success ? apiData.plans : [];
+
+        // Keep only country-specific plans for the hero selector
+        const countryOnly = Array.isArray(sailyPlans)
+          ? sailyPlans.filter((p: any) => p.planType === 'country')
+          : [];
         
-        if (sailyPlans && sailyPlans.length > 0) {
-          console.log('Using real Saily plans:', sailyPlans);
+        if (countryOnly && countryOnly.length > 0) {
+          console.log('Using real Saily country plans:', countryOnly.length);
+          setPlans(countryOnly);
+        } else if (sailyPlans && sailyPlans.length > 0) {
+          console.log('No explicit country-only plans found, falling back to all returned plans');
           setPlans(sailyPlans);
         } else {
           console.log('No Saily plans found, using fallback');
-          const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+          const fallbackPlans = (FALLBACK_PLANS[countryCode] || []).filter(p => (p as any).planType === 'country');
           console.log('Fallback plans for', countryCode, ':', fallbackPlans);
           setPlans(fallbackPlans);
         }

@@ -7,11 +7,8 @@ import { FALLBACK_PLANS } from '@/lib/sailyApi';
 /**
  * CompactPlansSectionWrapper Component
  * 
- * Note: Attempts to fetch from /api/saily-plans in development,
- * but with static export, this fails in production and falls back
- * to FALLBACK_PLANS.
- * 
- * Status: ✅ WORKS - Gracefully falls back to static plans
+ * Fetches plans from API and applies the same deduplication logic as HeroSectionWrapper
+ * to ensure both sections show the same plans.
  */
 
 interface CompactPlansSectionWrapperProps {
@@ -19,6 +16,43 @@ interface CompactPlansSectionWrapperProps {
   countryName: string;
   countryCode: string;
 }
+
+// Helper function to deduplicate plans by type
+// Keeps the best (lowest price) plan for each (data, validity) combination per plan type
+const deduplicateByType = (plans: any[], planType: string) => {
+  const filtered = plans.filter((p: any) => p.planType === planType);
+  const bestBySignature = new Map<string, any>();
+  
+  filtered.forEach((plan: any) => {
+    const priceUSD = (plan.priceUSD ?? plan.price) || 0;
+    const key = `${plan.data}|${plan.validity}`;
+    const existing = bestBySignature.get(key);
+    if (!existing) {
+      bestBySignature.set(key, plan);
+    } else {
+      const existingPrice = (existing.priceUSD ?? existing.price) || 0;
+      if (priceUSD < existingPrice) {
+        bestBySignature.set(key, plan);
+      }
+    }
+  });
+  
+  return Array.from(bestBySignature.values());
+};
+
+// Helper function to process plans (deduplicate and combine all types)
+const processPlans = (sailyPlans: any[]) => {
+  const dedupedCountryPlans = deduplicateByType(sailyPlans, 'country');
+  const dedupedRegionalPlans = deduplicateByType(sailyPlans, 'regional');
+  const dedupedGlobalPlans = deduplicateByType(sailyPlans, 'global');
+  
+  return {
+    country: dedupedCountryPlans,
+    regional: dedupedRegionalPlans,
+    global: dedupedGlobalPlans,
+    all: [...dedupedCountryPlans, ...dedupedRegionalPlans, ...dedupedGlobalPlans]
+  };
+};
 
 export default function CompactPlansSectionWrapper({ 
   title, 
@@ -37,18 +71,54 @@ export default function CompactPlansSectionWrapper({
       setError(null);
       
       try {
-        // Use fallback plans immediately for static export
-        // In production with static export, API routes don't exist
-        const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
-        console.log('Loading fallback plans for', countryCode, ':', fallbackPlans.length, 'plans');
-        setPlans(fallbackPlans);
-        setLastUpdated(undefined);
+        console.log('Fetching real Saily plans for', countryCode, '(CompactPlansSection)');
+        
+        // Fetch real plans from server-side API route (same as HeroSectionWrapper)
+        const response = await fetch(`/api/saily-plans?countryCode=${countryCode}`);
+        const apiData = await response.json();
+        console.log('Server-side API response for', countryCode, '(CompactPlansSection):', apiData);
+        
+        const sailyPlans = apiData.success ? apiData.plans : [];
+        
+        if (sailyPlans && sailyPlans.length > 0) {
+          const processed = processPlans(sailyPlans);
+          
+          if (processed.all.length > 0) {
+            console.log('Using real Saily plans (deduplicated):', {
+              country: processed.country.length,
+              regional: processed.regional.length,
+              global: processed.global.length,
+              total: processed.all.length
+            });
+            setPlans(processed.all);
+            setLastUpdated(apiData.lastUpdated);
+          } else {
+            console.log('No deduplicated plans, using all returned plans');
+            setPlans(sailyPlans);
+            setLastUpdated(apiData.lastUpdated);
+          }
+        } else {
+          console.log('No Saily plans found, using fallback');
+          const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+          const processed = processPlans(fallbackPlans);
+          console.log('Fallback plans (deduplicated) for', countryCode, ':', {
+            country: processed.country.length,
+            regional: processed.regional.length,
+            global: processed.global.length,
+            total: processed.all.length
+          });
+          setPlans(processed.all);
+          setLastUpdated(undefined);
+        }
+        
+        setIsLoading(false);
       } catch (error) {
         console.error('Error loading plans:', error);
+        console.log('Falling back to static plans');
         const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
-        setPlans(fallbackPlans);
+        const processed = processPlans(fallbackPlans);
+        setPlans(processed.all);
         setLastUpdated(undefined);
-      } finally {
         setIsLoading(false);
       }
     };

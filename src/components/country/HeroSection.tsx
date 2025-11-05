@@ -47,7 +47,25 @@ export default function HeroSection({
 
   // Filter only country plans and convert to current currency
   const countryPlans = plans.filter(plan => plan.planType === 'country');
-  const convertedPlans = countryPlans.map(plan => {
+
+  // Collapse to the single lowest-priced plan for each (data, validity)
+  const bestBySignature = new Map<string, Plan>();
+  countryPlans.forEach(plan => {
+    const priceUSD = (plan.priceUSD ?? plan.price) || 0;
+    const key = `${plan.data}|${plan.validity}`;
+    const existing = bestBySignature.get(key);
+    if (!existing) {
+      bestBySignature.set(key, plan);
+    } else {
+      const existingPrice = (existing.priceUSD ?? existing.price) || 0;
+      if (priceUSD < existingPrice) {
+        bestBySignature.set(key, plan);
+      }
+    }
+  });
+  const dedupedCountryPlans = Array.from(bestBySignature.values());
+
+  const convertedPlans = dedupedCountryPlans.map(plan => {
     const priceUSD = plan.priceUSD || plan.price; // Use priceUSD if available, fallback to price
     const convertedPrice = convertPrice(priceUSD, currency, exchangeRates || undefined);
     

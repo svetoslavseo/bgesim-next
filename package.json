@@ -14,6 +14,7 @@
     "integrate:scraped": "tsx scripts/integrate-scraped-content.ts",
     "transform:content": "tsx scripts/transform-content.ts",
     "update-rates": "tsx scripts/update-exchange-rates.ts",
+    "update-plans": "tsx scripts/fetch-and-verify-all-plans.ts",
     "test:stability": "tsx scripts/stability-test.ts",
     "dev": "next dev -p 3001",
     "build": "next build",

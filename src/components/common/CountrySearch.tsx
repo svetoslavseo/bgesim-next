@@ -47,6 +47,12 @@ const countries: Country[] = [
     href: '/esim-egipet/',
     flag: '/media/flags/eg.png',
   }
+  ,
+  {
+    name: 'Мароко',
+    href: '/esim-maroko/',
+    flag: '/media/flags/ma.png',
+  }
 ];
 
 function CountrySearch() {

@@ -81,6 +81,39 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
       })
       .map(plan => {
         const priceUSD = plan.price.amount_with_tax / 100; // Convert cents to USD
+        
+        // Determine plan type: check name first for regional plans, then by country count
+        let planType: 'global' | 'regional' | 'country';
+        const planNameLower = plan.name.toLowerCase();
+        
+        // Regional plan names that should be marked as regional even if they cover many countries
+        const regionalKeywords = [
+          'middle east',
+          'north america',
+          'south america',
+          'europe',
+          'asia',
+          'balkans',
+          'africa',
+          'oceania'
+        ];
+        
+        const isRegionalByName = regionalKeywords.some(keyword => planNameLower.includes(keyword));
+        
+        if (isRegionalByName && plan.covered_countries.length > 1 && plan.covered_countries.length <= 50) {
+          // Regional plans (cover multiple countries but not too many)
+          planType = 'regional';
+        } else if (plan.covered_countries.length > 50 || (!isRegionalByName && plan.covered_countries.length > 10)) {
+          // Global plans (cover many countries or explicitly global)
+          planType = 'global';
+        } else if (plan.covered_countries.length > 1) {
+          // Regional plans (2-10 countries, or 2-50 if it's a known regional name)
+          planType = 'regional';
+        } else {
+          // Country-specific plans
+          planType = 'country';
+        }
+        
         return {
           id: plan.identifier,
           name: plan.name,
@@ -91,8 +124,7 @@ export async function fetchSailyPlans(countryCode?: string): Promise<ProcessedPl
           currency: '$',
           identifier: plan.identifier,
           priceIdentifier: plan.price.identifier, // Add price identifier
-          planType: (plan.covered_countries.length > 10 ? 'global' : 
-                    plan.covered_countries.length > 1 ? 'regional' : 'country') as 'global' | 'regional' | 'country',
+          planType,
           coveredCountries: plan.covered_countries, // Store covered countries for filtering
         };
       });
@@ -161,6 +193,7 @@ function getCountryNameFromCode(countryCode: string): string {
     'RS': 'serbia', 
     'AE': 'dubai',
     'EG': 'egypt',
+    'MA': 'morocco',
     'US': 'usa',
     'GB': 'uk',
     'TR': 'turkey'
@@ -331,6 +364,14 @@ export async function getLowestPriceInBGN(countryCode: string): Promise<number> 
   return lowPrice;
 }
 
+/**
+ * Get the lowest price in BGN for a country, considering ONLY country-specific plans
+ */
+export async function getLowestCountryPriceInBGN(countryCode: string): Promise<number> {
+  const { lowPrice } = await getPriceRangeInBGNForCountryPlans(countryCode);
+  return lowPrice;
+}
+
 export async function getPriceRangeInBGN(countryCode: string): Promise<{ lowPrice: number; highPrice: number; offerCount: number }> {
   try {
     // Try to fetch real plans first
@@ -364,9 +405,210 @@ export async function getPriceRangeInBGN(countryCode: string): Promise<{ lowPric
   return { lowPrice, highPrice, offerCount };
 }
 
+/**
+ * Get price range (BGN) using ONLY country-specific plans; if none exist, falls back to all
+ */
+export async function getPriceRangeInBGNForCountryPlans(countryCode: string): Promise<{ lowPrice: number; highPrice: number; offerCount: number }> {
+  try {
+    const plans = await fetchSailyPlans(countryCode);
+    if (plans && plans.length > 0) {
+      const countryPlans = plans.filter(p => p.planType === 'country');
+      const plansToUse = countryPlans.length > 0 ? countryPlans : plans;
+      const pricesInBGN = plansToUse.map(plan => Math.round(plan.priceUSD * 1.8));
+      const lowPrice = Math.min(...pricesInBGN);
+      const highPrice = Math.max(...pricesInBGN);
+      const offerCount = plansToUse.length;
+      console.log(`Country-only price range for ${countryCode}: ${offerCount} offers, low: ${lowPrice}лв, high: ${highPrice}лв`);
+      return { lowPrice, highPrice, offerCount };
+    }
+  } catch (error) {
+    console.error('Error fetching plans for country-only price calculation:', error);
+  }
+
+  // Fallback: use any static plans available for the country code
+  const fallbackPlans = (FALLBACK_PLANS[countryCode] || []).filter(p => p.planType === 'country');
+  if (fallbackPlans.length === 0) {
+    return getPriceRangeInBGN(countryCode);
+  }
+  const pricesInBGN = fallbackPlans.map(plan => Math.round(plan.priceUSD * 1.8));
+  const lowPrice = Math.min(...pricesInBGN);
+  const highPrice = Math.max(...pricesInBGN);
+  const offerCount = fallbackPlans.length;
+  return { lowPrice, highPrice, offerCount };
+}
+
 // Fallback static plans for each country (all prices in USD for consistent conversion)
 // Using the same structure as the main project's plans.json
 export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
+  'MA': [
+    // Country Plans
+    {
+      id: 'ma-1',
+      name: 'Morocco 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 6.67,
+      price: 6.67,
+      currency: '$',
+      identifier: 'morocco-1gb-7d',
+      planType: 'country',
+      coveredCountries: ['MA'],
+    },
+    {
+      id: 'ma-2',
+      name: 'Morocco 3GB 15 days',
+      data: '3 GB',
+      validity: '15 дни',
+      priceUSD: 3.99,
+      price: 3.99,
+      currency: '$',
+      identifier: 'morocco-3gb-15d',
+      planType: 'country',
+      coveredCountries: ['MA'],
+    },
+    {
+      id: 'ma-3',
+      name: 'Morocco 5GB 30 days',
+      data: '5 GB',
+      validity: '30 дни',
+      priceUSD: 5.49,
+      price: 5.49,
+      currency: '$',
+      identifier: 'morocco-5gb-30d',
+      planType: 'country',
+      coveredCountries: ['MA'],
+    },
+    {
+      id: 'ma-4',
+      name: 'Morocco 10GB 30 days',
+      data: '10 GB',
+      validity: '30 дни',
+      priceUSD: 9.99,
+      price: 9.99,
+      currency: '$',
+      identifier: 'morocco-10gb-30d',
+      planType: 'country',
+      coveredCountries: ['MA'],
+    },
+    {
+      id: 'ma-5',
+      name: 'Morocco 20GB 30 days',
+      data: '20 GB',
+      validity: '30 дни',
+      priceUSD: 17.99,
+      price: 17.99,
+      currency: '$',
+      identifier: 'morocco-20gb-30d',
+      planType: 'country',
+      coveredCountries: ['MA'],
+    },
+    // Regional Plans - Middle East and North Africa
+    {
+      id: 'ma-regional-1',
+      name: 'Middle East and North Africa 3GB 30 days',
+      data: '3 GB',
+      validity: '30 дни',
+      priceUSD: 36.99,
+      price: 36.99,
+      currency: '$',
+      identifier: 'ee119582-491f-4801-b034-957408663b57',
+      priceIdentifier: 'MTpEX0hsOURWeGdNVnRUZzdtVVNzQnZ5MHNCdkNaOU5ac1BnbEVnUGctZ2tBPTpQcmljZTozMzQ1LlVTRC4zNjk5',
+      planType: 'regional',
+      coveredCountries: ['AE', 'AM', 'BH', 'CY', 'DZ', 'EG', 'GE', 'IL', 'IQ', 'JO', 'KW', 'MA', 'OM', 'QA', 'SA', 'SD', 'SS', 'TN', 'TR'],
+    },
+    {
+      id: 'ma-regional-2',
+      name: 'Middle East and North Africa 2GB 15 days',
+      data: '2 GB',
+      validity: '15 дни',
+      priceUSD: 26.99,
+      price: 26.99,
+      currency: '$',
+      identifier: 'ea82f8f7-3ab9-4fc6-aa9a-d1e2d1a13348',
+      priceIdentifier: 'MTpOalVUbC03M2VSZHNhZ25GM3pfVmltSjFvOWVQc0gxbHhNeWpkQjRuNFRJPTpQcmljZTozMzQ2LlVTRC4yNjk5',
+      planType: 'regional',
+      coveredCountries: ['AE', 'AM', 'BH', 'CY', 'DZ', 'EG', 'GE', 'IL', 'IQ', 'JO', 'KW', 'MA', 'OM', 'QA', 'SA', 'SD', 'SS', 'TN', 'TR'],
+    },
+    {
+      id: 'ma-regional-3',
+      name: 'Middle East and North Africa 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 13.99,
+      price: 13.99,
+      currency: '$',
+      identifier: '643bcddb-8539-40aa-965b-e25fc3a70f8f',
+      priceIdentifier: 'MTpBbFNUQ2lNOTBYNmZ2SnhsR0ptc0VOUVJWX280Z3JhWE1wa1BxOGIwQXJjPTpQcmljZTozMzQ3LlVTRC4xMzk5',
+      planType: 'regional',
+      coveredCountries: ['AE', 'AM', 'BH', 'CY', 'DZ', 'EG', 'GE', 'IL', 'IQ', 'JO', 'KW', 'MA', 'OM', 'QA', 'SA', 'SD', 'SS', 'TN', 'TR'],
+    },
+    // Global Plans
+    {
+      id: 'ma-global-1',
+      name: 'Global 20GB 365 days',
+      data: '20 GB',
+      validity: '365 дни',
+      priceUSD: 66.99,
+      price: 66.99,
+      currency: '$',
+      identifier: 'b4932f6c-f327-401e-83c4-edc7c7d78f29',
+      priceIdentifier: 'MToyMWdrUkNVcjU5cG1oYzVoMWhsVkpMLVhTMUkxQU5ZMzFqWWhRWDV3ME5VPTpQcmljZTozMzM5LlVTRC42Njk5',
+      planType: 'global',
+      coveredCountries: ['AE', 'AL', 'AM', 'AR', 'AT', 'AU', 'BB', 'BE', 'BG', 'BL', 'BM', 'BR', 'CA', 'CH', 'CL', 'CN', 'CO', 'CR', 'CY', 'CZ', 'DE', 'DK', 'DO', 'EC', 'EE', 'ES', 'FI', 'FJ', 'FO', 'FR', 'GB', 'GD', 'GF', 'GG', 'GH', 'GI', 'GP', 'GR', 'GT', 'GY', 'HK', 'HN', 'HR', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IS', 'IT', 'JE', 'JM', 'JP', 'KH', 'KR', 'KZ', 'LI', 'LK', 'LT', 'LU', 'LV', 'MC', 'ME', 'MF', 'MN', 'MQ', 'MS', 'MT', 'MX', 'MY', 'MZ', 'NI', 'NL', 'NO', 'NZ', 'PA', 'PE', 'PH', 'PL', 'PR', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'SA', 'SB', 'SE', 'SG', 'SI', 'SK', 'SR', 'SV', 'TH', 'TR', 'TW', 'US', 'UY', 'VN', 'VU', 'WS', 'YT', 'ZA'],
+    },
+    {
+      id: 'ma-global-2',
+      name: 'Global 10GB 180 days',
+      data: '10 GB',
+      validity: '180 дни',
+      priceUSD: 56.99,
+      price: 56.99,
+      currency: '$',
+      identifier: 'e34d1fcd-c81d-4073-bb23-174e13759863',
+      priceIdentifier: 'MTpwMlhKTnkxN3gtU1RaV2NwUnBSWThFTUFRLUJNUHhSbElBaU5ZWmMtQXhRPTpQcmljZTozMzQwLlVTRC41Njk5',
+      planType: 'global',
+      coveredCountries: ['AE', 'AL', 'AM', 'AR', 'AT', 'AU', 'BB', 'BE', 'BG', 'BL', 'BM', 'BR', 'CA', 'CH', 'CL', 'CN', 'CO', 'CR', 'CY', 'CZ', 'DE', 'DK', 'DO', 'EC', 'EE', 'ES', 'FI', 'FJ', 'FO', 'FR', 'GB', 'GD', 'GF', 'GG', 'GH', 'GI', 'GP', 'GR', 'GT', 'GY', 'HK', 'HN', 'HR', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IS', 'IT', 'JE', 'JM', 'JP', 'KH', 'KR', 'KZ', 'LI', 'LK', 'LT', 'LU', 'LV', 'MC', 'ME', 'MF', 'MN', 'MQ', 'MS', 'MT', 'MX', 'MY', 'MZ', 'NI', 'NL', 'NO', 'NZ', 'PA', 'PE', 'PH', 'PL', 'PR', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'SA', 'SB', 'SE', 'SG', 'SI', 'SK', 'SR', 'SV', 'TH', 'TR', 'TW', 'US', 'UY', 'VN', 'VU', 'WS', 'YT', 'ZA'],
+    },
+    {
+      id: 'ma-global-3',
+      name: 'Global 5GB 60 days',
+      data: '5 GB',
+      validity: '60 дни',
+      priceUSD: 33.99,
+      price: 33.99,
+      currency: '$',
+      identifier: 'a919bc99-4caf-4d76-8f07-5f65d7b44828',
+      priceIdentifier: 'MTpEYVpGZUZOU0Z6Wjdscmh6ZXNaYjNWZFI1MHJ5bVJ6WmQ1Zm5ucVExSTlJPTpQcmljZTozMzQxLlVTRC4zMzk5',
+      planType: 'global',
+      coveredCountries: ['AE', 'AL', 'AM', 'AR', 'AT', 'AU', 'BB', 'BE', 'BG', 'BL', 'BM', 'BR', 'CA', 'CH', 'CL', 'CN', 'CO', 'CR', 'CY', 'CZ', 'DE', 'DK', 'DO', 'EC', 'EE', 'ES', 'FI', 'FJ', 'FO', 'FR', 'GB', 'GD', 'GF', 'GG', 'GH', 'GI', 'GP', 'GR', 'GT', 'GY', 'HK', 'HN', 'HR', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IS', 'IT', 'JE', 'JM', 'JP', 'KH', 'KR', 'KZ', 'LI', 'LK', 'LT', 'LU', 'LV', 'MC', 'ME', 'MF', 'MN', 'MQ', 'MS', 'MT', 'MX', 'MY', 'MZ', 'NI', 'NL', 'NO', 'NZ', 'PA', 'PE', 'PH', 'PL', 'PR', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'SA', 'SB', 'SE', 'SG', 'SI', 'SK', 'SR', 'SV', 'TH', 'TR', 'TW', 'US', 'UY', 'VN', 'VU', 'WS', 'YT', 'ZA'],
+    },
+    {
+      id: 'ma-global-4',
+      name: 'Global 2GB 15 days',
+      data: '2 GB',
+      validity: '15 дни',
+      priceUSD: 16.49,
+      price: 16.49,
+      currency: '$',
+      identifier: 'b1c9f6a9-b250-4ff3-b869-b1672aa6cfa4',
+      priceIdentifier: 'MTpMOHhiVnNPaktRZkdPR1B4VEhveEVick55X21xbmFRZUh2X0VXdmI5aW40PTpQcmljZTozMzQzLlVTRC4xNjQ5',
+      planType: 'global',
+      coveredCountries: ['AE', 'AL', 'AM', 'AR', 'AT', 'AU', 'BB', 'BE', 'BG', 'BL', 'BM', 'BR', 'CA', 'CH', 'CL', 'CN', 'CO', 'CR', 'CY', 'CZ', 'DE', 'DK', 'DO', 'EC', 'EE', 'ES', 'FI', 'FJ', 'FO', 'FR', 'GB', 'GD', 'GF', 'GG', 'GH', 'GI', 'GP', 'GR', 'GT', 'GY', 'HK', 'HN', 'HR', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IS', 'IT', 'JE', 'JM', 'JP', 'KH', 'KR', 'KZ', 'LI', 'LK', 'LT', 'LU', 'LV', 'MC', 'ME', 'MF', 'MN', 'MQ', 'MS', 'MT', 'MX', 'MY', 'MZ', 'NI', 'NL', 'NO', 'NZ', 'PA', 'PE', 'PH', 'PL', 'PR', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'SA', 'SB', 'SE', 'SG', 'SI', 'SK', 'SR', 'SV', 'TH', 'TR', 'TW', 'US', 'UY', 'VN', 'VU', 'WS', 'YT', 'ZA'],
+    },
+    {
+      id: 'ma-global-5',
+      name: 'Global 1GB 7 days',
+      data: '1 GB',
+      validity: '7 дни',
+      priceUSD: 8.99,
+      price: 8.99,
+      currency: '$',
+      identifier: 'abbb6c4b-602b-4ed0-b384-20f3ce91dc24',
+      priceIdentifier: 'MTpWQnZPQ04yZXdFN040M2U2OXRreUlSRnp5UVNYRUt5dUhzazE0X0dkU3pRPTpQcmljZTozMzQ0LlVTRC44OTk=',
+      planType: 'global',
+      coveredCountries: ['AE', 'AL', 'AM', 'AR', 'AT', 'AU', 'BB', 'BE', 'BG', 'BL', 'BM', 'BR', 'CA', 'CH', 'CL', 'CN', 'CO', 'CR', 'CY', 'CZ', 'DE', 'DK', 'DO', 'EC', 'EE', 'ES', 'FI', 'FJ', 'FO', 'FR', 'GB', 'GD', 'GF', 'GG', 'GH', 'GI', 'GP', 'GR', 'GT', 'GY', 'HK', 'HN', 'HR', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IS', 'IT', 'JE', 'JM', 'JP', 'KH', 'KR', 'KZ', 'LI', 'LK', 'LT', 'LU', 'LV', 'MC', 'ME', 'MF', 'MN', 'MQ', 'MS', 'MT', 'MX', 'MY', 'MZ', 'NI', 'NL', 'NO', 'NZ', 'PA', 'PE', 'PH', 'PL', 'PR', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'SA', 'SB', 'SE', 'SG', 'SI', 'SK', 'SR', 'SV', 'TH', 'TR', 'TW', 'US', 'UY', 'VN', 'VU', 'WS', 'YT', 'ZA'],
+    },
+  ],
   'TH': [
     // Country Plans - Real data from Saily API
     {
