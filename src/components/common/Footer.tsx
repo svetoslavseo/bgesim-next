@@ -63,7 +63,6 @@ export default function Footer() {
                   width={400}
                   height={120}
                   style={{
-                    width: 'auto',
                     height: 'auto',
                     maxHeight: '120px'
                   }}

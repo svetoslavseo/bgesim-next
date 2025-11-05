@@ -19,12 +19,6 @@ export default function Header() {
                 fetchPriority="high"
                 quality={90}
                 sizes="(max-width: 768px) 300px, 400px"
-                style={{
-                  width: 'auto',
-                  height: 'auto',
-                  maxHeight: '100px',
-                  maxWidth: '400px'
-                }}
               />
             </Link>
           </div>

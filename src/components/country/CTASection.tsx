@@ -25,6 +25,9 @@ export default function CTASection({
             alt="Гарантирано качество и сигурност"
             width={96}
             height={96}
+            style={{
+              height: 'auto'
+            }}
           />
         </div>
         <div className={styles.content}>
