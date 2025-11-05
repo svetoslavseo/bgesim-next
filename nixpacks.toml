@@ -6,7 +6,7 @@ cmds = [
   "mkdir -p /tmp/.npm-cache || true",
   "npm config set cache /tmp/.npm-cache",
   "npm config set update-notifier false",
-  "NPM_CONFIG_CACHE=/tmp/.npm-cache npm ci --prefer-offline --no-audit",
+  "NPM_CONFIG_CACHE=/tmp/.npm-cache npm install --prefer-offline --no-audit",
   "NPM_CONFIG_CACHE=/tmp/.npm-cache npm run build"
 ]
 
