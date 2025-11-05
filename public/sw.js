@@ -57,29 +57,75 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Skip Next.js RSC routes (React Server Components)
+  if (url.searchParams.has('_rsc')) {
+    return;
+  }
+
+  // Skip robots.txt if it causes issues
+  if (url.pathname === '/robots.txt') {
+    return;
+  }
+
+  // Skip Next.js internal routes that shouldn't be cached
+  if (url.pathname.startsWith('/_next/')) {
+    // Only cache static assets, skip RSC and other dynamic routes
+    if (!url.pathname.includes('/static/')) {
+      return;
+    }
+  }
+
+  // Use a promise that always resolves to prevent unhandled rejections
   event.respondWith(
-    caches.match(request)
+    Promise.resolve()
+      .then(() => {
+        return caches.match(request);
+      })
       .then((cachedResponse) => {
         if (cachedResponse) {
           return cachedResponse;
         }
 
-        return fetch(request).then((response) => {
-          // Don't cache non-successful responses
-          if (!response || response.status !== 200 || response.type !== 'basic') {
+        // Try to fetch from network
+        return fetch(request)
+          .then((response) => {
+            // Don't cache non-successful responses
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // Clone the response for caching
+            const responseToCache = response.clone();
+
+            // Cache successful responses asynchronously (don't block response)
+            caches.open(DYNAMIC_CACHE)
+              .then((cache) => {
+                cache.put(request, responseToCache);
+              })
+              .catch((cacheError) => {
+                // Silently fail caching - don't block the response
+                console.warn('Service Worker: Failed to cache:', request.url);
+              });
+
             return response;
-          }
-
-          // Clone the response
-          const responseToCache = response.clone();
-
-          // Cache dynamic content
-          caches.open(DYNAMIC_CACHE).then((cache) => {
-            cache.put(request, responseToCache);
+          })
+          .catch((error) => {
+            // If fetch fails, try one more time from network
+            // This handles transient network errors
+            console.warn('Service Worker fetch failed, retrying:', request.url);
+            return fetch(request).catch((retryError) => {
+              // If retry also fails, log and let browser handle it
+              // by returning a failed fetch promise
+              console.warn('Service Worker: Fetch failed after retry:', request.url);
+              // Return the original fetch promise - browser will handle the error
+              return fetch(request);
+            });
           });
-
-          return response;
-        });
+      })
+      .catch((error) => {
+        // Final fallback: try direct network fetch
+        console.warn('Service Worker: Cache match failed, trying network:', request.url);
+        return fetch(request);
       })
   );
 });
