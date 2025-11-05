@@ -1,12 +1,10 @@
 {
   "trailingSlash": true,
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/((?!.*\\.(json|js|css|png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|eot|xml|txt|pdf|zip)$).*[^/])$",
       "destination": "/$1/",
-      "statusCode": 301,
-      "permanent": true,
-      "match": "non-file"
+      "permanent": true
     }
   ],
   "headers": [

@@ -16,18 +16,23 @@ function shouldRedirect(url) {
     return false;
   }
   
-  // Don't redirect static files
-  const ext = url.split('.').pop().toLowerCase();
-  if (staticExtensions.includes(ext)) {
+  // Don't redirect root
+  if (url === '/') {
     return false;
   }
   
-  // Don't redirect if it's a file that exists
-  const filePath = path.join(STATIC_DIR, url);
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-    return false;
+  // Don't redirect static files (check for file extension)
+  const urlParts = url.split('.');
+  if (urlParts.length > 1) {
+    const ext = urlParts[urlParts.length - 1].toLowerCase().split('?')[0];
+    if (staticExtensions.includes(ext)) {
+      return false;
+    }
   }
   
+  // For Next.js static export with trailingSlash: true,
+  // pages are directories with index.html (e.g., /turcia/index.html)
+  // So we should redirect any path without trailing slash that doesn't have a file extension
   return true;
 }
 
@@ -62,37 +67,39 @@ const server = http.createServer((req, res) => {
   let url = req.url;
   
   // Remove query string for path matching
-  const urlPath = url.split('?')[0];
+  const urlParts = url.split('?');
+  const urlPath = urlParts[0];
+  const queryString = urlParts.length > 1 ? '?' + urlParts.slice(1).join('?') : '';
   
   // Handle trailing slash redirect
   if (shouldRedirect(urlPath)) {
+    const redirectUrl = urlPath + '/' + queryString;
     res.writeHead(301, {
-      'Location': urlPath + '/',
+      'Location': redirectUrl,
       'Cache-Control': 'public, max-age=31536000',
     });
     res.end();
     return;
   }
   
+  // Normalize the path (remove trailing slash for path construction, but keep for directory detection)
+  const normalizedPath = urlPath === '/' ? 'index.html' : urlPath.replace(/\/$/, '');
+  
   // Serve the static file
-  const filePath = urlPath === '/' ? path.join(STATIC_DIR, 'index.html') : path.join(STATIC_DIR, urlPath);
+  const filePath = path.join(STATIC_DIR, normalizedPath);
   
   // Try to find the file
   let actualFilePath = filePath;
   if (!fs.existsSync(actualFilePath)) {
-    // Try with .html extension
-    if (fs.existsSync(filePath + '.html')) {
+    // For Next.js static export with trailingSlash: true,
+    // pages are in directories with index.html (e.g., /turcia/index.html)
+    // Try with /index.html
+    const indexPath = path.join(filePath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      actualFilePath = indexPath;
+    } else if (fs.existsSync(filePath + '.html')) {
+      // Fallback: try with .html extension
       actualFilePath = filePath + '.html';
-    } else if (fs.existsSync(filePath + '/index.html')) {
-      actualFilePath = filePath + '/index.html';
-    } else if (!urlPath.endsWith('/') && fs.existsSync(filePath + '.html')) {
-      // Redirect to with trailing slash
-      res.writeHead(301, {
-        'Location': urlPath + '/',
-        'Cache-Control': 'public, max-age=31536000',
-      });
-      res.end();
-      return;
     } else {
       // File not found, serve 404
       actualFilePath = path.join(STATIC_DIR, '404.html');
