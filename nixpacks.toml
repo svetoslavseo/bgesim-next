@@ -1,7 +1,4 @@
 # Railway build configuration for static Next.js export
-[providers]
-nixpacks = { version = "v0.21.0" }
-
 [phases.setup]
 nixPkgs = ["nodejs-20_x"]
 
