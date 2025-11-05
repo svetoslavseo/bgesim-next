@@ -1,7 +1,7 @@
 # Railway build configuration for static Next.js export
 # Nixpacks will auto-detect Node.js version from package.json
 [phases.build]
-cmds = ["npm ci", "npm run build"]
+cmds = ["npm ci --prefer-offline --no-audit", "npm run build"]
 
 [start]
 cmd = "node server.js"
