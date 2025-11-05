@@ -1,7 +1,5 @@
 # Railway build configuration for static Next.js export
-[phases.setup]
-nixPkgs = ["nodejs-20_x"]
-
+# Nixpacks will auto-detect Node.js version from package.json
 [phases.build]
 cmds = ["npm ci", "npm run build"]
 
