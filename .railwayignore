@@ -1,0 +1,4 @@
+# Railway configuration to ensure redirects work properly
+# This file helps Railway understand that redirects should be handled by server.js
+# rather than serving files directly from edge cache
+

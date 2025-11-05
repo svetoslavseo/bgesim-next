@@ -36,6 +36,14 @@ function shouldRedirect(url) {
   return true;
 }
 
+// Check if a path exists as a directory with index.html (Next.js static export format)
+function existsAsDirectory(urlPath) {
+  const normalizedPath = urlPath === '/' ? 'index.html' : urlPath.replace(/\/$/, '');
+  const dirPath = path.join(STATIC_DIR, normalizedPath);
+  const indexPath = path.join(dirPath, 'index.html');
+  return fs.existsSync(indexPath);
+}
+
 // Get content type
 function getContentType(filePath) {
   const ext = path.extname(filePath).toLowerCase();
@@ -71,12 +79,17 @@ const server = http.createServer((req, res) => {
   const urlPath = urlParts[0];
   const queryString = urlParts.length > 1 ? '?' + urlParts.slice(1).join('?') : '';
   
-  // Handle trailing slash redirect
-  if (shouldRedirect(urlPath)) {
+  // CRITICAL: Handle trailing slash redirect BEFORE checking if file exists
+  // This ensures redirects happen even when Railway edge serves files directly
+  // Check if the URL should redirect OR if it exists as a directory (which means it should have trailing slash)
+  if (shouldRedirect(urlPath) || (!urlPath.endsWith('/') && existsAsDirectory(urlPath))) {
     const redirectUrl = urlPath + '/' + queryString;
     res.writeHead(301, {
       'Location': redirectUrl,
       'Cache-Control': 'public, max-age=31536000',
+      // Add headers to prevent Railway edge from serving this directly
+      'X-Railway-Edge': 'bypass',
+      'Vary': 'Accept',
     });
     res.end();
     return;
