@@ -18,7 +18,7 @@
     "test:stability": "tsx scripts/stability-test.ts",
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "serve out",
+    "start": "node server.js",
     "lint": "next lint",
     "type-check": "tsc --noEmit"
   },

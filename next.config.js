@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static export for full SSG
-  output: 'export',
+  // Removed static export to enable API routes in production
+  // output: 'export', // REMOVED - API routes need server mode
   
   // Exclude API routes from static generation
   generateBuildId: async () => {
@@ -11,9 +11,9 @@ const nextConfig = {
   // Add trailing slashes to match WordPress URL structure
   trailingSlash: true,
   
-  // Image configuration for static export
+  // Image configuration (no longer requires unoptimized for server mode)
   images: {
-    unoptimized: true, // Required for static export
+    // unoptimized: true, // No longer needed - Next.js can optimize images
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
