@@ -2,9 +2,22 @@
 
 import { useState, useEffect, useRef, useMemo, memo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Navigation.module.css';
 import { classNames } from '@/lib/utils';
+
+// Country flag mapping for navigation
+const countryFlags: Record<string, string> = {
+  'eSIM Турция': '/media/flags/tr.svg',
+  'eSIM Сърбия': '/media/flags/rs.svg',
+  'eSIM САЩ': '/media/flags/us.svg',
+  'eSIM Великобритания': '/media/flags/gb.svg',
+  'eSIM Тайланд': '/media/flags/th.svg',
+  'eSIM Дубай': '/media/flags/ae.svg',
+  'eSIM Египет': '/media/flags/eg.svg',
+  'eSIM Мароко': '/media/flags/ma.svg',
+};
 
 // Navigation menu structure from WordPress
 const navigationItems = [
@@ -146,17 +159,31 @@ function Navigation() {
                 </button>
                 {openSubmenu === item.label && (
                   <ul className={styles.submenu}>
-                    {item.submenu.map((subItem) => (
-                      <li key={subItem.href}>
-                        <Link
-                          href={subItem.href}
-                          className={styles.submenuLink}
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {subItem.label}
-                        </Link>
-                      </li>
-                    ))}
+                    {item.submenu.map((subItem) => {
+                      const flagPath = countryFlags[subItem.label];
+                      return (
+                        <li key={subItem.href}>
+                          <Link
+                            href={subItem.href}
+                            className={styles.submenuLink}
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {flagPath && (
+                              <Image
+                                src={flagPath}
+                                alt={`${subItem.label} flag`}
+                                width={20}
+                                height={15}
+                                className={styles.flag}
+                                loading="lazy"
+                                unoptimized
+                              />
+                            )}
+                            <span>{subItem.label}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 )}
               </>
