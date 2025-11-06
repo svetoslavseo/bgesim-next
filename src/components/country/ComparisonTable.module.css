@@ -1,30 +1,51 @@
 .comparisonSection {
-  padding: 80px 20px;
-  background: #fff;
+  padding: 8rem 2rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+  position: relative;
+}
+
+.comparisonSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 162, 208, 0.2), transparent);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 64px;
+  font-weight: 800;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 5rem;
   color: #1a1a1a;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .tableWrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(229, 231, 235, 0.8);
   /* Custom scrollbar styling */
   scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
+  scrollbar-color: #c8a2d0 #f1f1f1;
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
 }
 
 .tableWrapper::-webkit-scrollbar {
@@ -53,16 +74,28 @@
 }
 
 .table thead {
-  background: #1a1a1a;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
   color: #fff;
+  position: relative;
+}
+
+.table thead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(200, 162, 208, 0.5), transparent);
 }
 
 .table th {
-  padding: 20px 16px;
+  padding: 24px 20px;
   text-align: left;
-  font-weight: 600;
-  font-size: 1rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  letter-spacing: -0.01em;
 }
 
 .table th:last-child {
@@ -71,11 +104,14 @@
 
 .table tbody tr {
   border-bottom: 1px solid #e5e7eb;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
+  background: #ffffff;
 }
 
 .table tbody tr:hover {
-  background-color: #f9fafb;
+  background: linear-gradient(135deg, rgba(200, 162, 208, 0.05), rgba(233, 197, 229, 0.05));
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(200, 162, 208, 0.1);
 }
 
 .table tbody tr:last-child {
