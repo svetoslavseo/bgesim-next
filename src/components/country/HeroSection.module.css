@@ -48,11 +48,8 @@
 
 .countryFlag {
   flex-shrink: 0;
-  width: 64px;
-  height: 64px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  object-fit: contain;
 }
 
 .title {
@@ -494,12 +491,9 @@
 }
 
 .paymentLogo {
-  width: 28px;
-  height: 18px;
   object-fit: contain;
   opacity: 0.8;
   transition: opacity 0.2s;
-  flex-shrink: 0;
 }
 
 .paymentLogo:hover {
@@ -632,8 +626,8 @@
   }
 
   .countryFlag {
-    width: 56px;
-    height: 56px;
+    width: 40px;
+    height: 40px;
   }
 
   .planSelector {

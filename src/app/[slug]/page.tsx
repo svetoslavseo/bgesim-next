@@ -18,7 +18,7 @@ export async function generateStaticParams() {
   // Exclude calculator page that has its own dedicated route
   // Exclude 'blog' as it has its own route at /blog/
   const staticFiles = ['favicon.ico', 'sw.js', 'robots.txt', 'sitemap.xml'];
-  const countryPages = ['turcia', 'esim-dubai', 'esim-egipet', 'esim-serbia', 'esim-thailand', 'esim-velikobritania', 'esim-za-usa'];
+  const countryPages = ['turcia', 'esim-dubai', 'esim-egipet', 'esim-serbia', 'esim-thailand', 'esim-velikobritania', 'esim-za-usa', 'esim-maroko'];
   const dedicatedRoutes = ['calculator-za-izpolzvani-mobilni-danni', 'proverka-na-syvmestimost-s-esim', 'contacts', 'v-andreev'];
   
   return slugs
