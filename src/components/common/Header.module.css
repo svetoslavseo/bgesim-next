@@ -32,7 +32,7 @@
 
 .logo img {
   height: auto;
-  max-height: 32px;
+  max-height: 63px;
   width: auto;
 }
 
@@ -58,6 +58,6 @@
   }
   
   .logo img {
-    max-height: 28px;
+    max-height: 108px;
   }
 }

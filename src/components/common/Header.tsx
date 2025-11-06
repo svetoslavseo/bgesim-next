@@ -11,14 +11,14 @@ export default function Header() {
           <div className={styles.headerLeft}>
             <Link href="/" className={styles.logo}>
               <Image
-                src="/media/images/travelesim/TraveleSIMBG-logo.png"
+                src="/media/images/travelesimbglogo.png"
                 alt="Travel eSIM BG Logo"
-                width={400}
-                height={100}
+                width={520}
+                height={130}
                 priority
                 fetchPriority="high"
                 quality={90}
-                sizes="(max-width: 768px) 300px, 400px"
+                sizes="(max-width: 768px) 1170px, 520px"
               />
             </Link>
           </div>
