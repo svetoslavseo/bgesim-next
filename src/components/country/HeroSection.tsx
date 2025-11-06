@@ -244,9 +244,11 @@ export default function HeroSection({
             <Image
               src={`/media/flags/${countryCode.toLowerCase()}.svg`}
               alt={`${countryName} flag`}
-              width={48}
-              height={48}
+              width={64}
+              height={64}
               className={styles.countryFlag}
+              priority
+              sizes="64px"
             />
             <h1 className={styles.title}>{title}</h1>
           </div>
@@ -385,11 +387,11 @@ export default function HeroSection({
           
           {/* Payment Methods */}
           <div className={styles.paymentMethods}>
-            <Image src="/media/logos/apple-pay.png" alt="Apple Pay" width={28} height={18} className={styles.paymentLogo} />
-            <Image src="/media/logos/google-pay.png" alt="Google Pay" width={28} height={18} className={styles.paymentLogo} />
-            <Image src="/media/logos/visa.png" alt="Visa" width={28} height={18} className={styles.paymentLogo} />
-            <Image src="/media/logos/mastercard.png" alt="Mastercard" width={28} height={18} className={styles.paymentLogo} />
-            <Image src="/media/logos/amex.png" alt="Amex" width={28} height={18} className={styles.paymentLogo} />
+            <Image src="/media/logos/apple-pay.png" alt="Apple Pay" width={28} height={18} className={styles.paymentLogo} sizes="28px" />
+            <Image src="/media/logos/google-pay.png" alt="Google Pay" width={28} height={18} className={styles.paymentLogo} sizes="28px" />
+            <Image src="/media/logos/visa.png" alt="Visa" width={28} height={18} className={styles.paymentLogo} sizes="28px" />
+            <Image src="/media/logos/mastercard.png" alt="Mastercard" width={28} height={18} className={styles.paymentLogo} sizes="28px" />
+            <Image src="/media/logos/amex.png" alt="Amex" width={28} height={18} className={styles.paymentLogo} sizes="28px" />
           </div>
         </div>
       </div>
