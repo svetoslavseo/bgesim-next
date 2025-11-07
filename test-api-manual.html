@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Client Manual Testing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #666;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        button {
+            background: #0070f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0051cc;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            background: #fee;
+            border-color: #fcc;
+            color: #c33;
+        }
+        .success {
+            background: #efe;
+            border-color: #cfc;
+            color: #3c3;
+        }
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .stat {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Client Manual Testing Tool</h1>
+    
+    <div class="container">
+        <h2>Basic API Tests</h2>
+        <button onclick="testBasicRequest()">Test Basic Request</button>
+        <button onclick="testWithCountryCode()">Test with Country Code (US)</button>
+        <button onclick="testInvalidEndpoint()">Test Invalid Endpoint (404)</button>
+        <button onclick="testCaching()">Test Caching</button>
+        <div id="basic-result" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="container">
+        <h2>Error Handling Tests</h2>
+        <button onclick="testNetworkError()">Simulate Network Error</button>
+        <button onclick="testServerError()">Test Server Error (500)</button>
+        <button onclick="testTimeout()">Test Timeout</button>
+        <div id="error-result" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="container">
+        <h2>Performance Tests</h2>
+        <button onclick="testRequestDeduplication()">Test Request Deduplication</button>
+        <button onclick="testParallelRequests()">Test Parallel Requests</button>
+        <button onclick="testCachePerformance()">Test Cache Performance</button>
+        <div id="performance-result" class="result" style="display: none;"></div>
+        <div id="performance-stats" class="stats" style="display: none;"></div>
+    </div>
+
+    <div class="container">
+        <h2>Custom Tests</h2>
+        <input type="text" id="custom-url" placeholder="/api/saily-plans?countryCode=US" style="width: 300px; padding: 8px; margin-right: 10px;">
+        <button onclick="testCustomRequest()">Test Custom Request</button>
+        <div id="custom-result" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Simple fetch wrapper with timing
+        async function fetchWithTiming(url, options = {}) {
+            const startTime = performance.now();
+            try {
+                const response = await fetch(url, options);
+                const endTime = performance.now();
+                const duration = endTime - startTime;
+                
+                let data;
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    data = await response.json();
+                } else {
+                    data = await response.text();
+                }
+                
+                return {
+                    success: response.ok,
+                    status: response.status,
+                    statusText: response.statusText,
+                    data,
+                    duration: duration.toFixed(2),
+                    headers: Object.fromEntries(response.headers.entries()),
+                };
+            } catch (error) {
+                const endTime = performance.now();
+                const duration = endTime - startTime;
+                return {
+                    success: false,
+                    error: error.message,
+                    duration: duration.toFixed(2),
+                };
+            }
+        }
+
+        function displayResult(elementId, result, isError = false) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.className = 'result ' + (isError ? 'error' : result.success ? 'success' : 'error');
+            element.innerHTML = `
+                <strong>Status:</strong> ${result.status || 'N/A'} ${result.statusText || ''}<br>
+                <strong>Duration:</strong> ${result.duration}ms<br>
+                ${result.error ? `<strong>Error:</strong> ${result.error}<br>` : ''}
+                <strong>Response:</strong>
+                <pre>${JSON.stringify(result.data || result, null, 2)}</pre>
+            `;
+        }
+
+        async function testBasicRequest() {
+            const result = await fetchWithTiming('/api/saily-plans');
+            displayResult('basic-result', result);
+        }
+
+        async function testWithCountryCode() {
+            const result = await fetchWithTiming('/api/saily-plans?countryCode=US');
+            displayResult('basic-result', result);
+        }
+
+        async function testInvalidEndpoint() {
+            const result = await fetchWithTiming('/api/nonexistent-endpoint');
+            displayResult('basic-result', result, true);
+        }
+
+        async function testCaching() {
+            const result1 = await fetchWithTiming('/api/saily-plans?countryCode=US');
+            const result2 = await fetchWithTiming('/api/saily-plans?countryCode=US');
+            
+            const element = document.getElementById('basic-result');
+            element.style.display = 'block';
+            element.className = 'result';
+            element.innerHTML = `
+                <strong>First Request:</strong> ${result1.duration}ms<br>
+                <strong>Second Request:</strong> ${result2.duration}ms<br>
+                <strong>Improvement:</strong> ${((result1.duration - result2.duration) / result1.duration * 100).toFixed(1)}% faster<br>
+                <strong>Response:</strong>
+                <pre>${JSON.stringify(result2.data || result2, null, 2)}</pre>
+            `;
+        }
+
+        async function testNetworkError() {
+            // Simulate by using invalid URL
+            try {
+                const result = await fetchWithTiming('https://invalid-domain-that-does-not-exist.com/api');
+                displayResult('error-result', result, true);
+            } catch (error) {
+                displayResult('error-result', { success: false, error: error.message }, true);
+            }
+        }
+
+        async function testServerError() {
+            // This would need a test endpoint that returns 500
+            const result = await fetchWithTiming('/api/saily-plans?forceError=500');
+            displayResult('error-result', result, !result.success);
+        }
+
+        async function testTimeout() {
+            // This would need a test endpoint that delays response
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 1000);
+            
+            try {
+                const result = await fetchWithTiming('/api/saily-plans', {
+                    signal: controller.signal,
+                });
+                clearTimeout(timeoutId);
+                displayResult('error-result', result);
+            } catch (error) {
+                clearTimeout(timeoutId);
+                displayResult('error-result', { success: false, error: 'Request timeout' }, true);
+            }
+        }
+
+        async function testRequestDeduplication() {
+            const startTime = performance.now();
+            const promises = [
+                fetchWithTiming('/api/saily-plans?countryCode=US'),
+                fetchWithTiming('/api/saily-plans?countryCode=US'),
+                fetchWithTiming('/api/saily-plans?countryCode=US'),
+            ];
+            const results = await Promise.all(promises);
+            const endTime = performance.now();
+            const totalDuration = endTime - startTime;
+
+            const element = document.getElementById('performance-result');
+            element.style.display = 'block';
+            element.className = 'result';
+            element.innerHTML = `
+                <strong>Total Duration:</strong> ${totalDuration.toFixed(2)}ms<br>
+                <strong>Number of Requests:</strong> 3<br>
+                <strong>Average per Request:</strong> ${(totalDuration / 3).toFixed(2)}ms<br>
+                <strong>Results:</strong>
+                <pre>${JSON.stringify(results.map(r => ({ duration: r.duration, status: r.status })), null, 2)}</pre>
+            `;
+        }
+
+        async function testParallelRequests() {
+            const startTime = performance.now();
+            const promises = [
+                fetchWithTiming('/api/saily-plans?countryCode=US'),
+                fetchWithTiming('/api/saily-plans?countryCode=GB'),
+                fetchWithTiming('/api/saily-plans?countryCode=TH'),
+            ];
+            const results = await Promise.all(promises);
+            const endTime = performance.now();
+            const totalDuration = endTime - startTime;
+
+            const stats = document.getElementById('performance-stats');
+            stats.style.display = 'grid';
+            stats.innerHTML = `
+                <div class="stat">
+                    <div class="stat-label">Total Duration</div>
+                    <div class="stat-value">${totalDuration.toFixed(0)}ms</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Requests</div>
+                    <div class="stat-value">${results.length}</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Avg per Request</div>
+                    <div class="stat-value">${(totalDuration / results.length).toFixed(0)}ms</div>
+                </div>
+            `;
+
+            const element = document.getElementById('performance-result');
+            element.style.display = 'block';
+            element.className = 'result';
+            element.innerHTML = `
+                <strong>Parallel Requests Completed</strong><br>
+                <pre>${JSON.stringify(results.map(r => ({ duration: r.duration, status: r.status })), null, 2)}</pre>
+            `;
+        }
+
+        async function testCachePerformance() {
+            // First request (cold cache)
+            const coldStart = performance.now();
+            const coldResult = await fetchWithTiming('/api/saily-plans?countryCode=US');
+            const coldDuration = performance.now() - coldStart;
+
+            // Second request (warm cache)
+            const warmStart = performance.now();
+            const warmResult = await fetchWithTiming('/api/saily-plans?countryCode=US');
+            const warmDuration = performance.now() - warmStart;
+
+            const improvement = ((coldDuration - warmDuration) / coldDuration * 100).toFixed(1);
+
+            const element = document.getElementById('performance-result');
+            element.style.display = 'block';
+            element.className = 'result';
+            element.innerHTML = `
+                <strong>Cold Cache (First Request):</strong> ${coldDuration.toFixed(2)}ms<br>
+                <strong>Warm Cache (Second Request):</strong> ${warmDuration.toFixed(2)}ms<br>
+                <strong>Performance Improvement:</strong> ${improvement}%<br>
+                <strong>Time Saved:</strong> ${(coldDuration - warmDuration).toFixed(2)}ms
+            `;
+        }
+
+        async function testCustomRequest() {
+            const url = document.getElementById('custom-url').value || '/api/saily-plans';
+            const result = await fetchWithTiming(url);
+            displayResult('custom-result', result, !result.success);
+        }
+    </script>
+</body>
+</html>
+
