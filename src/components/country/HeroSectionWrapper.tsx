@@ -11,6 +11,7 @@ interface HeroSectionWrapperProps {
   features: string[];
   countryName: string;
   countryCode: string;
+  titleElement?: React.ReactNode;
 }
 
 export default function HeroSectionWrapper({ 
@@ -19,7 +20,8 @@ export default function HeroSectionWrapper({
   subtitle,
   features,
   countryName,
-  countryCode
+  countryCode,
+  titleElement
 }: HeroSectionWrapperProps) {
   const [plans, setPlans] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -79,6 +81,7 @@ export default function HeroSectionWrapper({
         countryName={countryName}
         countryCode={countryCode}
         isLoading={true}
+        titleElement={titleElement}
       />
     );
   }
@@ -92,6 +95,7 @@ export default function HeroSectionWrapper({
       plans={plans}
       countryName={countryName}
       countryCode={countryCode}
+      titleElement={titleElement}
     />
   );
 }

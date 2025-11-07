@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { convertPrice, CURRENCY_SYMBOLS } from '@/lib/currency';
+import CountryFlag from './CountryFlag';
 import styles from './HeroSection.module.css';
 
 interface Plan {
@@ -28,6 +29,7 @@ interface HeroSectionProps {
   countryName: string;
   countryCode: string;
   isLoading?: boolean;
+  titleElement?: React.ReactNode;
 }
 
 export default function HeroSection({
@@ -38,7 +40,8 @@ export default function HeroSection({
   plans,
   countryName,
   countryCode,
-  isLoading = false
+  isLoading = false,
+  titleElement
 }: HeroSectionProps) {
   const { currency, exchangeRates } = useCurrency();
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
@@ -179,7 +182,12 @@ export default function HeroSection({
               <span> » </span>
               <span>{breadcrumb}</span>
             </nav>
-            <h1 className={styles.title}>{title}</h1>
+            {titleElement || (
+              <div className={styles.titleContainer}>
+                <CountryFlag countryCode={countryCode} countryName={countryName} />
+                <h1 className={styles.title}>{title}</h1>
+              </div>
+            )}
             {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
             <ul className={styles.features}>
               {features.map((feature, index) => (
@@ -240,16 +248,12 @@ export default function HeroSection({
           </nav>
 
           {/* Title with Flag */}
-          <div className={styles.titleContainer}>
-            <Image
-              src={`/media/flags/${countryCode.toLowerCase()}.svg`}
-              alt={`${countryName} flag`}
-              width={48}
-              height={48}
-              className={styles.countryFlag}
-            />
-            <h1 className={styles.title}>{title}</h1>
-          </div>
+          {titleElement || (
+            <div className={styles.titleContainer}>
+              <CountryFlag countryCode={countryCode} countryName={countryName} />
+              <h1 className={styles.title}>{title}</h1>
+            </div>
+          )}
           {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
 
           {/* Features List */}

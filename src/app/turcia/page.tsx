@@ -1,4 +1,4 @@
-import HeroSectionWrapper from '@/components/country/HeroSectionWrapper';
+import HeroSectionServer from '@/components/country/HeroSectionServer';
 import BenefitsSection from '@/components/country/BenefitsSection';
 import CompactPlansSectionWrapper from '@/components/country/CompactPlansSectionWrapper';
 import HowToBuySection from '@/components/country/HowToBuySection';
@@ -133,7 +133,7 @@ export default async function TurciaPage() {
       />
       
       <main>
-      <HeroSectionWrapper
+      <HeroSectionServer
         breadcrumb="eSIM Турция"
         title="eSIM за Турция с мобилен интернет"
         subtitle="Пътувате до Турция? С eSIM картата получавате интернет веднага – без роуминг и сложни настройки!"
