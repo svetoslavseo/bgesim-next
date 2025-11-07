@@ -42,7 +42,37 @@ export async function generateMetadata({
     };
   }
   
-  return generateSEOMetadata(post.seo);
+  // Generate base metadata
+  const metadata = generateSEOMetadata(post.seo);
+  
+  // Get the featured image URL (prioritize featuredImageUrl over SEO data)
+  const featuredImageUrl = post.featuredImageUrl || post.seo.openGraph.images[0]?.url;
+  
+  // Override Open Graph images with featured image if available
+  if (featuredImageUrl) {
+    // Get image dimensions from existing OG image or use defaults
+    const existingImage = post.seo.openGraph.images[0];
+    const imageUrl = featuredImageUrl.startsWith('http')
+      ? featuredImageUrl
+      : `https://travelesim.bg${featuredImageUrl}`;
+    
+    // Update metadata with featured image
+    if (metadata.openGraph) {
+      metadata.openGraph.images = [{
+        url: imageUrl,
+        width: existingImage?.width || 1200,
+        height: existingImage?.height || 630,
+        alt: post.title,
+      }];
+    }
+    
+    // Also update Twitter card image
+    if (metadata.twitter) {
+      metadata.twitter.images = imageUrl;
+    }
+  }
+  
+  return metadata;
 }
 
 /**
@@ -190,7 +220,14 @@ export default async function BlogPostPage({
     notFound();
   }
   
-  // Generate article schema
+  // Get featured image URL (absolute)
+  const featuredImageUrl = post.featuredImageUrl
+    ? (post.featuredImageUrl.startsWith('http')
+        ? post.featuredImageUrl
+        : `https://travelesim.bg${post.featuredImageUrl}`)
+    : post.seo.openGraph.images[0]?.url;
+  
+  // Generate article schema with featured image
   const articleSchema = generateArticleSchema({
     title: post.title,
     description: post.seo.description,
@@ -198,10 +235,10 @@ export default async function BlogPostPage({
     publishedDate: post.publishedDate,
     modifiedDate: post.modifiedDate,
     author: post.author,
-    image: post.seo.openGraph.images[0]?.url,
+    image: featuredImageUrl,
   });
   
-  // Get featured image
+  // Get featured image for display
   const featuredImagePath = post.featuredImageUrl;
   const featuredImage = post.seo.openGraph.images[0];
   
