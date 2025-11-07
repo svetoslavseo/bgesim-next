@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './AuthorBio.module.css';
 
 interface AuthorBioProps {
@@ -9,6 +10,7 @@ interface AuthorBioProps {
 
 /**
  * Author bio section component
+ * Optimized with Next.js Image for better performance
  */
 export default function AuthorBio({ name, bio, avatar, url }: AuthorBioProps) {
   const defaultBio = `${name} е автор на Travel eSIM BG, специализиран в технологии за мобилна свързаност и eSIM решения за пътуващи.`;
@@ -24,10 +26,14 @@ export default function AuthorBio({ name, bio, avatar, url }: AuthorBioProps) {
       
       <div className={styles.content}>
         <div className={styles.avatarWrapper}>
-          <img 
+          <Image 
             src={authorAvatar} 
             alt={name}
+            width={150}
+            height={150}
             className={styles.avatar}
+            loading="lazy"
+            sizes="150px"
           />
         </div>
         

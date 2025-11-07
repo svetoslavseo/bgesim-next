@@ -36,7 +36,7 @@ export default function BlogFeaturedImage({
           height: 'auto',
           objectFit: 'cover'
         }}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px"
       />
     </div>
   );

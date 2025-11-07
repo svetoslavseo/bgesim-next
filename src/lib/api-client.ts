@@ -232,10 +232,13 @@ export class ApiClient {
   private setCache<T>(key: string, data: T): void {
     if (!this.config.cache.enabled) return;
 
+    // Default TTL: 5 minutes (300000 ms) if not specified
+    const ttl = this.config.cache.ttl ?? 300000;
+
     if (this.config.cache.strategy === 'localStorage') {
-      this.localStorageCache.set(key, data, this.config.cache.ttl);
+      this.localStorageCache.set(key, data, ttl);
     } else {
-      this.memoryCache.set(key, data, this.config.cache.ttl);
+      this.memoryCache.set(key, data, ttl);
     }
   }
 

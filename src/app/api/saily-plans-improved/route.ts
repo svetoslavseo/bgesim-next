@@ -8,6 +8,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ApiClient, handleApiError, ApiClientError } from '@/lib/api-client';
 
+// Force dynamic rendering for API route
+export const dynamic = 'force-dynamic';
+
 const API_KEY = process.env.SAILY_API_KEY || 'a820596678ad38f13bad61d1648f1befef597d0b8659648f4cf8b337fd6cb513';
 const PARTNER_ID = process.env.SAILY_PARTNER_ID || 'atlasvpn';
 const API_URL = 'https://web.saily.com/v2/partners/plans';

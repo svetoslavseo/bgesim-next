@@ -22,14 +22,14 @@ export default function GoogleAnalytics() {
       {/* This ensures non-blocking load and works with static export */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         id="gtag-base"
       />
       
       {/* Google Analytics configuration */}
       <Script
         id="gtag-config"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
