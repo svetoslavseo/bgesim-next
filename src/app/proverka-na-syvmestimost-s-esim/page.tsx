@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   
   if (!page) {
     return {
-      title: 'eSIM съвместимост: Безплатна проверка',
+      title: 'Провери дали твоето устройство е съвменстимо с eSIM (телефон, таблет, смарт часовник или лаптоп)',
       description: 'Проверка на съвместимост с eSIM - Travel eSIM BG',
     };
   }
@@ -26,15 +26,15 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     ...metadata,
     // Set a clean title so the global template appends "| Travel eSIM" only once
-    title: 'eSIM съвместимост: Безплатна проверка',
+    title: 'Провери дали твоето устройство е съвменстимо с eSIM (телефон, таблет, смарт часовник или лаптоп)',
     openGraph: {
       ...metadata.openGraph,
       // Social titles include brand explicitly
-      title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
+      title: 'Провери дали твоето устройство е съвменстимо с eSIM (телефон, таблет, смарт часовник или лаптоп) | Travel eSIM',
     },
     twitter: {
       ...metadata.twitter,
-      title: 'eSIM съвместимост: Безплатна проверка | Travel eSIM',
+      title: 'Провери дали твоето устройство е съвменстимо с eSIM (телефон, таблет, смарт часовник или лаптоп) | Travel eSIM',
     },
   };
 }
