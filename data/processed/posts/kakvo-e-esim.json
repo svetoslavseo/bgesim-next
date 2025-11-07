@@ -26,7 +26,7 @@
         }
       ],
       "locale": "en_GB",
-      "modifiedTime": "2025-11-01T21:49:49.159Z"
+      "modifiedTime": "2025-11-01T21:49:49+00:00"
     },
     "twitter": {
       "card": "summary_large_image",
@@ -50,7 +50,7 @@
           },
           "headline": "Какво е eSIM и защо все повече хора я използват",
           "datePublished": "2025-02-14T11:20:23+00:00",
-          "dateModified": "2025-08-26T08:16:42+00:00",
+          "dateModified": "2025-11-01T21:49:49+00:00",
           "mainEntityOfPage": {
             "@id": "https://travelesim.bg/blog/kakvo-e-esim/"
           },
@@ -93,7 +93,7 @@
           },
           "thumbnailUrl": "https://travelesim.bg/wp-content/uploads/2025/02/What-is-an-esim.png",
           "datePublished": "2025-02-14T11:20:23+00:00",
-          "dateModified": "2025-08-26T08:16:42+00:00",
+          "dateModified": "2025-11-01T21:49:49+00:00",
           "description": "Какво е eSIM? - Travel eSIM BG",
           "breadcrumb": {
             "@id": "https://travelesim.bg/blog/kakvo-e-esim/#breadcrumb"
@@ -202,8 +202,8 @@
     }
   },
   "url": "https://travelesim.bg/blog/kakvo-e-esim/",
-  "modifiedDate": "2025-11-01 21:49:49",
-  "publishedDate": "2025-02-14T11:20:23",
+  "modifiedDate": "2025-11-01T21:49:49+00:00",
+  "publishedDate": "2025-02-14T11:20:23+00:00",
   "author": "Васил Андреев",
   "categories": [
     "eSIM технология"

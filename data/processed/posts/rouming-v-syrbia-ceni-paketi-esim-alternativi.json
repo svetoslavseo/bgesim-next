@@ -26,7 +26,7 @@
         }
       ],
       "locale": "en_GB",
-      "modifiedTime": "2025-10-15T20:05:53+00:00"
+      "modifiedTime": "2025-10-15T19:05:53+00:00"
     },
     "twitter": {
       "card": "summary_large_image",
@@ -49,8 +49,8 @@
             "@id": "https://travelesim.bg/#/schema/person/f91b87636c0e34acdd581723431a1f6d"
           },
           "headline": "Роуминг в Сърбия: Пълно ръководство за пътуващи",
-          "datePublished": "2025-08-13T12:27:11+00:00",
-          "dateModified": "2025-10-15T20:05:53+00:00",
+          "datePublished": "2025-08-13T11:27:11+00:00",
+          "dateModified": "2025-10-15T19:05:53+00:00",
           "mainEntityOfPage": {
             "@id": "https://travelesim.bg/blog/rouming-v-syrbia-ceni-paketi-esim-alternativi/"
           },
@@ -92,8 +92,8 @@
             "@id": "https://travelesim.bg/blog/rouming-v-syrbia-ceni-paketi-esim-alternativi/#primaryimage"
           },
           "thumbnailUrl": "https://travelesim.bg/wp-content/uploads/2025/08/syrbia-rouming-min.png",
-          "datePublished": "2025-08-13T12:27:11+00:00",
-          "dateModified": "2025-10-15T20:05:53+00:00",
+          "datePublished": "2025-08-13T11:27:11+00:00",
+          "dateModified": "2025-10-15T19:05:53+00:00",
           "description": "Научи всичко за роуминга в Сърбия – цени, пакети от български и сръбски оператори, туристически SIM и удобни eSIM решения. Полезни съвети за бърз и евтин интернет.",
           "breadcrumb": {
             "@id": "https://travelesim.bg/blog/rouming-v-syrbia-ceni-paketi-esim-alternativi/#breadcrumb"
@@ -201,8 +201,8 @@
     }
   },
   "url": "https://travelesim.bg/blog/rouming-v-syrbia-ceni-paketi-esim-alternativi/",
-  "modifiedDate": "2025-10-15T20:05:53",
-  "publishedDate": "2025-08-13T12:27:11",
+  "modifiedDate": "2025-10-15T19:05:53+00:00",
+  "publishedDate": "2025-08-13T11:27:11+00:00",
   "author": "Васил Андреев",
   "categories": [
     "Роуминг"

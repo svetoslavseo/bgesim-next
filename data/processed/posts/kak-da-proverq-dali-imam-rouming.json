@@ -26,7 +26,7 @@
         }
       ],
       "locale": "en_GB",
-      "modifiedTime": "2025-10-19T20:02:30+00:00"
+      "modifiedTime": "2025-10-19T19:02:30+00:00"
     },
     "twitter": {
       "card": "summary_large_image",
@@ -49,8 +49,8 @@
             "@id": "https://travelesim.bg/#/schema/person/f91b87636c0e34acdd581723431a1f6d"
           },
           "headline": "Как да проверя дали имам роуминг? Практично ръководство за Vivacom, Yettel и A1",
-          "datePublished": "2025-10-19T19:58:56+00:00",
-          "dateModified": "2025-10-19T20:02:30+00:00",
+          "datePublished": "2025-10-19T18:58:56+00:00",
+          "dateModified": "2025-10-19T19:02:30+00:00",
           "mainEntityOfPage": {
             "@id": "https://travelesim.bg/blog/kak-da-proverq-dali-imam-rouming/"
           },
@@ -92,8 +92,8 @@
             "@id": "https://travelesim.bg/blog/kak-da-proverq-dali-imam-rouming/#primaryimage"
           },
           "thumbnailUrl": "https://travelesim.bg/wp-content/uploads/2025/10/Feature-image.png",
-          "datePublished": "2025-10-19T19:58:56+00:00",
-          "dateModified": "2025-10-19T20:02:30+00:00",
+          "datePublished": "2025-10-19T18:58:56+00:00",
+          "dateModified": "2025-10-19T19:02:30+00:00",
           "description": "Как да проверя дали имам роуминг? Практично ръководство за Vivacom, Yettel и A1 - Travel eSIM BG",
           "breadcrumb": {
             "@id": "https://travelesim.bg/blog/kak-da-proverq-dali-imam-rouming/#breadcrumb"
@@ -201,8 +201,8 @@
     }
   },
   "url": "https://travelesim.bg/blog/kak-da-proverq-dali-imam-rouming/",
-  "modifiedDate": "2025-10-19T20:02:30",
-  "publishedDate": "2025-10-19T19:58:56",
+  "modifiedDate": "2025-10-19T19:02:30+00:00",
+  "publishedDate": "2025-10-19T18:58:56+00:00",
   "author": "Васил Андреев",
   "categories": [
     "Роуминг"

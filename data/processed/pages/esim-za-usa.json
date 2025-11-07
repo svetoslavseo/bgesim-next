@@ -26,7 +26,7 @@
         }
       ],
       "locale": "en_GB",
-      "modifiedTime": "2025-10-16T20:43:59+00:00"
+      "modifiedTime": "2025-10-16T19:43:59+00:00"
     },
     "twitter": {
       "card": "summary_large_image",
@@ -46,7 +46,7 @@
             "@id": "https://travelesim.bg/#website"
           },
           "datePublished": "2025-02-26T16:55:13+00:00",
-          "dateModified": "2025-10-16T20:43:59+00:00",
+          "dateModified": "2025-10-16T19:43:59+00:00",
           "description": "eSIM за САЩ - Travel eSIM BG",
           "breadcrumb": {
             "@id": "https://travelesim.bg/esim-za-usa/#breadcrumb"
@@ -128,6 +128,6 @@
     }
   },
   "url": "https://travelesim.bg/esim-za-usa/",
-  "modifiedDate": "2025-10-16T20:43:59",
-  "publishedDate": "2025-02-26T16:55:13"
+  "modifiedDate": "2025-10-16T19:43:59+00:00",
+  "publishedDate": "2025-02-26T16:55:13+00:00"
 }
