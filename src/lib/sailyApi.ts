@@ -196,8 +196,7 @@ function getCountryNameFromCode(countryCode: string): string {
     'MA': 'morocco',
     'US': 'usa',
     'GB': 'uk',
-    'TR': 'turkey',
-    'MA': 'morocco'
+    'TR': 'turkey'
   };
   return countryMap[countryCode] || countryCode.toLowerCase();
 }
