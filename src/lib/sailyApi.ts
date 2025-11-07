@@ -1210,48 +1210,6 @@ export const FALLBACK_PLANS: Record<string, ProcessedPlan[]> = {
       coveredCountries: ['AE', 'AM', 'BH', 'CY', 'DZ', 'EG', 'GE', 'IL', 'IQ', 'JO', 'KW', 'MA', 'OM', 'QA', 'SA', 'SD', 'SS', 'TN', 'TR'],
     },
   ],
-  'MA': [
-    // Regional plans that cover Morocco (MENA)
-    {
-      id: 'ma-mena-1',
-      name: 'Middle East and North Africa 1GB 7 days',
-      data: '1 GB',
-      validity: '7 дни',
-      priceUSD: 13.99,
-      price: 13.99,
-      currency: '$',
-      identifier: '643bcddb-8539-40aa-965b-e25fc3a70f8f',
-      priceIdentifier: 'MTpBbFNUQ2lNOTBYNmZ2SnhsR0ptc0VOUVJWX280Z3JhWE1wa1BxOGIwQXJjPTpQcmljZTozMzQ3LlVTRC4xMzk5',
-      planType: 'global',
-      coveredCountries: ['AE', 'AM', 'BH', 'CY', 'DZ', 'EG', 'GE', 'IL', 'IQ', 'JO', 'KW', 'MA', 'OM', 'QA', 'SA', 'SD', 'SS', 'TN', 'TR'],
-    },
-    {
-      id: 'ma-mena-2',
-      name: 'Middle East and North Africa 2GB 15 days',
-      data: '2 GB',
-      validity: '15 дни',
-      priceUSD: 26.99,
-      price: 26.99,
-      currency: '$',
-      identifier: 'ea82f8f7-3ab9-4fc6-aa9a-d1e2d1a13348',
-      priceIdentifier: 'MTpOalVUbC03M2VSZHNhZ25GM3pfVmltSjFvOWVQc0gxbHhNeWpkQjRuNFRJPTpQcmljZTozMzQ2LlVTRC4yNjk5',
-      planType: 'global',
-      coveredCountries: ['AE', 'AM', 'BH', 'CY', 'DZ', 'EG', 'GE', 'IL', 'IQ', 'JO', 'KW', 'MA', 'OM', 'QA', 'SA', 'SD', 'SS', 'TN', 'TR'],
-    },
-    {
-      id: 'ma-mena-3',
-      name: 'Middle East and North Africa 3GB 30 days',
-      data: '3 GB',
-      validity: '30 дни',
-      priceUSD: 36.99,
-      price: 36.99,
-      currency: '$',
-      identifier: 'ee119582-491f-4801-b034-957408663b57',
-      priceIdentifier: 'MTpEX0hsOURWeGdNVnRUZzdtVVNzQnZ5MHNCdkNaOU5ac1BnbEVnUGctZ2tBPTpQcmljZTozMzQ1LlVTRC4zNjk5',
-      planType: 'global',
-      coveredCountries: ['AE', 'AM', 'BH', 'CY', 'DZ', 'EG', 'GE', 'IL', 'IQ', 'JO', 'KW', 'MA', 'OM', 'QA', 'SA', 'SD', 'SS', 'TN', 'TR'],
-    },
-  ],
   'US': [
     // Country Plans - Real data from Saily API
     {
