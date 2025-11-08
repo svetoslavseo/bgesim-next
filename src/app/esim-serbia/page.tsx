@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const lowestPrice = await getLowestPriceInBGN('RS');
   
   return {
-    title: `eSIM за Сърбия: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    title: `eSIM за Сърбия на цени от ${lowestPrice}лв: Мобилен интернет без роуминг`,
     description: `Купи eSIM за Сърбия от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Сърбия с 4G/5G покритие.`,
     alternates: {
       canonical: generateCanonicalUrl('/esim-serbia'),
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       locale: 'bg_BG',
       type: 'website',
-      title: `eSIM за Сърбия: Бърз интернет без роуминг от ${lowestPrice}лв | Travel eSIM`,
+      title: `eSIM за Сърбия на цени от ${lowestPrice}лв: Мобилен интернет без роуминг | Travel eSIM`,
       description: `Купи eSIM за Сърбия от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Сърбия с 4G/5G покритие.`,
       url: generateCanonicalUrl('/esim-serbia'),
     },

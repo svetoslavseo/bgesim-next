@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     console.log(`Metadata generation - lowest price for Turkey: ${lowestPrice}лв`);
     
     return {
-      title: `eSIM за Турция: Бърз интернет без роуминг от ${lowestPrice}лв`,
+      title: `eSIM за Турция на цени от ${lowestPrice}лв: Мобилен интернет без роуминг`,
       description: `Купи eSIM за Турция от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Турция с 4G/5G покритие.`,
       alternates: {
         canonical: generateCanonicalUrl('/turcia'),
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       openGraph: {
         locale: 'bg_BG',
         type: 'website',
-        title: `eSIM за Турция: Бърз интернет без роуминг от ${lowestPrice}лв | Travel eSIM`,
+        title: `eSIM за Турция на цени от ${lowestPrice}лв: Мобилен интернет без роуминг | Travel eSIM`,
         description: `Купи eSIM за Турция от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Турция с 4G/5G покритие.`,
         url: generateCanonicalUrl('/turcia'),
       },
@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     console.error('Error generating metadata for Turkey:', error);
     // Fallback to a reasonable price
     return {
-      title: `eSIM за Турция: Бърз интернет без роуминг от 9лв`,
+      title: `eSIM за Турция на цени от 9лв: Мобилен интернет без роуминг`,
       description: 'Купи eSIM за Турция от 9лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Турция с 4G/5G покритие.',
       alternates: {
         canonical: generateCanonicalUrl('/turcia'),
@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
       openGraph: {
         locale: 'bg_BG',
         type: 'website',
-        title: `eSIM за Турция: Бърз интернет без роуминг от 9лв | Travel eSIM`,
+        title: `eSIM за Турция на цени от 9лв: Мобилен интернет без роуминг | Travel eSIM`,
         description: 'Купи eSIM за Турция от 9лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цяла Турция с 4G/5G покритие.',
         url: generateCanonicalUrl('/turcia'),
       },

@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const lowestPrice = await getLowestPriceInBGN('EG');
   
   return {
-    title: `eSIM за Египет: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    title: `eSIM за Египет на цени от ${lowestPrice}лв: Мобилен интернет без роуминг`,
     description: `Купи eSIM за Египет от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Египет с 4G/5G покритие.`,
     alternates: {
       canonical: generateCanonicalUrl('/esim-egipet'),
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       locale: 'bg_BG',
       type: 'website',
-      title: `eSIM за Египет: Бърз интернет без роуминг от ${lowestPrice}лв | Travel eSIM`,
+      title: `eSIM за Египет на цени от ${lowestPrice}лв: Мобилен интернет без роуминг | Travel eSIM`,
       description: `Купи eSIM за Египет от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Египет с 4G/5G покритие.`,
       url: generateCanonicalUrl('/esim-egipet'),
     },

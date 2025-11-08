@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const lowestPrice = await getLowestCountryPriceInBGN('MA');
   
   return {
-    title: `eSIM за Мароко: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    title: `eSIM за Мароко на цени от ${lowestPrice}лв: Мобилен интернет без роуминг`,
     description: `Купи eSIM за Мароко от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в Мароко с 4G/5G покритие – в Маракеш, Фес, Казабланка и още.`,
     alternates: {
       canonical: generateCanonicalUrl('/esim-maroko'),
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       locale: 'bg_BG',
       type: 'website',
-      title: `eSIM за Мароко: Бърз интернет без роуминг от ${lowestPrice}лв | Travel eSIM`,
+      title: `eSIM за Мароко на цени от ${lowestPrice}лв: Мобилен интернет без роуминг | Travel eSIM`,
       description: `Купи eSIM за Мароко от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в Мароко с 4G/5G покритие – в Маракеш, Фес, Казабланка и още.`,
       url: generateCanonicalUrl('/esim-maroko'),
     },

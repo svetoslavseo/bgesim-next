@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const lowestPrice = await getLowestPriceInBGN('TH');
   
   return {
-    title: `eSIM за Тайланд: Бърз интернет без роуминг от ${lowestPrice}лв`,
+    title: `eSIM за Тайланд на цени от ${lowestPrice}лв: Мобилен интернет без роуминг`,
     description: `Купи eSIM за Тайланд от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Тайланд с 4G/5G покритие.`,
     alternates: {
       canonical: generateCanonicalUrl('/esim-thailand'),
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       locale: 'bg_BG',
       type: 'website',
-      title: `eSIM за Тайланд: Бърз интернет без роуминг от ${lowestPrice}лв | Travel eSIM`,
+      title: `eSIM за Тайланд на цени от ${lowestPrice}лв: Мобилен интернет без роуминг | Travel eSIM`,
       description: `Купи eSIM за Тайланд от ${lowestPrice}лв. Бърз интернет без роуминг такси. Моментална активация с QR код. Работи в цял Тайланд с 4G/5G покритие.`,
       url: generateCanonicalUrl('/esim-thailand'),
     },
