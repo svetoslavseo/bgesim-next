@@ -35,6 +35,14 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     // Enable automatic image optimization
     unoptimized: false,
+    // Allow images from travelesim.bg domain
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'travelesim.bg',
+        pathname: '/**',
+      },
+    ],
   },
   
   // Optimize fonts

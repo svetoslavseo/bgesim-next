@@ -34,7 +34,9 @@ export async function generateMetadata({
 }: { 
   params: { slug: string } 
 }): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+  // Decode the slug in case it's URL-encoded
+  const decodedSlug = decodeURIComponent(params.slug);
+  const post = getPostBySlug(decodedSlug);
   
   if (!post) {
     return {
@@ -214,9 +216,14 @@ export default async function BlogPostPage({
 }: { 
   params: { slug: string } 
 }) {
-  const post = getPostBySlug(params.slug);
+  // Decode the slug in case it's URL-encoded
+  const decodedSlug = decodeURIComponent(params.slug);
+  const post = getPostBySlug(decodedSlug);
   
   if (!post) {
+    // Log for debugging
+    console.error('Post not found for slug:', params.slug, 'decoded:', decodedSlug);
+    console.error('Available slugs:', getAllPostSlugs());
     notFound();
   }
   
@@ -251,7 +258,7 @@ export default async function BlogPostPage({
   
   // Process content - inject CTA for Serbia article
   let processedContent = addRelToExternalLinks(post.content);
-  if (params.slug === 'rouming-v-syrbia-ceni-paketi-esim-alternativi') {
+  if (decodedSlug === 'rouming-v-syrbia-ceni-paketi-esim-alternativi') {
     const ctaHtml = await generateSerbiaCTAHTML();
     processedContent = injectCTABeforeHeading(
       processedContent,
