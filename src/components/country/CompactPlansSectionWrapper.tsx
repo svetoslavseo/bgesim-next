@@ -121,10 +121,10 @@ export default function CompactPlansSectionWrapper({
       } catch (error) {
         console.error('Error loading plans:', error);
         console.log('Falling back to static plans');
-        const cleanCountryCode = countryCode && countryCode.includes(':') 
-          ? countryCode.split(':')[0] 
-          : countryCode;
-        const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
+        const cleanCountryCode: string = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] as string
+          : (countryCode || '');
+        const fallbackPlans = cleanCountryCode ? (FALLBACK_PLANS[cleanCountryCode] || []) : [];
         const processed = processPlans(fallbackPlans);
         setPlans(processed.all);
         setLastUpdated(undefined);
