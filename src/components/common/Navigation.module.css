@@ -189,10 +189,12 @@
     background-color: #000;
     flex-direction: column;
     align-items: flex-start;
-    padding: 4rem 0;
+    padding: 4rem 0 2rem 0;
     gap: 0;
     box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     transition: transform 0.3s ease, visibility 0.3s ease;
     z-index: 1000;
     /* Ensure menu stays hidden even with horizontal scroll - use transform to completely hide */
@@ -218,6 +220,10 @@
     justify-content: space-between;
   }
 
+  .hasSubmenu .navLink[aria-expanded="true"] .arrow {
+    transform: rotate(180deg);
+  }
+
   .ctaButton {
     width: calc(100% - 3rem);
     margin: 1rem 1.5rem;
@@ -235,10 +241,23 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    max-height: none;
   }
 
   .submenuLink {
     padding-left: 3rem;
+    padding-right: 1.5rem;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.5;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .submenuLink span {
+    flex: 1;
+    word-break: break-word;
   }
 
   .hasSubmenu {
