@@ -21,7 +21,13 @@ const API_URL = 'https://web.saily.com/v2/partners/plans';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const countryCode = searchParams.get('countryCode');
+    let countryCode = searchParams.get('countryCode');
+
+    // Clean country code - remove any plan ID suffix (e.g., "ID:1" -> "ID")
+    if (countryCode && countryCode.includes(':')) {
+      countryCode = countryCode.split(':')[0];
+      console.log('Cleaned country code from URL parameter:', countryCode);
+    }
 
     console.log('Server-side Saily API request for country:', countryCode);
 
@@ -879,7 +885,8 @@ function getCountryNameFromCode(countryCode: string): string {
     'MA': 'morocco',
     'US': 'usa',
     'GB': 'uk',
-    'TR': 'turkey'
+    'TR': 'turkey',
+    'ID': 'indonesia'
   };
   return countryMap[countryCode] || countryCode.toLowerCase();
 }

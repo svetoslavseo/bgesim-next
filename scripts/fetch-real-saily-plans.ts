@@ -13,7 +13,8 @@ const COUNTRIES = {
   'TR': 'Turkey',
   'TH': 'Thailand',
   'RS': 'Serbia',
-  'AE': 'Dubai'
+  'AE': 'Dubai',
+  'ID': 'Indonesia'
 };
 
 async function fetchSailyPlans() {

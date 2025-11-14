@@ -68,6 +68,7 @@ const CheckoutPage = () => {
       'UK': 'gb',
       'Turkey': 'tr',
       'Morocco': 'ma',
+      'Indonesia': 'id',
       // Bulgarian names
       'Тайланд': 'th',
       'Сърбия': 'rs',
@@ -76,7 +77,8 @@ const CheckoutPage = () => {
       'САЩ': 'us',
       'Великобритания': 'gb',
       'Турция': 'tr',
-      'Мароко': 'ma'
+      'Мароко': 'ma',
+      'Индонезия': 'id'
     };
     return flagMap[country] || 'th';
   };
@@ -160,62 +162,46 @@ const CheckoutPage = () => {
     }
 
     try {
-      // Check if plan has required identifiers for Saily checkout
-      const identifierToUse = plan.priceIdentifier || plan.identifier;
+      // Convert plan to ProcessedPlan format and generate Saily affiliate link
+      // This matches the exact logic used in generateAffiliateLink function
+      const processedPlan: ProcessedPlan = {
+        id: plan.id || '',
+        name: plan.name,
+        data: plan.data,
+        validity: plan.validity,
+        priceUSD: plan.priceUSD || plan.price,
+        price: plan.price,
+        currency: plan.currency,
+        identifier: plan.identifier || '',
+        priceIdentifier: plan.priceIdentifier,
+        planType: 'country', // Default to country, can be determined from plan data if needed
+        coveredCountries: []
+      };
       
-      // Validate that the identifier is a real Saily identifier (not a fallback placeholder)
-      // Saily identifiers can be:
-      // - UUID format (contains dashes): e.g., "cd90a7da-a22c-4d25-b628-5be35c02772f"
-      // - Base64 format (long string, may or may not have padding '='): e.g., "MTpWRUF4RFF0dEkyLXV1VVFKOEhMYlRxQTJxa1V1d0pJYXliM1lSTUdaM2RJPTpQcmljZTozMTIyLlVTRC4yNzk5"
-      // - Fallback placeholders usually start with "saily_" or are very short
-      const isValidSailyIdentifier = identifierToUse && 
-        (identifierToUse.includes('-') || // UUID format
-         identifierToUse.includes('=') || // Base64 format with padding
-         (identifierToUse.length > 30 && /^[A-Za-z0-9+/=]+$/.test(identifierToUse))); // Base64 format without padding (long alphanumeric string)
-      
-      if (identifierToUse && isValidSailyIdentifier) {
-        // Convert plan to ProcessedPlan format and generate Saily affiliate link
-        const processedPlan: ProcessedPlan = {
-          id: plan.id || '',
-          name: plan.name,
-          data: plan.data,
-          validity: plan.validity,
-          priceUSD: plan.priceUSD || plan.price,
-          price: plan.price,
-          currency: plan.currency,
-          identifier: plan.identifier || '',
-          priceIdentifier: plan.priceIdentifier,
-          planType: 'country', // Default to country, can be determined from plan data if needed
-          coveredCountries: []
-        };
-        
-        const finalUrl = generateAffiliateLink(processedPlan);
+      // Use the same generateAffiliateLink function that country pages use
+      // This function handles: priceIdentifier || identifier internally
+      const finalUrl = generateAffiliateLink(processedPlan);
 
-        const navigate = () => {
-          window.location.href = finalUrl;
-        };
+      const navigate = () => {
+        window.location.href = finalUrl;
+      };
 
-        // Track the click with a callback to avoid losing the hit on redirect
-        try {
-          const params = {
-            variant,
-            page_path: window.location.pathname + window.location.search,
-            page_referrer: document.referrer || '(direct)',
-            button_text: 'Продължи',
-          } as Record<string, any>;
+      // Track the click with a callback to avoid losing the hit on redirect
+      try {
+        const params = {
+          variant,
+          page_path: window.location.pathname + window.location.search,
+          page_referrer: document.referrer || '(direct)',
+          button_text: 'Продължи',
+        } as Record<string, any>;
 
-          if (hasAnalyticsConsent()) {
-            trackEventWithCallback('checkout_continue_click', params, navigate, 800);
-          } else {
-            navigate();
-          }
-        } catch {
+        if (hasAnalyticsConsent()) {
+          trackEventWithCallback('checkout_continue_click', params, navigate, 800);
+        } else {
           navigate();
         }
-      } else {
-        // If no valid Saily identifier, show error instead of redirecting to Breeze
-        console.error('No valid Saily identifier found for plan:', plan);
-        setError('Липсва валиден идентификатор за плана. Моля, изберете план отново.');
+      } catch {
+        navigate();
       }
     } catch (error) {
       console.error('Error redirecting to payment:', error);

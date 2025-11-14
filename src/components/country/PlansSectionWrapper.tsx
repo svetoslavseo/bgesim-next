@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PlansSection from './PlansSection';
 import { fetchSailyPlans, getPlansForCountry, FALLBACK_PLANS } from '@/lib/sailyApi';
 import styles from './PlansSection.module.css';
@@ -32,6 +32,7 @@ export default function PlansSectionWrapper({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<string | undefined>(undefined);
+  const loadPlansRef = useRef<(() => Promise<void>) | null>(null);
 
   useEffect(() => {
     const loadPlans = async () => {
@@ -39,10 +40,15 @@ export default function PlansSectionWrapper({
         setIsLoading(true);
         setError(null);
         
+        // Clean country code - ensure it's just the 2-letter code (e.g., "ID" not "ID:1")
+        const cleanCountryCode = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] 
+          : countryCode;
+        
         // Fetch real plans from server-side API route
         // Note: With static export, this will fail in production and fall back to FALLBACK_PLANS
         try {
-          const response = await fetch(`/api/saily-plans?countryCode=${countryCode}`);
+          const response = await fetch(`/api/saily-plans?countryCode=${cleanCountryCode}`);
           const apiData = await response.json();
           
           if (apiData.success && apiData.plans && apiData.plans.length > 0) {
@@ -50,14 +56,14 @@ export default function PlansSectionWrapper({
             setLastUpdated(apiData.lastUpdated);
           } else {
             // Use fallback plans if API fails
-            const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+            const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
             setPlans(fallbackPlans);
             setLastUpdated(undefined);
           }
         } catch (apiError) {
           console.error('Error fetching from API:', apiError);
           // Use fallback plans
-          const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+          const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
           setPlans(fallbackPlans);
           setLastUpdated(undefined);
         }
@@ -66,7 +72,10 @@ export default function PlansSectionWrapper({
         setError('Не може да се заредят плановете от API');
         
         // Use fallback plans
-        const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+        const cleanCountryCode = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] 
+          : countryCode;
+        const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
         setPlans(fallbackPlans);
         setLastUpdated(undefined);
       } finally {
@@ -75,6 +84,30 @@ export default function PlansSectionWrapper({
     };
 
     loadPlans();
+    loadPlansRef.current = loadPlans;
+
+    // Reload plans when page becomes visible again (e.g., when navigating back from checkout)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        // Check if plans are empty after a short delay to allow state to update
+        setTimeout(() => {
+          setPlans(currentPlans => {
+            if (currentPlans.length === 0 && loadPlansRef.current) {
+              console.log('Page became visible and plans are empty, reloading...');
+              loadPlansRef.current();
+            }
+            return currentPlans;
+          });
+        }, 100);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      loadPlansRef.current = null;
+    };
   }, [countryCode]);
 
   const handlePlanSelect = (plan: any) => {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CompactPlansSection from './CompactPlansSection';
 import { FALLBACK_PLANS } from '@/lib/sailyApi';
 
@@ -64,6 +64,7 @@ export default function CompactPlansSectionWrapper({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<string | undefined>(undefined);
+  const loadPlansRef = useRef<(() => Promise<void>) | null>(null);
 
   useEffect(() => {
     const loadPlans = async () => {
@@ -71,12 +72,17 @@ export default function CompactPlansSectionWrapper({
       setError(null);
       
       try {
-        console.log('Fetching real Saily plans for', countryCode, '(CompactPlansSection)');
+        // Clean country code - ensure it's just the 2-letter code (e.g., "ID" not "ID:1")
+        const cleanCountryCode = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] 
+          : countryCode;
+        
+        console.log('Fetching real Saily plans for', cleanCountryCode, '(CompactPlansSection)');
         
         // Fetch real plans from server-side API route (same as HeroSectionWrapper)
-        const response = await fetch(`/api/saily-plans?countryCode=${countryCode}`);
+        const response = await fetch(`/api/saily-plans?countryCode=${cleanCountryCode}`);
         const apiData = await response.json();
-        console.log('Server-side API response for', countryCode, '(CompactPlansSection):', apiData);
+        console.log('Server-side API response for', cleanCountryCode, '(CompactPlansSection):', apiData);
         
         const sailyPlans = apiData.success ? apiData.plans : [];
         
@@ -99,9 +105,9 @@ export default function CompactPlansSectionWrapper({
           }
         } else {
           console.log('No Saily plans found, using fallback');
-          const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+          const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
           const processed = processPlans(fallbackPlans);
-          console.log('Fallback plans (deduplicated) for', countryCode, ':', {
+          console.log('Fallback plans (deduplicated) for', cleanCountryCode, ':', {
             country: processed.country.length,
             regional: processed.regional.length,
             global: processed.global.length,
@@ -115,7 +121,10 @@ export default function CompactPlansSectionWrapper({
       } catch (error) {
         console.error('Error loading plans:', error);
         console.log('Falling back to static plans');
-        const fallbackPlans = FALLBACK_PLANS[countryCode] || [];
+        const cleanCountryCode = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] 
+          : countryCode;
+        const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
         const processed = processPlans(fallbackPlans);
         setPlans(processed.all);
         setLastUpdated(undefined);
@@ -124,6 +133,30 @@ export default function CompactPlansSectionWrapper({
     };
 
     loadPlans();
+    loadPlansRef.current = loadPlans;
+
+    // Reload plans when page becomes visible again (e.g., when navigating back from checkout)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        // Check if plans are empty after a short delay to allow state to update
+        setTimeout(() => {
+          setPlans(currentPlans => {
+            if (currentPlans.length === 0 && loadPlansRef.current) {
+              console.log('Page became visible and plans are empty, reloading... (CompactPlansSection)');
+              loadPlansRef.current();
+            }
+            return currentPlans;
+          });
+        }, 100);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      loadPlansRef.current = null;
+    };
   }, [countryCode]);
 
   const handlePlanSelect = (plan: any) => {
