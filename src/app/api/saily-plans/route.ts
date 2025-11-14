@@ -21,11 +21,11 @@ const API_URL = 'https://web.saily.com/v2/partners/plans';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    let countryCode = searchParams.get('countryCode');
+    let countryCode: string | null = searchParams.get('countryCode');
 
     // Clean country code - remove any plan ID suffix (e.g., "ID:1" -> "ID")
     if (countryCode && countryCode.includes(':')) {
-      countryCode = countryCode.split(':')[0];
+      countryCode = countryCode.split(':')[0] as string;
       console.log('Cleaned country code from URL parameter:', countryCode);
     }
 
