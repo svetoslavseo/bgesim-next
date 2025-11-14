@@ -73,9 +73,9 @@ export default function CompactPlansSectionWrapper({
       
       try {
         // Clean country code - ensure it's just the 2-letter code (e.g., "ID" not "ID:1")
-        const cleanCountryCode = countryCode && countryCode.includes(':') 
-          ? countryCode.split(':')[0] 
-          : countryCode;
+        const cleanCountryCode: string = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] as string
+          : (countryCode || '');
         
         console.log('Fetching real Saily plans for', cleanCountryCode, '(CompactPlansSection)');
         
@@ -105,7 +105,7 @@ export default function CompactPlansSectionWrapper({
           }
         } else {
           console.log('No Saily plans found, using fallback');
-          const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
+          const fallbackPlans = cleanCountryCode ? (FALLBACK_PLANS[cleanCountryCode] || []) : [];
           const processed = processPlans(fallbackPlans);
           console.log('Fallback plans (deduplicated) for', cleanCountryCode, ':', {
             country: processed.country.length,
