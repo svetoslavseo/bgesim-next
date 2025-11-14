@@ -23,8 +23,9 @@ export const metadata: Metadata = {
 };
 
 export default async function DurjaviPage() {
-  // Fetch the lowest price for Morocco dynamically
+  // Fetch the lowest price for Morocco and Indonesia dynamically
   const moroccoLowestPrice = await getLowestCountryPriceInBGN('MA');
+  const indonesiaLowestPrice = await getLowestCountryPriceInBGN('ID');
 
   const countries = [
     {
@@ -82,6 +83,13 @@ export default async function DurjaviPage() {
       flag: '/media/flags/ma.png',
       description: 'eSIM за Мароко с мобилен интернет',
       price: `от ${moroccoLowestPrice}лв`
+    },
+    {
+      name: 'Индонезия',
+      href: '/esim-indonesia/',
+      flag: '/media/flags/id.png',
+      description: 'eSIM за Индонезия с мобилен интернет',
+      price: `от ${indonesiaLowestPrice}лв`
     }
   ];
   return (

@@ -17,6 +17,7 @@ const countryFlags: Record<string, string> = {
   'eSIM Дубай': '/media/flags/ae.svg',
   'eSIM Египет': '/media/flags/eg.svg',
   'eSIM Мароко': '/media/flags/ma.svg',
+  'eSIM Индонезия': '/media/flags/id.svg',
 };
 
 // Navigation menu structure from WordPress
@@ -35,6 +36,7 @@ const navigationItems = [
       { label: 'eSIM Дубай', href: '/esim-dubai' },
       { label: 'eSIM Египет', href: '/esim-egipet' },
       { label: 'eSIM Мароко', href: '/esim-maroko' },
+      { label: 'eSIM Индонезия', href: '/esim-indonesia' },
       { label: 'Всички държави', href: '/durjavi' },
     ]
   },
@@ -47,6 +49,7 @@ const navigationItems = [
     ]
   },
   { label: 'Какво е eSIM?', href: '/blog/kakvo-e-esim' },
+  { label: 'Контакти', href: '/contacts' },
 ];
 
 function Navigation() {
