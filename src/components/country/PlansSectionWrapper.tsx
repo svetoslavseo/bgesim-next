@@ -41,9 +41,9 @@ export default function PlansSectionWrapper({
         setError(null);
         
         // Clean country code - ensure it's just the 2-letter code (e.g., "ID" not "ID:1")
-        const cleanCountryCode = countryCode && countryCode.includes(':') 
-          ? countryCode.split(':')[0] 
-          : countryCode;
+        const cleanCountryCode: string = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] as string
+          : (countryCode || '');
         
         // Fetch real plans from server-side API route
         // Note: With static export, this will fail in production and fall back to FALLBACK_PLANS
@@ -56,14 +56,14 @@ export default function PlansSectionWrapper({
             setLastUpdated(apiData.lastUpdated);
           } else {
             // Use fallback plans if API fails
-            const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
+            const fallbackPlans = cleanCountryCode ? (FALLBACK_PLANS[cleanCountryCode] || []) : [];
             setPlans(fallbackPlans);
             setLastUpdated(undefined);
           }
         } catch (apiError) {
           console.error('Error fetching from API:', apiError);
           // Use fallback plans
-          const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
+          const fallbackPlans = cleanCountryCode ? (FALLBACK_PLANS[cleanCountryCode] || []) : [];
           setPlans(fallbackPlans);
           setLastUpdated(undefined);
         }
@@ -72,10 +72,10 @@ export default function PlansSectionWrapper({
         setError('Не може да се заредят плановете от API');
         
         // Use fallback plans
-        const cleanCountryCode = countryCode && countryCode.includes(':') 
-          ? countryCode.split(':')[0] 
-          : countryCode;
-        const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
+        const cleanCountryCode: string = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] as string
+          : (countryCode || '');
+        const fallbackPlans = cleanCountryCode ? (FALLBACK_PLANS[cleanCountryCode] || []) : [];
         setPlans(fallbackPlans);
         setLastUpdated(undefined);
       } finally {

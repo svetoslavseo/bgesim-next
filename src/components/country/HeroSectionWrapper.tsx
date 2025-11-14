@@ -31,9 +31,9 @@ export default function HeroSectionWrapper({
     const loadPlans = async () => {
       try {
         // Clean country code - ensure it's just the 2-letter code (e.g., "ID" not "ID:1")
-        const cleanCountryCode = countryCode && countryCode.includes(':') 
-          ? countryCode.split(':')[0] 
-          : countryCode;
+        const cleanCountryCode: string = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] as string
+          : (countryCode || '');
         
         console.log('Fetching real Saily plans for', cleanCountryCode);
         
@@ -57,7 +57,7 @@ export default function HeroSectionWrapper({
           setPlans(sailyPlans);
         } else {
           console.log('No Saily plans found, using fallback');
-          const fallbackPlans = (FALLBACK_PLANS[cleanCountryCode] || []).filter(p => (p as any).planType === 'country');
+          const fallbackPlans = cleanCountryCode ? ((FALLBACK_PLANS[cleanCountryCode] || []).filter(p => (p as any).planType === 'country')) : [];
           console.log('Fallback plans for', cleanCountryCode, ':', fallbackPlans);
           setPlans(fallbackPlans);
         }
@@ -66,10 +66,10 @@ export default function HeroSectionWrapper({
       } catch (error) {
         console.error('Error loading plans:', error);
         console.log('Falling back to static plans');
-        const cleanCountryCode = countryCode && countryCode.includes(':') 
-          ? countryCode.split(':')[0] 
-          : countryCode;
-        const fallbackPlans = FALLBACK_PLANS[cleanCountryCode] || [];
+        const cleanCountryCode: string = countryCode && countryCode.includes(':') 
+          ? countryCode.split(':')[0] as string
+          : (countryCode || '');
+        const fallbackPlans = cleanCountryCode ? (FALLBACK_PLANS[cleanCountryCode] || []) : [];
         setPlans(fallbackPlans);
         setIsLoading(false);
       }
