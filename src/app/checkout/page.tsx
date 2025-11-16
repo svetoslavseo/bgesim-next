@@ -29,6 +29,7 @@ const CheckoutPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isPackageDetailsOpen, setIsPackageDetailsOpen] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   // Lower z-index of sticky elements when modal is open
   useEffect(() => {
@@ -161,6 +162,9 @@ const CheckoutPage = () => {
       return;
     }
 
+    // Show loading screen immediately
+    setIsRedirecting(true);
+
     try {
       // Convert plan to ProcessedPlan format and generate Saily affiliate link
       // This matches the exact logic used in generateAffiliateLink function
@@ -182,11 +186,20 @@ const CheckoutPage = () => {
       // This function handles: priceIdentifier || identifier internally
       const finalUrl = generateAffiliateLink(processedPlan);
 
+      // Add a minimum delay for UX (makes the loading screen feel intentional)
+      // This also ensures users see the message
+      const minimumDelay = 1500; // 1.5 seconds minimum
+
       const navigate = () => {
-        window.location.href = finalUrl;
+        // Add fade-out effect before redirect
+        document.body.style.transition = 'opacity 0.3s ease-out';
+        document.body.style.opacity = '0';
+        setTimeout(() => {
+          window.location.href = finalUrl;
+        }, 300);
       };
 
-      // Track the click with a callback to avoid losing the hit on redirect
+      // Track the click with a callback
       try {
         const params = {
           variant,
@@ -196,16 +209,23 @@ const CheckoutPage = () => {
         } as Record<string, any>;
 
         if (hasAnalyticsConsent()) {
-          trackEventWithCallback('checkout_continue_click', params, navigate, 800);
+          // Use setTimeout to ensure minimum delay
+          const startTime = Date.now();
+          trackEventWithCallback('checkout_continue_click', params, () => {
+            const elapsed = Date.now() - startTime;
+            const remainingDelay = Math.max(0, minimumDelay - elapsed);
+            setTimeout(navigate, remainingDelay);
+          }, 800);
         } else {
-          navigate();
+          setTimeout(navigate, minimumDelay);
         }
       } catch {
-        navigate();
+        setTimeout(navigate, minimumDelay);
       }
     } catch (error) {
       console.error('Error redirecting to payment:', error);
       setError('Не може да се продължи към плащането');
+      setIsRedirecting(false);
     }
   };
 
@@ -475,6 +495,39 @@ const CheckoutPage = () => {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Redirect Loading Screen */}
+      {isRedirecting && (
+        <div className={styles.redirectOverlay}>
+          <div className={styles.redirectContent}>
+            <div className={styles.redirectLogoContainer}>
+              <div className={styles.redirectSpinner}>
+                <div className={styles.spinnerRing}></div>
+                <div className={styles.spinnerRing}></div>
+                <div className={styles.spinnerRing}></div>
+              </div>
+              <Image
+                src="/media/logos/Saily-logo-770x422.png"
+                alt="Saily"
+                width={120}
+                height={66}
+                className={styles.redirectLogo}
+                priority
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <h2 className={styles.redirectTitle}>
+              Проверяваме за активни отстъпки и промоции
+            </h2>
+            <p className={styles.redirectSubtitle}>
+              Пренасочваме ви към Saily за завършване на покупката
+            </p>
+            <div className={styles.redirectProgress}>
+              <div className={styles.redirectProgressBar}></div>
             </div>
           </div>
         </div>
