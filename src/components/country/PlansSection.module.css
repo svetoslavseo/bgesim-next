@@ -310,10 +310,58 @@
   gap: 0.25rem;
 }
 
+.planInfoHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
 .dataAmount {
   font-size: 1.755rem;
   font-weight: 700;
   color: #111827;
+}
+
+.recommendedBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3375rem 0.9rem;
+  background: linear-gradient(135deg, #e5e900 0%, #d4d800 100%);
+  color: #000000;
+  font-size: 0.81rem;
+  font-weight: 700;
+  border-radius: 14.4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2.7px 10.8px rgba(229, 233, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: subtlePulse 2s ease-in-out infinite;
+}
+
+.recommendedBadge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.recommendedBadge:hover::before {
+  left: 100%;
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    box-shadow: 0 2.7px 10.8px rgba(229, 233, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 5.4px 16.2px rgba(229, 233, 0, 0.5);
+  }
 }
 
 .validity {
@@ -599,6 +647,15 @@
     flex-direction: row;
     align-items: center;
     gap: 0.45rem;
+  }
+
+  .planInfoHeader {
+    gap: 0.675rem;
+  }
+
+  .recommendedBadge {
+    font-size: 0.72rem;
+    padding: 0.225rem 0.675rem;
   }
 
   .pricing {

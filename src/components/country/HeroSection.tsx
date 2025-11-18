@@ -129,6 +129,14 @@ export default function HeroSection({
     return pricePerGB.toFixed(2);
   };
 
+  // Check if plan is the recommended 10GB for 30 days plan
+  const isRecommendedPlan = (plan: Plan): boolean => {
+    const dataMatch = plan.data.match(/(\d+(?:\.\d+)?)/);
+    const dataAmount = dataMatch ? parseFloat(dataMatch[1]) : 0;
+    const validityDays = plan.validity.split(' ')[0];
+    return dataAmount === 10 && validityDays === '30';
+  };
+
   const getPlanTypeTooltip = (planType: string) => {
     switch (planType) {
       case 'global':
@@ -324,7 +332,12 @@ export default function HeroSection({
                   
                   <div className={styles.planDetails}>
                     <div className={styles.planInfo}>
-                      <div className={styles.dataAmount}>{plan.data}</div>
+                      <div className={styles.planInfoHeader}>
+                        <div className={styles.dataAmount}>{plan.data}</div>
+                        {isRecommendedPlan(plan) && (
+                          <span className={styles.recommendedBadge}>Препоръчан</span>
+                        )}
+                      </div>
                       <div className={styles.validity}>{plan.validity} валидност</div>
                     </div>
                     

@@ -107,6 +107,14 @@ export default function CompactPlansSection({
     return plan.price / dataAmount;
   };
 
+  // Check if plan is the recommended 10GB for 30 days plan
+  const isRecommendedPlan = (plan: Plan): boolean => {
+    const dataMatch = plan.data.match(/(\d+(?:\.\d+)?)/);
+    const dataAmount = dataMatch ? parseFloat(dataMatch[1]) : 0;
+    const validityDays = plan.validity.split(' ')[0];
+    return dataAmount === 10 && validityDays === '30';
+  };
+
 
   // Get country name in Bulgarian
   const getCountryNameInBulgarian = (countryName: string) => {
@@ -220,7 +228,14 @@ export default function CompactPlansSection({
                         
                         {/* Plan Details */}
                         <div className={styles.planDetails}>
-                          <div className={styles.dataAmount}>{plan.data}</div>
+                          <div className={styles.planInfoWrapper}>
+                            <div className={styles.planInfoHeader}>
+                              <div className={styles.dataAmount}>{plan.data}</div>
+                              {isRecommendedPlan(plan) && (
+                                <span className={styles.recommendedBadge}>Препоръчан</span>
+                              )}
+                            </div>
+                          </div>
                           <div className={styles.price}>
                             {plan.price.toFixed(2)}{plan.currency}
                           </div>
