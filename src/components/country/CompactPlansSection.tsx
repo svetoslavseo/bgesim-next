@@ -110,7 +110,7 @@ export default function CompactPlansSection({
   // Check if plan is the recommended 10GB for 30 days plan
   const isRecommendedPlan = (plan: Plan): boolean => {
     const dataMatch = plan.data.match(/(\d+(?:\.\d+)?)/);
-    const dataAmount = dataMatch ? parseFloat(dataMatch[1]) : 0;
+    const dataAmount = dataMatch && dataMatch[1] ? parseFloat(dataMatch[1]) : 0;
     const validityDays = plan.validity.split(' ')[0];
     return dataAmount === 10 && validityDays === '30';
   };
