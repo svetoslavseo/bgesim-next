@@ -871,7 +871,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Ensure all plans have ctaUrl (for plans that might not have been processed above)
-    const plansWithCtaUrl = filteredPlans.map(plan => {
+    const plansWithCtaUrl = filteredPlans.map((plan: any) => {
       if (!plan.ctaUrl) {
         return {
           ...plan,
