@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
           planType = 'country';
         }
         
-        const processedPlan = {
+        const basePlan = {
           id: plan.identifier,
           name: plan.name,
           data: plan.is_unlimited ? 'Unlimited' : `${plan.data_limit.amount} ${plan.data_limit.unit}`,
@@ -123,7 +123,10 @@ export async function GET(request: NextRequest) {
         };
         
         // Generate Saily affiliate URL for each plan
-        processedPlan.ctaUrl = generateAffiliateLink(processedPlan);
+        const processedPlan = {
+          ...basePlan,
+          ctaUrl: generateAffiliateLink(basePlan),
+        };
         
         return processedPlan;
       });
