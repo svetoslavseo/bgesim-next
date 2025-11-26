@@ -4,6 +4,17 @@ const API_KEY = 'a820596678ad38f13bad61d1648f1befef597d0b8659648f4cf8b337fd6cb51
 const PARTNER_ID = 'atlasvpn';
 const API_URL = 'https://web.saily.com/v2/partners/plans';
 
+// Helper function to generate Saily affiliate link
+function generateAffiliateLink(plan: any): string {
+  // Generate a unique transaction ID
+  const transactionId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  
+  // Use price identifier if available, otherwise use plan identifier
+  const planId = plan.priceIdentifier || plan.identifier;
+  const sailyCheckoutUrl = `https://saily.com/checkout/?planId=${planId}&aff_transaction_id=${transactionId}&aff_offer_id=101&aff_id=8080`;
+  return `https://go.saily.site/aff_c?offer_id=101&aff_id=8080&url=${encodeURIComponent(sailyCheckoutUrl)}`;
+}
+
 /**
  * IMPORTANT: This API route will NOT work in production with static export (output: 'export')
  * 
@@ -31,7 +42,11 @@ export async function GET(request: NextRequest) {
 
     console.log('Server-side Saily API request for country:', countryCode);
 
-    const response = await fetch(API_URL, {
+    // Add utm_source parameter to API URL
+    const url = new URL(API_URL);
+    url.searchParams.set('utm_source', 'travelesim');
+
+    const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
         'x-api-key': API_KEY,
@@ -93,7 +108,7 @@ export async function GET(request: NextRequest) {
           planType = 'country';
         }
         
-        return {
+        const processedPlan = {
           id: plan.identifier,
           name: plan.name,
           data: plan.is_unlimited ? 'Unlimited' : `${plan.data_limit.amount} ${plan.data_limit.unit}`,
@@ -106,6 +121,11 @@ export async function GET(request: NextRequest) {
           planType,
           coveredCountries: plan.covered_countries,
         };
+        
+        // Generate Saily affiliate URL for each plan
+        processedPlan.ctaUrl = generateAffiliateLink(processedPlan);
+        
+        return processedPlan;
       });
 
     // Filter plans for the specific country if provided
@@ -838,10 +858,25 @@ export async function GET(request: NextRequest) {
         }
         
         if (fallbackPlans.length > 0) {
-          filteredPlans = fallbackPlans;
+          // Add ctaUrl to fallback plans
+          filteredPlans = fallbackPlans.map(plan => ({
+            ...plan,
+            ctaUrl: generateAffiliateLink(plan)
+          }));
         }
       }
     }
+
+    // Ensure all plans have ctaUrl (for plans that might not have been processed above)
+    const plansWithCtaUrl = filteredPlans.map(plan => {
+      if (!plan.ctaUrl) {
+        return {
+          ...plan,
+          ctaUrl: generateAffiliateLink(plan)
+        };
+      }
+      return plan;
+    });
 
     // Get current date in Bulgarian format
     const now = new Date();
@@ -856,9 +891,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      plans: filteredPlans,
+      plans: plansWithCtaUrl,
       totalPlans: allPlans.length,
-      filteredPlans: filteredPlans.length,
+      filteredPlans: plansWithCtaUrl.length,
       countryCode: countryCode || 'all',
       lastUpdated: lastUpdated
     });
@@ -890,3 +925,5 @@ function getCountryNameFromCode(countryCode: string): string {
   };
   return countryMap[countryCode] || countryCode.toLowerCase();
 }
+
+

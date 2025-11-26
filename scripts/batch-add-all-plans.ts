@@ -29,7 +29,12 @@ const COUNTRIES = [
 
 async function main() {
   console.log('Fetching plans from Saily API...');
-  const response = await fetch(API_URL, {
+  
+  // Add utm_source parameter to API URL
+  const url = new URL(API_URL);
+  url.searchParams.set('utm_source', 'travelesim');
+  
+  const response = await fetch(url.toString(), {
     headers: {
       'x-api-key': API_KEY,
       'x-partner-id': PARTNER_ID,

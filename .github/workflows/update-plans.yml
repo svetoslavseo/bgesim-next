@@ -1,0 +1,55 @@
+name: Update Fallback Plans Backup
+
+on:
+  schedule:
+    # Run every 2 days at midnight UTC
+    # Updates fallback-plans.json as a backup when API is unavailable
+    - cron: '0 0 */2 * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-plans:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Update fallback plans backup file
+        run: npm run update-plans:auto
+        env:
+          NODE_ENV: production
+      
+      - name: Check for changes
+        id: git-check
+        run: |
+          if [ -n "$(git status --porcelain fallback-plans.json)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add fallback-plans.json
+          git commit -m "chore: auto-update fallback plans [skip ci]"
+          git push
+      
+      - name: No changes
+        if: steps.git-check.outputs.changed == 'false'
+        run: echo "No changes to fallback-plans.json"
+

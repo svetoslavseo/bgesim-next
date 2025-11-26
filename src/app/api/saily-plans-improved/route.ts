@@ -15,9 +15,16 @@ const API_KEY = process.env.SAILY_API_KEY || 'a820596678ad38f13bad61d1648f1befef
 const PARTNER_ID = process.env.SAILY_PARTNER_ID || 'atlasvpn';
 const API_URL = 'https://web.saily.com/v2/partners/plans';
 
+// Create API URL with utm_source parameter
+const apiUrlWithParams = (() => {
+  const url = new URL(API_URL);
+  url.searchParams.set('utm_source', 'travelesim');
+  return url.toString();
+})();
+
 // Create a dedicated client for Saily API
 const sailyApiClient = new ApiClient({
-  baseUrl: API_URL,
+  baseUrl: apiUrlWithParams,
   timeout: 15000, // 15 seconds
   retries: 3,
   retryDelay: 1000,

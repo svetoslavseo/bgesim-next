@@ -21,7 +21,11 @@ async function fetchSailyPlans() {
   try {
     console.log('Fetching plans from Saily API...\n');
     
-    const response = await fetch(API_URL, {
+    // Add utm_source parameter to API URL
+    const url = new URL(API_URL);
+    url.searchParams.set('utm_source', 'travelesim');
+    
+    const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
         'x-api-key': API_KEY,
