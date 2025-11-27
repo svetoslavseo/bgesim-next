@@ -18,6 +18,10 @@ const countryFlags: Record<string, string> = {
   'eSIM Египет': '/media/flags/eg.svg',
   'eSIM Мароко': '/media/flags/ma.svg',
   'eSIM Индонезия': '/media/flags/id.svg',
+  'eSIM Израел': '/media/flags/il.svg',
+  'eSIM Канада': '/media/flags/ca.svg',
+  'eSIM Малдиви': '/media/flags/mv.svg',
+  'eSIM Виетнам': '/media/flags/vn.svg',
 };
 
 // Navigation menu structure from WordPress
@@ -37,6 +41,10 @@ const navigationItems = [
       { label: 'eSIM Египет', href: '/esim-egipet' },
       { label: 'eSIM Мароко', href: '/esim-maroko' },
       { label: 'eSIM Индонезия', href: '/esim-indonesia' },
+      { label: 'eSIM Израел', href: '/esim-israel' },
+      { label: 'eSIM Канада', href: '/esim-canada' },
+      { label: 'eSIM Малдиви', href: '/esim-maldives' },
+      { label: 'eSIM Виетнам', href: '/esim-vietnam' },
       { label: 'Всички държави', href: '/durjavi' },
     ]
   },

@@ -68,6 +68,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/durjavi/`,
       lastModified: new Date(),
     },
+    {
+      url: `${baseUrl}/esim-israel/`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/esim-canada/`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/esim-maldives/`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/esim-vietnam/`,
+      lastModified: new Date(),
+    },
   ];
   
   return [

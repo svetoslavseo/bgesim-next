@@ -26,6 +26,10 @@ export default async function DurjaviPage() {
   // Fetch the lowest price for Morocco and Indonesia dynamically
   const moroccoLowestPrice = await getLowestCountryPriceInBGN('MA');
   const indonesiaLowestPrice = await getLowestCountryPriceInBGN('ID');
+  const israelLowestPrice = await getLowestCountryPriceInBGN('IL');
+  const canadaLowestPrice = await getLowestCountryPriceInBGN('CA');
+  const maldivesLowestPrice = await getLowestCountryPriceInBGN('MV');
+  const vietnamLowestPrice = await getLowestCountryPriceInBGN('VN');
 
   const countries = [
     {
@@ -90,6 +94,34 @@ export default async function DurjaviPage() {
       flag: '/media/flags/id.png',
       description: 'eSIM за Индонезия с мобилен интернет',
       price: `от ${indonesiaLowestPrice}лв`
+    },
+    {
+      name: 'Израел',
+      href: '/esim-israel/',
+      flag: '/media/flags/il.png',
+      description: 'eSIM за Израел с мобилен интернет',
+      price: `от ${israelLowestPrice}лв`
+    },
+    {
+      name: 'Канада',
+      href: '/esim-canada/',
+      flag: '/media/flags/ca.png',
+      description: 'eSIM за Канада с мобилен интернет',
+      price: `от ${canadaLowestPrice}лв`
+    },
+    {
+      name: 'Малдиви',
+      href: '/esim-maldives/',
+      flag: '/media/flags/mv.png',
+      description: 'eSIM за Малдиви с мобилен интернет',
+      price: `от ${maldivesLowestPrice}лв`
+    },
+    {
+      name: 'Виетнам',
+      href: '/esim-vietnam/',
+      flag: '/media/flags/vn.png',
+      description: 'eSIM за Виетнам с мобилен интернет',
+      price: `от ${vietnamLowestPrice}лв`
     }
   ];
   return (

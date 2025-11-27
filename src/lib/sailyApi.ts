@@ -204,7 +204,11 @@ function getCountryNameFromCode(countryCode: string): string {
     'US': 'usa',
     'GB': 'uk',
     'TR': 'turkey',
-    'ID': 'indonesia'
+    'ID': 'indonesia',
+    'IL': 'israel',
+    'CA': 'canada',
+    'MV': 'maldives',
+    'VN': 'vietnam'
   };
   return countryMap[countryCode] || countryCode.toLowerCase();
 }

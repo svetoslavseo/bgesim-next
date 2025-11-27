@@ -70,6 +70,10 @@ const CheckoutPage = () => {
       'Turkey': 'tr',
       'Morocco': 'ma',
       'Indonesia': 'id',
+      'Israel': 'il',
+      'Canada': 'ca',
+      'Maldives': 'mv',
+      'Vietnam': 'vn',
       // Bulgarian names
       'Тайланд': 'th',
       'Сърбия': 'rs',
@@ -79,7 +83,11 @@ const CheckoutPage = () => {
       'Великобритания': 'gb',
       'Турция': 'tr',
       'Мароко': 'ma',
-      'Индонезия': 'id'
+      'Индонезия': 'id',
+      'Израел': 'il',
+      'Канада': 'ca',
+      'Малдиви': 'mv',
+      'Виетнам': 'vn'
     };
     return flagMap[country] || 'th';
   };

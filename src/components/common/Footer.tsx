@@ -97,6 +97,10 @@ export default function Footer() {
                 <li><Link href="/esim-serbia/">eSIM за Сърбия</Link></li>
                 <li><Link href="/esim-egipet/">eSIM за Египет</Link></li>
                 <li><Link href="/esim-indonesia/">eSIM за Индонезия</Link></li>
+                <li><Link href="/esim-israel/">eSIM за Израел</Link></li>
+                <li><Link href="/esim-canada/">eSIM за Канада</Link></li>
+                <li><Link href="/esim-maldives/">eSIM за Малдиви</Link></li>
+                <li><Link href="/esim-vietnam/">eSIM за Виетнам</Link></li>
               </ul>
             </div>
 

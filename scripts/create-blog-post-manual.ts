@@ -240,3 +240,4 @@ fs.writeFileSync(indexPath, JSON.stringify(postsIndex, null, 2), 'utf-8');
 console.log(`✓ Updated posts index: ${indexPath}`);
 
 
+

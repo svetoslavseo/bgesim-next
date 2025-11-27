@@ -56,6 +56,26 @@ const countries: Country[] = [
     name: 'Индонезия',
     href: '/esim-indonesia/',
     flag: '/media/flags/id.png',
+  },
+  {
+    name: 'Израел',
+    href: '/esim-israel/',
+    flag: '/media/flags/il.png',
+  },
+  {
+    name: 'Канада',
+    href: '/esim-canada/',
+    flag: '/media/flags/ca.png',
+  },
+  {
+    name: 'Малдиви',
+    href: '/esim-maldives/',
+    flag: '/media/flags/mv.png',
+  },
+  {
+    name: 'Виетнам',
+    href: '/esim-vietnam/',
+    flag: '/media/flags/vn.png',
   }
 ];
 
